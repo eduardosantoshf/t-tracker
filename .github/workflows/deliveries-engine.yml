@@ -70,5 +70,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_DELIVERIES_ENGINE_TOKEN }}
         run: |
-            cd deliveries-engine
+            cd deliveries-engine/deliveries-engine
             mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
