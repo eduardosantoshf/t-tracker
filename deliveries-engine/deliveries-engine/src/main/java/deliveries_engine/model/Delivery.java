@@ -27,5 +27,14 @@ public class Delivery {
     @JoinColumn(name="store_id")
     private Store store;
 
+    @Column(name = "pickup_location", nullable = false)
+    private String pickup_location;
+
+    @Column(name = "delivery_location", nullable = false)
+    private String delivery_location;
+
+    @Column(name = "duration", nullable = false)
+    private double duration;
+
     
 }
