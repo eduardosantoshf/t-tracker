@@ -34,6 +34,9 @@ public class User {
     @Column(name = "zip_code", nullable = false)
     private String zipCode;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Admin admin;
+
 
 
 
