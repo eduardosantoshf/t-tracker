@@ -9,7 +9,7 @@ import deliveries_engine.model.Rider;
 @RequestMapping("/rider")
 public class RiderController {
 
-    @PostMapping(value = "/signup", produces = "application/json")
+    @PostMapping(value = "/signup", consumes = "application/json")
     public void registerRider(@RequestBody Rider rider){
     }
 
