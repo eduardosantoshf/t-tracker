@@ -6,6 +6,5 @@ import deliveries_engine.model.Admin;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Integer>{
-    Admin findByName(String name);
-    Admin findById(int id);
+    
 }

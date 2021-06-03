@@ -6,6 +6,5 @@ import deliveries_engine.model.Store;
 
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Integer>{
-    Store findByName(String name);
-    Store findById(int id);
+    
 }

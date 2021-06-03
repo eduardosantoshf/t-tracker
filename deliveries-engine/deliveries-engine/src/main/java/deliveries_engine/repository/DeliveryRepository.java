@@ -6,6 +6,5 @@ import deliveries_engine.model.Delivery;
 
 @Repository
 public interface DeliveryRepository extends JpaRepository<Delivery, Integer>{
-    Delivery findByName(String name);
-    Delivery findById(int id);
+    
 }
