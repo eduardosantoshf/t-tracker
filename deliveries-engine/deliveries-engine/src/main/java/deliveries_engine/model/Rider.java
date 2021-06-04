@@ -21,8 +21,4 @@ public class Rider {
 
     @OneToMany(mappedBy = "rider")
     private List<Delivery> deliveries;
-
-
-
-
 }
