@@ -37,7 +37,6 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Admin admin;
 
-
-
-
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Rider rider;
 }

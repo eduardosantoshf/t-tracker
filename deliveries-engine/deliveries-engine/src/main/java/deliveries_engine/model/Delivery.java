@@ -28,13 +28,13 @@ public class Delivery {
     private Store store;
 
     @Column(name = "pickup_location", nullable = false)
-    private String pickup_location;
+    private String pickupLocation;
 
     @Column(name = "delivery_location", nullable = false)
-    private String delivery_location;
+    private String deliveryLocation;
 
     @Column(name = "duration", nullable = false)
     private double duration;
 
-    
+
 }

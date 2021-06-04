@@ -19,6 +19,6 @@ public class Store {
     private List<Delivery> deliveries;
 
     @Column(name = "owner_name", nullable = false)
-    private String owner_name;
-    
+    private String ownerName;
+
 }
