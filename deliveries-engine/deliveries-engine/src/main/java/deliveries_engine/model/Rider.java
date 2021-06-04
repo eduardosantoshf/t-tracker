@@ -10,7 +10,7 @@ public class Rider {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -21,4 +21,46 @@ public class Rider {
 
     @OneToMany(mappedBy = "rider")
     private List<Delivery> deliveries;
+
+    public Rider(User user) {
+        this.user = user;
+        this.status = false;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public List<Delivery> getDeliveries() {
+        return this.deliveries;
+    }
+
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
+    }
+
+    public void addDelivery(Delivery delivery) {
+        this.deliveries.add(delivery);
+    }
+
+    public void deleteDelivery(Delivery delivery) {
+        this.deliveries.remove(delivery);
+    }
+
 }
