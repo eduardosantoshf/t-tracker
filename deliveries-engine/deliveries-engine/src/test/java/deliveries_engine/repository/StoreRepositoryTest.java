@@ -46,8 +46,9 @@ class StoreRepositoryTest {
 
     @Test
     public void whenFindStoreByInvalidId_thenReturnNull() {
-        Store storeFound = storeRepository.findById(99999L);
-        assertThat( storeFound, is(tTracker) );
+        Long invalidId = 99999L;
+        Store storeFound = storeRepository.findById(invalidId);
+        assertThat( storeFound, is(nullValue()) );
     }
 
 }

@@ -26,12 +26,40 @@ public class Store {
         this.ownerName = ownerName;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Delivery> getDeliveries() {
+        return deliveries;
+    }
+
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
+    }
+
+    public void addDelivery(Delivery delivery) {
+        this.deliveries.add(delivery);
+    }
+
+    public void deleteDelivery(Delivery delivery) {
+        this.deliveries.remove(delivery);
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
 }
