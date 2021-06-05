@@ -1,6 +1,5 @@
 package deliveries_engine.repository;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -8,13 +7,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.nullValue;
 
 import deliveries_engine.model.User;
 import deliveries_engine.model.Rider;
+
+import java.util.List;
 
 @DataJpaTest
 class RiderRepositoryTest {

@@ -36,6 +36,12 @@ public class User {
     @Column(name = "zip_code", nullable = true)
     private String zipCode;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Admin admin;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Rider rider;
+
     public User(String name, String email, String username, String password, int phoneNumber) {
         this.name = name;
         this.email = email;
