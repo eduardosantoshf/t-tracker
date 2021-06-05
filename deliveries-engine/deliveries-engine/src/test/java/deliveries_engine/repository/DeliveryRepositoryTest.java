@@ -2,6 +2,7 @@ package deliveries_engine.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -31,8 +32,14 @@ class DeliveryRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        deliveryRider = new Rider(new User("Alex Jones", "alexjones1@mail.com", "AlexJonesOfficial", "alexijoni", 913444555));
+        User newUser = new User("Alex Jones", "alexjones1@mail.com", "AlexJonesOfficial", "alexijoni", 913444555);
+        entityManager.persist(newUser);
+
+        deliveryRider = new Rider(newUser);
         deliveryStore = new Store("Nozama", "Beff Jezos");
+        entityManager.persist(deliveryRider);
+        entityManager.persist(deliveryStore);
+        entityManager.flush();
     }
 
     @Test
@@ -46,7 +53,7 @@ class DeliveryRepositoryTest {
 
     @Test
     public void whenFindDeliveryByInvalidId_thenReturnNull() {
-        Long invalidId = 99999L;
+        int invalidId = 99999;
         Delivery deliveryFound = deliveryRepository.findById(invalidId);
         assertThat( deliveryFound, is(nullValue()) );
     }

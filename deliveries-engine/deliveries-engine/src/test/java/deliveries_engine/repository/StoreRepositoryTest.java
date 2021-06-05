@@ -21,6 +21,22 @@ class StoreRepositoryTest {
     private StoreRepository storeRepository;
 
     @Test
+    public void whenFindStoreByExistingId_thenReturnStore() {
+        Store tTracker = new Store("T-Tracker", "Owner Name");
+        entityManager.persistAndFlush(tTracker);
+
+        Store storeFound = storeRepository.findById(tTracker.getId());
+        assertThat( storeFound, is(tTracker) );
+    }
+
+    @Test
+    public void whenFindStoreByInvalidId_thenReturnNull() {
+        int invalidId = 99999;
+        Store storeFound = storeRepository.findById(invalidId);
+        assertThat( storeFound, is(nullValue()) );
+    }
+
+    @Test
     public void whenFindStoreByValidName_thenReturnValidStore() {
         Store tTracker = new Store("T-Tracker", "Owner Name");
         entityManager.persistAndFlush(tTracker);
@@ -32,22 +48,6 @@ class StoreRepositoryTest {
     @Test
     public void whenFindByInvalidName_thenReturnNull() {
         Store storeFound = storeRepository.findByName("Invalid Store");
-        assertThat( storeFound, is(nullValue()) );
-    }
-
-    @Test
-    public void whenFindStoreByExistingId_thenReturnStore() {
-        Store tTracker = new Store("T-Tracker", "Owner Name");
-        entityManager.persistAndFlush(tTracker);
-
-        Store storeFound = storeRepository.findById(tTracker.getId());
-        assertThat( storeFound, is(tTracker) );
-    }
-
-    @Test
-    public void whenFindStoreByInvalidId_thenReturnNull() {
-        Long invalidId = 99999L;
-        Store storeFound = storeRepository.findById(invalidId);
         assertThat( storeFound, is(nullValue()) );
     }
 

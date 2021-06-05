@@ -23,7 +23,10 @@ class AdminRepositoryTest {
 
     @Test
     public void whenFindAdminByValidId_thenReturnValidAdmin() {
-        Admin admin = new Admin(new User("Mr Admin", "admin@org.com", "Admin", "admin1234", 901010101));
+        User newUser = new User("Mr Admin", "admin@org.com", "Admin", "admin1234", 901010101);
+        entityManager.persistAndFlush(newUser);
+
+        Admin admin = new Admin(newUser);
         entityManager.persistAndFlush(admin);
 
         Admin adminFound = adminRepository.findById(admin.getId());
@@ -32,7 +35,7 @@ class AdminRepositoryTest {
 
     @Test
     public void whenFindRiderByInvalidId_thenReturnNull() {
-        Long invalidId = 99999L;
+        int invalidId = 99999;
         Admin adminFound = adminRepository.findById(invalidId);
         assertThat( adminFound, is(nullValue()) );
     }

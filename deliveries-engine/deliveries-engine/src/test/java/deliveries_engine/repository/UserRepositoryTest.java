@@ -1,6 +1,5 @@
 package deliveries_engine.repository;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -22,6 +21,22 @@ class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
+    public void whenFindUserByExistingId_thenReturnUser() {
+        User john = new User("John Doe", "john@doe.com", "JohnTheDoe", "testpassword", 999999999, "Test Address", "Test City", "Test-Zipcode");
+        entityManager.persistAndFlush(john);
+
+        User userFound = userRepository.findById(john.getId());
+        assertThat( userFound, is(john) );
+    }
+
+    @Test
+    public void whenFindUserByInvalidId_thenReturnNull() {
+        int invalidId = 99999;
+        User userFound = userRepository.findById(invalidId);
+        assertThat( userFound, is(nullValue()) );
+    }
+
+    @Test
     public void whenFindUserByValidUsername_thenReturnValidUser() {
         User john = new User("John Doe", "john@doe.com", "JohnTheDoe", "testpassword", 999999999, "Test Address", "Test City", "Test-Zipcode");
         entityManager.persistAndFlush(john);
@@ -34,22 +49,6 @@ class UserRepositoryTest {
     public void whenFindUserByInvalidUsername_thenReturnNull() {
         String invalidUsername = "ThisUsernameDoesNotExist";
         User userFound = userRepository.findByUsername(invalidUsername);
-        assertThat( userFound, is(nullValue()) );
-    }
-
-    @Test
-    public void whenFindUserByExistingId_thenReturnUser() {
-        User john = new User("John Doe", "john@doe.com", "JohnTheDoe", "testpassword", 999999999, "Test Address", "Test City", "Test-Zipcode");
-        entityManager.persistAndFlush(john);
-
-        User userFound = userRepository.findById(john.getId());
-        assertThat( userFound, is(john) );
-    }
-
-    @Test
-    public void whenFindUserByInvalidId_thenReturnNull() {
-        Long invalidId = 99999L;
-        User userFound = userRepository.findById(invalidId);
         assertThat( userFound, is(nullValue()) );
     }
 

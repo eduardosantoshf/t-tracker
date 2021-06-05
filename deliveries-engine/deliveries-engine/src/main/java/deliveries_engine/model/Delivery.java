@@ -8,7 +8,7 @@ public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -47,7 +47,7 @@ public class Delivery {
         this.duration = duration;
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 

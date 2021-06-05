@@ -8,7 +8,7 @@ public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -18,7 +18,7 @@ public class Admin {
         this.user = user;
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 

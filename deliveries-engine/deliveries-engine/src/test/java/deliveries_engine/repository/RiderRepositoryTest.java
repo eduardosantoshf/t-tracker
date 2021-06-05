@@ -25,7 +25,10 @@ class RiderRepositoryTest {
 
     @Test
     public void whenFindRiderByValidId_thenReturnValidRider() {
-        Rider testRider = new Rider(new User("Test User", "test@user.com", "UserForTests", "testPassword1234", 933399999));
+        User newUser = new User("Test User", "test@user.com", "UserForTests", "testPassword1234", 933399999);
+        entityManager.persistAndFlush(newUser);
+
+        Rider testRider = new Rider(newUser);
         entityManager.persistAndFlush(testRider);
 
         Rider riderFound = riderRepository.findById(testRider.getId());
@@ -34,16 +37,24 @@ class RiderRepositoryTest {
 
     @Test
     public void whenFindRiderByInvalidId_thenReturnNull() {
-        Long invalidId = 99999L;
+        int invalidId = 99999;
         Rider riderFound = riderRepository.findById(invalidId);
         assertThat( riderFound, is(nullValue()) );
     }
 
     @Test
     public void whenFindRidersByStatus_thenReturnValidRiders() {
-        Rider john = new Rider(new User("John", "john@user.com", "john", "johnPassword", 911111111));
-        Rider alice = new Rider(new User("Alice", "alice@user.com", "alice", "alicePassword", 922222222));
-        Rider alex = new Rider(new User("Alex", "alex@user.com", "alex", "alexPassword", 933333333));
+        User user1 = new User("John", "john@user.com", "john", "johnPassword", 911111111);
+        User user2 = new User("Alice", "alice@user.com", "alice", "alicePassword", 922222222);
+        User user3 = new User("Alex", "alex@user.com", "alex", "alexPassword", 933333333);
+        entityManager.persist(user1);
+        entityManager.persist(user2);
+        entityManager.persist(user3);
+        entityManager.flush();
+
+        Rider john = new Rider(user1);
+        Rider alice = new Rider(user2);
+        Rider alex = new Rider(user3);
         alice.setStatus(true);
         alex.setStatus(true);
 
