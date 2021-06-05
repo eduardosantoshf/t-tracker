@@ -8,7 +8,7 @@ public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -35,6 +35,85 @@ public class Delivery {
 
     @Column(name = "duration", nullable = false)
     private double duration;
+
+    public Delivery(String name, double commission, Rider rider, Store store, String pickupLocation, String deliveryLocation, double duration) {
+        this.name = name;
+        this.commission = commission;
+        this.status = false;
+        this.rider = rider;
+        this.store = store;
+        this.pickupLocation = pickupLocation;
+        this.deliveryLocation = deliveryLocation;
+        this.duration = duration;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getCommission() {
+        return this.commission;
+    }
+
+    public void setCommission(double commission) {
+        this.commission = commission;
+    }
+
+    public boolean getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public Rider getRider() {
+        return this.rider;
+    }
+
+    public void setRider(Rider rider) {
+        this.rider = rider;
+    }
+
+    public Store getStore() {
+        return this.store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public String getPickupLocation() {
+        return this.pickupLocation;
+    }
+
+    public void setPickupLocation(String pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
+
+    public String getDeliveryLocation() {
+        return this.deliveryLocation;
+    }
+
+    public void setDeliveryLocation(String deliveryLocation) {
+        this.deliveryLocation = deliveryLocation;
+    }
+
+    public double getDuration() {
+        return this.duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
 
 
 }
