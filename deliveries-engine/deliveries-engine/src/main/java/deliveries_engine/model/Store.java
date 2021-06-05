@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 @Table(name = "Store")
 public class Store {
@@ -21,6 +23,9 @@ public class Store {
     @Column(name = "owner_name", nullable = false)
     private String ownerName;
 
+    public Store () {}
+
+    @Autowired
     public Store(String name, String ownerName) {
         this.name = name;
         this.ownerName = ownerName;

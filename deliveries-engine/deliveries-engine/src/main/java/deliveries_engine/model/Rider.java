@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 @Table(name = "Rider")
 public class Rider {
@@ -22,6 +24,9 @@ public class Rider {
     @OneToMany(mappedBy = "rider")
     private List<Delivery> deliveries;
 
+    public Rider() {}
+
+    @Autowired
     public Rider(User user) {
         this.user = user;
         this.status = false;

@@ -2,6 +2,8 @@ package deliveries_engine.model;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 @Table(name = "Delivery")
 public class Delivery {
@@ -36,6 +38,9 @@ public class Delivery {
     @Column(name = "duration", nullable = false)
     private double duration;
 
+    public Delivery() {}
+
+    @Autowired
     public Delivery(String name, double commission, Rider rider, Store store, String pickupLocation, String deliveryLocation, double duration) {
         this.name = name;
         this.commission = commission;

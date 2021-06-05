@@ -2,6 +2,8 @@ package deliveries_engine.model;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 @Table(name = "Admin")
 public class Admin {
@@ -14,6 +16,9 @@ public class Admin {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    public Admin() {}
+
+    @Autowired
     public Admin(User user) {
         this.user = user;
     }
