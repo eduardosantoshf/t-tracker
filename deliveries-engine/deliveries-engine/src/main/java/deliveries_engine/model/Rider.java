@@ -9,18 +9,12 @@ import javax.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
-//@Table(name = "Rider")
 public class Rider extends User {
-
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private int id;
 
     @Column(name = "status", nullable = true)
     private int status;
 
     @OneToMany(mappedBy = "rider")
-    //@JsonManagedReference
     @JsonIgnore
     private List<Delivery> deliveries;
 

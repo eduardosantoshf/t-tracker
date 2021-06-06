@@ -42,15 +42,15 @@ public class RiderServiceImp implements RiderService {
         Rider newRider = rider;
 
         // check wether username or email is already used
-        Optional<User> check_username = userRepository.findByUsername(rider.getUsername());
-        Optional<User> check_email = userRepository.findByEmail(rider.getEmail());
+        Optional<User> checkUsername = userRepository.findByUsername(rider.getUsername());
+        Optional<User> checkEmail = userRepository.findByEmail(rider.getEmail());
 
         // in that case, throw exceptions
-        if(check_username.isPresent()){
-            throw new ErrorWarning("Username already exists");
+        if(checkUsername.isPresent()){
+            throw new Exception("Username already exists");
         }
-        else if(check_email.isPresent()){
-            throw new ErrorWarning("Email already exists");
+        else if(checkEmail.isPresent()){
+            throw new Exception("Email already exists");
         }
 
         // set encoded password
