@@ -1,25 +1,18 @@
 package deliveries_engine.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "Rider")
 public class Rider extends User {
-
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private int id;
 
     @Column(name = "status", nullable = false)
     private int status;
 
     @OneToMany(mappedBy = "rider")
-    //@JsonManagedReference
     @JsonIgnore
     private List<Delivery> deliveries;
 
@@ -43,8 +36,4 @@ public class Rider extends User {
     public String toString(){
         return "Rider: " + this.getUsername() + " " + this.getEmail();
     }
-
-    
-
-
 }

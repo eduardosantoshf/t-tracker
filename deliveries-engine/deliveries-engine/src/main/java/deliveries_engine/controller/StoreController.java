@@ -1,5 +1,7 @@
 package deliveries_engine.controller;
 
+import deliveries_engine.service.StoreService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import deliveries_engine.model.Delivery;
@@ -10,8 +12,12 @@ import deliveries_engine.model.Store;
 @RequestMapping("/store")
 public class StoreController {
 
+    @Autowired
+    StoreService storeService;
+
     @PostMapping(consumes = "application/json")
-    public void registerStore(@RequestBody Store store){
+    public Store registerStore(@RequestBody Store store) throws Exception {
+        return storeService.registerStore(store);
     }
 
     @GetMapping(value = "/driver/location/{location}", produces = "application/json")
@@ -30,5 +36,4 @@ public class StoreController {
     @PostMapping(value = "/order", consumes = "application/json")
     public void order(@RequestBody Delivery delivery){
     }
-    
 }
