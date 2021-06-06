@@ -18,10 +18,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private PasswordEncoder passwordEncoder;
     private UserDetailsService userDetailsService;
+    private UserRepository userRepository;
 
-    public SecurityConfig(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -34,11 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         httpSecurity.csrf().disable().cors().and()
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, "/rider/signup").permitAll()
-            .antMatchers(HttpMethod.GET, "/rider/location/**").permitAll();
-			//.anyRequest().authenticated()
-			//.and()
-			//.addFilter(new JwtAuthenticationFilter(authenticationManager(),userRepository))
-            //.addFilter(new JWTAuthorizationFilter(authenticationManager()));
+            .antMatchers(HttpMethod.GET, "/rider/location/**").permitAll()
+			.anyRequest().authenticated()
+			.and()
+			.addFilter(new JwtAuthenticationFilter(authenticationManager(),userRepository))
+            .addFilter(new JWTAuthorizationFilter(authenticationManager()));
 	}
 
 }

@@ -29,7 +29,9 @@ public class RiderServiceImp implements RiderService {
         this.userRepository = userRepository;
     }
 
-    public Rider registerRider(Rider rider) throws Exception{
+    public Rider registerRider(Rider rider) throws ErrorWarning{
+
+        System.out.println(rider.getUsername());
         
         // cehck if rider is already registered 
         Optional<Rider> potentialRider = riderRepository.findByUsername(rider.getUsername());
@@ -47,13 +49,14 @@ public class RiderServiceImp implements RiderService {
 
         // in that case, throw exceptions
         if(checkUsername.isPresent()){
-            throw new Exception("Username already exists");
+            throw new ErrorWarning("Username already exists");
         }
         else if(checkEmail.isPresent()){
-            throw new Exception("Email already exists");
+            throw new ErrorWarning("Email already exists");
         }
 
         // set encoded password
+        System.out.println(rider.getPassword());
         newRider.setPassword(passwordEncoder.encode(newRider.getPassword()));
 
         // save rider in database
