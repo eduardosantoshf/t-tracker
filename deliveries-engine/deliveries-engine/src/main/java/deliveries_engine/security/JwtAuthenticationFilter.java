@@ -28,7 +28,7 @@ import io.jsonwebtoken.impl.DefaultClaims;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     private AuthenticationManager authenticationManager;
 
@@ -46,6 +46,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         HashMap<String, Object> responseBody = new HashMap<>();
 
         String username = ((UserDetails) authResult.getPrincipal()).getUsername();
+        int id = this.userRepository.findByUsername(username).get().getId();
 
         List<String> authorities = authResult.getAuthorities().stream()
                 .map(role -> role.getAuthority())
@@ -55,6 +56,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = JwtTokenService.generateToken(username, claims);
 
         responseBody.put("token", token);
+        responseBody.put("id", id);
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getWriter(), responseBody);

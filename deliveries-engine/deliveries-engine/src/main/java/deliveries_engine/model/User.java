@@ -55,6 +55,9 @@ public class User {
         this.zipCode = zipCode;
     }
 
+    public int getId() {
+        return id;
+    }
 
     public String getUsername(){
         return this.username;
