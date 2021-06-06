@@ -27,6 +27,10 @@ public class Store {
         this.ownerName = ownerName;
     }
 
+    public Store() {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -37,5 +41,17 @@ public class Store {
 
     public String getOwnerName() {
         return ownerName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 }
