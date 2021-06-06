@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 @Table(name = "Store")
 public class Store {
@@ -21,37 +23,48 @@ public class Store {
     @Column(name = "owner_name", nullable = false)
     private String ownerName;
 
-    public Store(String name, List<Delivery> deliveries, String ownerName) {
+    public Store () {}
+
+    @Autowired
+    public Store(String name, String ownerName) {
         this.name = name;
-        this.deliveries = deliveries;
         this.ownerName = ownerName;
     }
 
-    public Store() {
-
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Delivery> getDeliveries() {
-        return deliveries;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Delivery> getDeliveries() {
+        return deliveries;
     }
 
     public void setDeliveries(List<Delivery> deliveries) {
         this.deliveries = deliveries;
     }
 
+    public void addDelivery(Delivery delivery) {
+        this.deliveries.add(delivery);
+    }
+
+    public void deleteDelivery(Delivery delivery) {
+        this.deliveries.remove(delivery);
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
     }
+
 }

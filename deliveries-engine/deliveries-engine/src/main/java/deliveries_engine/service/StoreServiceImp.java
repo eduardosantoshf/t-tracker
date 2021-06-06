@@ -16,7 +16,7 @@ public class StoreServiceImp implements StoreService{
 
     public Store registerStore(Store store) throws ErrorWarning {
 
-        Optional<Store> potentialStore = storeRepository.findStoreByName(store.getName());
+        Optional<Store> potentialStore = storeRepository.findByName(store.getName());
 
         if (potentialStore.isPresent()){
             throw new ErrorWarning("Store is already registered");

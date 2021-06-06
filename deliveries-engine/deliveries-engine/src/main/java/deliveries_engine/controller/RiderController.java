@@ -24,6 +24,7 @@ public class RiderController {
     @GetMapping(value = "/location/{location}", produces = "application/json")
     public Rider updateLocation(@PathVariable(value = "location") String location){
         return null;
+    
     }
 
     @PostMapping(value = "/status/{status}")
