@@ -2,6 +2,7 @@ package deliveries_engine.service;
 
 import java.util.Optional;
 
+import deliveries_engine.exception.ErrorWarning;
 import deliveries_engine.model.Rider;
 import deliveries_engine.model.User;
 import deliveries_engine.repository.RiderRepository;
@@ -34,7 +35,7 @@ public class RiderServiceImp implements RiderService {
         Optional<Rider> potentialRider = riderRepository.findByUsername(rider.getUsername());
 
         if (potentialRider.isPresent()){
-            throw new Exception("Rider is already registered");
+            throw new ErrorWarning("Rider is already registered");
         }
 
         // new rider object
@@ -46,17 +47,22 @@ public class RiderServiceImp implements RiderService {
 
         // in that case, throw exceptions
         if(check_username.isPresent()){
-            throw new Exception("Username already exists");
+            throw new ErrorWarning("Username already exists");
         }
         else if(check_email.isPresent()){
-            throw new Exception("Email already exists");
+            throw new ErrorWarning("Email already exists");
         }
 
         // set encoded password
         newRider.setPassword(passwordEncoder.encode(newRider.getPassword()));
 
         // save rider in database
-        riderRepository.save(newRider);
+        try{
+            riderRepository.save(newRider);
+        }catch (Exception e){
+            throw new ErrorWarning("Failed to Register user");
+        };
+
 
         return newRider;
 

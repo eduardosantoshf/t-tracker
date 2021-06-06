@@ -23,7 +23,6 @@ public class RiderController {
 
     @PostMapping(value = "/signup", consumes = "application/json")
     public Rider registerRider(@RequestBody Rider rider) throws Exception {
-        System.out.println(rider);
         return riderService.registerRider(rider);
     }
 
