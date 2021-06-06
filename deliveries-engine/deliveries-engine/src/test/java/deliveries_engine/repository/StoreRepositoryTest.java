@@ -12,6 +12,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import deliveries_engine.model.Store;
 
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 class StoreRepositoryTest {
@@ -43,14 +44,14 @@ class StoreRepositoryTest {
         Store tTracker = new Store("T-Tracker", "Owner Name");
         entityManager.persistAndFlush(tTracker);
 
-        Store storeFound = storeRepository.findByName(tTracker.getName());
-        assertThat( storeFound, is(tTracker) );
+        Optional<Store> storeFound = storeRepository.findByName(tTracker.getName());
+        storeFound.ifPresent(store -> assertThat( store, is(tTracker) ));
     }
 
     @Test
     public void whenFindByInvalidName_thenReturnNull() {
-        Store storeFound = storeRepository.findByName("Invalid Store");
-        assertThat( storeFound, is(nullValue()) );
+        Optional<Store> storeFound = storeRepository.findByName("Invalid Store");
+        assertThat( storeFound.isPresent(), is(false) );
     }
 
     @Test
