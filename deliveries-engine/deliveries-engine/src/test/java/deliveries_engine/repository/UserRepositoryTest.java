@@ -7,6 +7,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+
+import java.util.Optional;
+
 import static org.hamcrest.CoreMatchers.nullValue;
 
 import deliveries_engine.model.User;
@@ -41,15 +44,15 @@ class UserRepositoryTest {
         User john = new User("John Doe", "john@doe.com", "JohnTheDoe", "testpassword", 999999999, "Test Address", "Test City", "Test-Zipcode");
         entityManager.persistAndFlush(john);
 
-        User userFound = userRepository.findByUsername(john.getUsername());
-        assertThat( userFound, is(john) );
+        Optional<User> userFound = userRepository.findByUsername(john.getUsername());
+        userFound.ifPresent(user -> assertThat( user, is(john) ) );
     }
 
     @Test
     public void whenFindUserByInvalidUsername_thenReturnNull() {
         String invalidUsername = "ThisUsernameDoesNotExist";
-        User userFound = userRepository.findByUsername(invalidUsername);
-        assertThat( userFound, is(nullValue()) );
+        Optional<User> userFound = userRepository.findByUsername(invalidUsername);
+        assertThat( userFound.isPresent(), is(false) );
     }
 
     @Test

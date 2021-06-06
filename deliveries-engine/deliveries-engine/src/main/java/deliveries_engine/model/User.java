@@ -1,15 +1,20 @@
 package deliveries_engine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name = "User")
+//@MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "user_id")
     private int id;
 
     @Column(name = "name", nullable = false)
@@ -22,6 +27,7 @@ public class User {
     private String username;
 
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "phone_number", nullable = false)
@@ -36,11 +42,7 @@ public class User {
     @Column(name = "zip_code", nullable = true)
     private String zipCode;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Admin admin;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Rider rider;
+    public User(){}
 
     public User(String name, String email, String username, String password, int phoneNumber) {
         this.name = name;
@@ -66,68 +68,40 @@ public class User {
         return this.id;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
+    public String getUsername(){
         return this.username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getEmail(){
+        return this.email;
     }
 
-    public String getPassword() {
+    public String getPassword(){
         return this.password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getName() {
+        return name;
     }
 
     public int getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        return phoneNumber;
     }
 
     public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+        return address;
     }
 
     public String getCity() {
-        return this.city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+        return city;
     }
 
     public String getZipCode() {
-        return this.zipCode;
+        return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void setPassword(String password){
+        this.password = password;
     }
 
 }

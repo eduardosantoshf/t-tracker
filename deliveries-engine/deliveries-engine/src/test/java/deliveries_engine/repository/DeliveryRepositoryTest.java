@@ -14,7 +14,6 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import deliveries_engine.model.Delivery;
 import deliveries_engine.model.Rider;
 import deliveries_engine.model.Store;
-import deliveries_engine.model.User;
 
 import java.util.List;
 
@@ -32,10 +31,7 @@ class DeliveryRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        User newUser = new User("Alex Jones", "alexjones1@mail.com", "AlexJonesOfficial", "alexijoni", 913444555);
-        entityManager.persist(newUser);
-
-        deliveryRider = new Rider(newUser);
+        deliveryRider = new Rider("Alex Jones", "alexjones1@mail.com", "AlexJonesOfficial", "alexijoni", 913444555);
         deliveryStore = new Store("Nozama", "Beff Jezos");
         entityManager.persist(deliveryRider);
         entityManager.persist(deliveryStore);
