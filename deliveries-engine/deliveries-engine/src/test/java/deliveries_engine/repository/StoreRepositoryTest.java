@@ -11,6 +11,8 @@ import static org.hamcrest.CoreMatchers.nullValue;
 
 import deliveries_engine.model.Store;
 
+import java.util.List;
+
 @DataJpaTest
 class StoreRepositoryTest {
 
@@ -49,6 +51,25 @@ class StoreRepositoryTest {
     public void whenFindByInvalidName_thenReturnNull() {
         Store storeFound = storeRepository.findByName("Invalid Store");
         assertThat( storeFound, is(nullValue()) );
+    }
+
+    @Test
+    public void whenFindAll_thenReturnAllStores() {
+        Store tTracker = new Store("T-Tracker", "Owner Name");
+        Store amazon = new Store("Amazon", "Jeff B.");
+        Store fnac = new Store("Fnac", "Fnac Owner");
+    
+        entityManager.persist(tTracker);
+        entityManager.persist(amazon);
+        entityManager.persist(fnac);
+        entityManager.flush();
+
+        List<Store> deliveriesFound = storeRepository.findAll();
+
+        assertThat( deliveriesFound.size(), is(3) );
+        assertThat( deliveriesFound.contains(tTracker), is(true) );
+        assertThat( deliveriesFound.contains(amazon), is(true) );
+        assertThat( deliveriesFound.contains(fnac), is(true) );
     }
 
 }
