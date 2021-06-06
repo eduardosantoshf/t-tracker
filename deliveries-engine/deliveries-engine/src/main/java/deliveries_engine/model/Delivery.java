@@ -1,5 +1,7 @@
 package deliveries_engine.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,6 +23,7 @@ public class Delivery {
 
     @ManyToOne
     @JoinColumn(name="rider_id")
+    //@JsonBackReference
     private Rider rider;
 
     @ManyToOne

@@ -21,4 +21,21 @@ public class Store {
     @Column(name = "owner_name", nullable = false)
     private String ownerName;
 
+    public Store(String name, List<Delivery> deliveries, String ownerName) {
+        this.name = name;
+        this.deliveries = deliveries;
+        this.ownerName = ownerName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Delivery> getDeliveries() {
+        return deliveries;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
 }
