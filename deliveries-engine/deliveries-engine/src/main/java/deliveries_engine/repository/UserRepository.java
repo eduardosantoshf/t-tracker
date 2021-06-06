@@ -9,7 +9,9 @@ import deliveries_engine.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 
-    Optional<User> findByUsername(String username);
     Optional<User> findByEmail(String email);
-    
+    public User findById(int id);
+    Optional<User> findByUsername(String username);
+    public User findByPhoneNumber(int phoneNumber);
+
 }

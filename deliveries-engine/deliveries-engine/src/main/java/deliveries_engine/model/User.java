@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 @Table(name = "User")
 //@MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_id")
     private int id;
@@ -31,20 +33,27 @@ public class User {
     @Column(name = "phone_number", nullable = false)
     private int phoneNumber;
 
-    @Column(name = "adress", nullable = false)
+    @Column(name = "adress", nullable = true)
     private String address;
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "city", nullable = true)
     private String city;
 
-    @Column(name = "zip_code", nullable = false)
+    @Column(name = "zip_code", nullable = true)
     private String zipCode;
 
-    public User(){
+    public User(){}
 
+    public User(String name, String email, String username, String password, int phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
     }
 
-    public User(String name, String email, String username, String password, int phoneNumber, String address, String city, String zipCode){
+    @Autowired
+    public User(String name, String email, String username, String password, int phoneNumber, String address, String city, String zipCode) {
         this.name = name;
         this.email = email;
         this.username = username;
@@ -55,6 +64,9 @@ public class User {
         this.zipCode = zipCode;
     }
 
+    public int getId() {
+        return this.id;
+    }
 
     public String getUsername(){
         return this.username;
