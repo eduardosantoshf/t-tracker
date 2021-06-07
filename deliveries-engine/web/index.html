@@ -94,16 +94,16 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav m-auto">
                                     <li class="nav-item active">
-                                        <a href="index.html/#home">Home</a>
+                                        <a id="linkHome" href="index.html/#home">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.html/#about">Drivers</a>
+                                        <a id="linkDrivers" href="index.html/#about">Drivers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.html/#services">Stores</a>
+                                        <a id="linkStores" href="index.html/#services">Stores</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="login.html">Login</a>
+                                        <a id="linkLogin" href="login.html">Login</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="header-hero-content">
-                            <h1 class="hero-title wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s"><b>Your</b> <span>Delivery</span> Partner for <b>Growth.</b></h1>
+                            <h1 id="main-header" class="hero-title wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s"><b>Your</b> <span>Delivery</span> Partner for <b>Growth.</b></h1>
                             <p class="text wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">Check your tracking number...</p>
                             <div class="header-singup wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.8s">
                                 <input type="text" placeholder="XYZ123XXXXXXXXXX">
@@ -144,19 +144,19 @@
         <div class="container">
             <div class="title">Signup as Driver</div>
             <div class="row row-padding">
-                <div class="col-3"><input class="form-control" placeholder="Nome"></div>
-                <div class="col-3"><input class="form-control" placeholder="Email"></div>
-                <div class="col-3"><input class="form-control" placeholder="Username"></div>
-                <div class="col-3"><input class="form-control" placeholder="Password" type="password"></div>
+                <div class="col-3"><input id="driverNameInput" class="form-control" placeholder="Nome"></div>
+                <div class="col-3"><input id="driverEmailInput" class="form-control" placeholder="Email"></div>
+                <div class="col-3"><input id="driverUsernameInput" class="form-control" placeholder="Username"></div>
+                <div class="col-3"><input id="driverPasswordInput" class="form-control" placeholder="Password" type="password"></div>
             </div>
             <div class="row row-padding">
-                <div class="col-3"><input class="form-control" placeholder="Telemóvel"></div>
-                <div class="col-3"><input class="form-control" placeholder="Morada"></div>
-                <div class="col-3"><input class="form-control" placeholder="Codigo-Postal"></div>
-                <div class="col-3"><input class="form-control" placeholder="Cidade"></div>
+                <div class="col-3"><input id="driverPhoneNumberInput" class="form-control" placeholder="Telemóvel"></div>
+                <div class="col-3"><input id="driverAddressInput" class="form-control" placeholder="Morada"></div>
+                <div class="col-3"><input id="driverZipCodeInput" class="form-control" placeholder="Codigo-Postal"></div>
+                <div class="col-3"><input id="driverCityInput" class="form-control" placeholder="Cidade"></div>
             </div>
             <div class="row row-padding">
-                <div class="col-3"><button type="button" class="btn btn-light">Signup</button></div>
+                <div class="col-3"><button id="driverSignupSubmitBtn" type="button" class="btn btn-light">Signup</button></div>
                 <div class="col-9"></div>
             </div>
         </div>
@@ -169,8 +169,10 @@
     <section id="services" class="our-services-area pt-115">
         <div class="container">
             <div class="title">Signup as Store</div>
+            <p class="pl-3">(Retreive a token)</p>
             <div class="row row-padding">
-                <div class="col-12"><input class="form-control" placeholder="Store Name (Retreive a token)"></div>
+                <div class="col-8"><input id="storeSignupName" class="form-control" placeholder="Store Name"></div>
+                <div class="col-4"><input id="storeSignupOwnerName" class="form-control" placeholder="Owner Name"></div>
             </div>
             <div class="row row-padding">
                 <div class="col-3"><button type="button" class="btn btn-light">Signup</button></div>
