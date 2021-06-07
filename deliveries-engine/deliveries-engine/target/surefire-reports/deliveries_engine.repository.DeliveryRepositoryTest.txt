@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: deliveries_engine.repository.DeliveryRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.429 s - in deliveries_engine.repository.DeliveryRepositoryTest
