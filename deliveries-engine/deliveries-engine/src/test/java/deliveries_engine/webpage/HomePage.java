@@ -17,6 +17,9 @@ public class HomePage {
     @FindBy(id = "main-header")
     private WebElement mainHeader;
 
+	@FindBy(id = "driver-header")
+    private WebElement driverHeader;
+
 	@FindBy(id = "linkDrivers")
     private WebElement navLinkDrivers;
 
@@ -62,6 +65,9 @@ public class HomePage {
 	@FindBy(id = "storeSignupOwnerName")
 	private WebElement storeSignupOwnerName;
 
+	@FindBy(id = "storeSignupSubmitBtn")
+	private WebElement storeSignupSubmitBtn;
+
     //Constructor
 	public HomePage(WebDriver driver){
 		this.driver = driver;
@@ -87,8 +93,20 @@ public class HomePage {
 		return this.mainHeader.getText();
 	}
 
-	public void navigateToRiderSignup() {
+	public void navigateToDriverSignup() {
 		navLinkDrivers.click();
+	}
+
+	public void navigateToStoreSignup() {
+		navLinkStores.click();
+	}
+
+	public void navigateToLogin() {
+		navLinkLogin.click();
+	}
+
+	public String getDriverHeader() {
+		return this.driverHeader.getText();
 	}
 
 	public void fillDriverSignup() {
@@ -102,10 +120,21 @@ public class HomePage {
 		driverCityInput.sendKeys("NYC");
 	}
 
+	public void pressSubmitDriver() {
+		this.driverSignupSubmitBtn.click();
+	}
+
+	public String getStoreHeader() {
+		return this.storeHeader.getText();
+	}
+	
 	public void fillStoreSignup() {
 		storeSignupName.sendKeys("The New Amazon");
 		storeSignupOwnerName.sendKeys("Gill Bates");
 	}
-	
+
+	public void pressSubmitStore() {
+		this.storeSignupSubmitBtn.click();
+	}
 
 }
