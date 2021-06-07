@@ -1,0 +1,47 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql
+    #restart: always
+    environment:
+      MYSQL_DATABASE: 't-tracker'
+      MYSQL_USER: 'useraroo'
+      MYSQL_ROOT_PASSWORD: 'lepwd'
+      MYSQL_PASSWORD: 'lepwd'
+      MYSQL_TCP_PORT: 3307
+    ports:
+      - '3307:3307'
+    #volumes:
+      #- db-data1:/var/lib/mysql
+      #- ./mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
+    expose:
+    # opens port 3307 on the container
+      - '3307'
+  
+  backend:
+    build:
+      context: t-tracker
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3307/t-tracker
+      SPRING_DATASOURCE_USERNAME: useraroo
+      SPRING_DATASOURCE_PASSWORD: lepwd
+      SPRING_RABBITMQ_HOST: lepwd
+    depends_on: 
+      - db
+
+  #client:
+  #  build:
+  #      context: web
+  #      dockerfile: Dockerfile
+  #  ports:
+  #      - "8000:8081"
+  #  volumes:
+  #      - ./src:/etc/share/nginx/html
+  #      - ./nginx.conf:/etc/nginx/nginx.conf
+  #  depends_on: 
+  #      - backend

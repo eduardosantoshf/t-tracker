@@ -4,11 +4,11 @@ name: Deliveries Engine CI/CD Pipeline
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # Triggers the workflow on push for all branches and pull requests for the main branch
   push:
-    branches: [ main ]
+
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
           java-version: 1.8
 
       - name: Step 3 - Have Github Actions build Maven project
-        run: mvn -B package --file deliveries-engine/deliveries-engine/pom.xml
+        run: mvn -B package --file deliveries-engine/deliveries-engine/pom.xml -Dtest=\!webpage/*
         
       - name: Step 4 - List the current directory
         run: ls -la
@@ -71,4 +71,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_DELIVERIES_ENGINE_TOKEN }}
         run: |
             cd deliveries-engine/deliveries-engine
-            mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+            mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dtest=\!webpage/*
