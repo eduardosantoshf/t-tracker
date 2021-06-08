@@ -38,6 +38,14 @@ public class Rider extends User {
         this.status = 0;
     }
 
+    @Autowired
+    public Rider(String name, String email, String username, String password, int phoneNumber, String address, String city, String zipCode, double latitude, double longitude){
+        super(name, email, username, password, phoneNumber, address, city, zipCode);
+        this.status = 0;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public String toString(){
         return "Rider: " + this.getUsername() + " " + this.getEmail();
     }
