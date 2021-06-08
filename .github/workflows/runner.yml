@@ -10,7 +10,6 @@ jobs:
   test:
     runs-on:
     - self-hosted
-    - ${{github.event.inputs.target_runner}}
 
     name: Runner Basic Test
     steps:
