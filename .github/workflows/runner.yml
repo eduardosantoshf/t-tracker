@@ -11,10 +11,10 @@ jobs:
     runs-on:
     - self-hosted
 
-    name: Runner Basic Test
+    name: Run deliveries-engine Compose
     steps:
     - uses: actions/checkout@v2
-    - name: Run a one-line script
+    - name: Run compose
       run: |
         cd deliveries-engine/
         docker-compose up --build
