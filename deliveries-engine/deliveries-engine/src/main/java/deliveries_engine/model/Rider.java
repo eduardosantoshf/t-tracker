@@ -18,6 +18,12 @@ public class Rider extends User {
     @JsonIgnore
     private List<Delivery> deliveries;
 
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longitude")
+    private double longitude;
+
     public Rider() {}
 
     @Autowired
@@ -60,4 +66,19 @@ public class Rider extends User {
         this.deliveries.remove(delivery);
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 }

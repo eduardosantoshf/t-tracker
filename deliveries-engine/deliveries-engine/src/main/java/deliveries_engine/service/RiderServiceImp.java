@@ -71,4 +71,18 @@ public class RiderServiceImp implements RiderService {
 
     }
 
+    @Override
+    public String updateLocation(double latitude, double longitude, Rider rider) {
+
+        rider.setLatitude(latitude);
+        rider.setLongitude(longitude);
+
+        if(rider.getLatitude() == latitude && rider.getLongitude() == longitude){
+            return "Success";
+        }
+        else{
+            return "Failed";
+        }
+    }
+
 }
