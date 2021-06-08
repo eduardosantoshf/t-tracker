@@ -15,7 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run a one-line script
-      run: echo Hello, world!
+      run: |
+        cd deliveries-engine/
+        docker-compose up --build
 
     #- name: Validate GitHub Context
     #  shell: bash
