@@ -17,7 +17,7 @@ jobs:
     - name: Run compose
       run: |
         cd deliveries-engine/
-        docker-compose up --build
+        sudo docker-compose up --build
 
     #- name: Validate GitHub Context
     #  shell: bash
