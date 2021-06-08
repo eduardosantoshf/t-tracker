@@ -13,14 +13,15 @@ jobs:
     - self-hosted
     - ${{github.event.inputs.target_runner}}
 
-    name: Runner Basic Test 🛠
+    name: Runner Basic Test
     steps:
     - uses: actions/checkout@v2
     - name: Run a one-line script
       run: echo Hello, world!
-    - name: Validate GitHub Context
-      shell: bash
-      run: |
-        declare -a context_vars=("GITHUB_ACTION" "GITHUB_ACTIONS" "GITHUB_REPOSITORY" "GITHUB_WORKSPACE" "GITHUB_SHA" "GITHUB_RUN_ID" "GITHUB_RUN_NUMBER")
-        for var in ${context_vars[@]};
-        do [ -z "${!var}" ] && echo "##[error]$var not found" && exit 1 || echo "$var: ${!var}"; done
+
+    #- name: Validate GitHub Context
+    #  shell: bash
+    #  run: |
+    #    declare -a context_vars=("GITHUB_ACTION" "GITHUB_ACTIONS" "GITHUB_REPOSITORY" "GITHUB_WORKSPACE" "GITHUB_SHA" "GITHUB_RUN_ID" "GITHUB_RUN_NUMBER")
+    #    for var in ${context_vars[@]};
+    #    do [ -z "${!var}" ] && echo "##[error]$var not found" && exit 1 || echo "$var: ${!var}"; done
