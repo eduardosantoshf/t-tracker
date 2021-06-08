@@ -1,5 +1,6 @@
 package deliveries_engine.controller;
 
+import deliveries_engine.exception.ErrorWarning;
 import deliveries_engine.repository.RiderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class RiderController {
 
 
     @PostMapping(value = "/location/{latitude}/{longitude}", produces = "application/json")
-    public String updateLocation(@PathVariable(value = "latitude") double latitude, @PathVariable(value = "longitude") double longitude, HttpServletRequest request){
+    public Rider updateLocation(@PathVariable(value = "latitude") double latitude, @PathVariable(value = "longitude") double longitude, HttpServletRequest request) throws ErrorWarning {
         Principal principal = request.getUserPrincipal();
         Optional<Rider> opt = riderRepository.findByUsername(principal.getName());
         Rider rider = opt.get();
