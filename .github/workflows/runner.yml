@@ -1,11 +1,10 @@
 name: Runner Basics Test Case
 
-on:
-  workflow_dispatch:
-    inputs: 
-      target_runner:
-        description: 'Self-hosted runner will run the job'
-        required: true
+on: [push]
+  #push:
+
+  #pull_request:
+  #  branches: [ main ]
 
 jobs:
   test:
