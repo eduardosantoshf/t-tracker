@@ -1,54 +1,22 @@
-name: Runner Basics Test Case
+name: deliveries-engine runner
 
-on: [push]
-  #push:
+on:
+  push:
+    branches:
+      - deployment
 
-  #pull_request:
-  #  branches: [ main ]
+  pull_request:
+    branches: [ deployment ]
 
 jobs:
-  #build:
-  #  name: Build deliveries-engine Maven Project
-  #  # The type of runner that the job will run on
-  #  runs-on: self-hosted
-
-  #  # Steps represent a sequence of tasks that will be executed as part of the job
-  #  steps:
-  #    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-  #    - name: Step 1 - Checkout main branch from Github
-  #      uses: actions/checkout@v2
-
-  #    - name: Step 2 - Set up JDK 1.8
-  #      uses: actions/setup-java@v1
-  #      with:
-  #        java-version: 1.8
-
-  #    - name: Step 3 - Have Github Actions build Maven project
-  #      run: mvn -B package --file deliveries-engine/deliveries-engine/pom.xml -Dtest=\!webpage/*
-  #      
-  #    - name: Step 4 - List the current directory
-  #      run: ls -la
-  #      
-  #    - name: Step 5 - Show files inside the target/ folder
-  #      run: |
-  #        cd deliveries-engine/deliveries-engine/target
-  #        ls -la
-
-  test:
+  deployment:
     runs-on:
     - self-hosted
 
-    name: Run deliveries-engine Compose
+    name: Run deliveries-engine docker-compose
     steps:
     - uses: actions/checkout@v2
     - name: Run compose
       run: |
         cd deliveries-engine/
         sudo docker-compose up --build
-
-    #- name: Validate GitHub Context
-    #  shell: bash
-    #  run: |
-    #    declare -a context_vars=("GITHUB_ACTION" "GITHUB_ACTIONS" "GITHUB_REPOSITORY" "GITHUB_WORKSPACE" "GITHUB_SHA" "GITHUB_RUN_ID" "GITHUB_RUN_NUMBER")
-    #    for var in ${context_vars[@]};
-    #    do [ -z "${!var}" ] && echo "##[error]$var not found" && exit 1 || echo "$var: ${!var}"; done
