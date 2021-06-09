@@ -4,39 +4,50 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "User")
-public class User {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private int id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique=true)
     private String email;
-
-    @Column(name = "username", nullable = false)
-    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number", unique=true)
     private int phoneNumber;
 
-    @Column(name = "adress", nullable = false)
-    private String address;
+    @Column(name = "home_location")
+    private Coordinates homeLocation;
 
-    @Column(name = "city", nullable = false)
-    private String city;
+    public User(String name, String email, String password, int phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+    }
 
-    @Column(name = "zip_code", nullable = false)
-    private String zipCode;
+    public User(String name, String email, String password, Coordinates homeLocation) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.homeLocation = homeLocation;
+    }
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Owner owner;
+    public User(String name, String email, String password, int phoneNumber, Coordinates homeLocation) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.homeLocation = homeLocation;
+    }
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Client client;
+
 }

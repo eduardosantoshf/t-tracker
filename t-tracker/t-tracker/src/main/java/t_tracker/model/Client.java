@@ -1,26 +1,28 @@
 package t_tracker.model;
 
 import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @Entity
-@Table(name = "Client")
-public class Client {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @Column(name = "current_location", nullable = false)
-    private String currentLocation;
+public class Client extends User {
 
     @OneToMany(mappedBy = "client")
-    private List<VaccineBuy> vaccine_buys;
+    private List<Order> orderlist;
 
-    @OneToMany(mappedBy = "client")
-    private List<VaccineCollection> vaccine_collects;
+    public Client(String name, String email, String password, int phoneNumber) {
+        super(name, email, password, phoneNumber);
+    }
+
+    public Client(String name, String email, String password, Coordinates homeLocation) {
+        super(name, email, password, homeLocation);
+    }
+
+    @Autowired
+    public Client(String name, String email, String password, int phoneNumber, Coordinates homeLocation) {
+        super(name, email, password, phoneNumber, homeLocation);
+    }
+
 }
