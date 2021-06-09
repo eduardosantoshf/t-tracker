@@ -15,6 +15,9 @@ public abstract class User {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "username", nullable = false)
+    private String username;
+
     @Column(name = "email", nullable = false, unique=true)
     private String email;
 
@@ -24,29 +27,49 @@ public abstract class User {
     @Column(name = "phone_number", unique=true)
     private int phoneNumber;
 
-    @Column(name = "home_location")
+    @OneToOne
+    @JoinColumn(name = "coordinates_id")
     private Coordinates homeLocation;
 
-    public User(String name, String email, String password, int phoneNumber) {
+    public User(String name, String username, String email, String password, int phoneNumber) {
         this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
 
-    public User(String name, String email, String password, Coordinates homeLocation) {
+    public User(String name, String username, String email, String password, Coordinates homeLocation) {
         this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.homeLocation = homeLocation;
     }
 
-    public User(String name, String email, String password, int phoneNumber, Coordinates homeLocation) {
+    public User(String name, String username, String email, String password, int phoneNumber, Coordinates homeLocation) {
         this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.homeLocation = homeLocation;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
 

@@ -19,20 +19,20 @@ services:
     # opens port 3307 on the container
       - '3307'
   
-  backend:
-    build:
-      context: t-tracker
-      dockerfile: Dockerfile
-    ports:
-      - "8081:8081"
-    restart: on-failure
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3307/t-tracker
-      SPRING_DATASOURCE_USERNAME: useraroo
-      SPRING_DATASOURCE_PASSWORD: lepwd
-      SPRING_RABBITMQ_HOST: lepwd
-    depends_on: 
-      - db
+  # backend:
+  #   build:
+  #     context: t-tracker
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8081:8081"
+  #   restart: on-failure
+  #   environment:
+  #     SPRING_DATASOURCE_URL: jdbc:mysql://db:3307/t-tracker
+  #     SPRING_DATASOURCE_USERNAME: useraroo
+  #     SPRING_DATASOURCE_PASSWORD: lepwd
+  #     SPRING_RABBITMQ_HOST: lepwd
+  #   depends_on: 
+  #     - db
 
   #client:
   #  build:

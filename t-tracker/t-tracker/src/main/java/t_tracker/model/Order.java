@@ -5,19 +5,23 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name="orders")
 public class Order {
     
     @Id
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "client_id", nullable = false)
-    private int clientId;
+    @ManyToOne
+    @JoinColumn(name="client_id")
+    private Client client;
 
-    @Column(name = "pickup_location", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "coordinates_id", insertable=false, updatable=false)
     private Coordinates pickupLocation;
 
-    @Column(name = "deliver_location", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "coordinates_id", insertable=false, updatable=false)
     private Coordinates deliverLocation;
 
     @Column(name = "order_total", nullable = false)
@@ -25,15 +29,15 @@ public class Order {
 
     @Column(name = "driver_id")
     private int driverId;
-
-    @Column(name = "list_of_products", nullable = false)
+    
+    @OneToMany(mappedBy = "order")
     private List<Stock> listOfProducts;
 
     @Column(name = "is_delivered", nullable = false)
-    private boolean isDelivered;
+    private boolean isDelivered;    
 
-    public Order(int clientId, Coordinates pickupLocation, Coordinates deliverLocation, int orderTotal, List<Stock> listOfProducts) {
-        this.clientId = clientId;
+    public Order(Client client, Coordinates pickupLocation, Coordinates deliverLocation, int orderTotal, List<Stock> listOfProducts) {
+        this.client = client;
         this.pickupLocation = pickupLocation;
         this.deliverLocation = deliverLocation;
         this.orderTotal = orderTotal;

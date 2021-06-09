@@ -12,17 +12,17 @@ public class Client extends User {
     @OneToMany(mappedBy = "client")
     private List<Order> orderlist;
 
-    public Client(String name, String email, String password, int phoneNumber) {
-        super(name, email, password, phoneNumber);
+    public Client(String name, String username, String email, String password, int phoneNumber) {
+        super(name, username, email, password, phoneNumber);
     }
 
-    public Client(String name, String email, String password, Coordinates homeLocation) {
-        super(name, email, password, homeLocation);
+    public Client(String name, String username, String email, String password, Coordinates homeLocation) {
+        super(name, username, email, password, homeLocation);
     }
 
     @Autowired
-    public Client(String name, String email, String password, int phoneNumber, Coordinates homeLocation) {
-        super(name, email, password, phoneNumber, homeLocation);
+    public Client(String name, String username, String email, String password, int phoneNumber, Coordinates homeLocation) {
+        super(name, username, email, password, phoneNumber, homeLocation);
     }
 
 }

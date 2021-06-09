@@ -17,6 +17,10 @@ public class Stock {
     private int quantity;
 
     @ManyToOne
+    @JoinColumn(name="order_id")
+    private Order order;
+
+    @ManyToOne
     @JoinColumn(name="lab_id")
     private Lab lab;
 

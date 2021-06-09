@@ -13,10 +13,11 @@ public class Lab {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "location")
+    @OneToOne
+    @JoinColumn(name = "coordinates_id")
     private Coordinates location;
 
-    @OneToMany(mappedBy = "Lab")
+    @OneToMany(mappedBy = "lab")
     private List<Stock> stocks;
 
     public Lab(String name, Coordinates location) {
