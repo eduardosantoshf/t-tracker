@@ -41,16 +41,46 @@ function signuprider(){
     var riderCity=$("#riderCity").val();
 
     var rider={"name":riderName, "email":riderEmail, "username":riderUsername, "password":riderPassword, "phoneNumber":riderPhone, "address":riderAddress, "zipCode":riderCEP, "city":riderCity};
-    fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => (data.id!=null) ? autoLogin(riderUsername, riderPassword) : alert("User already exists!"));
+    //fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => (data.id!=null) ? autoLogin(riderUsername, riderPassword) : $("#authmessage").show());
+
+    fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
+        if(data.status==200)
+            try{
+                data.json();
+                autoLogin(riderUsername, riderPassword);
+            }catch(e){
+                $("#authmessage").show();
+            }
+        else
+            $("#authmessage").show();
+    })
 }
 
 function loginrider(){
     var riderUsername = $("#riderUsername").val();
     var riderPassword = $("#riderPassword").val();
     
-    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => (data.status==200) ? data.json() : alert("Wrong credentials")).then(data => document.cookie = "sessionKey="+data.token).then(() => window.location.href="/dashboard.html");
+    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
+        if(data.status==200){
+            data=data.json();
+            document.cookie = "sessionKey="+data.token;
+            window.location.href="/dashboard.html"
+        }else{
+            $("#authmessage").show();
+            $("#riderPassword").val("");
+        }
+    });
 }
 
 function autoLogin(riderUsername, riderPassword){
-    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => (data.status==200) ? data.json() : alert("Wrong credentials")).then(data => document.cookie = "sessionKey="+data.token).then(() => window.location.href="/dashboard.html");
+    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
+        if(data.status==200){
+            data=data.json();
+            document.cookie = "sessionKey="+data.token;
+            window.location.href="/dashboard.html"
+        }else{
+            alert("Wrong credentials");
+            $("#riderPassword").val("");
+        }
+    });
 }
