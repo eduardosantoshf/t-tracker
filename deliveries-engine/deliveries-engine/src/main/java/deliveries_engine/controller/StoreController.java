@@ -34,6 +34,7 @@ public class StoreController {
     }
 
     @PostMapping(value = "/order", consumes = "application/json")
-    public void order(@RequestBody Delivery delivery){
+    public Rider order(@RequestBody Delivery delivery){
+        return storeService.getClosestRider(delivery.getDeliveryLatitude(), delivery.getDeliveryLongitude());
     }
 }
