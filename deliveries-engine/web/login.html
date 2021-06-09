@@ -45,6 +45,7 @@
             font-size: 25pt;
         }
     </style>
+    <script src="assets/js/auth.js"></script>
 </head>
 
 <body>
@@ -211,7 +212,7 @@
                 </div> <!-- row -->
             </div> <!-- footer widget -->
             <div class="footer-copyright text-center">
-                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">UIdeck</a> All Rights
+                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">Very Dedicated People</a> All Rights
                     Reserved.</p>
             </div>
         </div> <!-- container -->
@@ -282,15 +283,6 @@
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
 
-    <script>
-        function loginrider(){
-            var riderUsername = $("#riderUsername").val();
-            var riderPassword = $("#riderPassword").val();
-            console.log(riderUsername + " / " + riderPassword)
-            var rider={"username":riderUsername, "password":riderPassword}
-            fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => data.json()).then(data => document.cookie = "sessionKey="+data.token);
-        }
-    </script>
 </body>
 
 </html>
