@@ -18,6 +18,12 @@ public class Rider extends User {
     @JsonIgnore
     private List<Delivery> deliveries;
 
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longitude")
+    private double longitude;
+
     public Rider() {}
 
     @Autowired
@@ -30,6 +36,14 @@ public class Rider extends User {
     public Rider(String name, String email, String username, String password, int phoneNumber, String address, String city, String zipCode){
         super(name, email, username, password, phoneNumber, address, city, zipCode);
         this.status = 0;
+    }
+
+    @Autowired
+    public Rider(String name, String email, String username, String password, int phoneNumber, String address, String city, String zipCode, double latitude, double longitude){
+        super(name, email, username, password, phoneNumber, address, city, zipCode);
+        this.status = 0;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String toString(){
@@ -60,44 +74,19 @@ public class Rider extends User {
         this.deliveries.remove(delivery);
     }
 
-    public int getId() {
-        return super.getId();
+    public double getLatitude() {
+        return latitude;
     }
 
-    public String getUsername(){
-        return super.getUsername();
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public String getEmail(){
-        return super.getEmail();
+    public double getLongitude() {
+        return longitude;
     }
 
-    public String getPassword(){
-        return super.getPassword();
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
-
-    public String getName() {
-        return super.getName();
-    }
-
-    public int getPhoneNumber() {
-        return super.getPhoneNumber();
-    }
-
-    public String getAddress() {
-        return super.getAddress();
-    }
-
-    public String getCity() {
-        return super.getCity();
-    }
-
-    public String getZipCode() {
-        return super.getZipCode();
-    }
-
-    public void setPassword(String password){
-        super.setPassword(password);
-    }
-
 }

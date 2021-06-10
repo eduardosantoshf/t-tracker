@@ -71,4 +71,18 @@ public class RiderServiceImp implements RiderService {
 
     }
 
+    @Override
+    public Rider updateLocation(double latitude, double longitude, Rider rider) throws ErrorWarning {
+
+        rider.setLatitude(latitude);
+        rider.setLongitude(longitude);
+        riderRepository.save(rider);
+        if(rider.getLatitude() == latitude && rider.getLongitude() == longitude){
+            return rider;
+        }
+        else{
+            throw  new ErrorWarning("Failed to change location");
+        }
+    }
+
 }

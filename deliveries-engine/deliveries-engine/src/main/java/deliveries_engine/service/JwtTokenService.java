@@ -18,7 +18,7 @@ public class JwtTokenService {
     public static String generateToken(String username, Claims claims) {
         return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
-                .setClaims(claims)
+                //.setClaims(claims)
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + tokenExpirationTime))
                 .signWith(SignatureAlgorithm.HS512, tokenKey)

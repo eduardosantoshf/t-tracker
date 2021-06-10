@@ -94,16 +94,16 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav m-auto">
                                     <li class="nav-item active">
-                                        <a href="index.html/#home">Home</a>
+                                        <a id="linkHome" href="index.html/#home">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.html/#about">Drivers</a>
+                                        <a id="linkDrivers" href="index.html/#about">Drivers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.html/#services">Stores</a>
+                                        <a id="linkStores" href="index.html/#services">Stores</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="login.html">Login</a>
+                                        <a id="linkLogin" href="login.html">Login</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="header-hero-content">
-                            <h1 class="hero-title wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s"><b>Your</b> <span>Delivery</span> Partner for <b>Growth.</b></h1>
+                            <h1 id="main-header" class="hero-title wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s"><b>Your</b> <span>Delivery</span> Partner for <b>Growth.</b></h1>
                             <p class="text wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">Check your tracking number...</p>
                             <div class="header-singup wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.8s">
                                 <input type="text" placeholder="XYZ123XXXXXXXXXX">
@@ -142,7 +142,7 @@
     
     <section id="about" class="about-area pt-115">
         <div class="container">
-            <div class="title">Signup as Driver</div>
+            <div id="driver-header" class="title">Signup as Driver</div>
             <div class="row row-padding">
                 <div class="col-3"><input class="form-control" placeholder="Nome" id="riderName"></div>
                 <div class="col-3"><input class="form-control" placeholder="Email" id="riderEmail"></div>
@@ -168,7 +168,8 @@
     
     <section id="services" class="our-services-area pt-115">
         <div class="container">
-            <div class="title">Signup as Store</div>
+            <div id="store-header" class="title">Signup as Store</div>
+            <p class="pl-3">(Retreive a token)</p>
             <div class="row row-padding">
                 <div class="col-6"><input class="form-control" placeholder="Store Name (Retreive a token)" id="storeNameTxt"></div>
                 <div class="col-6"><input class="form-control" placeholder="Owner's Name" id="storeOwnerTxt"></div>
