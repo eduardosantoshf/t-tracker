@@ -63,8 +63,12 @@ function loginrider(){
     fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
         if(data.status==200){
             data=data.json();
-            document.cookie = "sessionKey="+data.token;
-            window.location.href="/dashboard.html"
+            
+            Promise.all([data]).then(data => {
+                data=data[0]
+                document.cookie = "sessionKey="+data.token+"; Max-Age=604800"; // a week of TTL
+                window.location.href="/dashboard.html"
+            });
         }else{
             $("#authmessage").show();
             $("#riderPassword").val("");
@@ -76,8 +80,12 @@ function autoLogin(riderUsername, riderPassword){
     fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
         if(data.status==200){
             data=data.json();
-            document.cookie = "sessionKey="+data.token;
-            window.location.href="/dashboard.html"
+            
+            Promise.all([data]).then(data => {
+                data=data[0]
+                document.cookie = "sessionKey="+data.token+"; Max-Age=604800"; // a week of TTL
+                window.location.href="/dashboard.html"
+            });
         }else{
             alert("Wrong credentials");
             $("#riderPassword").val("");
