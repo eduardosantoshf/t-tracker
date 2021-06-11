@@ -3,7 +3,7 @@ name: Deliveries Engine Runner
 on:
   # triggers the workflow on push for the deployment branch
   push:
-    branches: [ deployment, workflows]
+    branches: [ deployment, workflows ]
 
   # triggers the workflow on pull requests for the deployment branch
   pull_request:
@@ -22,4 +22,5 @@ jobs:
       # when running the docker-compose, this actions won't be marked as finished because, while the service is running on the vm runner, the workflow won't finish
       run: |
         cd deliveries-engine/
+        sudo docker-compose down
         sudo docker-compose up --build -d
