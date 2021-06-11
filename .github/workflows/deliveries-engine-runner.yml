@@ -13,7 +13,7 @@ jobs:
   deployment:
     # the type of runner that the job will run on, in this case, it will be on the Github runner that is ruunning on the vm provided for this project
     runs-on:
-    - self-hosted
+    - deliveries-engine-runner
 
     name: Run deliveries-engine docker-compose
     steps:
