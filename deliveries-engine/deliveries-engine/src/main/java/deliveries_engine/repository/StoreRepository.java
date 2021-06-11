@@ -10,7 +10,7 @@ import deliveries_engine.model.Store;
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Long>{
     
-    public Store findById(int id);
+    Optional<Store> findById(int id);
     Optional<Store> findByName(String name);
     public List<Store> findAll();
 

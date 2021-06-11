@@ -28,14 +28,14 @@ class StoreRepositoryTest {
         Store tTracker = new Store("T-Tracker", "Owner Name");
         entityManager.persistAndFlush(tTracker);
 
-        Store storeFound = storeRepository.findById(tTracker.getId());
+        Optional<Store> storeFound = storeRepository.findById(tTracker.getId());
         assertThat( storeFound, is(tTracker) );
     }
 
     @Test
     public void whenFindStoreByInvalidId_thenReturnNull() {
         int invalidId = 99999;
-        Store storeFound = storeRepository.findById(invalidId);
+        Optional<Store> storeFound = storeRepository.findById(invalidId);
         assertThat( storeFound, is(nullValue()) );
     }
 

@@ -5,6 +5,7 @@ import deliveries_engine.model.Rider;
 import deliveries_engine.model.Store;
 import deliveries_engine.repository.RiderRepository;
 import deliveries_engine.repository.StoreRepository;
+import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,16 +30,34 @@ public class StoreServiceImp implements StoreService{
         if (potentialStore.isPresent()){
             throw new ErrorWarning("Store is already registered");
         }
+        else{
+            String token = JwtTokenService.generateToken(store.getName(), new DefaultClaims());
+            store.setToken(token);
+        }
 
         return storeRepository.save(store);
     }
 
     @Override
-    public Rider getClosestRider(double latitude, double longitude) {
+    public Rider getClosestRider(double latitude, double longitude, String token, int storeId) throws ErrorWarning {
+
+        Optional<Store> store = storeRepository.findById(storeId);
+
+        if(!store.isPresent()){
+            throw new ErrorWarning("Invalid Store Id");
+        }
+
+        if(!token.equals(store.get().getToken())){
+            throw new ErrorWarning("Invalid Store token");
+        }
 
         HashMap<Rider, Double> map = new HashMap<>();
 
         List<Rider> riders = riderRepository.findAll();
+
+        if (riders.size() == 0){
+            throw new ErrorWarning("No riders available");
+        }
 
         for(Rider r: riders){
             double riderLat = r.getLatitude();
@@ -67,7 +86,6 @@ public class StoreServiceImp implements StoreService{
 
             // calculate the result
             double finalResult = c * radius;
-            System.out.println(finalResult);
 
             map.put(r, finalResult);
         }
@@ -75,7 +93,7 @@ public class StoreServiceImp implements StoreService{
         Rider responseRider = map.keySet().iterator().next();
         double minDistance = map.get(responseRider);
         for(Map.Entry<Rider, Double> entry: map.entrySet()){
-            if(entry.getValue() < minDistance){
+            if(entry.getValue() < minDistance || entry.getKey().getStatus() == 1){
                 responseRider = entry.getKey();
                 minDistance = entry.getValue();
             }
