@@ -1,6 +1,9 @@
 package t_tracker.model;
 
 import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -34,8 +37,11 @@ public class Order {
     private List<Stock> listOfProducts;
 
     @Column(name = "is_delivered", nullable = false)
-    private boolean isDelivered;    
+    private boolean isDelivered;
+    
+    public Order() {}
 
+    @Autowired
     public Order(Client client, Coordinates pickupLocation, Coordinates deliverLocation, int orderTotal, List<Stock> listOfProducts) {
         this.client = client;
         this.pickupLocation = pickupLocation;

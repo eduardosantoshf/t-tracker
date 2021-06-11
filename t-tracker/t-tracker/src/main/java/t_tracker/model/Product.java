@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 public class Product {
 
@@ -20,6 +22,9 @@ public class Product {
     @Column(name = "type", nullable = false)
     private String type;
 
+    public Product() {}
+
+    @Autowired
     public Product(String name, Double price, String type) {
         this.name = name;
         this.price = price;

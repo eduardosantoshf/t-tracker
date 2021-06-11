@@ -23,9 +23,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository<t_tracker.model.User> userRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository) {
+    public UserDetailsServiceImpl(UserRepository<t_tracker.model.User> userRepository) {
         this.userRepository = userRepository;
     }
 

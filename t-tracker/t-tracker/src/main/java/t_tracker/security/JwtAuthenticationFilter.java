@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import t_tracker.service.JwtTokenService;
-
+import t_tracker.model.User;
 import t_tracker.repository.UserRepository;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,15 +28,15 @@ import io.jsonwebtoken.impl.DefaultClaims;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 
-    private final UserRepository userRepository;
+    private final UserRepository<User> userRepository;
 
     private AuthenticationManager authenticationManager;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager,UserRepository userRepository) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager,UserRepository<User> userRepository) {
         this.authenticationManager = authenticationManager;
         //this.setAuthenticationManager(authenticationManager);
         this.userRepository = userRepository;
-        setFilterProcessesUrl("/login");
+        setFilterProcessesUrl("/client/login");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         HashMap<String, Object> responseBody = new HashMap<>();
 
         String username = ((UserDetails) authResult.getPrincipal()).getUsername();
-        int id = this.userRepository.findByUsername(username).get().getId();
+        Integer id = this.userRepository.findByUsername(username).get().getId();
 
         List<String> authorities = authResult.getAuthorities().stream()
                 .map(role -> role.getAuthority())

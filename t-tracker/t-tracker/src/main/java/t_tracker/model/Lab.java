@@ -1,6 +1,9 @@
 package t_tracker.model;
 
 import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @Entity
@@ -20,6 +23,9 @@ public class Lab {
     @OneToMany(mappedBy = "lab")
     private List<Stock> stocks;
 
+    public Lab() {}
+
+    @Autowired
     public Lab(String name, Coordinates location) {
         this.name = name;
         this.location = location;

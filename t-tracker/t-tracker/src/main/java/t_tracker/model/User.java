@@ -4,18 +4,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "User")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique=true)
     private String username;
 
     @Column(name = "email", nullable = false, unique=true)
@@ -24,12 +23,14 @@ public abstract class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "phone_number", unique=true)
+    @Column(name = "phone_number")
     private int phoneNumber;
 
     @OneToOne
     @JoinColumn(name = "coordinates_id")
     private Coordinates homeLocation;
+
+    public User() {}
 
     public User(String name, String username, String email, String password, int phoneNumber) {
         this.name = name;
@@ -56,8 +57,12 @@ public abstract class User {
         this.homeLocation = homeLocation;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public String getEmail() {
@@ -72,5 +77,29 @@ public abstract class User {
         return this.password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public Coordinates getHomeLocation() {
+        return this.homeLocation;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", username='" + getUsername() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", homeLocation='" + getHomeLocation() + "'" +
+            "}";
+    }
 
 }

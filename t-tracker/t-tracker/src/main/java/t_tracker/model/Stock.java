@@ -2,6 +2,8 @@ package t_tracker.model;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 public class Stock {
 
@@ -24,6 +26,9 @@ public class Stock {
     @JoinColumn(name="lab_id")
     private Lab lab;
 
+    public Stock() {}
+
+    @Autowired
     public Stock(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;

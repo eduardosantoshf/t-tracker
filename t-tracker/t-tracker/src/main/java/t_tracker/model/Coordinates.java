@@ -2,6 +2,8 @@ package t_tracker.model;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 public class Coordinates {
 
@@ -27,6 +29,9 @@ public class Coordinates {
     @OneToOne(mappedBy = "deliverLocation")
     private Order deliverOrder;
 
+    public Coordinates() {}
+
+    @Autowired
     public Coordinates(Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
