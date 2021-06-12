@@ -3,6 +3,7 @@ package t_tracker.service;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.model.Client;
@@ -25,6 +27,9 @@ public class ClientServiceUnitTests {
 
     @Mock( lenient = true)
     private ClientRepository clientRepository;
+
+    @Mock( lenient = true)
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private ClientServiceImpl clientService;
@@ -43,7 +48,9 @@ public class ClientServiceUnitTests {
         
         Mockito.when(clientRepository.findByEmail(neo.getEmail())).thenReturn(Optional.ofNullable(null));
         Mockito.when(clientRepository.findByUsername(neo.getUsername())).thenReturn(Optional.ofNullable(null));
-
+        Mockito.when(clientRepository.save(any(Client.class))).thenReturn(neo);
+        Mockito.when(passwordEncoder.encode(any(String.class))).thenReturn(neo.getPassword());
+        
         Mockito.when(clientRepository.findByEmail(emailUsedUser.getEmail())).thenReturn(Optional.of(emailUsedUser));
         Mockito.when(clientRepository.findByUsername(emailUsedUser.getUsername())).thenReturn(Optional.ofNullable(null));
         
@@ -54,6 +61,7 @@ public class ClientServiceUnitTests {
 
     @Test
     void whenRegisterNewClient_thenReturnCreatedClient() {
+        System.out.println(neo);
         Client registeredClient = clientService.registerClient(neo);
         assertThat( registeredClient, is(neo) );
 
@@ -65,7 +73,7 @@ public class ClientServiceUnitTests {
     void whenRegisterClientWithDuplicateEmail_thenThrowException() {
         ResponseStatusException exceptionThrown = assertThrows( ResponseStatusException.class, () -> { clientService.registerClient(emailUsedUser); });
 
-        assertThat( exceptionThrown.getMessage(), is("The provided email is already being used.") );
+        assertThat( exceptionThrown.getReason(), is("The provided email is already being used.") );
 
         verifyFindByEmailIsCalledOnce(emailUsedUser.getEmail());
         verifyFindByUsernameIsCalledOnce(emailUsedUser.getUsername());
@@ -75,8 +83,8 @@ public class ClientServiceUnitTests {
     void whenRegisterClientWithDuplicateUsername_thenThrowException() {
         ResponseStatusException exceptionThrown = assertThrows( ResponseStatusException.class, () -> { clientService.registerClient(usernameUsedUser); });
 
-        assertThat( exceptionThrown.getMessage(), is("The provided username is already being used.") );
-
+        assertThat( exceptionThrown.getReason(), is("The provided username is already being used.") );
+        
         verifyFindByEmailIsCalledOnce(usernameUsedUser.getEmail());
         verifyFindByUsernameIsCalledOnce(usernameUsedUser.getUsername());
     }
@@ -85,7 +93,7 @@ public class ClientServiceUnitTests {
         Mockito.verify(clientRepository, VerificationModeFactory.times(1)).findByEmail(email);
     }
     private void verifyFindByUsernameIsCalledOnce(String username) {
-        Mockito.verify(clientRepository, VerificationModeFactory.times(1)).findByEmail(username);
+        Mockito.verify(clientRepository, VerificationModeFactory.times(1)).findByUsername(username);
     }
     
 }

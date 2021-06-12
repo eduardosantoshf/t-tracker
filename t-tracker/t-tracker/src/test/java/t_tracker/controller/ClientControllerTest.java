@@ -1,5 +1,6 @@
 package t_tracker.controller;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -8,14 +9,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import static org.hamcrest.core.Is.is;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.JsonUtil;
 import t_tracker.TTrackerApplication;
@@ -33,6 +37,14 @@ public class ClientControllerTest {
     @MockBean
     private ClientServiceImpl clientService;
 
+    Client willy;
+
+    @BeforeEach
+    void setUp() {
+        willy = new Client("Willy Wonka", "ChocolateMan", "chocofactory@org.com", "iS2oompaloompas");
+        willy.setPhoneNumber(931313444);
+        willy.setHomeLocation(new Coordinates(46.991750174814946, 15.907980069174572));
+    }
 
     @AfterEach
     void cleanUp() {
@@ -41,32 +53,26 @@ public class ClientControllerTest {
 
     @Test
     void whenSignupNewClient_thenReturnClientAnd200() throws Exception {
-        Client newClient = new Client("Willy Wonka", "ChocolateMan", "chocofactory@org.com", "iS2oompaloompas");
-        newClient.setPhoneNumber(931313444);
-        newClient.setHomeLocation(new Coordinates(46.991750174814946, 15.907980069174572));
         
-        when( clientService.registerClient(newClient) ).thenReturn(newClient);
+        System.out.println("Test: " + willy);
+        when( clientService.registerClient(willy) ).thenReturn(willy);
 
-        mvc.perform( post("/client/signup").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(newClient)) )
+        mvc.perform( post("/client/signup").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(willy)) )
             .andExpect( status().isOk() )
-            .andExpect( jsonPath("$.name", is(newClient.getName())) )
-            .andExpect( jsonPath("$.username", is(newClient.getUsername())) )
-            .andExpect( jsonPath("$.email", is(newClient.getEmail())) )
-            .andExpect( jsonPath("$.username", is(newClient.getUsername())) )
-            .andExpect( jsonPath("$.phoneNumber", is(newClient.getPhoneNumber())) )
-            .andExpect( jsonPath("$.homeLocation", is(newClient.getHomeLocation())) );
+            .andExpect( jsonPath("$.name", is(willy.getName())) )
+            .andExpect( jsonPath("$.username", is(willy.getUsername())) )
+            .andExpect( jsonPath("$.email", is(willy.getEmail())) )
+            .andExpect( jsonPath("$.username", is(willy.getUsername())) )
+            .andExpect( jsonPath("$.phoneNumber", is(willy.getPhoneNumber())) );
 
     }
 
     @Test
     void whenSignupDuplicateClient_ThenReturnNullAnd409() throws Exception {
-        Client newClient = new Client("Willy Wonka", "ChocolateMan", "chocofactory@org.com", "iS2oompaloompas");
-        newClient.setPhoneNumber(931313444);
-        newClient.setHomeLocation(new Coordinates(46.991750174814946, 15.907980069174572));
 
-        when( clientService.registerClient(newClient) ).thenReturn(null);
+        when( clientService.registerClient(any()) ).thenThrow( ResponseStatusException.class );
 
-        mvc.perform( post("/client/signup").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(newClient)) )
+        mvc.perform( post("/client/signup").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(willy)) )
             .andExpect( status().isConflict() );
     
     }

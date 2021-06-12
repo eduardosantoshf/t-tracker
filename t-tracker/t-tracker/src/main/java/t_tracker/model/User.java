@@ -2,6 +2,8 @@ package t_tracker.model;
 
 import javax.persistence.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 @Table(name = "User")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -39,6 +41,7 @@ public abstract class User {
         this.password = password;
     }
 
+    @Autowired
     public User(String name, String username, String email, String password, int phoneNumber, Coordinates homeLocation) {
         this.name = name;
         this.username = username;
