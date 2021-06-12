@@ -1,4 +1,4 @@
-name: Projects' Runner
+name: T-Tracker Runner
 
 on:
   # triggers the workflow on push for the deployment branch
@@ -10,22 +10,6 @@ on:
     branches: [ deployment ]
 
 jobs:
-  deliveries-engine-runner:
-    # the type of runner that the job will run on, in this case, it will be on the Github runner that is ruunning on the vm provided for this project
-    runs-on:
-    - deliveries-engine-runner
-
-    name: Run deliveries-engine docker-compose
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run compose
-      # when running the docker-compose, this actions won't be marked as finished because, while the service is running on the vm runner, the workflow won't finish
-      run: |
-        cd deliveries-engine/
-        sudo docker-compose down
-        tqs2021
-        sudo docker-compose up --build -d
-  
   t-tracker-runner:
     # the type of runner that the job will run on, in this case, it will be on the Github runner that is ruunning on the vm provided for this project
     runs-on:
