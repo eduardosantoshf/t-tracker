@@ -21,7 +21,7 @@ import t_tracker.JsonUtil;
 import t_tracker.TTrackerApplication;
 import t_tracker.model.Client;
 import t_tracker.model.Coordinates;
-import t_tracker.service.ClientService;
+import t_tracker.service.ClientServiceImpl;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TTrackerApplication.class)
 @AutoConfigureMockMvc
@@ -31,7 +31,7 @@ public class ClientControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private ClientService clientService;
+    private ClientServiceImpl clientService;
 
 
     @AfterEach
