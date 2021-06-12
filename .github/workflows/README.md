@@ -19,7 +19,7 @@ For the **CI** part, there are two scripts, one for each project, both of them w
 For the **CD** part, there are also two scripts, one for each project, but, in this case, each one of them will run on a [**GitHub Self-Hosted Runner**](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners) installed on the given virtual machine.
 
 <p align="center">
-    <img style="height: 100px" src="../../images/runners.png">
+    <img src="images/runners.png">
 </p>
 
 These runners allow us to easily deploy our projects, when pushing/pull requesting to specific branches.
