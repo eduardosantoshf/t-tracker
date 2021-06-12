@@ -22,8 +22,9 @@ jobs:
       # when running the docker-compose, this actions won't be marked as finished because, while the service is running on the vm runner, the workflow won't finish
       run: |
         cd deliveries-engine/
-        docker-compose down
-        docker-compose up --build -d
+        sudo docker-compose down
+        tqs2021
+        sudo docker-compose up --build -d
   
   t-tracker-runner:
     # the type of runner that the job will run on, in this case, it will be on the Github runner that is ruunning on the vm provided for this project
@@ -37,5 +38,5 @@ jobs:
       # when running the docker-compose, this actions won't be marked as finished because, while the service is running on the vm runner, the workflow won't finish
       run: |
         cd t-tracker/
-        docker-compose down
-        docker-compose up --build -d
+        sudo docker-compose down
+        sudo docker-compose up --build -d
