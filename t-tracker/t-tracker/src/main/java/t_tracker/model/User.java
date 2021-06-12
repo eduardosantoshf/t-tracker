@@ -32,20 +32,11 @@ public abstract class User {
 
     public User() {}
 
-    public User(String name, String username, String email, String password, int phoneNumber) {
+    public User(String name, String username, String email, String password) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public User(String name, String username, String email, String password, Coordinates homeLocation) {
-        this.name = name;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.homeLocation = homeLocation;
     }
 
     public User(String name, String username, String email, String password, int phoneNumber, Coordinates homeLocation) {
@@ -65,12 +56,24 @@ public abstract class User {
         return this.name;
     }
 
-    public String getEmail() {
-        return this.email;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {
         return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -85,8 +88,16 @@ public abstract class User {
         return this.phoneNumber;
     }
 
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public Coordinates getHomeLocation() {
         return this.homeLocation;
+    }
+
+    public void setHomeLocation(Coordinates homeLocation) {
+        this.homeLocation = homeLocation;
     }
 
     @Override

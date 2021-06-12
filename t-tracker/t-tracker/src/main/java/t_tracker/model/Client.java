@@ -15,12 +15,8 @@ public class Client extends User {
 
     public Client() {}
 
-    public Client(String name, String username, String email, String password, int phoneNumber) {
-        super(name, username, email, password, phoneNumber);
-    }
-
-    public Client(String name, String username, String email, String password, Coordinates homeLocation) {
-        super(name, username, email, password, homeLocation);
+    public Client(String name, String username, String email, String password) {
+        super(name, username, email, password);
     }
 
     @Autowired
