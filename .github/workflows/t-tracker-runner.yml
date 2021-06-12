@@ -22,5 +22,9 @@ jobs:
       # when running the docker-compose, this actions won't be marked as finished because, while the service is running on the vm runner, the workflow won't finish
       run: |
         cd t-tracker/
+<<<<<<< HEAD
         sudo docker-compose down
         sudo docker-compose up --build -d
+=======
+        sudo docker-compose up --build
+>>>>>>> 3dc3d7f0a6f01b83ba6d933e251e1a93267cd72a
