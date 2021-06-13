@@ -144,19 +144,19 @@
         <div class="container">
             <div id="driver-header" class="title">Signup as Driver</div>
             <div class="row row-padding">
-                <div class="col-3"><input id="driverNameInput" class="form-control" placeholder="Nome"></div>
-                <div class="col-3"><input id="driverEmailInput" class="form-control" placeholder="Email"></div>
-                <div class="col-3"><input id="driverUsernameInput" class="form-control" placeholder="Username"></div>
-                <div class="col-3"><input id="driverPasswordInput" class="form-control" placeholder="Password" type="password"></div>
+                <div class="col-3"><input class="form-control" placeholder="Nome" id="riderName"></div>
+                <div class="col-3"><input class="form-control" placeholder="Email" id="riderEmail"></div>
+                <div class="col-3"><input class="form-control" placeholder="Username" id="riderUsername"></div>
+                <div class="col-3"><input class="form-control" placeholder="Password" type="password" id="riderPassword"></div>
             </div>
             <div class="row row-padding">
-                <div class="col-3"><input id="driverPhoneNumberInput" class="form-control" placeholder="Telemóvel"></div>
-                <div class="col-3"><input id="driverAddressInput" class="form-control" placeholder="Morada"></div>
-                <div class="col-3"><input id="driverZipCodeInput" class="form-control" placeholder="Codigo-Postal"></div>
-                <div class="col-3"><input id="driverCityInput" class="form-control" placeholder="Cidade"></div>
+                <div class="col-3"><input class="form-control" placeholder="Telemóvel" id="riderPhone"></div>
+                <div class="col-3"><input class="form-control" placeholder="Morada" id="riderAddress"></div>
+                <div class="col-3"><input class="form-control" placeholder="Codigo-Postal" id="riderCEP"></div>
+                <div class="col-3"><input class="form-control" placeholder="Cidade" id="riderCity"></div>
             </div>
             <div class="row row-padding">
-                <div class="col-3"><button id="driverSignupSubmitBtn" type="button" class="btn btn-light">Signup</button></div>
+                <div class="col-3"><button type="button" class="btn btn-light" onclick="signuprider()">Signup</button></div>
                 <div class="col-9"></div>
             </div>
         </div>
@@ -171,11 +171,11 @@
             <div id="store-header" class="title">Signup as Store</div>
             <p class="pl-3">(Retreive a token)</p>
             <div class="row row-padding">
-                <div class="col-8"><input id="storeSignupName" class="form-control" placeholder="Store Name"></div>
-                <div class="col-4"><input id="storeSignupOwnerName" class="form-control" placeholder="Owner Name"></div>
+                <div class="col-6"><input class="form-control" placeholder="Store Name (Retreive a token)" id="storeNameTxt"></div>
+                <div class="col-6"><input class="form-control" placeholder="Owner's Name" id="storeOwnerTxt"></div>
             </div>
             <div class="row row-padding">
-                <div class="col-3"><button id="storeSignupSubmitBtn" type="button" class="btn btn-light">Signup</button></div>
+                <div class="col-3"><button type="button" class="btn btn-light" onclick="signupstore()">Signup</button></div>
                 <div class="col-9"></div>
             </div>
         </div>
@@ -244,7 +244,7 @@
                 </div> <!-- row -->
             </div> <!-- footer widget -->
             <div class="footer-copyright text-center">
-                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">UIdeck</a> All Rights Reserved.</p>
+                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">Very Dedicated People</a> All Rights Reserved.</p>
             </div>
         </div> <!-- container -->
     </footer>
@@ -314,6 +314,29 @@
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
     
+
+    <script>
+        function signupstore(){
+            var name = $("#storeNameTxt").val();
+            var ownerName = $("#storeOwnerTxt").val();
+
+            fetch('http://localhost:8080/store', { method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => console.log("response: " + data))
+        }
+
+        function signuprider(){
+            var riderName=$("#riderName").val();
+            var riderEmail=$("#riderEmail").val();
+            var riderUsername=$("#riderUsername").val();
+            var riderPassword=$("#riderPassword").val();
+            var riderPhone=$("#riderPhone").val();
+            var riderAddress=$("#riderAddress").val();
+            var riderCEP=$("#riderCEP").val();
+            var riderCity=$("#riderCity").val();
+
+            var rider={"name":riderName, "email":riderEmail, "username":riderUsername, "password":riderPassword, "phoneNumber":riderPhone, "address":riderAddress, "zipCode":riderCEP, "city":riderCity};
+            fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => console.log(data));
+        }
+    </script>
 </body>
 
 </html>

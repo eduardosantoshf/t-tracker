@@ -12,7 +12,9 @@ import java.util.List;
 public interface RiderRepository extends JpaRepository<Rider, Long>{
 
     Optional<Rider> findByUsername(String username);
-    public Rider findById(int id);
-    public List<Rider> findByStatus(int status);
+    Rider findById(int id);
+    List<Rider> findByStatus(int status);
+    List<Rider> findAll();
+
 
 }

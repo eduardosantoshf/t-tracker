@@ -1,9 +1,9 @@
 package deliveries_engine.controller;
 
+import deliveries_engine.service.JwtTokenService;
+import io.jsonwebtoken.impl.DefaultClaims;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.internal.verification.VerificationModeFactory;
@@ -14,7 +14,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.verify;
@@ -30,11 +29,11 @@ import deliveries_engine.DeliveriesEngineApplication;
 import deliveries_engine.model.Rider;
 import deliveries_engine.service.RiderService;
 import deliveries_engine.JsonUtil;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -54,7 +53,7 @@ class RiderControllerTest {
     @MockBean
     private RiderService riderService;
 
-    private Rider newRider = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678, "Kingdom of The Crystal Skull", "Akator", "9090-666");;
+    private Rider newRider = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678, "Kingdom of The Crystal Skull", "Akator", "9090-666");
 
     @Before
     void setUp() {
@@ -86,13 +85,17 @@ class RiderControllerTest {
 
     @Test
     void whenUpdatingRiderLocation_thenCheckChangedLocation() throws Exception {
-        //Rider rider = new Rider("name", "email", "username", "pw", 912345678, "address", "city", "zip");
-        //given (riderService.updateLocation(40.631858, -8.650833, rider)).willReturn(rider);
+        Rider rider = new Rider("name", "email", "username", "pw", 912345678, "address", "city", "zip", 40.631858, -8.650833);
 
-        //mvc.perform(post("/rider/location/40.631858/-8.650833").with(csrf()).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(newRider)) )
-        //    .andExpect(status().isOk())
-        //    .andExpect( jsonPath("$.latitude", is(newRider.getLatitude())))
-        //    .andExpect( jsonPath("$.longitude", is(newRider.getLongitude())));
+        String token = JwtTokenService.generateToken("olezito", new DefaultClaims());
+        assertNotNull(token);
+
+        given(riderService.updateLocation(any(Double.class), any(Double.class), any(Rider.class))).willReturn(rider);
+
+        mvc.perform(post("/rider/location/40.631858/-8.650833").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(rider)) )
+            .andExpect(status().isOk())
+            .andExpect( jsonPath("$.latitude", is(rider.getLatitude())))
+            .andExpect( jsonPath("$.longitude", is(rider.getLongitude())));
     }
 
     @Test
