@@ -36,9 +36,9 @@ services:
   client:
     build: web
     ports:
-        - "8000:8082"
+      - "8000:8082"
     volumes:
-        - ./web:/etc/share/nginx/html
-        - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./src:/etc/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on: 
         - backend
