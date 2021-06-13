@@ -85,4 +85,17 @@ public class RiderServiceImp implements RiderService {
         }
     }
 
+    @Override
+    public Rider updateStatus(int status, Rider rider) throws Exception {
+
+        if(status < 0 || status > 1)
+            throw new Exception("Status needs to be 0 (inactive) or 1 (active)");
+
+        rider.setStatus(status);
+        riderRepository.save(rider);
+
+        return rider;
+
+    }
+
 }

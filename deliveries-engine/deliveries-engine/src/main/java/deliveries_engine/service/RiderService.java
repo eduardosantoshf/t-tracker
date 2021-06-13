@@ -8,4 +8,6 @@ public interface RiderService {
     Rider registerRider(Rider rider) throws Exception;
     Rider updateLocation(double latitude, double longitude, Rider rider) throws Exception;
 
+    Rider updateStatus(int status, Rider rider) throws Exception;
+
 }
