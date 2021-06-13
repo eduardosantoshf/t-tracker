@@ -10,7 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'lepwd'
       MYSQL_PASSWORD: 'lepwd'
     ports:
-      - '3306:3306'
+      - '3306:3306' # -[port_outside_container]:[port_inside_container]
     #volumes:
       #- db-data1:/var/lib/mysql
       #- ./mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
