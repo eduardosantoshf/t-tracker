@@ -76,7 +76,7 @@ public class RiderServiceImp implements RiderService {
 
         rider.setLatitude(latitude);
         rider.setLongitude(longitude);
-
+        riderRepository.save(rider);
         if(rider.getLatitude() == latitude && rider.getLongitude() == longitude){
             return rider;
         }

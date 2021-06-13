@@ -40,7 +40,7 @@ class DeliveryRepositoryTest {
 
     @Test
     public void whenFindDeliveryByExistingId_thenReturnDelivery() {
-        Delivery delivery = new Delivery("Chocolate Delivery", 14.99, deliveryRider, deliveryStore, "Location Ave., Nº123", "Location Ave., Nº123", 20);
+        Delivery delivery = new Delivery("Chocolate Delivery", 14.99, deliveryRider, deliveryStore, 40.631858, -8.650833, 20);
         entityManager.persistAndFlush(delivery);
 
         Delivery deliveryFound = deliveryRepository.findById(delivery.getId());
@@ -56,9 +56,9 @@ class DeliveryRepositoryTest {
 
     @Test
     public void whenFindByStatus_thenReturnCorrectDeliveries() {
-        Delivery delivery1 = new Delivery("Chocolate Delivery", 14.99, deliveryRider, deliveryStore, "Location Ave., Nº123", "Location Ave., Nº123", 20);
-        Delivery delivery2 = new Delivery("Bread Delivery", 4.99, deliveryRider, deliveryStore, "Location Ave., Nº234", "Location Ave., Nº234", 10);
-        Delivery delivery3 = new Delivery("Water Delivery", 9.99, deliveryRider, deliveryStore, "Location Ave., Nº345", "Location Ave., Nº345", 15);
+        Delivery delivery1 = new Delivery("Chocolate Delivery", 14.99, deliveryRider, deliveryStore, 40.631858, -8.650833, 20);
+        Delivery delivery2 = new Delivery("Bread Delivery", 4.99, deliveryRider, deliveryStore, 40.631858, -8.650833, 10);
+        Delivery delivery3 = new Delivery("Water Delivery", 9.99, deliveryRider, deliveryStore, 40.631858, -8.650833, 15);
         delivery1.setStatus(true);
         delivery2.setStatus(true);
 
@@ -77,9 +77,9 @@ class DeliveryRepositoryTest {
 
     @Test
     public void whenFindAll_thenReturnAllDeliveries() {
-        Delivery delivery1 = new Delivery("Chocolate Delivery", 14.99, deliveryRider, deliveryStore, "Location Ave., Nº123", "Location Ave., Nº123", 20);
-        Delivery delivery2 = new Delivery("Bread Delivery", 4.99, deliveryRider, deliveryStore, "Location Ave., Nº234", "Location Ave., Nº234", 10);
-        Delivery delivery3 = new Delivery("Water Delivery", 9.99, deliveryRider, deliveryStore, "Location Ave., Nº345", "Location Ave., Nº345", 15);
+        Delivery delivery1 =new Delivery("Chocolate Delivery", 14.99, deliveryRider, deliveryStore, 40.631858, -8.650833, 20);
+        Delivery delivery2 = new Delivery("Bread Delivery", 4.99, deliveryRider, deliveryStore, 40.631858, -8.650833, 10);
+        Delivery delivery3 = new Delivery("Water Delivery", 9.99, deliveryRider, deliveryStore, 40.631858, -8.650833, 15);
     
         entityManager.persist(delivery1);
         entityManager.persist(delivery2);
