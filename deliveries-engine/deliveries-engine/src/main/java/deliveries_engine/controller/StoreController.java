@@ -34,9 +34,8 @@ public class StoreController {
     public void updateStore(@RequestBody Store store){
     }
 
-    @PostMapping(value = "/order/{storeId}", consumes = "application/json")
-    public Rider order(@RequestBody Delivery delivery,@RequestHeader(name = "Authorization") String token, @PathVariable(name = "storeId") int storeId) throws ErrorWarning {
-        System.out.println(token);
+    @PostMapping(value = "/order/{storeId}", consumes = "application/json", produces = "application/json")
+    public Rider order(@RequestBody Delivery delivery,@RequestHeader(name = "Authorization") String token, @PathVariable(name = "storeId") int storeId) throws Exception {
         return storeService.getClosestRider(delivery.getDeliveryLatitude(), delivery.getDeliveryLongitude(), token, storeId);
     }
 }

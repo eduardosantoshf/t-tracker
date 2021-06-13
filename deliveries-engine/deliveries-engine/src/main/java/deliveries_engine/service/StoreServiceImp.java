@@ -23,12 +23,12 @@ public class StoreServiceImp implements StoreService{
     @Autowired
     private RiderRepository riderRepository;
 
-    public Store registerStore(Store store) throws ErrorWarning {
+    public Store registerStore(Store store) throws Exception {
 
         Optional<Store> potentialStore = storeRepository.findByName(store.getName());
 
         if (potentialStore.isPresent()){
-            throw new ErrorWarning("Store is already registered");
+            throw new Exception("Store is already registered");
         }
         else{
             String token = JwtTokenService.generateToken(store.getName(), new DefaultClaims());
@@ -39,16 +39,16 @@ public class StoreServiceImp implements StoreService{
     }
 
     @Override
-    public Rider getClosestRider(double latitude, double longitude, String token, int storeId) throws ErrorWarning {
+    public Rider getClosestRider(double latitude, double longitude, String token, int storeId) throws Exception {
 
         Optional<Store> store = storeRepository.findById(storeId);
 
         if(!store.isPresent()){
-            throw new ErrorWarning("Invalid Store Id");
+            throw new Exception("Invalid Store Id");
         }
 
         if(!token.equals(store.get().getToken())){
-            throw new ErrorWarning("Invalid Store token");
+            throw new Exception("Invalid Store token");
         }
 
         HashMap<Rider, Double> map = new HashMap<>();
@@ -56,7 +56,7 @@ public class StoreServiceImp implements StoreService{
         List<Rider> riders = riderRepository.findAll();
 
         if (riders.size() == 0){
-            throw new ErrorWarning("No riders available");
+            throw new Exception("No riders available");
         }
 
         for(Rider r: riders){

@@ -53,7 +53,7 @@ class RiderControllerTest {
     @MockBean
     private RiderService riderService;
 
-    private Rider newRider = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678, "Kingdom of The Crystal Skull", "Akator", "9090-666");;
+    private Rider newRider = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678, "Kingdom of The Crystal Skull", "Akator", "9090-666");
 
     @Before
     void setUp() {
