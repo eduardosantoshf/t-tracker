@@ -29,7 +29,7 @@ public class RiderServiceImp implements RiderService {
         this.userRepository = userRepository;
     }
 
-    public Rider registerRider(Rider rider) throws ErrorWarning{
+    public Rider registerRider(Rider rider) throws Exception{
 
         System.out.println(rider.getUsername());
         
@@ -37,7 +37,7 @@ public class RiderServiceImp implements RiderService {
         Optional<Rider> potentialRider = riderRepository.findByUsername(rider.getUsername());
 
         if (potentialRider.isPresent()){
-            throw new ErrorWarning("Rider is already registered");
+            throw new Exception("Rider is already registered");
         }
 
         // new rider object
@@ -49,10 +49,10 @@ public class RiderServiceImp implements RiderService {
 
         // in that case, throw exceptions
         if(checkUsername.isPresent()){
-            throw new ErrorWarning("Username already exists");
+            throw new Exception("Username already exists");
         }
         else if(checkEmail.isPresent()){
-            throw new ErrorWarning("Email already exists");
+            throw new Exception("Email already exists");
         }
 
         // set encoded password
@@ -63,7 +63,7 @@ public class RiderServiceImp implements RiderService {
         try{
             riderRepository.save(newRider);
         }catch (Exception e){
-            throw new ErrorWarning("Failed to Register user");
+            throw new Exception("Failed to Register user");
         };
 
 
@@ -72,7 +72,7 @@ public class RiderServiceImp implements RiderService {
     }
 
     @Override
-    public Rider updateLocation(double latitude, double longitude, Rider rider) throws ErrorWarning {
+    public Rider updateLocation(double latitude, double longitude, Rider rider) throws Exception {
 
         rider.setLatitude(latitude);
         rider.setLongitude(longitude);
@@ -81,8 +81,21 @@ public class RiderServiceImp implements RiderService {
             return rider;
         }
         else{
-            throw  new ErrorWarning("Failed to change location");
+            throw  new Exception("Failed to change location");
         }
+    }
+
+    @Override
+    public Rider updateStatus(int status, Rider rider) throws Exception {
+
+        if(status < 0 || status > 1)
+            throw new Exception("Status needs to be 0 (inactive) or 1 (active)");
+
+        rider.setStatus(status);
+        riderRepository.save(rider);
+
+        return rider;
+
     }
 
 }

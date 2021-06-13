@@ -23,6 +23,9 @@ public class Store {
     @Column(name = "owner_name", nullable = false)
     private String ownerName;
 
+    @Column(name = "token")
+    private String token;
+
     public Store () {}
 
     @Autowired
@@ -67,4 +70,11 @@ public class Store {
         this.ownerName = ownerName;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

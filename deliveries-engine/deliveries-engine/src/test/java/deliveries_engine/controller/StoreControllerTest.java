@@ -1,5 +1,8 @@
 package deliveries_engine.controller;
 
+import com.google.gson.JsonObject;
+import deliveries_engine.model.Delivery;
+import deliveries_engine.model.Rider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +28,8 @@ import deliveries_engine.model.Store;
 import deliveries_engine.service.StoreService;
 import deliveries_engine.JsonUtil;
 
+import org.json.JSONObject;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DeliveriesEngineApplication.class)
 @AutoConfigureMockMvc
 class StoreControllerTest {
@@ -37,9 +42,22 @@ class StoreControllerTest {
 
     private Store newStore;
 
+    private Delivery delivery;
+
+    private String token;
+
+    private int storeId;
+
+    private Rider newRider;
+
     @BeforeEach
     void setUp() {
         newStore = new Store("CTT", "Pidgeon Man");
+        delivery = new Delivery("delivery", 2.5, 40.631858, -8.650833);
+        token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdG9yZXRlc3RlMiIsImV4cCI6MTYyMzU5NjE4NX0";
+        storeId = 3;
+        newRider = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678, "Kingdom of The Crystal Skull", "Akator", "9090-666");
+
     }
 
     @AfterEach
@@ -60,11 +78,26 @@ class StoreControllerTest {
     }
 
     @Test
-    void whenSignUpInvalidStore_thenReturnConflictStatusCode() {
-        // given( storeService.registerStore(newStore) ).willReturn(null);
+    void whenSignUpInvalidStore_thenReturnConflictStatusCode() throws Exception {
+         given( storeService.registerStore(any(Store.class)) ).willThrow(new Exception("Store registered"));
 
-        // mvc.perform( post("/store").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(newStore)) )
-        //     .andExpect( status().isConflict() );
+         mvc.perform( post("/store").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(newStore)) )
+             .andExpect( status().isConflict() );
+    }
+
+    @Test
+    void whenOrder_getClosestRider() throws Exception {
+        given(storeService.getClosestRider(delivery.getDeliveryLatitude(), delivery.getDeliveryLongitude(), token, storeId)).willReturn(newRider);
+
+        JSONObject json = new JSONObject();
+        json.put("name", delivery.getName());
+        json.put("comission", Double.toString(delivery.getCommission()));
+        json.put("deliveryLatitude", delivery.getDeliveryLatitude().toString());
+        json.put("deliveryLongitude", delivery.getDeliveryLongitude().toString());
+
+
+        mvc.perform( post("/store/order/1").header("Authorization", token).contentType(MediaType.APPLICATION_JSON).content(json.toString().getBytes()))
+                .andExpect(status().isOk());
     }
 
 }

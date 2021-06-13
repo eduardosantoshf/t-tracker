@@ -1,4 +1,4 @@
-package deliveries_engine.security;
+package t_tracker.security;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import deliveries_engine.repository.UserRepository;
+import t_tracker.model.User;
+import t_tracker.repository.UserRepository;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -19,9 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private PasswordEncoder passwordEncoder;
     private UserDetailsService userDetailsService;
-    private UserRepository userRepository;
+    private UserRepository<User> userRepository;
 
-    public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, UserRepository userRepository) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, UserRepository<User> userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
         this.userRepository = userRepository;
@@ -36,14 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable().cors().and()
             .authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/login").permitAll()
-            .antMatchers(HttpMethod.POST, "/rider/signup").permitAll()
-            .antMatchers(HttpMethod.POST, "/store").permitAll()
-                .antMatchers(HttpMethod.POST, "/store/order/{storeId}").permitAll()
-                .antMatchers(HttpMethod.POST, "/store/driver/rating/{storeId}/{riderId}").permitAll()
-                .antMatchers(HttpMethod.POST, "/store/driver/comment/{storeId}/{riderId}").permitAll()
-                .antMatchers(HttpMethod.GET, "/store/driver/rating/{storeId}/{riderId}").permitAll()
-                .antMatchers(HttpMethod.GET, "/store/driver/comment/{storeId}/{riderId}").permitAll()
+            .antMatchers(HttpMethod.GET, "/client/login").permitAll()
+            .antMatchers(HttpMethod.POST, "/client/signup").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.addFilter(new JwtAuthenticationFilter(authenticationManager(),userRepository))
