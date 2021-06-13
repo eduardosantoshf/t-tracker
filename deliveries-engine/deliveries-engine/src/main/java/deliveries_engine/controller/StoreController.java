@@ -1,5 +1,6 @@
 package deliveries_engine.controller;
 
+import deliveries_engine.exception.ErrorWarning;
 import deliveries_engine.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,8 @@ public class StoreController {
     public void updateStore(@RequestBody Store store){
     }
 
-    @PostMapping(value = "/order", consumes = "application/json")
-    public Rider order(@RequestBody Delivery delivery){
-        return storeService.getClosestRider(delivery.getDeliveryLatitude(), delivery.getDeliveryLongitude());
+    @PostMapping(value = "/order/{storeId}", consumes = "application/json", produces = "application/json")
+    public Rider order(@RequestBody Delivery delivery,@RequestHeader(name = "Authorization") String token, @PathVariable(name = "storeId") int storeId) throws Exception {
+        return storeService.getClosestRider(delivery.getDeliveryLatitude(), delivery.getDeliveryLongitude(), token, storeId);
     }
 }

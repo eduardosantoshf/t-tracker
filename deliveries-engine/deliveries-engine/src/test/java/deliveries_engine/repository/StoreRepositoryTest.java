@@ -28,15 +28,17 @@ class StoreRepositoryTest {
         Store tTracker = new Store("T-Tracker", "Owner Name");
         entityManager.persistAndFlush(tTracker);
 
-        Store storeFound = storeRepository.findById(tTracker.getId());
+        Optional<Store> opt = storeRepository.findById(tTracker.getId());
+        Store storeFound = opt.get();
+
         assertThat( storeFound, is(tTracker) );
     }
 
     @Test
     public void whenFindStoreByInvalidId_thenReturnNull() {
         int invalidId = 99999;
-        Store storeFound = storeRepository.findById(invalidId);
-        assertThat( storeFound, is(nullValue()) );
+        Optional<Store> opt = storeRepository.findById(invalidId);
+        assertThat( opt, is(Optional.empty()) );
     }
 
     @Test
@@ -45,6 +47,7 @@ class StoreRepositoryTest {
         entityManager.persistAndFlush(tTracker);
 
         Optional<Store> storeFound = storeRepository.findByName(tTracker.getName());
+
         storeFound.ifPresent(store -> assertThat( store, is(tTracker) ));
     }
 

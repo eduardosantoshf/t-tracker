@@ -29,7 +29,7 @@ public class RiderController {
 
 
     @PostMapping(value = "/location/{latitude}/{longitude}", produces = "application/json")
-    public Rider updateLocation(@PathVariable(value = "latitude") double latitude, @PathVariable(value = "longitude") double longitude, HttpServletRequest request) throws ErrorWarning {
+    public Rider updateLocation(@PathVariable(value = "latitude") double latitude, @PathVariable(value = "longitude") double longitude, HttpServletRequest request) throws Exception {
         Principal principal = request.getUserPrincipal();
         Optional<Rider> opt = riderRepository.findByUsername(principal.getName());
         Rider rider = new Rider();
