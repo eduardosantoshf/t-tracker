@@ -23,7 +23,7 @@ import t_tracker.model.Coordinates;
 import t_tracker.repository.ClientRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class ClientServiceUnitTests {
+class ClientServiceUnitTests {
 
     @Mock( lenient = true)
     private ClientRepository clientRepository;

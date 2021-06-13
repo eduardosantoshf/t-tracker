@@ -16,7 +16,7 @@ import t_tracker.model.Client;
 import t_tracker.model.Coordinates;
 
 @DataJpaTest
-public class ClientRepositoryTests {
+class ClientRepositoryTests {
     
     @Autowired
     private TestEntityManager entityManager;
@@ -35,7 +35,7 @@ public class ClientRepositoryTests {
     }
 
     @Test
-    public void whenFindClientByExistingId_thenReturnValidClient() {
+    void whenFindClientByExistingId_thenReturnValidClient() {
         Optional<Client> clientFound = clientRepository.findById(jason.getId());
 
         assertThat( clientFound.isPresent(), is(true) );
@@ -43,7 +43,7 @@ public class ClientRepositoryTests {
     }
 
     @Test
-    public void whenFindClientByInvalidId_thenReturnNull() {
+    void whenFindClientByInvalidId_thenReturnNull() {
         Integer invalidId = 9999;
         Optional<Client> clientFound = clientRepository.findById(invalidId);
 
@@ -51,7 +51,7 @@ public class ClientRepositoryTests {
     }
 
     @Test
-    public void whenFindClientByValidUsername_thenReturnValidClient() {
+    void whenFindClientByValidUsername_thenReturnValidClient() {
         Optional<Client> clientFound = clientRepository.findByUsername(jason.getUsername());
 
         assertThat( clientFound.isPresent(), is(true) );
@@ -59,7 +59,7 @@ public class ClientRepositoryTests {
     }
     
     @Test
-    public void whenFindClientByInvalidUsername_thenReturnNull() {
+    void whenFindClientByInvalidUsername_thenReturnNull() {
         String invalidUsername = "TotallyNotValidUsername";
         Optional<Client> clientFound = clientRepository.findByUsername(invalidUsername);
 
@@ -67,7 +67,7 @@ public class ClientRepositoryTests {
     }
 
     @Test
-    public void whenFindClientByValidEmail_thenReturnValidClient() {
+    void whenFindClientByValidEmail_thenReturnValidClient() {
         Optional<Client> clientFound = clientRepository.findByEmail(jason.getEmail());
 
         assertThat( clientFound.isPresent(), is(true) );
@@ -75,7 +75,7 @@ public class ClientRepositoryTests {
     }
     
     @Test
-    public void whenFindClientByInvalidEmail_thenReturnNull() {
+    void whenFindClientByInvalidEmail_thenReturnNull() {
         String invalidEmail = "TotallyNotValidEmail@1234.asdfa";
         Optional<Client> clientFound = clientRepository.findByEmail(invalidEmail);
 
@@ -83,7 +83,7 @@ public class ClientRepositoryTests {
     }
 
     @Test
-    public void whenFindClientByValidPhoneNumber_thenReturnValidClient() {
+    void whenFindClientByValidPhoneNumber_thenReturnValidClient() {
         Optional<Client> clientFound = clientRepository.findByPhoneNumber(jason.getPhoneNumber());
 
         assertThat( clientFound.isPresent(), is(true) );
@@ -91,7 +91,7 @@ public class ClientRepositoryTests {
     }
     
     @Test
-    public void whenFindClientByInvalidPhoneNumber_thenReturnNull() {
+    void whenFindClientByInvalidPhoneNumber_thenReturnNull() {
         int invalidPhoneNumber = 1;
         Optional<Client> clientFound = clientRepository.findByPhoneNumber(invalidPhoneNumber);
 
@@ -99,7 +99,7 @@ public class ClientRepositoryTests {
     }
 
     @Test
-    public void whenFindAllClients_thenReturnAllClients() {
+    void whenFindAllClients_thenReturnAllClients() {
         Client shrek = new Client("Shrek", "SwampMaster", "bigandgreen@org.com", "getoutofmyswamp");
         Client donkey = new Client("Donkey", "ShreksFriend", "donkey@org.com", "iS2dragons");
         Client puss = new Client("Puss", "PussInBoots", "wantedcat@org.com", "cutekitty");

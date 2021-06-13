@@ -15,7 +15,7 @@ import t_tracker.model.Coordinates;
 import t_tracker.model.Lab;
 
 @DataJpaTest
-public class LabRepositoryTests {
+class LabRepositoryTests {
 
     @Autowired
     private TestEntityManager entityManager;

@@ -18,7 +18,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import t_tracker.model.*;
 
 @DataJpaTest
-public class OrderRepositoryTests {
+class OrderRepositoryTests {
 
     @Autowired
     private TestEntityManager entityManager;

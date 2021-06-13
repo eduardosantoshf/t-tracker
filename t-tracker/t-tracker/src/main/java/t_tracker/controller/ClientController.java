@@ -1,7 +1,5 @@
 package t_tracker.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +28,6 @@ public class ClientController {
             registeredClient = clientService.registerClient(client);
         
         } catch (Exception e) {
-            System.out.println("Threw");
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
 
