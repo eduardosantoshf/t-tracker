@@ -20,6 +20,7 @@ services:
       - '3307'
   
   backend:
+    image: store-backend
     build:
       context: t-tracker
       dockerfile: Dockerfile
@@ -35,10 +36,10 @@ services:
       - db
 
   client:
-    image: deli-eng-frontend
+    image: store-frontend
     build: ./web
     ports:
-        - "8081:80"
+        - "8082:80"
     #volumes:
     #    - ./web:/etc/share/nginx/html
     #    - ./nginx.conf:/etc/nginx/nginx.conf
