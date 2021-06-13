@@ -34,12 +34,12 @@ services:
     depends_on: 
       - db
 
-    client:
-      build: web
-      ports:
-        - "8001:8083"
-      volumes:
-        - ./src:/etc/share/nginx/html
-        - ./nginx.conf:/etc/nginx/nginx.conf
-      depends_on: 
-          - backend
+  client:
+    build: web
+    ports:
+      - "8001:8083"
+    volumes:
+      - ./src:/etc/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on: 
+        - backend
