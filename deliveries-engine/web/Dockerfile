@@ -1,4 +1,4 @@
 FROM nginx:latest
 RUN rm -rf /usr/share/nginx/html
 COPY . /usr/share/nginx/html
-EXPOSE 8000
+RUN chmod +r /usr/share/nginx/html/index.html
