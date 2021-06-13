@@ -41,15 +41,7 @@ public class StoreServiceImp implements StoreService{
     @Override
     public Rider getClosestRider(double latitude, double longitude, String token, int storeId) throws Exception {
 
-        Optional<Store> store = storeRepository.findById(storeId);
-
-        if(!store.isPresent()){
-            throw new Exception("Invalid Store Id");
-        }
-
-        if(!token.equals(store.get().getToken())){
-            throw new Exception("Invalid Store token");
-        }
+        checkStoreToken(storeId, token);
 
         HashMap<Rider, Double> map = new HashMap<>();
 
@@ -101,5 +93,90 @@ public class StoreServiceImp implements StoreService{
 
 
         return responseRider;
+    }
+
+    @Override
+    public List<Integer> updateRatings(int rating, String token, int storeId, int riderId) throws Exception {
+
+        checkStoreToken(storeId, token);
+
+        Rider rider = riderRepository.findById(riderId);
+
+        if (rider == null) {
+            throw new Exception("Rider not found");
+        }
+
+        List<Integer> ratings = rider.getRatings();
+        ratings.add(rating);
+        rider.setRatings(ratings);
+        riderRepository.save(rider);
+
+        return ratings;
+    }
+
+    @Override
+    public List<String> updateComments(String comment, String token, int storeId, int riderId) throws Exception {
+
+        checkStoreToken(storeId, token);
+
+        Rider rider = riderRepository.findById(riderId);
+
+        if (rider == null) {
+            throw new Exception("Rider not found");
+        }
+
+        List<String> comments = rider.getComments();
+        comments.add(comment);
+        rider.setComments(comments);
+        riderRepository.save(rider);
+
+        return comments;
+
+    }
+
+    @Override
+    public List<Integer> getRatings(String token, int storeId, int riderId) throws Exception {
+
+        checkStoreToken(storeId, token);
+
+        Rider rider = riderRepository.findById(riderId);
+
+        if (rider == null) {
+            throw new Exception("Rider not found");
+        }
+
+        List<Integer> ratings = rider.getRatings();
+
+        return ratings;
+    }
+
+    @Override
+    public List<String> getComments(String token, int storeId, int riderId) throws Exception {
+
+        checkStoreToken(storeId, token);
+
+        Rider rider = riderRepository.findById(riderId);
+
+        if (rider == null) {
+            throw new Exception("Rider not found");
+        }
+
+        List<String> comments = rider.getComments();
+
+        return comments;
+    }
+
+    public void checkStoreToken(int storeId, String token) throws Exception {
+
+        Optional<Store> store = storeRepository.findById(storeId);
+
+        if(!store.isPresent()){
+            throw new Exception("Invalid Store Id");
+        }
+
+        if(!token.equals(store.get().getToken())){
+            throw new Exception("Invalid Store token");
+        }
+
     }
 }
