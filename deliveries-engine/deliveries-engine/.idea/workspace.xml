@@ -3,10 +3,84 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:security" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:security" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:test" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a41c79-a386-4eb3-8650-4dfcba796f86" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deliveries-engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/deliveries-engine.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/CorsConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/CorsConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/DeliveriesEngineApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/DeliveriesEngineApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/PasswordEncoderConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/PasswordEncoderConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/RiderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/RiderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/StoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/StoreController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/exception/ErrorWarning.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/exception/ErrorWarning.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Delivery.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Delivery.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Rider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Rider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Store.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/AdminRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/AdminRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/DeliveryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/DeliveryRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/RiderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/RiderRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/StoreRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/StoreRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JWTAuthorizationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JWTAuthorizationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/security/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/JwtTokenService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/JwtTokenService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderServiceImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/Service.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/ServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/ServiceImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreServiceImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/UserDetailsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/UserDetailsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/swagger2/Swagger2Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/swagger2/Swagger2Config.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/DeliveryRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/DeliveryRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/StoreRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/StoreRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +120,66 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager" selected="Spring Boot.DeliveriesEngineApplication">
+  <component name="RunManager" selected="JUnit.RiderServiceTest.whenUpdateStatus_thenStatusIsChanged">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.RiderServiceTest" />
+      <option name="METHOD_NAME" value="whenSignUpRider_thenRiderIsRegistered" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RiderServiceTest.whenUpdateLocation_thenLocationIsChanged" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.RiderServiceTest" />
+      <option name="METHOD_NAME" value="whenUpdateLocation_thenLocationIsChanged" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RiderServiceTest.whenUpdateStatus_thenStatusIsChanged" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.RiderServiceTest" />
+      <option name="METHOD_NAME" value="whenUpdateStatus_thenStatusIsChanged" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="deliveries-engine" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -86,9 +219,15 @@
     <list>
       <item itemvalue="Maven.deliveries-engine" />
       <item itemvalue="Spring Boot.DeliveriesEngineApplication" />
+      <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
+      <item itemvalue="JUnit.RiderServiceTest.whenUpdateLocation_thenLocationIsChanged" />
+      <item itemvalue="JUnit.RiderServiceTest.whenUpdateStatus_thenStatusIsChanged" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RiderServiceTest.whenUpdateStatus_thenStatusIsChanged" />
+        <item itemvalue="JUnit.RiderServiceTest.whenUpdateLocation_thenLocationIsChanged" />
+        <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
         <item itemvalue="Spring Boot.DeliveriesEngineApplication" />
       </list>
     </recent_temporary>
@@ -130,5 +269,23 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1878" height="297" key="GridCell.Tab.0.bottom" timestamp="1623684060604">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.bottom/0.23.1920.1123@0.23.1920.1123" timestamp="1623684060604" />
+    <state width="1878" height="297" key="GridCell.Tab.0.center" timestamp="1623684060603">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.center/0.23.1920.1123@0.23.1920.1123" timestamp="1623684060603" />
+    <state width="1878" height="297" key="GridCell.Tab.0.left" timestamp="1623684060602">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.left/0.23.1920.1123@0.23.1920.1123" timestamp="1623684060602" />
+    <state width="1878" height="297" key="GridCell.Tab.0.right" timestamp="1623684060603">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.right/0.23.1920.1123@0.23.1920.1123" timestamp="1623684060603" />
   </component>
 </project>
