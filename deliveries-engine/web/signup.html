@@ -45,6 +45,7 @@
             font-size: 25pt;
         }
     </style>
+    <script src="assets/js/auth.js"></script>
 </head>
 
 <body>
@@ -124,43 +125,46 @@
         <div style="width:30%;">
             <form action="dashboard.html">
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="staticEmail2">Name</label>
-                    <input type="text" class="form-control" id="staticEmail2" placeholder="Marciano">
+                    <div style="background-color:rgb(194, 12, 12); color: white; width:100%; padding: 10px; border-radius: 4px; display: none;" id="authmessage">User already exists!!</div>
                 </div>
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="staticEmail2">Phone</label>
-                    <input type="text" class="form-control" id="staticEmail2" placeholder="910000000">
+                    <label style="font-weight: bold;" for="riderName">Name</label>
+                    <input type="text" class="form-control" placeholder="Marciano" id="riderName">
                 </div>
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="staticEmail2">Username</label>
-                    <input type="text" class="form-control" id="staticEmail2" placeholder="marciano_do_espaco">
+                    <label style="font-weight: bold;" for="riderPhone">Phone</label>
+                    <input type="text" class="form-control" placeholder="910000000" id="riderPhone">
                 </div>
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="staticEmail2">Address</label>
-                    <input type="text" class="form-control" id="staticEmail2" placeholder="Rua de Marte">
+                    <label style="font-weight: bold;" for="riderUsername">Username</label>
+                    <input type="text" class="form-control"  placeholder="marciano_do_espaco" id="riderUsername">
                 </div>
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="staticEmail2">Zip Code</label>
-                    <input type="text" class="form-control" id="staticEmail2" placeholder="0000-000">
+                    <label style="font-weight: bold;" for="riderAddress">Address</label>
+                    <input type="text" class="form-control" placeholder="Rua de Marte" id="riderAddress">
                 </div>
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="staticEmail2">City</label>
-                    <input type="text" class="form-control" id="staticEmail2" placeholder="Martinho">
+                    <label style="font-weight: bold;" for="riderCEP">Zip Code</label>
+                    <input type="text" class="form-control" placeholder="0000-000" id="riderCEP">
                 </div>
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="staticEmail2">Email</label>
-                    <input type="text" class="form-control" id="staticEmail2" placeholder="email@example.com">
+                    <label style="font-weight: bold;" for="riderCity">City</label>
+                    <input type="text" class="form-control" placeholder="Martinho" id="riderCity">
                 </div>
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="inputPassword2">Password</label>
-                    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                    <label style="font-weight: bold;" for="riderEmail">Email</label>
+                    <input type="text" class="form-control" placeholder="email@example.com" id="riderEmail">
+                </div>
+                <div class="row col-12" style="padding: 5px 0px;">
+                    <label style="font-weight: bold;" for="riderPassword">Password</label>
+                    <input type="password" class="form-control" placeholder="Password" id="riderPassword">
                 </div>
                 <div class="row" style="padding: 5px 0px;">
                     <div class="col-3">
-                        <button type="submit" class="btn btn-success mb-3 w-100">Login</button>
+                        <button type="button" class="btn btn-success mb-3 w-100" onclick="signuprider()">Signup</button>
                     </div>
                     <div class="col-3">
-                        <button type="button" class="btn btn-secondary mb-3 w-100" onclick="window.location.href='signup.html'">Signup</button>
+                        <button type="button" class="btn btn-secondary mb-3 w-100" onclick="window.location.href='login.html'">Login</button>
                     </div>
                     <div class="col-6">
 
@@ -235,7 +239,7 @@
                 </div> <!-- row -->
             </div> <!-- footer widget -->
             <div class="footer-copyright text-center">
-                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">UIdeck</a> All Rights
+                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">Very Dedicated People</a> All Rights
                     Reserved.</p>
             </div>
         </div> <!-- container -->
@@ -305,7 +309,6 @@
 
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
-
 </body>
 
 </html>

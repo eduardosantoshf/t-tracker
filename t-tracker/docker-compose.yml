@@ -9,9 +9,9 @@ services:
       MYSQL_USER: 'useraroo'
       MYSQL_ROOT_PASSWORD: 'lepwd'
       MYSQL_PASSWORD: 'lepwd'
-      MYSQL_TCP_PORT: 3307
+      MYSQL_TCP_PORT: 3307 # change default MYSQL port from 3306 to 3307
     ports:
-      - '3307:3307'
+      - '3307:3307' # -[port_outside_container]:[port_inside_container]
     #volumes:
       #- db-data1:/var/lib/mysql
       #- ./mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
@@ -20,6 +20,7 @@ services:
       - '3307'
   
   backend:
+    image: store-backend
     build:
       context: t-tracker
       dockerfile: Dockerfile
@@ -34,14 +35,12 @@ services:
     depends_on: 
       - db
 
-  #client:
-  #  build:
-  #      context: web
-  #      dockerfile: Dockerfile
-  #  ports:
-  #      - "8000:8081"
-  #  volumes:
-  #      - ./src:/etc/share/nginx/html
-  #      - ./nginx.conf:/etc/nginx/nginx.conf
-  #  depends_on: 
-  #      - backend
+  client:
+    build: web
+    ports:
+      - "8001:8083"
+    volumes:
+      - ./src:/etc/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on: 
+        - backend

@@ -33,6 +33,50 @@
     
     <!--====== Style CSS ======-->
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Websockets -->
+    <script src="assets/js/sockjs-0.3.4.js"></script>
+    <script src="assets/js/stomp.js"></script>
+ 
+    <script type="text/javascript">
+
+       var stompClient = null;
+       var socket = new SockJS('http://localhost:8080/chat');
+       stompClient = Stomp.over(socket);
+       var headers = {
+          // additional header
+          "Access-Control-Allow-Origin":"http://localhost:8080",
+       };
+       stompClient.connect(headers, function(frame) {
+
+          stompClient.subscribe('/order/messages', function(messageOutput) {   
+                //message= messageOutput.body.split(":");;
+                //if (message[1]== id_medic){
+                //   $.ajax({
+                //   url: "http://192.168.160.217:8080/api/patients/"+ message[0],
+                //   headers:{"Access-Control-Allow-Origin":"http://192.168.160.217:8080","Authorization":"Bearer "+ jwt},
+                //   }).done(function (results) {
+                //      document.getElementById('ModalPatient').innerHTML = " Patient "+ results['fullname']+" is in danger!";
+                //   });
+                //   $.ajax({
+                //   url: "http://192.168.160.217:8080/api/patients/"+  message[0]+'/latest',
+                //   headers:{"Access-Control-Allow-Origin":"http://192.168.160.217","Authorization":"Bearer "+ jwt},
+                //   }).done(function (results) {
+                //         document.getElementById('modal_latest_bp').innerHTML = '-> '+results[0].low_value;
+                //         document.getElementById('modal_latest_bt').innerHTML = '-> '+results[1].bodyTemp;
+                //         document.getElementById('modal_latest_hr').innerHTML = '-> '+results[2].heartRate;
+                //         document.getElementById('modal_latest_sl').innerHTML = '-> '+results[3].sugarLevel;
+                //         document.getElementById('modal_latest_ol').innerHTML = '-> '+results[4].oxygenLevel;
+                //         localStorage.setItem("mPatient",message[0]);
+                //         $('#myModal').modal("show");
+                //   });
+                //}
+
+                console.log(messageOutput);
+          });
+       });
+
+    </script>
     
     <style>
         .row-padding{
@@ -45,6 +89,8 @@
             font-size: 25pt;
         }
     </style>
+
+
 </head>
 
 <body>
@@ -144,19 +190,19 @@
         <div class="container">
             <div id="driver-header" class="title">Signup as Driver</div>
             <div class="row row-padding">
-                <div class="col-3"><input id="driverNameInput" class="form-control" placeholder="Nome"></div>
-                <div class="col-3"><input id="driverEmailInput" class="form-control" placeholder="Email"></div>
-                <div class="col-3"><input id="driverUsernameInput" class="form-control" placeholder="Username"></div>
-                <div class="col-3"><input id="driverPasswordInput" class="form-control" placeholder="Password" type="password"></div>
+                <div class="col-3"><input class="form-control" placeholder="Nome" id="riderName"></div>
+                <div class="col-3"><input class="form-control" placeholder="Email" id="riderEmail"></div>
+                <div class="col-3"><input class="form-control" placeholder="Username" id="riderUsername"></div>
+                <div class="col-3"><input class="form-control" placeholder="Password" type="password" id="riderPassword"></div>
             </div>
             <div class="row row-padding">
-                <div class="col-3"><input id="driverPhoneNumberInput" class="form-control" placeholder="Telemóvel"></div>
-                <div class="col-3"><input id="driverAddressInput" class="form-control" placeholder="Morada"></div>
-                <div class="col-3"><input id="driverZipCodeInput" class="form-control" placeholder="Codigo-Postal"></div>
-                <div class="col-3"><input id="driverCityInput" class="form-control" placeholder="Cidade"></div>
+                <div class="col-3"><input class="form-control" placeholder="Telemóvel" id="riderPhone"></div>
+                <div class="col-3"><input class="form-control" placeholder="Morada" id="riderAddress"></div>
+                <div class="col-3"><input class="form-control" placeholder="Codigo-Postal" id="riderCEP"></div>
+                <div class="col-3"><input class="form-control" placeholder="Cidade" id="riderCity"></div>
             </div>
             <div class="row row-padding">
-                <div class="col-3"><button id="driverSignupSubmitBtn" type="button" class="btn btn-light">Signup</button></div>
+                <div class="col-3"><button type="button" class="btn btn-light" onclick="signuprider()">Signup</button></div>
                 <div class="col-9"></div>
             </div>
         </div>
@@ -171,13 +217,14 @@
             <div id="store-header" class="title">Signup as Store</div>
             <p class="pl-3">(Retreive a token)</p>
             <div class="row row-padding">
-                <div class="col-8"><input id="storeSignupName" class="form-control" placeholder="Store Name"></div>
-                <div class="col-4"><input id="storeSignupOwnerName" class="form-control" placeholder="Owner Name"></div>
+                <div class="col-6"><input class="form-control" placeholder="Store Name (Retreive a token)" id="storeNameTxt"></div>
+                <div class="col-6"><input class="form-control" placeholder="Owner's Name" id="storeOwnerTxt"></div>
             </div>
             <div class="row row-padding">
-                <div class="col-3"><button id="storeSignupSubmitBtn" type="button" class="btn btn-light">Signup</button></div>
+                <div class="col-3"><button type="button" class="btn btn-light" onclick="signupstore()">Signup</button></div>
                 <div class="col-9"></div>
             </div>
+            <div class="row col-12" id="signupstore_message" style="padding: 5px; color: black; overflow-x: scroll;"></div>
         </div>
     </section>
     
@@ -244,7 +291,7 @@
                 </div> <!-- row -->
             </div> <!-- footer widget -->
             <div class="footer-copyright text-center">
-                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">UIdeck</a> All Rights Reserved.</p>
+                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">Very Dedicated People</a> All Rights Reserved.</p>
             </div>
         </div> <!-- container -->
     </footer>
@@ -314,6 +361,7 @@
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
     
+    <script src="assets/js/auth.js"></script>
 </body>
 
 </html>

@@ -99,9 +99,11 @@
             z-index: 2;
         }
     </style>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/dashboard.js"></script>
 </head>
 
-<body>
+<body onload="checkToken(); changeState(1);">
     <!--[if IE]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
@@ -184,15 +186,13 @@
             <div class="dashboardBody">
                 <div style="width:100%; display: flex; align-items: center;">
                     <div style="width:100%">Status:
-                        <button class="btn btn-success">Idle</button>
-                        <button class="btn btn-warning">Delivering</button>
-                        <button class="btn btn-danger">Offline</button>
+                        <button class="btn btn-success" onclick="changeState(1);">Idle</button>
+                        <button class="btn btn-warning" onclick="changeState(2);">Delivering</button>
+                        <button class="btn btn-danger" onclick="changeState(0);">Offline</button>
                     </div>
                     <div style="width:100%; text-align: right;">
                         Current Status: 
-                        <!--<span class="badge bg-success text-light">Idle</span>-->
-                        <span class="badge bg-warning text-dark">Delivering</span>
-                        <!--<span class="badge bg-danger">Danger</span>-->
+                        <span class="badge bg-warning text-dark" id="riderDeliveringBadge">Warning: Cannot get your current state</span>
                     </div>
 
                 </div>
@@ -317,7 +317,7 @@
                 </div> <!-- row -->
             </div> <!-- footer widget -->
             <div class="footer-copyright text-center">
-                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">UIdeck</a> All Rights
+                <p class="text">© 2022 Crafted by <a href="https://uideck.com" rel="nofollow">Very Dedicated People</a> All Rights
                     Reserved.</p>
             </div>
         </div> <!-- container -->

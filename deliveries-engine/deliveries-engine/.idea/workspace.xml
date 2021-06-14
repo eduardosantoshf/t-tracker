@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:security" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:security" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:test" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1t8ufjHZFfPxjdDQfXxrrPlcITB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager" selected="JUnit.RiderServiceTest">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RiderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.RiderServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.RiderServiceTest" />
+      <option name="METHOD_NAME" value="whenSignUpRider_thenRiderIsRegistered" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StoreServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StoreServiceTest.whenGetComments_returnComments" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
+      <option name="METHOD_NAME" value="whenGetComments_returnComments" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StoreServiceTest.whenGetRatings_returnRatings" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
+      <option name="METHOD_NAME" value="whenGetRatings_returnRatings" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="deliveries-engine" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Maven.deliveries-engine" />
+      <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
+      <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
+      <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
+      <item itemvalue="JUnit.RiderServiceTest" />
+      <item itemvalue="JUnit.StoreServiceTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.RiderServiceTest" />
+        <item itemvalue="JUnit.StoreServiceTest" />
+        <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
+        <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
+        <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="41a41c79-a386-4eb3-8650-4dfcba796f86" name="Default Changelist" comment="" />
+      <created>1622163143077</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622163143077</updated>
+      <workItem from="1622163144674" duration="496000" />
+      <workItem from="1622471349321" duration="1903000" />
+      <workItem from="1622481103706" duration="1289000" />
+      <workItem from="1622497462418" duration="1897000" />
+      <workItem from="1622729923850" duration="9068000" />
+      <workItem from="1622767583824" duration="855000" />
+      <workItem from="1622817775992" duration="434000" />
+      <workItem from="1622902504277" duration="3948000" />
+      <workItem from="1622979381853" duration="8477000" />
+      <workItem from="1622995033260" duration="3827000" />
+      <workItem from="1623058433344" duration="546000" />
+      <workItem from="1623172360370" duration="35000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1878" height="297" key="GridCell.Tab.0.bottom" timestamp="1623691163190">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.bottom/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163190" />
+    <state width="1878" height="297" key="GridCell.Tab.0.center" timestamp="1623691163189">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.center/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
+    <state width="1878" height="297" key="GridCell.Tab.0.left" timestamp="1623691163189">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.left/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
+    <state width="1878" height="297" key="GridCell.Tab.0.right" timestamp="1623691163189">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.right/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
+  </component>
+</project>

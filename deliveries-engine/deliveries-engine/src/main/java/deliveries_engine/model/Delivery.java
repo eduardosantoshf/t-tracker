@@ -30,11 +30,14 @@ public class Delivery {
     @JoinColumn(name="store_id")
     private Store store;
 
-    @Column(name = "pickup_location", nullable = false)
+    @Column(name = "pickup_location")
     private String pickupLocation;
 
-    @Column(name = "delivery_location", nullable = false)
-    private String deliveryLocation;
+    @Column(name = "delivery_latitude", nullable = false)
+    private Double deliveryLatitude;
+
+    @Column(name = "delivery_longitude", nullable = false)
+    private Double deliveryLongitude;
 
     @Column(name = "duration", nullable = false)
     private double duration;
@@ -42,15 +45,25 @@ public class Delivery {
     public Delivery() {}
 
     @Autowired
-    public Delivery(String name, double commission, Rider rider, Store store, String pickupLocation, String deliveryLocation, double duration) {
+    public Delivery(String name, double commission, Rider rider, Store store, Double deliveryLatitude, Double deliveryLongitude, double duration) {
         this.name = name;
         this.commission = commission;
         this.status = false;
         this.rider = rider;
         this.store = store;
-        this.pickupLocation = pickupLocation;
-        this.deliveryLocation = deliveryLocation;
+        this.deliveryLatitude = deliveryLatitude;
+        this.deliveryLongitude = deliveryLongitude;
         this.duration = duration;
+    }
+
+    @Autowired
+    public Delivery(String name, double commission, Double deliveryLatitude, Double deliveryLongitude) {
+        this.name = name;
+        this.commission = commission;
+        this.status = false;
+        this.store = store;
+        this.deliveryLatitude = deliveryLatitude;
+        this.deliveryLongitude = deliveryLongitude;
     }
 
     public int getId() {
@@ -105,12 +118,20 @@ public class Delivery {
         this.pickupLocation = pickupLocation;
     }
 
-    public String getDeliveryLocation() {
-        return this.deliveryLocation;
+    public Double getDeliveryLatitude() {
+        return deliveryLatitude;
     }
 
-    public void setDeliveryLocation(String deliveryLocation) {
-        this.deliveryLocation = deliveryLocation;
+    public void setDeliveryLatitude(Double deliveryLatitude) {
+        this.deliveryLatitude = deliveryLatitude;
+    }
+
+    public Double getDeliveryLongitude() {
+        return deliveryLongitude;
+    }
+
+    public void setDeliveryLongitude(Double deliveryLongitude) {
+        this.deliveryLongitude = deliveryLongitude;
     }
 
     public double getDuration() {

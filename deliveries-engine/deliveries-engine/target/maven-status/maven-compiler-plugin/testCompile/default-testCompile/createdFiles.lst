@@ -1,0 +1,5 @@
+deliveries_engine/repository/AdminRepositoryTest.class
+deliveries_engine/repository/RiderRepositoryTest.class
+deliveries_engine/repository/UserRepositoryTest.class
+deliveries_engine/repository/StoreRepositoryTest.class
+deliveries_engine/repository/DeliveryRepositoryTest.class
