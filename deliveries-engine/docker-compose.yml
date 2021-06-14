@@ -41,3 +41,6 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on: 
         - backend
+
+volumes:
+  db-data:
