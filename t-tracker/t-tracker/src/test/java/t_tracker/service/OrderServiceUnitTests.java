@@ -22,7 +22,7 @@ import t_tracker.repository.LabRepository;
 import t_tracker.repository.OrderRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class OrderServiceUnitTests {
+class OrderServiceUnitTests {
     
     @Mock( lenient = true)
     private OrderRepository orderRepository;
