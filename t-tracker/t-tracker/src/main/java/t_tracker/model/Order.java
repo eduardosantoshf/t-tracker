@@ -33,6 +33,10 @@ public class Order {
 
     @Column(name = "driver_id")
     private int driverId;
+
+    @ManyToOne
+    @JoinColumn(name="lab_id")
+    private int lab_id;
     
     @OneToMany(mappedBy = "order")
     private List<Stock> listOfProducts;
@@ -52,6 +56,18 @@ public class Order {
         this.isDelivered = false;
     }
 
+
+    public Order(UUID id, Client client, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, int driverId, int lab_id, List<Stock> listOfProducts, boolean isDelivered) {
+        this.id = id;
+        this.client = client;
+        this.pickupLocation = pickupLocation;
+        this.deliverLocation = deliverLocation;
+        this.orderTotal = orderTotal;
+        this.driverId = driverId;
+        this.lab_id = lab_id;
+        this.listOfProducts = listOfProducts;
+        this.isDelivered = isDelivered;
+    }
 
     public UUID getId() {
         return this.id;
@@ -97,6 +113,14 @@ public class Order {
         this.driverId = driverId;
     }
 
+    public int getLab_id() {
+        return this.lab_id;
+    }
+
+    public void setLab_id(int lab_id) {
+        this.lab_id = lab_id;
+    }
+
     public List<Stock> getListOfProducts() {
         return this.listOfProducts;
     }
@@ -125,13 +149,12 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(client, order.client) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(listOfProducts, order.listOfProducts) && isDelivered == order.isDelivered;
+        return Objects.equals(id, order.id) && Objects.equals(client, order.client) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && lab_id == order.lab_id && Objects.equals(listOfProducts, order.listOfProducts) && isDelivered == order.isDelivered;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, client, pickupLocation, deliverLocation, orderTotal, driverId, listOfProducts, isDelivered);
+        return Objects.hash(id, client, pickupLocation, deliverLocation, orderTotal, driverId, lab_id, listOfProducts, isDelivered);
     }
-
 
 }
