@@ -14,19 +14,25 @@ For the **CI** part, there are two scripts, one for each project, both of them w
     * **build** - build the t-tracker Maven project, checking if it succeeds
     * **sonar** - runs the SonarCloud static code analysis for the t-tracker project, checking if it passes the quality gate 
 
-## CD - Continuous Deployment
+## CD - Continuous Delivery/Deployment
 
 For the **CD** part, there are also two scripts, one for each project, but, in this case, each one of them will run on a [**GitHub Self-Hosted Runner**](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners) installed on the given virtual machine.
 
 <p align="center">
-    <img src="images/runners.png">
+    <img style="height: 450px" src="images/runners.png">
 </p>
 
 These runners allow us to easily deploy our projects, when pushing/pull requesting to specific branches.
 
-There was an issue with the _sudo_ command, as the runners were running on one of the group members' user, and this depends on the UA's IDP, this could give permissions/timeouts errors, when executing the 
+Each project has its own ***docker-compose.yml***, which will deploy all the parts of the same project, this parts being:
 
-I created a new user, giving him root permissions. This can be done with the following commands:
+* **SpringBoot project**
+* **MySQL Database**
+* **Frontend**
+
+There was an issue with the _sudo_ command, as the runners were running on one of the group members' user, and this depends on the UA's IDP, this could give permissions/timeouts errors, when executing the ***sudo docker-compose up*** command.
+
+To get around this, I created a new user, giving him root permissions. This can be done with the following commands:
 
 ```shell
 $ sudo adduser [username]
