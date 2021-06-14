@@ -178,6 +178,7 @@
                 <div class="col-3"><button type="button" class="btn btn-light" onclick="signupstore()">Signup</button></div>
                 <div class="col-9"></div>
             </div>
+            <div class="row col-12" id="signupstore_message" style="padding: 5px; color: black; overflow-x: scroll;"></div>
         </div>
     </section>
     
@@ -314,29 +315,7 @@
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
     
-
-    <script>
-        function signupstore(){
-            var name = $("#storeNameTxt").val();
-            var ownerName = $("#storeOwnerTxt").val();
-
-            fetch('http://localhost:8080/store', { method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => console.log("response: " + data))
-        }
-
-        function signuprider(){
-            var riderName=$("#riderName").val();
-            var riderEmail=$("#riderEmail").val();
-            var riderUsername=$("#riderUsername").val();
-            var riderPassword=$("#riderPassword").val();
-            var riderPhone=$("#riderPhone").val();
-            var riderAddress=$("#riderAddress").val();
-            var riderCEP=$("#riderCEP").val();
-            var riderCity=$("#riderCity").val();
-
-            var rider={"name":riderName, "email":riderEmail, "username":riderUsername, "password":riderPassword, "phoneNumber":riderPhone, "address":riderAddress, "zipCode":riderCEP, "city":riderCity};
-            fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => console.log(data));
-        }
-    </script>
+    <script src="assets/js/auth.js"></script>
 </body>
 
 </html>
