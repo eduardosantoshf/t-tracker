@@ -38,16 +38,16 @@ class OrderRepositoryTests {
         
         Product product1 = new Product("Covid Test 1", 49.99, "Infrared Test");
         Product product2 = new Product("Covid Test 2", 99.99, "Molecular Test");
-        
         Stock orderStock1 = new Stock(product1, 2);
         Stock orderStock2 = new Stock(product2, 1);
-
         List<Stock> listOfProducts = new ArrayList<>(Arrays.asList(orderStock1, orderStock2));
+
+        Lab orderLab = new Lab("Chemical Lab lda", pickupLocation);
 
         Double orderTotal = orderStock1.getTotalPrice() + orderStock2.getTotalPrice();
         
-        testOrder1 = new Order(orderClient, pickupLocation, deliverLocation, orderTotal, listOfProducts);
-        testOrder2 = new Order(orderClient, pickupLocation, deliverLocation, orderTotal, listOfProducts);
+        testOrder1 = new Order(orderClient, pickupLocation, deliverLocation, orderTotal, orderLab, listOfProducts);
+        testOrder2 = new Order(orderClient, pickupLocation, deliverLocation, orderTotal, orderLab, listOfProducts);
 
         testOrder2.setIsDelivered(true);
 
@@ -58,6 +58,7 @@ class OrderRepositoryTests {
         entityManager.persist(product2);
         entityManager.persist(orderStock1);
         entityManager.persist(orderStock2);
+        entityManager.persist(orderLab);
         entityManager.persist(testOrder1);
         entityManager.persist(testOrder2);
         entityManager.flush();

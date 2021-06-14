@@ -36,7 +36,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name="lab_id")
-    private int lab_id;
+    private Lab lab;
     
     @OneToMany(mappedBy = "order")
     private List<Stock> listOfProducts;
@@ -47,26 +47,14 @@ public class Order {
     public Order() {}
 
     @Autowired
-    public Order(Client client, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, List<Stock> listOfProducts) {
+    public Order(Client client, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, Lab lab, List<Stock> listOfProducts) {
         this.client = client;
         this.pickupLocation = pickupLocation;
         this.deliverLocation = deliverLocation;
         this.orderTotal = orderTotal;
+        this.lab = lab;
         this.listOfProducts = listOfProducts;
         this.isDelivered = false;
-    }
-
-
-    public Order(UUID id, Client client, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, int driverId, int lab_id, List<Stock> listOfProducts, boolean isDelivered) {
-        this.id = id;
-        this.client = client;
-        this.pickupLocation = pickupLocation;
-        this.deliverLocation = deliverLocation;
-        this.orderTotal = orderTotal;
-        this.driverId = driverId;
-        this.lab_id = lab_id;
-        this.listOfProducts = listOfProducts;
-        this.isDelivered = isDelivered;
     }
 
     public UUID getId() {
@@ -113,12 +101,12 @@ public class Order {
         this.driverId = driverId;
     }
 
-    public int getLab_id() {
-        return this.lab_id;
+    public Lab getLab() {
+        return this.lab;
     }
 
-    public void setLab_id(int lab_id) {
-        this.lab_id = lab_id;
+    public void setLab(Lab lab) {
+        this.lab = lab;
     }
 
     public List<Stock> getListOfProducts() {
@@ -149,12 +137,12 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(client, order.client) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && lab_id == order.lab_id && Objects.equals(listOfProducts, order.listOfProducts) && isDelivered == order.isDelivered;
+        return Objects.equals(id, order.id) && Objects.equals(client, order.client) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(lab, order.lab) && Objects.equals(listOfProducts, order.listOfProducts) && isDelivered == order.isDelivered;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, client, pickupLocation, deliverLocation, orderTotal, driverId, lab_id, listOfProducts, isDelivered);
+        return Objects.hash(id, client, pickupLocation, deliverLocation, orderTotal, driverId, lab, listOfProducts, isDelivered);
     }
 
 }

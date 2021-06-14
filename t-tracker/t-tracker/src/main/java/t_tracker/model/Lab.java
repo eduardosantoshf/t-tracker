@@ -23,6 +23,9 @@ public class Lab {
     @OneToMany(mappedBy = "lab")
     private List<Stock> stocks;
 
+    @OneToMany(mappedBy = "lab")
+    private List<Order> orders;
+
     public Lab() {}
 
     @Autowired
