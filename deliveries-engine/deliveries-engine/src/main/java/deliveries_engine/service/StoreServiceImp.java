@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.json.JSONObject;
+
 @Service
 public class StoreServiceImp implements StoreService{
 
@@ -103,7 +105,11 @@ public class StoreServiceImp implements StoreService{
             }
         }
 
-        warningController.send("teste");
+        JSONObject json = new JSONObject();
+        json.put("latitude", latitude);
+        json.put("longitude", longitude);
+
+        warningController.send(json.toString());
 
         return responseRider;
     }
