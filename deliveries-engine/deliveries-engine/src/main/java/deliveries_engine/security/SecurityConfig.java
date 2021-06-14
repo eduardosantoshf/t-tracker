@@ -40,6 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers(HttpMethod.POST, "/rider/signup").permitAll()
             .antMatchers(HttpMethod.POST, "/store").permitAll()
                 .antMatchers(HttpMethod.POST, "/store/order/{storeId}").permitAll()
+                .antMatchers("/chat/**").permitAll()
+                .antMatchers("/chat/info/*").permitAll()
                 .antMatchers(HttpMethod.POST, "/store/driver/rating/{storeId}/{riderId}").permitAll()
                 .antMatchers(HttpMethod.POST, "/store/driver/comment/{storeId}/{riderId}").permitAll()
                 .antMatchers(HttpMethod.GET, "/store/driver/rating/{storeId}/{riderId}").permitAll()

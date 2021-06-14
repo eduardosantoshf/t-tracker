@@ -5,6 +5,7 @@ import deliveries_engine.model.Rider;
 import deliveries_engine.model.Store;
 import deliveries_engine.repository.RiderRepository;
 import deliveries_engine.repository.StoreRepository;
+import deliveries_engine.websocket.WarningController;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.json.JSONObject;
+
 @Service
 public class StoreServiceImp implements StoreService{
 
@@ -22,6 +25,9 @@ public class StoreServiceImp implements StoreService{
 
     @Autowired
     private RiderRepository riderRepository;
+
+    @Autowired
+    public WarningController warningController = new WarningController();
 
     public Store registerStore(Store store) throws Exception {
 
@@ -91,6 +97,11 @@ public class StoreServiceImp implements StoreService{
             }
         }
 
+        JSONObject json = new JSONObject();
+        json.put("latitude", latitude);
+        json.put("longitude", longitude);
+
+        warningController.send(json.toString());
 
         return responseRider;
     }
