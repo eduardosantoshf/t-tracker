@@ -11,9 +11,8 @@ services:
       MYSQL_PASSWORD: 'lepwd'
     ports:
       - '3306:3306' # -[port_outside_container]:[port_inside_container]
-    #volumes:
-      #- db-data1:/var/lib/mysql
-      #- ./mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
+    volumes:
+      - db-data:/var/lib/mysql # persist DB data, even after "docker-compose down"
     expose:
     # opens port 3306 on the container
       - '3306'
