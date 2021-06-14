@@ -4,6 +4,7 @@ import deliveries_engine.DeliveriesEngineApplication;
 import deliveries_engine.model.Delivery;
 import deliveries_engine.model.Rider;
 import deliveries_engine.model.Store;
+import deliveries_engine.repository.RiderRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,9 @@ public class RiderServiceTest {
 
     private Rider newRider;
 
+    @MockBean
+    private RiderRepository riderRepository;
+
     @BeforeEach
     void setUp() {
         newRider = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678, "Kingdom of The Crystal Skull", "Akator", "9090-666");
@@ -37,7 +41,7 @@ public class RiderServiceTest {
 
     @AfterEach
     void cleanUp() {
-        //reset(riderService);
+        reset(riderRepository);
     }
 
     @Test

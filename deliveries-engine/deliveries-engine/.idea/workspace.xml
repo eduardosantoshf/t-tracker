@@ -47,7 +47,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,13 +89,59 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager" selected="JUnit.StoreServiceTest.whenGetComments_returnComments">
+  <component name="RunManager" selected="JUnit.RiderServiceTest">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RiderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.RiderServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.RiderServiceTest" />
+      <option name="METHOD_NAME" value="whenSignUpRider_thenRiderIsRegistered" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StoreServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -131,54 +179,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StoreServiceTest.whenRequestClosestRider_getRider" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="deliveries-engine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="deliveries_engine.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
-      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
-      <option name="METHOD_NAME" value="whenRequestClosestRider_getRider" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StoreServiceTest.whenUpdateComments_commentsAreUpdated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="deliveries-engine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="deliveries_engine.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
-      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
-      <option name="METHOD_NAME" value="whenUpdateComments_commentsAreUpdated" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StoreServiceTest.whenUpdateRatings_ratingsAreUpdated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="deliveries-engine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="deliveries_engine.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
-      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
-      <option name="METHOD_NAME" value="whenUpdateRatings_ratingsAreUpdated" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="deliveries-engine" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -204,19 +204,19 @@
     </configuration>
     <list>
       <item itemvalue="Maven.deliveries-engine" />
-      <item itemvalue="JUnit.StoreServiceTest.whenRequestClosestRider_getRider" />
-      <item itemvalue="JUnit.StoreServiceTest.whenUpdateRatings_ratingsAreUpdated" />
-      <item itemvalue="JUnit.StoreServiceTest.whenUpdateComments_commentsAreUpdated" />
       <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
       <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
+      <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
+      <item itemvalue="JUnit.RiderServiceTest" />
+      <item itemvalue="JUnit.StoreServiceTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RiderServiceTest" />
+        <item itemvalue="JUnit.StoreServiceTest" />
+        <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
         <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
         <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
-        <item itemvalue="JUnit.StoreServiceTest.whenUpdateComments_commentsAreUpdated" />
-        <item itemvalue="JUnit.StoreServiceTest.whenUpdateRatings_ratingsAreUpdated" />
-        <item itemvalue="JUnit.StoreServiceTest.whenRequestClosestRider_getRider" />
       </list>
     </recent_temporary>
   </component>
@@ -259,21 +259,21 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1878" height="297" key="GridCell.Tab.0.bottom" timestamp="1623687892602">
+    <state width="1878" height="297" key="GridCell.Tab.0.bottom" timestamp="1623691163190">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="297" key="GridCell.Tab.0.bottom/0.23.1920.1123@0.23.1920.1123" timestamp="1623687892602" />
-    <state width="1878" height="297" key="GridCell.Tab.0.center" timestamp="1623687892601">
+    <state width="1878" height="297" key="GridCell.Tab.0.bottom/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163190" />
+    <state width="1878" height="297" key="GridCell.Tab.0.center" timestamp="1623691163189">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="297" key="GridCell.Tab.0.center/0.23.1920.1123@0.23.1920.1123" timestamp="1623687892601" />
-    <state width="1878" height="297" key="GridCell.Tab.0.left" timestamp="1623687892600">
+    <state width="1878" height="297" key="GridCell.Tab.0.center/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
+    <state width="1878" height="297" key="GridCell.Tab.0.left" timestamp="1623691163189">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="297" key="GridCell.Tab.0.left/0.23.1920.1123@0.23.1920.1123" timestamp="1623687892600" />
-    <state width="1878" height="297" key="GridCell.Tab.0.right" timestamp="1623687892601">
+    <state width="1878" height="297" key="GridCell.Tab.0.left/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
+    <state width="1878" height="297" key="GridCell.Tab.0.right" timestamp="1623691163189">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="297" key="GridCell.Tab.0.right/0.23.1920.1123@0.23.1920.1123" timestamp="1623687892601" />
+    <state width="1878" height="297" key="GridCell.Tab.0.right/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
   </component>
 </project>
