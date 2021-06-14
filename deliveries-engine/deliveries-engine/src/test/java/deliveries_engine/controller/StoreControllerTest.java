@@ -100,4 +100,30 @@ class StoreControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    void whenAddingRating_getRatingsList() throws Exception {
+        given(storeService.updateRatings(3, token, newStore.getId(), newRider.getId())).willReturn(newRider.getRatings());
+
+        JSONObject json = new JSONObject();
+        json.put("rating", 3);
+
+        mvc.perform(post("/store/driver/rating/" + newStore.getId() + "/" + newRider.getId()).header("Authorization", token)
+                .contentType(MediaType.APPLICATION_JSON).content(json.toString().getBytes()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void whenAddingComment_getList() throws Exception {
+        given(storeService.updateComments("bom servico", token, newStore.getId(), newRider.getId())).willReturn(newRider.getComments());
+
+        JSONObject json = new JSONObject();
+        json.put("comment", "bom servico");
+
+        mvc.perform(post("/store/driver/comment/" + newStore.getId() + "/" + newRider.getId()).header("Authorization", token)
+                .contentType(MediaType.APPLICATION_JSON).content(json.toString().getBytes()))
+                .andExpect(status().isOk());
+    }
+
+
+
 }
