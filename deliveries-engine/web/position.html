@@ -34,6 +34,8 @@
     <!--====== Style CSS ======-->
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" /> <!-- must be cdn because of markers that remains online -->
+
     <style>
         .row-padding {
             padding: 10px;
@@ -99,10 +101,11 @@
             z-index: 2;
         }
     </style>
+
     <script src="assets/js/auth.js"></script>
 </head>
 
-<body onload="checkToken()">
+<body onload="checkToken(); getLocation(); loadMap();">
     <!--[if IE]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
@@ -185,18 +188,19 @@
             <div class="dashboardBody">
                 <div style="width:100%; display: flex; align-items: center;">
                     <div style="width:100%">
-                        <button class="btn btn-primary">Set current position</button>
+                        <button class="btn btn-primary" onclick="getLocation()">Set current position</button>
                     </div>
                     <div style="width:100%; text-align: right;">
                         My current location: 
                         <!--<span class="badge bg-success text-light">40.634765, -8.647065</span>-->
-                        <span class="badge bg-warning text-dark">Warning: cannot get your position</span>
+                        <span class="badge bg-warning text-dark" id="badgePosition">Warning: cannot get your position</span>
                     </div>
                 </div>
-                <iframe height="300" frameborder="0" scrolling="no" marginheight="0"
+                <!--<iframe height="300" frameborder="0" scrolling="no" marginheight="0"
                         marginwidth="0"
                         src="https://www.openstreetmap.org/export/embed.html?bbox=-8.753037666901948%2C40.571594025686785%2C-8.548760628327727%2C40.66449958661063&amp;layer=mapnik"
-                        style="border: 1px solid black; width: 100%;"></iframe>
+                        style="border: 1px solid black; width: 100%;"></iframe>-->
+                <div style="height:300px; width:100%;" id="ridermap"></div>
             </div>
         </div>
     </section>
@@ -336,6 +340,10 @@
 
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> <!-- must be online so it can request online assets -->
+
+    <script src="assets/js/position.js"></script>
 
 </body>
 
