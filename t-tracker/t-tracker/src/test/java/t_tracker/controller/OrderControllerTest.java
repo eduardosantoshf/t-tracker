@@ -1,7 +1,6 @@
 package t_tracker.controller;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -67,7 +66,7 @@ public class OrderControllerTest {
     void whenPlaceOrderWithInvalidStock_ThenReturnNullAnd409() throws Exception {
         when( orderService.placeAnOrder(any(Order.class)) ).thenThrow( ResponseStatusException.class );
 
-        mvc.perform( post("/client/signup").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
+        mvc.perform( post("/order").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
             .andExpect( status().isConflict() );
     
     }
