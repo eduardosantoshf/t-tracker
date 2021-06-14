@@ -320,7 +320,7 @@
             var name = $("#storeNameTxt").val();
             var ownerName = $("#storeOwnerTxt").val();
 
-            fetch('http://localhost:8080/store', { method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => console.log("response: " + data))
+            fetch('http://192.168.160.222:8080/store', { method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => console.log("response: " + data))
         }
 
         function signuprider(){
@@ -334,7 +334,7 @@
             var riderCity=$("#riderCity").val();
 
             var rider={"name":riderName, "email":riderEmail, "username":riderUsername, "password":riderPassword, "phoneNumber":riderPhone, "address":riderAddress, "zipCode":riderCEP, "city":riderCity};
-            fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => console.log(data));
+            fetch('http://192.168.160.222:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => console.log(data));
         }
     </script>
 </body>
