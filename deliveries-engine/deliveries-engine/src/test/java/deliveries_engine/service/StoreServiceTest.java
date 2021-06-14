@@ -77,4 +77,78 @@ public class StoreServiceTest {
 
     }
 
+    @Test
+    void whenUpdateRatings_ratingsAreUpdated() throws Exception {
+        Rider rider1 = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678,
+                "Kingdom of The Crystal Skull", "Akator", "9090-666", 40.631858, -8.650833);
+
+        given(riderRepository.findById(rider1.getId())).willReturn(rider1);
+
+        List<Integer> response_ratings = storeService.updateRatings(3, token, store.getId(), rider1.getId());
+
+        List<Integer> expected_ratings = new ArrayList<>();
+        expected_ratings.add(3);
+
+        assertEquals(expected_ratings, response_ratings);
+    }
+
+    @Test
+    void whenUpdateComments_commentsAreUpdated() throws Exception {
+        Rider rider1 = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678,
+                "Kingdom of The Crystal Skull", "Akator", "9090-666", 40.631858, -8.650833);
+
+        given(riderRepository.findById(rider1.getId())).willReturn(rider1);
+
+        List<String> response_comments = storeService.updateComments("que bonito", token, store.getId(), rider1.getId());
+
+        List<String> expected_comments = new ArrayList<>();
+        expected_comments.add("que bonito");
+
+        assertEquals(expected_comments, response_comments);
+    }
+
+    @Test
+    void whenGetRatings_returnRatings() throws Exception {
+        Rider rider1 = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678,
+                "Kingdom of The Crystal Skull", "Akator", "9090-666", 40.631858, -8.650833);
+
+        given(riderRepository.findById(rider1.getId())).willReturn(rider1);
+
+        storeService.updateRatings(3, token, store.getId(), rider1.getId());
+        storeService.updateRatings(3, token, store.getId(), rider1.getId());
+        storeService.updateRatings(2, token, store.getId(), rider1.getId());
+
+        List<Integer> expected_ratings = new ArrayList<>();
+        expected_ratings.add(3);
+        expected_ratings.add(3);
+        expected_ratings.add(2);
+
+        List <Integer> response_ratings = storeService.getRatings(token, store.getId(), rider1.getId());
+
+        assertEquals(expected_ratings, response_ratings);
+    }
+
+    @Test
+    void whenGetComments_returnComments() throws Exception {
+        Rider rider1 = new Rider("Jones", "indiana@jones.org", "CrystalSkull", "losttemple", 912345678,
+                "Kingdom of The Crystal Skull", "Akator", "9090-666", 40.631858, -8.650833);
+
+        given(riderRepository.findById(rider1.getId())).willReturn(rider1);
+
+        storeService.updateComments("bonito", token, store.getId(), rider1.getId());
+        storeService.updateComments("lindo", token, store.getId(), rider1.getId());
+        storeService.updateComments("no cap", token, store.getId(), rider1.getId());
+
+        List<String> expected_comments = new ArrayList<>();
+        expected_comments.add("bonito");
+        expected_comments.add("lindo");
+        expected_comments.add("no cap");
+
+        List <String> response_comments = storeService.getComments(token, store.getId(), rider1.getId());
+
+        assertEquals(expected_comments, response_comments);
+    }
+
+
+
 }
