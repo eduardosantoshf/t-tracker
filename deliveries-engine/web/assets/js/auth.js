@@ -43,7 +43,7 @@ function signuprider(){
     var rider={"name":riderName, "email":riderEmail, "username":riderUsername, "password":riderPassword, "phoneNumber":riderPhone, "address":riderAddress, "zipCode":riderCEP, "city":riderCity};
     //fetch('http://192.168.160.222:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => (data.id!=null) ? autoLogin(riderUsername, riderPassword) : $("#authmessage").show());
 
-    fetch('http://192.168.160.222:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
+    fetch('http://192.168.160.222:8080/rider/signup', { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'http://192.168.160.222' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
         if(data.status==200)
             try{
                 data.json();
