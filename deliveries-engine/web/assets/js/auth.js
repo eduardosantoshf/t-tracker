@@ -96,7 +96,7 @@ function signupstore(){
     var name = $("#storeNameTxt").val();
     var ownerName = $("#storeOwnerTxt").val();
 
-    fetch('http://localhost:8080/store', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => {
+    fetch('http://192.168.160.222:8080/store', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => {
         if(data.status==200){
             data=data.json();
             
