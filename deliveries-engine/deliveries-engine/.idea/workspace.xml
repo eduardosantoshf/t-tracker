@@ -46,10 +46,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/java/t_tracker/security/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/java/t_tracker/security/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/java/t_tracker/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/java/t_tracker/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/TTrackerApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Lab.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Owner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Product.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Store.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/VaccineBuy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/VaccineCollection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/t-tracker-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/t-tracker-1.0-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/web/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/web/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/web/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/web/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +81,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectId" id="1t8ufjHZFfPxjdDQfXxrrPlcITB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -84,23 +106,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../t-tracker" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager" selected="JUnit.RiderServiceTest">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RiderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="deliveries-engine" />
       <extension name="coverage">
@@ -203,12 +214,12 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Maven.deliveries-engine" />
       <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
       <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
       <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
       <item itemvalue="JUnit.RiderServiceTest" />
       <item itemvalue="JUnit.StoreServiceTest" />
+      <item itemvalue="Maven.deliveries-engine" />
     </list>
     <recent_temporary>
       <list>
@@ -223,7 +234,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="41a41c79-a386-4eb3-8650-4dfcba796f86" name="Default Changelist" comment="" />
+      <changelist id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="" />
       <created>1622163143077</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -240,6 +251,7 @@
       <workItem from="1622995033260" duration="3827000" />
       <workItem from="1623058433344" duration="546000" />
       <workItem from="1623172360370" duration="35000" />
+      <workItem from="1623870114685" duration="21000" />
     </task>
     <servers />
   </component>
@@ -259,6 +271,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="508" y="209" key="FileChooserDialogImpl" timestamp="1623870133728">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="508" y="209" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1623870133728" />
     <state width="1878" height="297" key="GridCell.Tab.0.bottom" timestamp="1623691163190">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>

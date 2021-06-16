@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import t_tracker.model.User;
-import t_tracker.repository.UserRepository;
+import t_tracker.repository.ClientRepository;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -20,12 +20,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private PasswordEncoder passwordEncoder;
     private UserDetailsService userDetailsService;
-    private UserRepository<User> userRepository;
+    private ClientRepository ClientRepository;
 
-    public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, UserRepository<User> userRepository) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, ClientRepository ClientRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
-        this.userRepository = userRepository;
+        this.ClientRepository = ClientRepository;
     }
 
     @Override
@@ -41,8 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers(HttpMethod.POST, "/client/signup").permitAll()
 			.anyRequest().authenticated()
 			.and()
-			.addFilter(new JwtAuthenticationFilter(authenticationManager(),userRepository))
+			.addFilter(new JwtAuthenticationFilter(authenticationManager(),ClientRepository))
             .addFilter(new JWTAuthorizationFilter(authenticationManager()));
 	}
-
 }
