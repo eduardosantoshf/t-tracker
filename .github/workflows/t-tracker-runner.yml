@@ -19,7 +19,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run compose
-      # when running the docker-compose, this actions won't be marked as finished because, while the service is running on the vm runner, the workflow won't finish
       run: |
         cd t-tracker/
         sudo docker-compose down
@@ -29,10 +28,10 @@ jobs:
     name: Migrate DB
     # the type of runner that the job will run on, in this case, it will be on the Github runner that is ruunning on the vm provided for this project
     runs-on: t-tracker-runner
-    
+
     needs: [t-tracker-runner]
 
-    # run this job only if the previous one succeeds, to prevent trying to migrate unexistant DB
+    # run this job only if the previous one succeeds, to prevent trying to migrate non-existent DB
     if: always() && needs.t-tracker-runner.result == 'success'
 
     # steps represent a sequence of tasks that will be executed as part of the job
