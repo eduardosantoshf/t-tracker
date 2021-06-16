@@ -43,5 +43,4 @@ jobs:
       - name: Step 2 - Have Flyway migrate the deliveries-engine project's database
         run: |
           cd deliveries-engine/deliveries-engine/
-          mvn clean install
           mvn clean flyway:migrate -Dflyway.configFiles=myFlywayConfig.properties
