@@ -3,7 +3,49 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:security" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:security" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:test" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="41a41c79-a386-4eb3-8650-4dfcba796f86" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/deliveries-engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/deliveries-engine.iml" afterDir="false" />
@@ -45,6 +87,13 @@
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/t-tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/t-tracker.iml" afterDir="false" />
+=======
+    <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+>>>>>>> b1d4c354d323d231df9c9a5caa82a28143211a6c
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +133,11 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Spring Boot.DeliveriesEngineApplication">
+=======
+  <component name="RunManager" selected="JUnit.RiderServiceTest">
+>>>>>>> b1d4c354d323d231df9c9a5caa82a28143211a6c
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -96,6 +149,87 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
+=======
+    <configuration name="RiderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.RiderServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.RiderServiceTest" />
+      <option name="METHOD_NAME" value="whenSignUpRider_thenRiderIsRegistered" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StoreServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StoreServiceTest.whenGetComments_returnComments" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
+      <option name="METHOD_NAME" value="whenGetComments_returnComments" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StoreServiceTest.whenGetRatings_returnRatings" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="deliveries-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="deliveries_engine.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="deliveries_engine.service" />
+      <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
+      <option name="METHOD_NAME" value="whenGetRatings_returnRatings" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+>>>>>>> b1d4c354d323d231df9c9a5caa82a28143211a6c
     <configuration name="deliveries-engine" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -119,26 +253,21 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
-    <configuration name="DeliveriesEngineApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="deliveries-engine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="deliveries_engine.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="deliveries_engine.DeliveriesEngineApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Maven.deliveries-engine" />
-      <item itemvalue="Spring Boot.DeliveriesEngineApplication" />
+      <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
+      <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
+      <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
+      <item itemvalue="JUnit.RiderServiceTest" />
+      <item itemvalue="JUnit.StoreServiceTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.DeliveriesEngineApplication" />
+        <item itemvalue="JUnit.RiderServiceTest" />
+        <item itemvalue="JUnit.StoreServiceTest" />
+        <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
+        <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
+        <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
       </list>
     </recent_temporary>
   </component>
@@ -183,5 +312,23 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1878" height="297" key="GridCell.Tab.0.bottom" timestamp="1623691163190">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.bottom/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163190" />
+    <state width="1878" height="297" key="GridCell.Tab.0.center" timestamp="1623691163189">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.center/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
+    <state width="1878" height="297" key="GridCell.Tab.0.left" timestamp="1623691163189">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.left/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
+    <state width="1878" height="297" key="GridCell.Tab.0.right" timestamp="1623691163189">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state width="1878" height="297" key="GridCell.Tab.0.right/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
   </component>
 </project>
