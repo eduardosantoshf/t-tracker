@@ -37,4 +37,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Step 2 - Have Flyway migrate the deliveries-engine project's database
-        run: mvn clean flyway:migrate -Dflyway.configFiles=myFlywayConfig.properties
+        run: |
+        cd deliveries-engine/deliveries-engine/
+        mvn clean flyway:migrate -Dflyway.configFiles=myFlywayConfig.properties
