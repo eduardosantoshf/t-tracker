@@ -24,3 +24,22 @@ jobs:
         cd deliveries-engine/
         sudo docker-compose down
         sudo docker-compose up --build -d
+
+  db-migration:
+    name: Migrate DB
+    # the type of runner that the job will run on, in this case, it will be on the Github runner that is ruunning on the vm provided for this project
+    runs-on: deliveries-engine-runner
+
+    # steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Step 1 - Checkout main branch from Github
+        uses: actions/checkout@v2
+
+      - name: Step 2 - Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Step 3 - Have Flyway migrate the deliveries-engine project's database
+        run: mvn clean flyway:migrate -Dflyway.configFiles=myFlywayConfig.properties
