@@ -41,12 +41,13 @@ function signuprider(){
     var riderCity=$("#riderCity").val();
 
     var rider={"name":riderName, "email":riderEmail, "username":riderUsername, "password":riderPassword, "phoneNumber":riderPhone, "address":riderAddress, "zipCode":riderCEP, "city":riderCity};
-    //fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => (data.id!=null) ? autoLogin(riderUsername, riderPassword) : $("#authmessage").show());
-
-    fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
+    //fetch('http://192.168.160.222:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => (data.id!=null) ? autoLogin(riderUsername, riderPassword) : $("#authmessage").show());
+    // 'Access-Control-Allow-Origin':'http://192.168.160.222', , contentType:'application/json'
+    fetch('http://192.168.160.222:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
         if(data.status==200)
             try{
                 data.json();
+
                 autoLogin(riderUsername, riderPassword);
             }catch(e){
                 $("#authmessage").show();
@@ -60,11 +61,14 @@ function loginrider(){
     var riderUsername = $("#riderUsername").val();
     var riderPassword = $("#riderPassword").val();
     
-    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
+    fetch('http://192.168.160.222:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
         if(data.status==200){
             data=data.json();
-            document.cookie = "sessionKey="+data.token;
-            window.location.href="/dashboard.html"
+
+            Promise.all([data]).then(data => {
+                document.cookie = "sessionKey="+data[0].token;
+                window.location.href="/dashboard.html";
+            })
         }else{
             $("#authmessage").show();
             $("#riderPassword").val("");
@@ -73,14 +77,36 @@ function loginrider(){
 }
 
 function autoLogin(riderUsername, riderPassword){
-    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
+    fetch('http://192.168.160.222:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
         if(data.status==200){
             data=data.json();
-            document.cookie = "sessionKey="+data.token;
-            window.location.href="/dashboard.html"
+
+            Promise.all([data]).then(data => {
+                document.cookie = "sessionKey="+data[0].token;
+                window.location.href="/dashboard.html"
+            })
         }else{
             alert("Wrong credentials");
             $("#riderPassword").val("");
+        }
+    });
+}
+
+function signupstore(){
+    var name = $("#storeNameTxt").val();
+    var ownerName = $("#storeOwnerTxt").val();
+
+    fetch('http://192.168.160.222:8080/store', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => {
+        if(data.status==200){
+            data=data.json();
+            
+            Promise.all([data]).then(data => {
+                $("#signupstore_message").text("Save this token very carefully: " + data[0].token);
+                $("#signupstore_message").css({"background-color": "green"})
+            });
+        }else{
+            $("#signupstore_message").text("Failed to connect to server");
+            $("#signupstore_message").css({"background-color": "red"})
         }
     });
 }
