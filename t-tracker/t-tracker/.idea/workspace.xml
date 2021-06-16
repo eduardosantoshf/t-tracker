@@ -5,41 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="673d179a-00ab-4fcc-88d7-f991ff03b56c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.github/workflows/t-tracker-runner.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.github/workflows/t-tracker-runner.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../deliveries-engine/deliveries-engine/deliveries-engine.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../deliveries-engine/deliveries-engine/myFlywayConfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../deliveries-engine/deliveries-engine/myFlywayConfig.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/t-tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/t-tracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/CorsConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/PasswordEncoderConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/TTrackerApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/controller/ClientController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/model/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/model/Coordinates.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/model/Lab.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/model/Order.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/model/Owner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/model/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/model/Rider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/model/Stock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/model/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/repository/ClientRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/repository/LabRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/repository/OrderRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/repository/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/security/JWTAuthorizationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/security/JwtAuthenticationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/security/SecurityConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/service/ClientService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/service/ClientServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/service/JwtTokenService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/t_tracker/service/UserDetailsServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/t-tracker-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/t-tracker-1.0-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myFlywayConfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/myFlywayConfig.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +83,7 @@
       <workItem from="1623172360371" duration="35000" />
       <workItem from="1623767423361" duration="409000" />
       <workItem from="1623798769868" duration="4000" />
-      <workItem from="1623842295396" duration="206000" />
+      <workItem from="1623842295396" duration="765000" />
     </task>
     <servers />
   </component>
