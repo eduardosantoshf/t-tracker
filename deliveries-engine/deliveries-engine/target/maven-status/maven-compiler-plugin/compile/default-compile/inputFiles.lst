@@ -2,6 +2,7 @@
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/security/SecurityConfig.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/service/Service.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/service/RiderService.java
+/Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/websocket/WarningController.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/model/Admin.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/controller/RiderController.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/swagger2/Swagger2Config.java
@@ -14,11 +15,13 @@
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/repository/UserRepository.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/service/JwtTokenService.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/repository/RiderRepository.java
+/Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/websocket/Warning.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/model/Rider.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/service/RiderServiceImp.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/PasswordEncoderConfig.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/service/StoreServiceImp.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/service/UserDetailsServiceImpl.java
+/Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/websocket/WebSocketConfig.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/exception/ErrorWarning.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/security/JWTAuthorizationFilter.java
 /Users/eduardosantos/OneDrive - Universidade de Aveiro/UA - LEI/3o Ano/2o Semestre/TQS/t-tracker/deliveries-engine/deliveries-engine/src/main/java/deliveries_engine/service/StoreService.java
