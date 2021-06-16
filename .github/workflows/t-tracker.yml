@@ -4,7 +4,7 @@ name: t-tracker CI/CD Pipeline
 on:
   # triggers the workflow on push for the develop and deployment branches
   push:
-    branches: [ develop, deployment ]
+    branches: [ develop, deployment, db-migration ]
     paths-ignore:
       - 'reporting/**' # don't run this workflow when the are pushes, and there are only changes for this directory
       # don't run this workflow when the are pushes, and there are only changes for the following files:
@@ -85,3 +85,4 @@ jobs:
         run: |
             cd t-tracker/t-tracker
             mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+  
