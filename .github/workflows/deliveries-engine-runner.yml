@@ -3,7 +3,7 @@ name: Deliveries Engine Runner
 on:
   # triggers the workflow on push for the deployment branch
   push:
-    branches: [ deployment, db-migration ]
+    branches: [ deployment ]
 
   # triggers the workflow on pull requests for the deployment branch
   pull_request:
