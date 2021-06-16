@@ -43,5 +43,5 @@ jobs:
       - name: Step 2 - Have Flyway migrate the t-tracker project's database
         run: |
           cd t-tracker/t-tracker/
-          mvn clean install
+          mvn clean install -Dmaven.test.skip=true
           mvn clean flyway:migrate -Dflyway.configFiles=myFlywayConfig.properties
