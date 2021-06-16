@@ -7,7 +7,7 @@ on:
     branches: [ develop, deployment, db-migration ]
     paths-ignore:
       - 'reporting/**' # don't run this workflow when the are pushes, and there are only changes for this directory
-      # don't run this workflow when the are pushes, and there are only changes for the following files:
+      # don't run this workflow when the are pushes and there are only changes for the following files:
       - '**.md'
       - '**.pdf'
       - '**.docx'
