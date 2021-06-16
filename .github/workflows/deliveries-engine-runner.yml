@@ -29,7 +29,8 @@ jobs:
     name: Migrate DB
     # the type of runner that the job will run on, in this case, it will be on the Github runner that is ruunning on the vm provided for this project
     runs-on: deliveries-engine-runner
-
+    needs: [deliveries-engine-runner]
+    if: always() && needs.deliveries-engine-runner.result == 'success'
     # steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
