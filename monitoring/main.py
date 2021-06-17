@@ -11,7 +11,7 @@ def get_workflow_info():
     workflow_info = dict()
 
     data = request.get_json()
-    
+
     workflow_name = data.get("workflow")
     page_number = data.get("page_number")
 
@@ -46,4 +46,5 @@ def get_workflow_info():
     return worksflows
 
 if __name__ == "__main__":
-    app.run()
+    #app.run(host='0.0.0.0')
+    app.run(host='192.168.160.222')
