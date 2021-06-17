@@ -11,6 +11,7 @@ def get_workflow_info():
     workflow_info = dict()
 
     data = request.get_json()
+    
     workflow_name = data.get("workflow")
     page_number = data.get("page_number")
 
@@ -20,8 +21,8 @@ def get_workflow_info():
     workflow["data"] = list()
 
     for run in response["workflow_runs"]:
-        #workflow["data"].append(run)
         r = dict()
+
         r["id"] = run["id"]
         r["name"] = run["name"]
         r["event"] = run["event"]
