@@ -24,6 +24,10 @@
         <selenium-java.version>3.141.59</selenium-java.version>
     	<webdrivermanager.version>4.4.0</webdrivermanager.version>
 		<cucumber.version>6.10.3</cucumber.version>
+
+        <!-- Properties are prefixed with flyway. -->
+        <flyway.user>user</flyway.user>
+        <flyway.password>root</flyway.password>
     </properties>
 
     <dependencies>
@@ -175,10 +179,19 @@
     <build>
 		<plugins>
 
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>7.10.0</version>
+                <configuration>
+                    <baselineOnMigrate>true</baselineOnMigrate>
+                </configuration>
+            </plugin>
 
 			<plugin>
 				<groupId>org.jacoco</groupId>

@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="673d179a-00ab-4fcc-88d7-f991ff03b56c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../deliveries-engine/deliveries-engine/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../deliveries-engine/deliveries-engine/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../deliveries-engine/deliveries-engine/myFlywayConfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../deliveries-engine/deliveries-engine/myFlywayConfig.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myFlywayConfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/myFlywayConfig.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +81,9 @@
       <workItem from="1622902504278" duration="457000" />
       <workItem from="1623069420377" duration="850000" />
       <workItem from="1623172360371" duration="35000" />
+      <workItem from="1623767423361" duration="409000" />
+      <workItem from="1623798769868" duration="4000" />
+      <workItem from="1623842295396" duration="765000" />
     </task>
     <servers />
   </component>
