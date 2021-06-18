@@ -16,7 +16,7 @@ def get_workflow_info():
     page_number = data.get("page_number")
 
     response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows/{workflow_name}/runs?page={page_number}").json()
-
+    print(response)
     workflow["runs"] = response["total_count"]
     workflow["data"] = list()
 
