@@ -9,18 +9,25 @@ worksflows = dict()
 def get_workflow_info():
     workflow = dict()
     workflow_info = dict()
+    error_dic = dict()
 
     data = request.get_json()
 
     workflow_name = data.get("workflow")
     page_number = data.get("page_number")
 
-    response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows/{workflow_name}/runs?page={page_number}").json()
-    print(response)
-    workflow["runs"] = response["total_count"]
+    response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows/{workflow_name}/runs?per_page=5&page={page_number}")
+
+    if response.status_code != 200: 
+        print("Error on GitHub's response")
+        return error_dic
+
+    response_json = response.json()
+    
+    workflow["runs"] = response_json["total_count"]
     workflow["data"] = list()
 
-    for run in response["workflow_runs"]:
+    for run in response_json["workflow_runs"]:
         r = dict()
 
         r["id"] = run["id"]
@@ -35,9 +42,15 @@ def get_workflow_info():
 
         run_id = run["id"]
 
-        response2 = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/runs/{run_id}/timing").json()
+        response2 = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/runs/{run_id}/timing")
 
-        r["duration"] = response2["run_duration_ms"]
+        if response2.status_code != 200: 
+            print("Error on GitHub's response")
+            return error_dic
+
+        response_json2 = response2.json()
+
+        r["duration"] = response_json2["run_duration_ms"]
 
         workflow["data"].append(r)
 
