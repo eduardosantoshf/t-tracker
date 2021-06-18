@@ -17,31 +17,31 @@ def get_workflow_info():
 
     response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows/{workflow_name}/runs?page={page_number}").json()
 
-    workflow["runs"] = response["total_count"]
-    workflow["data"] = list()
-
-    for run in response["workflow_runs"]:
-        r = dict()
-
-        r["id"] = run["id"]
-        r["name"] = run["name"]
-        r["event"] = run["event"]
-        r["status"] = run["status"]
-        r["conclusion"] = run["conclusion"]
-        r["pull_requests"] = run["pull_requests"]
-        r["created_at"] = run["created_at"]
-        r["updated_at"] = run["updated_at"]
-        r["head_commit"] = run["head_commit"]
-
-        run_id = run["id"]
-
-        response2 = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/runs/{run_id}/timing").json()
-
-        r["duration"] = response2["run_duration_ms"]
-
-        workflow["data"].append(r)
-
-    worksflows[workflow_name] = workflow
+    #workflow["runs"] = response["total_count"]
+    #workflow["data"] = list()
+#
+    #for run in response["workflow_runs"]:
+    #    r = dict()
+#
+    #    r["id"] = run["id"]
+    #    r["name"] = run["name"]
+    #    r["event"] = run["event"]
+    #    r["status"] = run["status"]
+    #    r["conclusion"] = run["conclusion"]
+    #    r["pull_requests"] = run["pull_requests"]
+    #    r["created_at"] = run["created_at"]
+    #    r["updated_at"] = run["updated_at"]
+    #    r["head_commit"] = run["head_commit"]
+#
+    #    run_id = run["id"]
+#
+    #    response2 = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/runs/{run_id}/timing").json()
+#
+    #    r["duration"] = response2["run_duration_ms"]
+#
+    #    workflow["data"].append(r)
+#
+    #worksflows[workflow_name] = workflow
     
     return worksflows
 
