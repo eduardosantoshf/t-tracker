@@ -3,13 +3,46 @@ from requests import get
 
 app = Flask(__name__)
 
-worksflows = dict()
+workflows_infos = dict()
+error_dic = dict()
 
-@app.route("/workflows", methods=["POST"])
+@app.route("/workflows", methods=["GET"])
+def get_workflows():
+    workflows = dict()
+
+    data = request.get_json()
+
+    page_number = data.get("page_number")
+
+    response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows?page={page_number}")
+
+    if response.status_code != 200:
+        print("Error on GitHub's response")
+        return error_dic
+
+    response_json = response.json()
+
+    workflows["workflows_number"] = response_json["total_count"]
+
+    workflows["workflows"] = list()
+
+    for workflow in response_json["workflows"]:
+        w = dict()
+
+        w["id"] = workflow["id"]
+        w["name"] = workflow["name"]
+        w["state"] = workflow["state"]
+        w["created_at"] = workflow["created_at"]
+        w["updated_at"] = workflow["updated_at"]
+
+        workflows["workflows"].append(w)
+
+    return workflows
+
+@app.route("/workflow-runs", methods=["POST"])
 def get_workflow_info():
     workflow = dict()
     workflow_info = dict()
-    error_dic = dict()
 
     data = request.get_json()
 
@@ -54,9 +87,9 @@ def get_workflow_info():
 
         workflow["data"].append(r)
 
-    worksflows[workflow_name] = workflow
+    workflows_infos[workflow_name] = workflow
     
-    return worksflows
+    return workflows_infos
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
