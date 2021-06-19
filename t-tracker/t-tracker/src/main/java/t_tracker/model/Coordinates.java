@@ -39,7 +39,7 @@ public class Coordinates {
         this.longitude = longitude;
     }
 
-    private Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -67,12 +67,12 @@ public class Coordinates {
             return false;
         }
         Coordinates coordinates = (Coordinates) o;
-        return id == coordinates.id && Objects.equals(latitude, coordinates.latitude) && Objects.equals(longitude, coordinates.longitude) && Objects.equals(lab, coordinates.lab) && Objects.equals(user, coordinates.user) && Objects.equals(pickupOrder, coordinates.pickupOrder) && Objects.equals(deliverOrder, coordinates.deliverOrder);
+        return id == coordinates.id && Objects.equals(latitude, coordinates.latitude) && Objects.equals(longitude, coordinates.longitude);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, latitude, longitude, lab, user, pickupOrder, deliverOrder);
+        return Objects.hash(id, latitude, longitude);
     }
 
     @Override

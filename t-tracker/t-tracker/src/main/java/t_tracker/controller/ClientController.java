@@ -25,12 +25,13 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping(value = "/signup", consumes = "application/json")
-    public ResponseEntity<Client> registerClient(@RequestBody Client client, HttpServletRequest request) throws Exception {
+    public ResponseEntity<Client> registerClient(@RequestBody Client client, HttpServletRequest request)
+            throws Exception {
         Client registeredClient;
 
         try {
             registeredClient = clientService.registerClient(client);
-        
+
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
@@ -47,11 +48,12 @@ public class ClientController {
     }
 
     @GetMapping(value = "/verify", produces = "application/json")
-    public String checkToken(@RequestHeader(name = "Authorization") String token, HttpServletRequest request) throws Exception {
-        try{
+    public String checkToken(@RequestHeader(name = "Authorization") String token, HttpServletRequest request)
+            throws Exception {
+        try {
             JwtTokenService.verifyToken(token);
         } catch (JwtException e) {
-            //e.printStackTrace();
+            // e.printStackTrace();
             throw new Exception("FAILED TO VERIFY TOKEN");
         }
         return "SUCCESS";

@@ -1,6 +1,10 @@
 package t_tracker.model;
 
+import java.util.Objects;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,8 +26,9 @@ public class Stock {
     @JoinColumn(name="order_id")
     private Order order;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="lab_id")
+    @JoinColumn(name="lab_id", referencedColumnName = "id")
     private Lab lab;
 
     public Stock() {}
@@ -59,7 +64,12 @@ public class Stock {
     }
 
     public void removeQuantity(int quantity) {
-        this.quantity -= quantity;
+        int result = this.quantity - quantity;
+        this.quantity = result <= 0 ? 0 : result;
+    }
+
+    public Order getOrder() {
+        return this.order;
     }
 
     public Lab getLab() {
@@ -73,6 +83,31 @@ public class Stock {
     public Double getTotalPrice() {
         return this.getProduct().getPrice() * this.getQuantity();
     }
-    
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Stock)) {
+            return false;
+        }
+        Stock stock = (Stock) o;
+        return Objects.equals(product, stock.product) && quantity == stock.quantity && Objects.equals(lab, stock.lab);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(product, quantity, lab);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", product='" + getProduct() + "'" +
+            ", quantity='" + getQuantity() + "'" +
+            ", order='" + getOrder() + "'" +
+            "}";
+    }
+
 }
