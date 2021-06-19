@@ -101,6 +101,14 @@ public class StoreServiceImp implements StoreService{
         json.put("latitude", latitude);
         json.put("longitude", longitude);
 
+        Optional<Store> opt = storeRepository.findById(storeId);
+
+        Store store = opt.get();
+
+
+        json.put("store_latitude", store.getLatitude());
+        json.put("store_longitude", store.getLongitude());
+
         warningController.send(json.toString());
 
         return responseRider;
