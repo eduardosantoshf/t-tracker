@@ -43,7 +43,7 @@ function signuprider(){
     var rider={"name":riderName, "email":riderEmail, "username":riderUsername, "password":riderPassword, "phoneNumber":riderPhone, "address":riderAddress, "zipCode":riderCEP, "city":riderCity};
     //fetch('http://192.168.160.222:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => (data.id!=null) ? autoLogin(riderUsername, riderPassword) : $("#authmessage").show());
     // 'Access-Control-Allow-Origin':'http://192.168.160.222', , contentType:'application/json'
-    fetch('http://192.168.160.222:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
+    fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
         if(data.status==200)
             try{
                 data.json();
@@ -61,7 +61,7 @@ function loginrider(){
     var riderUsername = $("#riderUsername").val();
     var riderPassword = $("#riderPassword").val();
     
-    fetch('http://192.168.160.222:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
+    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
         if(data.status==200){
             data=data.json();
 
@@ -77,7 +77,7 @@ function loginrider(){
 }
 
 function autoLogin(riderUsername, riderPassword){
-    fetch('http://192.168.160.222:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
+    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
         if(data.status==200){
             data=data.json();
 
@@ -96,7 +96,7 @@ function signupstore(){
     var name = $("#storeNameTxt").val();
     var ownerName = $("#storeOwnerTxt").val();
 
-    fetch('http://192.168.160.222:8080/store', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => {
+    fetch('http://localhost:8080/store', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => {
         if(data.status==200){
             data=data.json();
             
