@@ -24,16 +24,19 @@ def get_workflows():
 
     workflows["workflows_number"] = response_json["total_count"]
 
+    if "workflows" in response_json:
+        workflows_list = response_json["workflows"]
+
     workflows["workflows"] = list()
 
-    for workflow in response_json["workflows"]:
+    for workflow in workflows_list:
         w = dict()
 
-        w["id"] = workflow["id"]
-        w["name"] = workflow["name"]
-        w["state"] = workflow["state"]
-        w["created_at"] = workflow["created_at"]
-        w["updated_at"] = workflow["updated_at"]
+        w["id"] = workflow["id"] if ("id" in workflow) else None
+        w["name"] = workflow["name"] if ("name" in workflow) else None
+        w["state"] = workflow["state"] if ("state" in workflow) else None
+        w["created_at"] = workflow["created_at"] if ("created_at" in workflow) else None
+        w["updated_at"] = workflow["updated_at"] if ("updated_at" in workflow) else None
 
         workflows["workflows"].append(w)
 
@@ -58,20 +61,24 @@ def get_workflow_info():
     response_json = response.json()
     
     workflow["runs"] = response_json["total_count"]
+
+    if "workflow_runs" in response_json:
+        workflow_runs_list = response_json["workflow_runs"]
+
     workflow["data"] = list()
 
     for run in response_json["workflow_runs"]:
         r = dict()
 
-        r["id"] = run["id"]
-        r["name"] = run["name"]
-        r["event"] = run["event"]
-        r["status"] = run["status"]
-        r["conclusion"] = run["conclusion"]
-        r["pull_requests"] = run["pull_requests"]
-        r["created_at"] = run["created_at"]
-        r["updated_at"] = run["updated_at"]
-        r["head_commit"] = run["head_commit"]
+        r["id"] = run["id"] if ("id" in run) else None
+        r["name"] = run["name"] if ("name" in run) else None
+        r["event"] = run["event"] if ("event" in run) else None
+        r["status"] = run["status"] if ("status" in run) else None
+        r["conclusion"] = run["conclusion"] if ("conclusion" in run) else None
+        r["pull_requests"] = run["pull_requests"] if ("pull_requests" in run) else None
+        r["created_at"] = run["created_at"] if ("created_at" in run) else None
+        r["updated_at"] = run["updated_at"] if ("updated_at" in run) else None
+        r["head_commit"] = run["head_commit"] if ("head_commit" in run) else None
 
         run_id = run["id"]
 
