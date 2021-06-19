@@ -94,7 +94,7 @@ function checkToken(name){
 }
 
 function buy(){
-    if(checkToken("sessionKey")){
+    if(checkToken("sessionKey-client")){
         // TODO place an order
     }else{
         $("#modalLogin").css({"display":"block"});
