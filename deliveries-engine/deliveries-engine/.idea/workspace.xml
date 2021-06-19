@@ -79,6 +79,25 @@
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/DeliveryRepositoryTest.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/StoreRepositoryTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/java/t_tracker/security/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/java/t_tracker/security/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/java/t_tracker/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/src/main/java/t_tracker/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/TTrackerApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Lab.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Owner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Product.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/Store.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/VaccineBuy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/classes/t_tracker/model/VaccineCollection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/t-tracker-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/target/t-tracker-1.0-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/web/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/web/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t-tracker/web/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/web/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +139,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../t-tracker" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -279,6 +298,7 @@
       <workItem from="1623058433344" duration="546000" />
       <workItem from="1623172360370" duration="35000" />
       <workItem from="1623965789279" duration="1821000" />
+      <workItem from="1623870114685" duration="21000" />
     </task>
     <servers />
   </component>
@@ -298,6 +318,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="508" y="209" key="FileChooserDialogImpl" timestamp="1623870133728">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="508" y="209" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1623870133728" />
     <state width="1878" height="297" key="GridCell.Tab.0.bottom" timestamp="1623691163190">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
