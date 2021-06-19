@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.model.*;
 import t_tracker.service.OrderService;
@@ -20,14 +21,14 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @PostMapping(value = "/", consumes = "application/json")
-    public ResponseEntity<Order> placeAnOrder(@RequestBody Order order, HttpServletRequest request) throws Exception {
+    @PostMapping(consumes = "application/json")
+    public ResponseEntity<?> placeAnOrder(@RequestBody Order order, HttpServletRequest request) throws Exception {
         Order orderPlaced;
 
         try {
             orderPlaced = orderService.placeAnOrder(order);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatus());
         }
 
         return new ResponseEntity<>(orderPlaced, HttpStatus.OK);

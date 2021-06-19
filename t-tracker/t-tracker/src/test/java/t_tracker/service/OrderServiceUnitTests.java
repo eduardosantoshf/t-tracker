@@ -59,11 +59,11 @@ class OrderServiceUnitTests {
 
         Double orderTotal = orderStock1.getTotalPrice() + orderStock2.getTotalPrice();
         
-        testOrder1 = new Order(orderClient, pickupLocation, deliverLocation, orderTotal, pickupLab, listOfOrderProducts1);
-        testOrder2 = new Order(orderClient, pickupLocation, deliverLocation, orderTotal, pickupLab, listOfOrderProducts2);
+        testOrder1 = new Order(orderClient.getUsername(), pickupLocation, deliverLocation, orderTotal, pickupLab.getId(), listOfOrderProducts1);
+        testOrder2 = new Order(orderClient.getUsername(), pickupLocation, deliverLocation, orderTotal, pickupLab.getId(), listOfOrderProducts2);
 
         System.out.println(orderStock1.getLab());
-        Mockito.when(labRepository.findById(testOrder1.getLab().getId())).thenReturn(Optional.of(pickupLab));
+        Mockito.when(labRepository.findById(testOrder1.getLabId())).thenReturn(Optional.of(pickupLab));
 
     }
 
@@ -93,7 +93,7 @@ class OrderServiceUnitTests {
     void whenPlacingValidOrder_thenReturnValidOrder() {
         Order placedOrder = orderService.placeAnOrder( testOrder1 );
 
-        assertThat( placedOrder.getClient(), is(testOrder1.getClient()) );
+        assertThat( placedOrder.getClientUsername(), is(testOrder1.getClientUsername()) );
         assertThat( placedOrder.getDeliverLocation(), is(testOrder1.getDeliverLocation()) );
         assertThat( placedOrder.getPickupLocation(), is(testOrder1.getPickupLocation()) );
         assertThat( placedOrder.getIsDelivered(), is(false) );
@@ -105,7 +105,7 @@ class OrderServiceUnitTests {
     void whenPlacingInvalidOrder_thenReturnNull() {
         Order placedOrder = orderService.placeAnOrder( testOrder2 );
 
-        assertThat( placedOrder.getClient(), is(nullValue()) );
+        assertThat( placedOrder.getClientUsername(), is(nullValue()) );
     }
 
 

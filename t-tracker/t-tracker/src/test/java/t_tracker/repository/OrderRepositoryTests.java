@@ -46,8 +46,8 @@ class OrderRepositoryTests {
 
         Double orderTotal = orderStock1.getTotalPrice() + orderStock2.getTotalPrice();
         
-        testOrder1 = new Order(orderClient, pickupLocation, deliverLocation, orderTotal, orderLab, listOfProducts);
-        testOrder2 = new Order(orderClient, pickupLocation, deliverLocation, orderTotal, orderLab, listOfProducts);
+        testOrder1 = new Order(orderClient.getUsername(), pickupLocation, deliverLocation, orderTotal, orderLab.getId(), listOfProducts);
+        testOrder2 = new Order(orderClient.getUsername(), pickupLocation, deliverLocation, orderTotal, orderLab.getId(), listOfProducts);
 
         testOrder2.setIsDelivered(true);
 
@@ -83,7 +83,7 @@ class OrderRepositoryTests {
 
     @Test
     void whenFindOrderByClientId_thenReturnOrder() {
-        List<Order> orderFound = orderRepository.findByClientId(orderClient.getId());
+        List<Order> orderFound = orderRepository.findByClientUsername(orderClient.getUsername());
 
         assertThat( orderFound.size(), is(2) );
         assertThat( orderFound.contains(testOrder1), is(true) );
@@ -92,8 +92,8 @@ class OrderRepositoryTests {
 
     @Test
     void whenFindByInvalidClientId_thenReturnNullOrder() {
-        Integer invalidId = 9999;
-        List<Order> orderFound = orderRepository.findByClientId(invalidId);
+        String invalidUsername = "ThisUsernameIsDefinitelyInvalid";
+        List<Order> orderFound = orderRepository.findByClientUsername(invalidUsername);
 
         assertThat( orderFound.size(), is(0) );
     }

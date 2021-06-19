@@ -41,11 +41,11 @@ public class OrderControllerTest {
     @BeforeEach
     void setUp() {
         testOrder = new Order(
-            new Client("Test Client", "TestClientUsername", "test@org.com", "password1234"),
+            "TestClientUsername",
             new Coordinates(1.23456, 2.34567),
             new Coordinates(1.23457, 2.34566),
             49.99,
-            new Lab("Test Lab", new Coordinates(1.23456, 2.34567)),
+            1,
             new ArrayList<>(Arrays.asList(new Stock(new Product("Covid Test 1", 49.99, "Infrared Test"), 1)))
         );
     }
@@ -56,7 +56,7 @@ public class OrderControllerTest {
 
         mvc.perform( post("/order").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
             .andExpect( status().isOk() )
-            .andExpect( jsonPath("$.client.username", is(testOrder.getClient().getUsername())) )
+            .andExpect( jsonPath("$.clientUsername", is(testOrder.getClientUsername())) )
             .andExpect( jsonPath("$.pickupLocation", is(testOrder.getPickupLocation())) )
             .andExpect( jsonPath("$.deliverLocation", is(testOrder.getDeliverLocation())) )
             .andExpect( jsonPath("$.orderTotal", is(testOrder.getOrderTotal())) );

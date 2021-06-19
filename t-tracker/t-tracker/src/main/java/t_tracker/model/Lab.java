@@ -23,7 +23,7 @@ public class Lab {
     @OneToMany(mappedBy = "lab")
     private List<Stock> stocks;
 
-    @OneToMany(mappedBy = "lab")
+    @OneToMany(mappedBy = "labId")
     private List<Order> orders;
 
     public Lab() {}

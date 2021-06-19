@@ -14,17 +14,17 @@ public class StoreDetails {
     @Id
     private int id;
 
-    @Column(name = "auth_token")
-    private String authToken;
+    @Column(name = "token")
+    private String token;
 
 
     public StoreDetails() {
     }
 
     @Autowired
-    public StoreDetails(int id, String authToken) {
+    public StoreDetails(int id, String token) {
         this.id = id;
-        this.authToken = authToken;
+        this.token = token;
     }
 
     public int getId() {
@@ -35,12 +35,12 @@ public class StoreDetails {
         this.id = id;
     }
 
-    public String getAuthToken() {
-        return this.authToken;
+    public String getToken() {
+        return this.token;
     }
 
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override
@@ -51,12 +51,22 @@ public class StoreDetails {
             return false;
         }
         StoreDetails storeDetails = (StoreDetails) o;
-        return id == storeDetails.id && Objects.equals(authToken, storeDetails.authToken);
+        return id == storeDetails.id && Objects.equals(token, storeDetails.token);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, authToken);
+        return Objects.hash(id, token);
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", token='" + getToken() + "'" +
+            "}";
+    }
+
 
 }
