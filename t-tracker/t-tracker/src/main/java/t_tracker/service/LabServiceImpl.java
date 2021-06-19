@@ -117,33 +117,12 @@ public class LabServiceImpl implements LabService {
 
         List<Stock> allStocks = actualLab.getStocks();
 
-        Boolean labHasStock = false;
-
         for (Stock stock : allStocks)
             if (stockToRemove.getProduct().equals(stock.getProduct())) {
                 stock.removeQuantity(stockToRemove.getQuantity());
                 stockRepository.save(stock);
-                labHasStock = true;
                 break;
             }
-
-        if (!labHasStock) {
-            Product actualProduct;
-            Optional<Product> productFound = productRepository.findByNameAndPriceAndType(
-                stockToRemove.getProduct().getName(), stockToRemove.getProduct().getPrice(),
-                stockToRemove.getProduct().getType());
-
-            if (productFound.isPresent())
-                actualProduct = productFound.get();
-            else
-                actualProduct = productRepository.save(stockToRemove.getProduct());
-            
-                stockToRemove.setProduct(actualProduct);
-
-                stockToRemove.setLab(actualLab);
-
-            actualLab.removeStock(stockRepository.save(stockToRemove));
-        }
 
         labRepository.save(actualLab);
 
