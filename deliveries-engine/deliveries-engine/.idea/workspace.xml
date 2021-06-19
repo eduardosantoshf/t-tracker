@@ -47,8 +47,47 @@
   <component name="ChangeListManager">
     <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/model/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/model/Store.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/controller/RiderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/controller/RiderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/controller/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/controller/StoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/model/Rider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/model/Rider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/RiderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/RiderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/RiderServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/RiderServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/StoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/StoreService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/StoreServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/StoreServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/controller/StoreControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/controller/StoreControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/CorsConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/CorsConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/DeliveriesEngineApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/DeliveriesEngineApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/PasswordEncoderConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/PasswordEncoderConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/RiderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/RiderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/StoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/StoreController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/exception/ErrorWarning.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/exception/ErrorWarning.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Delivery.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Delivery.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Rider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Rider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Store.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/AdminRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/AdminRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/DeliveryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/DeliveryRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/RiderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/RiderRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/StoreRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/StoreRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JWTAuthorizationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JWTAuthorizationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/security/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/JwtTokenService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/JwtTokenService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderServiceImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/Service.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/ServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/ServiceImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreServiceImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/UserDetailsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/UserDetailsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/swagger2/Swagger2Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/swagger2/Swagger2Config.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +135,17 @@
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager" selected="JUnit.RiderServiceTest">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RiderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="deliveries-engine" />
       <extension name="coverage">
@@ -265,10 +315,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser" timestamp="1624139565451">
+    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser" timestamp="1624140783292">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1123@0.23.1920.1123" timestamp="1624139565451" />
+    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1123@0.23.1920.1123" timestamp="1624140783292" />
     <state x="508" y="209" key="FileChooserDialogImpl" timestamp="1623870133728">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

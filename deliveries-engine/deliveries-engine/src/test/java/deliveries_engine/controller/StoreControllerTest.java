@@ -94,7 +94,7 @@ class StoreControllerTest {
 
     @Test
     void whenOrder_getClosestRider() throws Exception {
-        given(storeService.getClosestRider(delivery.getDeliveryLatitude(), delivery.getDeliveryLongitude(), token, storeId)).willReturn(newRider);
+        given(storeService.getClosestRider(delivery, delivery.getDeliveryLatitude(), delivery.getDeliveryLongitude(), token, storeId)).willReturn(newRider);
 
         JSONObject json = new JSONObject();
         json.put("name", delivery.getName());

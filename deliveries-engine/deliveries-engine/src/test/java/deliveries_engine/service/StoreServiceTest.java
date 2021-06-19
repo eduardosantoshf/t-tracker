@@ -1,6 +1,7 @@
 package deliveries_engine.service;
 
 import deliveries_engine.DeliveriesEngineApplication;
+import deliveries_engine.model.Delivery;
 import deliveries_engine.model.Rider;
 import deliveries_engine.model.Store;
 import deliveries_engine.repository.RiderRepository;
@@ -84,7 +85,9 @@ public class StoreServiceTest {
         given(riderRepository.findAll()).willReturn(riders);
         given(storeRepository.findById(store.getId())).willReturn(Optional.of(store));
 
-        Rider response_rider = storeService.getClosestRider(40.741858, -8.470833, token, store.getId());
+        Delivery delivery = new Delivery("name", 3.4, 40.741858, -8.470833);
+
+        Rider response_rider = storeService.getClosestRider(delivery,40.741858, -8.470833, token, store.getId());
 
         assertEquals(rider1, response_rider);
 
