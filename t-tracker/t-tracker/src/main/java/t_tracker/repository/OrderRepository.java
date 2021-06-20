@@ -13,7 +13,7 @@ import t_tracker.model.Order;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     
     public Optional<Order> findById(UUID id);
-    public List<Order> findByClientUsername(String username);
+    public List<Order> findByClientId(int id);
     public List<Order> findByIsDelivered(boolean isDelivered);
     public List<Order> findAll();
 

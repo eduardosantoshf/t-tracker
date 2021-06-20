@@ -29,7 +29,7 @@ class LabRepositoryTests {
     void setUp() {
         Coordinates labCoord = new Coordinates(99.9999, 99.9999);
         entityManager.persistAndFlush(labCoord);
-        laboratory = new Lab("Very Good Lab", labCoord);
+        laboratory = new Lab(1, "labtoken", "Very Good Lab", labCoord);
         entityManager.persistAndFlush(laboratory);
     }
 

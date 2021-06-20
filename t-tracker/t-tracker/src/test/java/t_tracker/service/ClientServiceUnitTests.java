@@ -21,12 +21,16 @@ import org.springframework.web.server.ResponseStatusException;
 import t_tracker.model.Client;
 import t_tracker.model.Coordinates;
 import t_tracker.repository.ClientRepository;
+import t_tracker.repository.CoordinatesRepository;
 
 @ExtendWith(MockitoExtension.class)
 class ClientServiceUnitTests {
 
     @Mock( lenient = true)
     private ClientRepository clientRepository;
+
+    @Mock( lenient = true)
+    private CoordinatesRepository coordRepository;
 
     @Mock( lenient = true)
     private PasswordEncoder passwordEncoder;
@@ -43,8 +47,8 @@ class ClientServiceUnitTests {
         neo = new Client("Thomas Anderson", "Neo", "thisisasimulation@sim.com", "keanuisbreathtaking");
         neo.setPhoneNumber(911222333);
         neo.setHomeLocation(new Coordinates(25.00198217925069, -70.99974266535844));
-        emailUsedUser = new Client("Common Name", "NotSoCommonUsername", usedEmail, "CommonPassword1234");
-        usernameUsedUser = new Client("Common Name", usedUsername, "notsocommonemail@org.com", "CommonPassword1234");
+        emailUsedUser = new Client("Common Name", "NotSoCommonUsername", usedEmail, "CommonPassword1234", 123123123, new Coordinates(12.0, 13.0));
+        usernameUsedUser = new Client("Common Name", usedUsername, "notsocommonemail@org.com", "CommonPassword1234", 123124123, new Coordinates(14.0, 13.0));
         
         Mockito.when(clientRepository.findByEmail(neo.getEmail())).thenReturn(Optional.ofNullable(null));
         Mockito.when(clientRepository.findByUsername(neo.getUsername())).thenReturn(Optional.ofNullable(null));

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import t_tracker.service.JwtTokenService;
-import t_tracker.model.User;
 import t_tracker.repository.ClientRepository;
 import t_tracker.repository.UserRepository;
 import org.springframework.http.MediaType;
@@ -41,7 +40,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager,ClientRepository userRepository) {
         this.authenticationManager = authenticationManager;
         //this.setAuthenticationManager(authenticationManager);
-        this.ClientRepository = ClientRepository;
+        this.userRepository = userRepository;
         setFilterProcessesUrl("/client/login");
     }
 

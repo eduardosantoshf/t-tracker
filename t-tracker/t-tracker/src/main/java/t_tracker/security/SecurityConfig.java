@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import t_tracker.model.User;
 import t_tracker.repository.ClientRepository;
 import t_tracker.repository.UserRepository;
 
@@ -29,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, ClientRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
-        this.ClientRepository = ClientRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -46,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers(HttpMethod.GET, "/client/verify").permitAll()
 			.anyRequest().authenticated()
 			.and()
-			.addFilter(new JwtAuthenticationFilter(authenticationManager(),ClientRepository))
+			.addFilter(new JwtAuthenticationFilter(authenticationManager(),userRepository))
             .addFilter(new JWTAuthorizationFilter(authenticationManager()));
 	}
 }

@@ -1,5 +1,9 @@
 package t_tracker.controller;
 
+import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.model.*;
+import t_tracker.repository.ClientRepository;
+import t_tracker.service.ClientService;
 import t_tracker.service.OrderService;
+import t_tracker.service.ProductService;
 
 @RestController
 @RequestMapping("/order")
@@ -21,12 +28,40 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    ProductService productService;
+
+    @Autowired
+    ClientService clientService;
+
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<?> placeAnOrder(@RequestBody Order order, HttpServletRequest request) throws Exception {
-        Order orderPlaced;
+    public ResponseEntity<?> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request) throws Exception {
+        Principal principal = request.getUserPrincipal();
+        Client client;
 
         try {
-            orderPlaced = orderService.placeAnOrder(order);
+            System.out.println(principal.getName());
+            client = clientService.getClientByUsername(principal.getName());
+            System.out.println(client);
+        } catch(ResponseStatusException e) {
+            return new ResponseEntity<String>("Unauthorized client.", HttpStatus.FORBIDDEN);
+        }
+
+        Product orderProduct;
+        Order orderPlaced = new Order(client);
+
+        try {
+            for (OrderDTO order : productList) {
+                System.out.println(order);
+                orderProduct = productService.getProduct(order.getProductId());
+                orderPlaced.addProduct(new Stock(orderProduct, order.getQuantity()));
+            }
+        } catch( ResponseStatusException e ) {
+            return new ResponseEntity<>(e.getReason(), e.getStatus());
+        }
+
+        try {
+            orderPlaced = orderService.placeAnOrder(orderPlaced);
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(e.getReason(), e.getStatus());
         }
