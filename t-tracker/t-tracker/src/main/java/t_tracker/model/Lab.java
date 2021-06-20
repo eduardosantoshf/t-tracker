@@ -13,8 +13,10 @@ import java.util.Objects;
 public class Lab {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "token")
+    private String token;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -33,18 +35,14 @@ public class Lab {
     public Lab() {}
 
     @Autowired
-    public Lab(String name, Coordinates location) {
+    public Lab(int id, String token, String name, Coordinates location) {
+        this.id = id;
+        this.token = token;
         this.name = name;
         this.location = location;
     }
 
     public void addStock(Stock stockToAdd) {
-        // for (Stock stock : stocks)
-        //     if ( stockToAdd.getProduct().equals(stock.getProduct()) ) {
-        //         stock.addQuantity( stockToAdd.getQuantity() );
-        //         return;
-        //     }
-
         stocks.add(stockToAdd);
     }
 
@@ -62,6 +60,18 @@ public class Lab {
 
     public int getId() {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getToken() {
+        return this.token;
+    }
+
+    public void setId(String token) {
+        this.token = token;
     }
 
     public String getName() {
@@ -96,23 +106,25 @@ public class Lab {
             return false;
         }
         Lab lab = (Lab) o;
-        return Objects.equals(name, lab.name) && Objects.equals(location, lab.location);
+        return Objects.equals(token, lab.token) && Objects.equals(name, lab.name) && Objects.equals(location, lab.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, location);
+        return Objects.hash(token, name, location);
     }
     
+
 
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
+            ", token='" + getToken() + "'" +
             ", name='" + getName() + "'" +
             ", location='" + getLocation() + "'" +
-            ", stocks='" + getStocks() + "'" +
             "}";
     }
+    
 
 }

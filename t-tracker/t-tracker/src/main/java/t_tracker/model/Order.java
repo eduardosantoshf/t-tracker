@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -62,6 +63,12 @@ public class Order {
         this.isDelivered = false;
     }
 
+    public Order(Client client) {
+        this.clientId = client.getId();
+        listOfProducts = new ArrayList<>();
+        this.isDelivered = false;
+    }
+
     public UUID getId() {
         return this.id;
     }
@@ -70,7 +77,11 @@ public class Order {
         return this.clientId;
     }
 
-    public void setClientUsername(int clientId) {
+    public Client getClient() {
+        return this.client;
+    }
+
+    public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
@@ -122,6 +133,10 @@ public class Order {
         this.listOfProducts = listOfProducts;
     }
 
+    public void addProduct(Stock stock) {
+        this.listOfProducts.add(stock);
+    }
+
     public boolean isIsDelivered() {
         return this.isDelivered;
     }
@@ -132,6 +147,16 @@ public class Order {
 
     public void setIsDelivered(boolean isDelivered) {
         this.isDelivered = isDelivered;
+    }
+
+    public Double getTotalPrice() {
+        Double totalPrice = 0.0;
+        
+        for (Stock s : listOfProducts) {
+            totalPrice += s.getTotalPrice();
+        }
+        
+        return totalPrice;
     }
 
     @Override

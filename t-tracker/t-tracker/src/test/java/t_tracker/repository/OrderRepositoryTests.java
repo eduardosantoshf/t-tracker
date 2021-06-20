@@ -31,10 +31,13 @@ class OrderRepositoryTests {
 
     @BeforeEach
     void setUp() {
-        orderClient = new Client("Client Name", "ClientUsername", "email@org.com", "password1234");
+        Coordinates deliverLocation = new Coordinates(1.1112, 1.1112);
+        entityManager.persistAndFlush(deliverLocation);
+
+        orderClient = new Client("Client Name", "ClientUsername", "email@org.com", "password1234", 123123123, deliverLocation);
 
         Coordinates pickupLocation = new Coordinates(1.1111, 1.1111);
-        Coordinates deliverLocation = new Coordinates(1.1112, 1.1112);
+        entityManager.persistAndFlush(pickupLocation);
 
         Product product1 = new Product("Covid Test 1", 49.99, "Infrared Test", "Very nice test 1.");
         Product product2 = new Product("Covid Test 2", 99.99, "Molecular Test", "Very nice test 1.");
@@ -42,9 +45,11 @@ class OrderRepositoryTests {
         Stock orderStock2 = new Stock(product2, 1);
         List<Stock> listOfProducts = new ArrayList<>(Arrays.asList(orderStock1, orderStock2));
 
-        Lab orderLab = new Lab("Chemical Lab lda", pickupLocation);
+        Lab orderLab = new Lab(1, "labtoken", "Chemical Lab lda", pickupLocation);
 
         Double orderTotal = orderStock1.getTotalPrice() + orderStock2.getTotalPrice();
+
+        entityManager.persistAndFlush(orderClient);
 
         testOrder1 = new Order(orderClient.getId(), pickupLocation, deliverLocation, orderTotal, orderLab.getId(),
                 listOfProducts);
@@ -53,8 +58,7 @@ class OrderRepositoryTests {
 
         testOrder2.setIsDelivered(true);
 
-        entityManager.persist(orderClient);
-        entityManager.persist(pickupLocation);
+        
         entityManager.persist(deliverLocation);
         entityManager.persist(product1);
         entityManager.persist(product2);
@@ -94,7 +98,7 @@ class OrderRepositoryTests {
 
     @Test
     void whenFindByInvalidClientId_thenReturnNullOrder() {
-        id invalidId = 9999999;
+        int invalidId = 9999999;
         List<Order> orderFound = orderRepository.findByClientId(invalidId);
 
         assertThat(orderFound.size(), is(0));

@@ -20,14 +20,12 @@ import t_tracker.model.Lab;
 import t_tracker.model.Order;
 import t_tracker.model.Product;
 import t_tracker.model.Stock;
-import t_tracker.model.StoreDetails;
 import t_tracker.repository.ClientRepository;
 import t_tracker.repository.CoordinatesRepository;
 import t_tracker.repository.LabRepository;
 import t_tracker.repository.OrderRepository;
 import t_tracker.repository.ProductRepository;
 import t_tracker.repository.StockRepository;
-import t_tracker.repository.StoreDetailsRepository;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -51,47 +49,51 @@ public class OrderServiceImpl implements OrderService {
     private StockRepository stockRepository;
 
     @Autowired
-    private StoreDetailsRepository storeDetailsRepository;
-
-    @Autowired
     private RestTemplate restTemplate;
 
     private HttpHeaders httpHeaders;
     private String storeSignupUrl = "http://localhost:8080/store";
     private String orderPlacementUrl = "http://localhost:8080/store/order/";
+    private String labInfo = "{\"name\":\"CovidTestsDeliveries\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
 
     @Override
     public Order placeAnOrder(Order order) {
 
-        Optional<Client> clientFound = clientRepository.findById(order.getClientId());
-        Optional<Lab> labFound = labRepository.findById(order.getLabId());
+        List<Lab> labFound = labRepository.findAll();
 
-        if (!clientFound.isPresent())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found.");
-        if (!labFound.isPresent())
+        if (labFound.size() == 0)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Laboratory not found.");
 
         for (Stock stockOrder : order.getListOfProducts())
-            if (!isInStock(labFound.get(), stockOrder))
+            if (!isInStock(labFound.get(0), stockOrder))
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Product out of stock.");
 
-        Client client = clientFound.get();
-        StoreDetails authDetails = getStoreDetails();
+        Client client = clientRepository.findById(order.getClientId()).get();
+
+        order.setPickupLocation(labFound.get(0).getLocation());
+        order.setLabId(labFound.get(0).getId());
+        order.setOrderTotal(order.getTotalPrice());
+        order.setDeliverLocation(client.getHomeLocation());
+        order.setPickupLocation(labFound.get(0).getLocation());
+
+        Lab authDetails = getLabDetails();
 
         httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.add("Authorization", authDetails.getToken());
 
-        JSONObject orderRequest = buildOrderRequest("" + order.getLabId() + order.getId(),
+        JSONObject orderRequest = buildOrderRequest("" + order.getLabId() + java.time.LocalDate.now(),
                 "" + order.getOrderTotal() * 0.1, order.getDeliverLocation().getLatitude().toString(),
                 order.getDeliverLocation().getLongitude().toString());
 
         HttpEntity<String> requestContent = new HttpEntity<String>(orderRequest.toString(), httpHeaders);
 
         try {
+
             ResponseEntity<JSONObject> response = restTemplate.postForEntity(orderPlacementUrl + authDetails.getId(),
                     requestContent, JSONObject.class);
-            // Order orderToStore = order;
+
+                    // Order orderToStore = order;
             order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
             coordRepository.save(order.getPickupLocation());
             coordRepository.save(order.getDeliverLocation());
@@ -99,6 +101,7 @@ public class OrderServiceImpl implements OrderService {
             // Store order products and quantities
             List<Stock> orderStock = order.getListOfProducts();
             Product actualProduct;
+
             for (Stock s : orderStock) {
                 Optional<Product> productFound = productRepository.findByNameAndPriceAndType(
                         s.getProduct().getName(), s.getProduct().getPrice(),
@@ -114,13 +117,13 @@ public class OrderServiceImpl implements OrderService {
 
             Order orderStored = orderRepository.save(order);
 
-            // Update lab stock
             for (Stock s : orderStock) {
-                labFound.get().removeStock(s);
+                labFound.get(0).removeStock(s);
                 s.setOrder(order);
                 stockRepository.save(s);
             }
-            labRepository.save(labFound.get());
+
+            labRepository.save(labFound.get(0));
 
             client.addOrder(orderStored);
             clientRepository.save(client);
@@ -131,26 +134,20 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    public StoreDetails getStoreDetails() {
+    public Lab getLabDetails() {
+        List<Lab> allDetails = labRepository.findAll();
 
-        List<StoreDetails> allDetails = storeDetailsRepository.findAll();
-
-        StoreDetails authDetails = new StoreDetails();
+        Lab authDetails = new Lab();
         if (allDetails.size() == 0) {
             httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-            HashMap<String, String> storeDetails = new HashMap<>();
-            storeDetails.put("name", "CovidTestsDeliveries2");
-            storeDetails.put("ownerName", "TqsG101");
-            JSONObject storeRequest = new JSONObject(storeDetails);
+            HttpEntity<String> labDetailsRequest = new HttpEntity<String>(labInfo, httpHeaders);
 
-            HttpEntity<String> requestContent = new HttpEntity<String>(storeRequest.toString(), httpHeaders);
+            ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest,
+                    Lab.class);
 
-            ResponseEntity<StoreDetails> response = restTemplate.postForEntity(storeSignupUrl, requestContent,
-                    StoreDetails.class);
-
-            authDetails = storeDetailsRepository.save(response.getBody());
+            authDetails = labRepository.save(response.getBody());
 
         } else {
             authDetails = allDetails.get(0);

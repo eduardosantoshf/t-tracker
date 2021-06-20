@@ -46,7 +46,10 @@ class OrderServiceUnitTests {
     private CoordinatesRepository coordRepository;
 
     @Mock(lenient = true)
-    private StoreDetailsRepository storeDetailsRepository;
+    private StockRepository stockRepository;
+
+    @Mock(lenient = true)
+    private ProductRepository productRepository;
 
     @Mock(lenient = true)
     private RestTemplate restTemplate;
@@ -59,19 +62,19 @@ class OrderServiceUnitTests {
 
     @BeforeEach
     void setUp() {
+        Coordinates deliverLocation = new Coordinates(1.1112, 1.1112);
         // Start of order building section //
-        Client orderClient = new Client("Client Name", "ClientUsername", "email@org.com", "password1234");
+        Client orderClient = new Client("Client Name", "ClientUsername", "email@org.com", "password1234", 123321231, deliverLocation);
 
         Coordinates pickupLocation = new Coordinates(1.1111, 1.1111);
-        Coordinates deliverLocation = new Coordinates(1.1112, 1.1112);
-
+        
         Product product1 = new Product("Covid Test 1", 49.99, "Infrared Test", "Infrared test description.");
         Product product2 = new Product("Covid Test 2", 99.99, "Molecular Test", "Molecular test description.");
 
         Stock labStock1 = new Stock(product1, 3);
         Stock labStock2 = new Stock(product2, 4);
         List<Stock> pickupLabFullStock = new ArrayList<>(Arrays.asList(labStock1, labStock2));
-        pickupLab = new Lab("Test Deliveries Lab. lda", pickupLocation);
+        pickupLab = new Lab(1, "labtoken", "CovidTestsDeliveries", new Coordinates(1.0, 2.0));
         pickupLab.setStocks(pickupLabFullStock);
 
         Stock orderStock1 = new Stock(product1, 2);
@@ -85,38 +88,39 @@ class OrderServiceUnitTests {
 
         Double orderTotal = orderStock1.getTotalPrice() + orderStock2.getTotalPrice();
 
-        testOrder1 = new Order(orderClient.getId(), pickupLocation, deliverLocation, orderTotal,
+        testOrder1 = new Order(1, pickupLocation, deliverLocation, orderTotal,
                 pickupLab.getId(), listOfOrderProducts1);
-        testOrder2 = new Order(orderClient.getId(), pickupLocation, deliverLocation, orderTotal,
+        testOrder2 = new Order(1, pickupLocation, deliverLocation, orderTotal,
                 pickupLab.getId(), listOfOrderProducts2);
         
         // Start of repository mocks //
-
-        Mockito.when(labRepository.findById(testOrder1.getLabId())).thenReturn(Optional.of(pickupLab));
+        Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<>(Arrays.asList(pickupLab)));
+        
         Mockito.when(clientRepository.findById(testOrder1.getClientId()))
                 .thenReturn(Optional.of(orderClient));
-        Mockito.when(labRepository.findById(testOrder1.getLabId())).thenReturn(Optional.of(pickupLab));
-        Mockito.when(storeDetailsRepository.findAll()).thenReturn(new ArrayList<>());
+        
         Mockito.when(orderRepository.save(testOrder1)).thenReturn(testOrder1);
+
+        Mockito.when(productRepository.findByNameAndPriceAndType(
+            orderStock1.getProduct().getName(), orderStock1.getProduct().getPrice(),
+            orderStock1.getProduct().getType())).thenReturn(Optional.of(orderStock1.getProduct()));
+        Mockito.when(productRepository.findByNameAndPriceAndType(
+            orderStock2.getProduct().getName(), orderStock2.getProduct().getPrice(),
+            orderStock2.getProduct().getType())).thenReturn(Optional.of(orderStock2.getProduct()));
         
         // Start of store signup mocks, by mocking rest template //
-
-        StoreDetails storeAuthenticationDetails = new StoreDetails(1, "testtoken");
-
-        HashMap<String, String> storeDetailsMap = new HashMap<>();
-        storeDetailsMap.put("name", "CovidTestsDeliveries");
-        storeDetailsMap.put("ownerName", "TqsG101");
-        JSONObject storeDetailsRequest = new JSONObject(storeDetailsMap);
+        
+        String labInfo = "{\"name\":\"CovidTestsDeliveries\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
         
         HttpHeaders storeDetailsRequestHeaders = new HttpHeaders();
         storeDetailsRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
         
-        HttpEntity<String> storeDetailsResponse = new HttpEntity<String>(storeDetailsRequest.toString(), storeDetailsRequestHeaders);
+        HttpEntity<String> storeDetailsRequest = new HttpEntity<String>(labInfo, storeDetailsRequestHeaders);
 
-        Mockito.when(restTemplate.postForEntity("http://localhost:8080/store", storeDetailsResponse, StoreDetails.class))
-                .thenReturn(new ResponseEntity<StoreDetails>(storeAuthenticationDetails, HttpStatus.OK));
+        Mockito.when(restTemplate.postForEntity("http://localhost:8080/store", storeDetailsRequest, Lab.class))
+                .thenReturn(new ResponseEntity<Lab>(pickupLab, HttpStatus.OK));
 
-        Mockito.when(storeDetailsRepository.save( any(StoreDetails.class) )).thenReturn(storeAuthenticationDetails);
+        Mockito.when(labRepository.save( any(Lab.class) )).thenReturn(pickupLab);
 
         // Start of driver request mocks, by mocking rest template //
 
@@ -125,7 +129,7 @@ class OrderServiceUnitTests {
         JSONObject driverDetailsResponse = new JSONObject(driverDetailsMap);
 
         HashMap<String, String> deliveryDetailsMap = new HashMap<>();
-        deliveryDetailsMap.put("name", "" + testOrder1.getLabId() + testOrder1.getId());
+        deliveryDetailsMap.put("name", "" + testOrder1.getLabId() + java.time.LocalDate.now());
         deliveryDetailsMap.put("comission", "" + testOrder1.getOrderTotal() * 0.1);
         deliveryDetailsMap.put("deliveryLatitude", testOrder1.getDeliverLocation().getLatitude().toString());
         deliveryDetailsMap.put("deliveryLongitude", testOrder1.getDeliverLocation().getLongitude().toString());
@@ -133,11 +137,11 @@ class OrderServiceUnitTests {
 
         HttpHeaders deliveryDetailsRequestHeaders = new HttpHeaders();
         deliveryDetailsRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
-        deliveryDetailsRequestHeaders.add("Authorization", storeAuthenticationDetails.getToken());
+        deliveryDetailsRequestHeaders.add("Authorization", pickupLab.getToken());
 
         HttpEntity<String> deliveryDetailsRequest = new HttpEntity<String>(orderDetailsRequest.toString(), deliveryDetailsRequestHeaders);
 
-        Mockito.when(restTemplate.postForEntity("http://localhost:8080/store/order/" + storeAuthenticationDetails.getId(), deliveryDetailsRequest, JSONObject.class))
+        Mockito.when(restTemplate.postForEntity("http://localhost:8080/store/order/" + pickupLab.getId(), deliveryDetailsRequest, JSONObject.class))
                 .thenReturn(new ResponseEntity<JSONObject>(driverDetailsResponse, HttpStatus.OK));
 
     }

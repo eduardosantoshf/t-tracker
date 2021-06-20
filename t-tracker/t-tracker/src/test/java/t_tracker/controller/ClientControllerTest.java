@@ -38,7 +38,7 @@ class ClientControllerTest {
 
     @BeforeEach
     void setUp() {
-        willy = new Client("Willy Wonka", "ChocolateMan", "chocofactory@org.com", "iS2oompaloompas");
+        willy = new Client("Willy Wonka", "ChocolateMan", "chocofactory@org.com", "iS2oompaloompas", 123123123, new Coordinates(12.1, 12.2));
         willy.setPhoneNumber(931313444);
         willy.setHomeLocation(new Coordinates(46.991750174814946, 15.907980069174572));
     }

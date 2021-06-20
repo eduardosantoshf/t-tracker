@@ -31,45 +31,47 @@ public class LabServiceImpl implements LabService {
     @Autowired
     ProductRepository productRepository;
 
-    @Override
-    public Lab registerLab(Lab lab) {
-        coordRepository.save(lab.getLocation());
-        return labRepository.save(lab);
-    }
+    // @Override
+    // public Lab registerLab(Lab lab) {
+    //     coordRepository.save(lab.getLocation());
+    //     return labRepository.save(lab);
+    // }
+
+    // @Override
+    // public Lab getLabById(int id) {
+    //     Optional<Lab> labFound = labRepository.findById(id);
+
+    //     if (labFound.isPresent())
+    //         return labFound.get();
+
+    //     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
+    // }
+
+    // @Override
+    // public List<Lab> getAllLabs() {
+    //     return labRepository.findAll();
+    // }
 
     @Override
-    public Lab getLabById(int id) {
-        Optional<Lab> labFound = labRepository.findById(id);
+    public List<Stock> getLabStock() {
+        List<Lab> labFound = labRepository.findAll();
 
-        if (labFound.isPresent())
-            return labFound.get();
+        System.out.println(labFound);
 
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
-    }
-
-    @Override
-    public List<Lab> getAllLabs() {
-        return labRepository.findAll();
-    }
-
-    @Override
-    public List<Stock> getLabStock(int id) {
-        Optional<Lab> labFound = labRepository.findById(id);
-
-        if (!labFound.isPresent())
+        if (labFound.size() == 0)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
 
-        return labFound.get().getStocks();
+        return labFound.get(0).getStocks();
     }
 
     @Override
-    public List<Stock> addStockToLab(int labId, Stock stockToAdd) {
-        Optional<Lab> labFound = labRepository.findById(labId);
+    public List<Stock> addStockToLab(Stock stockToAdd) {
+        List<Lab> labFound = labRepository.findAll();
 
-        if (!labFound.isPresent())
+        if (labFound.size() == 0)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
 
-        Lab actualLab = labFound.get();
+        Lab actualLab = labFound.get(0);
 
         List<Stock> allStocks = actualLab.getStocks();
 
@@ -107,13 +109,13 @@ public class LabServiceImpl implements LabService {
     }
 
     @Override
-    public List<Stock> removeStockFromLab(int labId, Stock stockToRemove) {
-        Optional<Lab> labFound = labRepository.findById(labId);
+    public List<Stock> removeStockFromLab(Stock stockToRemove) {
+        List<Lab> labFound = labRepository.findAll();
 
-        if (!labFound.isPresent())
+        if (labFound.size() == 0)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
 
-        Lab actualLab = labFound.get();
+        Lab actualLab = labFound.get(0);
 
         List<Stock> allStocks = actualLab.getStocks();
 

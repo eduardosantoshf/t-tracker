@@ -2,8 +2,6 @@ package t_tracker.service;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -18,11 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.server.ResponseStatusException;
 
-import net.bytebuddy.agent.VirtualMachine.ForHotSpot.Connection.Response;
 import t_tracker.model.Lab;
 import t_tracker.model.Product;
 import t_tracker.model.Stock;
@@ -51,11 +45,9 @@ public class LabServiceUnitTests {
     private Product testProduct1, testProduct2;
     private Stock testStock1, testStock2;
 
-    private int invalidLabId = 99999;
-
     @BeforeEach
     void setUp() {
-        testLab = new Lab("Public Test Lab", new Coordinates(44.5566, 44.6655));
+        testLab = new Lab(1, "labtoken", "Public Test Lab", new Coordinates(44.5566, 44.6655));
         testProduct1 = new Product("Very Accurate Test", 99.99, "goodtype", "Bad test.");
         testProduct2 = new Product("Not So Accurate Test", 9.99, "badtype", "Bad test.");
         testStock1 = new Stock(testProduct1, 10);
@@ -63,8 +55,7 @@ public class LabServiceUnitTests {
         testLab.setStocks(new ArrayList<>(Arrays.asList(testStock1, testStock2)));
 
         Mockito.when(labRepository.save(testLab)).thenReturn(testLab);
-        Mockito.when(labRepository.findById(testLab.getId())).thenReturn(Optional.of(testLab));
-        Mockito.when(labRepository.findById(invalidLabId)).thenReturn(Optional.ofNullable(null));
+        Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<>(Arrays.asList(testLab)));
         
         Mockito.when(productRepository.findByNameAndPriceAndType(testProduct1.getName(), testProduct1.getPrice(),
                 testProduct1.getType())).thenReturn(Optional.of(testProduct1));
@@ -75,84 +66,84 @@ public class LabServiceUnitTests {
         Mockito.when(productRepository.save(testStock2.getProduct())).thenReturn(testStock2.getProduct());
     }
 
-    @Test
-    void whenRegisterValidLab_thenReturnValidLab() {
-        Lab labRegistered = labService.registerLab(testLab);
-        assertThat(labRegistered, is(testLab));
+    // @Test
+    // void whenRegisterValidLab_thenReturnValidLab() {
+    //     Lab labRegistered = labService.registerLab(testLab);
+    //     assertThat(labRegistered, is(testLab));
 
-    }
+    // }
 
-    @Test
-    void whenGetLabByValidId_thenReturnLab() {
-        Lab labRegistered = labService.getLabById(testLab.getId());
-        assertThat(labRegistered, is(testLab));
+    // @Test
+    // void whenGetLabByValidId_thenReturnLab() {
+    //     Lab labRegistered = labService.getLabById(testLab.getId());
+    //     assertThat(labRegistered, is(testLab));
 
-        verifyFindByIdIsCalledOnce(testLab.getId());
-    }
+    //     verifyFindByIdIsCalledOnce(testLab.getId());
+    // }
 
-    @Test
-    void whenGetLabByInvalidId_thenThrow404LabNotFound() {
-        ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
-                () -> labService.getLabById(invalidLabId));
+    // @Test
+    // void whenGetLabByInvalidId_thenThrow404LabNotFound() {
+    //     ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
+    //             () -> labService.getLabById(invalidLabId));
 
-        assertThat(exceptionThrown.getStatus(), is(HttpStatus.NOT_FOUND));
-        assertThat(exceptionThrown.getReason(), is("Lab not found."));
+    //     assertThat(exceptionThrown.getStatus(), is(HttpStatus.NOT_FOUND));
+    //     assertThat(exceptionThrown.getReason(), is("Lab not found."));
 
-        verifyFindByIdIsCalledOnce(invalidLabId);
-    }
+    //     verifyFindByIdIsCalledOnce(invalidLabId);
+    // }
 
-    @Test
-    void whenGetAllLabs_thenReturnAllLabs() {
-        Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<Lab>(Arrays.asList(testLab)));
+    // @Test
+    // void whenGetAllLabs_thenReturnAllLabs() {
+    //     Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<Lab>(Arrays.asList(testLab)));
 
-        List<Lab> labsFound = labService.getAllLabs();
+    //     List<Lab> labsFound = labService.getAllLabs();
 
-        assertThat(labsFound.size(), is(1));
-        assertThat(labsFound.contains(testLab), is(true));
+    //     assertThat(labsFound.size(), is(1));
+    //     assertThat(labsFound.contains(testLab), is(true));
 
-        verifyFindAllIsCalledOnce();
-    }
+    //     verifyFindAllIsCalledOnce();
+    // }
 
-    @Test
-    void whenGetAllLabsEmpty_thenReturnEmptyList() {
-        Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<Lab>());
+    // @Test
+    // void whenGetAllLabsEmpty_thenReturnEmptyList() {
+    //     Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<Lab>());
 
-        List<Lab> labsFound = labService.getAllLabs();
+    //     List<Lab> labsFound = labService.getAllLabs();
 
-        assertThat(labsFound.size(), is(0));
+    //     assertThat(labsFound.size(), is(0));
 
-        verifyFindAllIsCalledOnce();
-    }
+    //     verifyFindAllIsCalledOnce();
+    // }
 
     @Test
     void whenGetLabStock_thenReturnLabStock() {
-        List<Stock> stockFound = labService.getLabStock(testLab.getId());
+        List<Stock> stockFound = labService.getLabStock();
 
         assertThat(stockFound.size(), is(testLab.getStocks().size()));
         assertThat(stockFound.contains(testStock1), is(true));
         assertThat(stockFound.contains(testStock2), is(true));
 
-        verifyFindByIdIsCalledOnce(testLab.getId());
+        verifyFindAllIsCalledOnce();
 
     }
 
-    @Test
-    void whenGetLabStockWithInvalidId_thenThrow404LabNotFound() {
-        ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
-                () -> labService.getLabStock(invalidLabId));
+    // @Test
+    // void whenGetLabStockWithInvalidId_thenThrow404LabNotFound() {
+    //     ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
+    //             () -> labService.getLabStock(invalidLabId));
 
-        assertThat(exceptionThrown.getStatus(), is(HttpStatus.NOT_FOUND));
-        assertThat(exceptionThrown.getReason(), is("Lab not found."));
+    //     assertThat(exceptionThrown.getStatus(), is(HttpStatus.NOT_FOUND));
+    //     assertThat(exceptionThrown.getReason(), is("Lab not found."));
 
-        verifyFindByIdIsCalledOnce(invalidLabId);
+    //     verifyFindByIdIsCalledOnce(invalidLabId);
 
-    }
+    // }
 
     @Test
     void whenAddExistingStockToValidLab_thenSumQuantityToLabStock() {
         Stock stockToAdd = new Stock(testProduct1, 1);
 
-        List<Stock> resultingStock = labService.addStockToLab(testLab.getId(), stockToAdd);
+        List<Stock> resultingStock = labService.addStockToLab(stockToAdd);
 
         List<Stock> expectedStock = testLab.getStocks();
         for (Stock s : expectedStock)
@@ -177,7 +168,7 @@ public class LabServiceUnitTests {
         Mockito.when(productRepository.save(stockToAdd.getProduct())).thenReturn(stockToAdd.getProduct());
         Mockito.when(stockRepository.save(stockToAdd)).thenReturn(stockToAdd);
 
-        List<Stock> resultingStock = labService.addStockToLab(testLab.getId(), stockToAdd);
+        List<Stock> resultingStock = labService.addStockToLab(stockToAdd);
 
         System.out.println(resultingStock);
         assertThat(resultingStock.size(), is(3));
@@ -186,24 +177,24 @@ public class LabServiceUnitTests {
 
     }
 
-    @Test
-    void whenAddNewStockToInvalidLab_thenThrow404LabNotFound() {
-        Stock stockToAdd = new Stock(new Product("Brand New Test", 49.99, "deluxe", "Deluxe test."), 3);
-        int invalidLabId = 99999;
+    // @Test
+    // void whenAddNewStockToInvalidLab_thenThrow404LabNotFound() {
+    //     Stock stockToAdd = new Stock(new Product("Brand New Test", 49.99, "deluxe", "Deluxe test."), 3);
+    //     int invalidLabId = 99999;
 
-        List<Stock> expectedStock = new ArrayList<>(testLab.getStocks());
+    //     List<Stock> expectedStock = new ArrayList<>(testLab.getStocks());
 
-        ResponseStatusException throwException = assertThrows(ResponseStatusException.class, () -> labService.addStockToLab(invalidLabId, stockToAdd));
+    //     ResponseStatusException throwException = assertThrows(ResponseStatusException.class, () -> labService.addStockToLab(invalidLabId, stockToAdd));
 
-        assertThat( throwException.getStatus(), is(HttpStatus.NOT_FOUND) );
-        assertThat( throwException.getReason(), is("Lab not found.") );
-        assertThat( testLab.getStocks(), is(expectedStock) );
+    //     assertThat( throwException.getStatus(), is(HttpStatus.NOT_FOUND) );
+    //     assertThat( throwException.getReason(), is("Lab not found.") );
+    //     assertThat( testLab.getStocks(), is(expectedStock) );
 
-    }
+    // }
 
-    private void verifyFindByIdIsCalledOnce(int id) {
-        Mockito.verify(labRepository, VerificationModeFactory.times(1)).findById(id);
-    }
+    // private void verifyFindByIdIsCalledOnce(int id) {
+    //     Mockito.verify(labRepository, VerificationModeFactory.times(1)).findById(id);
+    // }
 
     private void verifyFindAllIsCalledOnce() {
         Mockito.verify(labRepository, VerificationModeFactory.times(1)).findAll();
