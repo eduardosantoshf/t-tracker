@@ -102,9 +102,11 @@
             $("#delivery_" + cod).toggleClass("deliveryOpened");
         }
     </script>
+
+
 </head>
 
-<body>
+<body onload="checkToken()">
 
     <!--====== PRELOADER PART START ======-->
 
@@ -343,6 +345,8 @@
 
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/auth.js"></script>
 
 </body>
 

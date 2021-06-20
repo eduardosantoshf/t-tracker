@@ -26,12 +26,26 @@ public class Store {
     @Column(name = "token")
     private String token;
 
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longitude")
+    private double longitude;
+
     public Store () {}
 
     @Autowired
     public Store(String name, String ownerName) {
         this.name = name;
         this.ownerName = ownerName;
+    }
+
+    @Autowired
+    public Store(String name, String ownerName, double latitude, double longitude) {
+        this.name = name;
+        this.ownerName = ownerName;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getId() {
@@ -76,5 +90,21 @@ public class Store {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
