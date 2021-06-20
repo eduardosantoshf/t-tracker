@@ -20,13 +20,18 @@ function checkToken(){
         return decodeURI(dc.substring(begin + prefix.length, end));
     }
     
-    var myCookie = getCookie("sessionKey--client");
+    var myCookie = getCookie("sessionKey-client");
 
     if (myCookie == null) {
         window.location.href='/login.html';
     }
     else {
-        // do cookie-exists stuff
+        fetch("http://localhost:8081/client/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client") }, method: 'get'}).then(data => data.text()).then(data => {
+            if(data!="SUCCESS"){
+                document.cookie = "sessionKey-client= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+                window.location.href='login.html';
+            }
+        })
     }
 }
 
