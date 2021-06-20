@@ -1,7 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from requests import get
+import json
 
 app = Flask(__name__)
+CORS(app)
 
 workflows_infos = dict()
 error_dic = dict()
@@ -10,17 +13,27 @@ error_dic = dict()
 def get_workflows():
     workflows = dict()
 
-    data = request.get_json()
+    page_number = request.args.get('page_number')
 
-    page_number = data.get("page_number")
+    #response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows?page={page_number}")
+#
+    #if response.status_code != 200:
+    #    print("Error on GitHub's response")
+    #    return error_dic
+    #response_json = response.json()
 
-    response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows?page={page_number}")
 
-    if response.status_code != 200:
-        print("Error on GitHub's response")
-        return error_dic
 
-    response_json = response.json()
+
+    f = open('workflows_test.json')
+    response_json = json.load(f)
+    print(json.dumps(response_json, indent=4))
+
+
+
+
+
+
 
     workflows["workflows_number"] = response_json["total_count"]
 
@@ -52,13 +65,16 @@ def get_workflow_info():
     workflow_name = data.get("workflow")
     page_number = data.get("page_number")
 
-    response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows/{workflow_name}/runs?per_page=5&page={page_number}")
-
-    if response.status_code != 200: 
-        print("Error on GitHub's response")
-        return error_dic
-
-    response_json = response.json()
+    #response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows/{workflow_name}/runs?per_page=5&page={page_number}")
+#
+    #if response.status_code != 200: 
+    #    print("Error on GitHub's response")
+    #    return error_dic
+#
+    #response_json = response.json()
+    f = open('workflow_runs_test.json')
+    response_json = json.load(f)
+    print(json.dumps(response_json, indent=4))
     
     workflow["runs"] = response_json["total_count"]
 
@@ -82,13 +98,16 @@ def get_workflow_info():
 
         run_id = run["id"]
 
-        response2 = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/runs/{run_id}/timing")
+        #response2 = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/runs/{run_id}/timing")
+#
+        #if response2.status_code != 200: 
+        #    print("Error on GitHub's response")
+        #    return error_dic
+#
+        #response_json2 = response2.json()
 
-        if response2.status_code != 200: 
-            print("Error on GitHub's response")
-            return error_dic
-
-        response_json2 = response2.json()
+        f2 = open('workflow_runs_954738441_timing_test.json')
+        response_json2 = json.load(f2)
 
         r["duration"] = response_json2["run_duration_ms"]
 
