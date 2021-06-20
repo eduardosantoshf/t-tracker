@@ -46,15 +46,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/model/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/model/Store.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +258,7 @@
       <workItem from="1624223337222" duration="244000" />
       <workItem from="1624223587386" duration="24000" />
       <workItem from="1624223643513" duration="37000" />
-      <workItem from="1624223702931" duration="1861000" />
+      <workItem from="1624223702931" duration="2286000" />
     </task>
     <servers />
   </component>
@@ -297,22 +290,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="508" y="209" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1623870133728" />
-    <state width="1878" height="312" key="GridCell.Tab.0.bottom" timestamp="1624225670467">
+    <state width="1878" height="312" key="GridCell.Tab.0.bottom" timestamp="1624225678373">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="312" key="GridCell.Tab.0.bottom/0.23.1920.1123@0.23.1920.1123" timestamp="1624225670467" />
-    <state width="1878" height="312" key="GridCell.Tab.0.center" timestamp="1624225670466">
+    <state width="1878" height="312" key="GridCell.Tab.0.bottom/0.23.1920.1123@0.23.1920.1123" timestamp="1624225678373" />
+    <state width="1878" height="312" key="GridCell.Tab.0.center" timestamp="1624225678372">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="312" key="GridCell.Tab.0.center/0.23.1920.1123@0.23.1920.1123" timestamp="1624225670466" />
-    <state width="1878" height="312" key="GridCell.Tab.0.left" timestamp="1624225670465">
+    <state width="1878" height="312" key="GridCell.Tab.0.center/0.23.1920.1123@0.23.1920.1123" timestamp="1624225678372" />
+    <state width="1878" height="312" key="GridCell.Tab.0.left" timestamp="1624225678372">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="312" key="GridCell.Tab.0.left/0.23.1920.1123@0.23.1920.1123" timestamp="1624225670465" />
-    <state width="1878" height="312" key="GridCell.Tab.0.right" timestamp="1624225670466">
+    <state width="1878" height="312" key="GridCell.Tab.0.left/0.23.1920.1123@0.23.1920.1123" timestamp="1624225678372" />
+    <state width="1878" height="312" key="GridCell.Tab.0.right" timestamp="1624225678373">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="312" key="GridCell.Tab.0.right/0.23.1920.1123@0.23.1920.1123" timestamp="1624225670466" />
+    <state width="1878" height="312" key="GridCell.Tab.0.right/0.23.1920.1123@0.23.1920.1123" timestamp="1624225678373" />
     <state x="575" y="291" key="NewModule_or_Project.wizard" timestamp="1624223902604">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
