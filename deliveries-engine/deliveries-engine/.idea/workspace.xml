@@ -45,55 +45,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="41a41c79-a386-4eb3-8650-4dfcba796f86" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deliveries-engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/deliveries-engine.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/CorsConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/DeliveriesEngineApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/PasswordEncoderConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/RiderController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/StoreController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/exception/ErrorWarning.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Delivery.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Rider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Store.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/AdminRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/DeliveryRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/RiderRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/StoreRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JWTAuthorizationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JwtAuthenticationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/SecurityConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/JwtTokenService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderServiceImp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/Service.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/ServiceImp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreServiceImp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/UserDetailsServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/swagger2/Swagger2Config.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar.original" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../t-tracker/t-tracker/t-tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../t-tracker/t-tracker/t-tracker.iml" afterDir="false" />
-=======
     <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
->>>>>>> b1d4c354d323d231df9c9a5caa82a28143211a6c
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +64,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectId" id="1t8ufjHZFfPxjdDQfXxrrPlcITB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -128,16 +89,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../t-tracker" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-<<<<<<< HEAD
-  <component name="RunManager" selected="Spring Boot.DeliveriesEngineApplication">
-=======
-  <component name="RunManager" selected="JUnit.RiderServiceTest">
->>>>>>> b1d4c354d323d231df9c9a5caa82a28143211a6c
+  <component name="RunManager" selected="JUnit.StoreServiceTest">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -149,8 +106,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-<<<<<<< HEAD
-=======
     <configuration name="RiderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="deliveries-engine" />
       <extension name="coverage">
@@ -213,7 +168,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StoreServiceTest.whenGetRatings_returnRatings" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StoreServiceTest.whenRequestClosestRider_getRider" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="deliveries-engine" />
       <extension name="coverage">
         <pattern>
@@ -223,13 +178,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="deliveries_engine.service" />
       <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
-      <option name="METHOD_NAME" value="whenGetRatings_returnRatings" />
+      <option name="METHOD_NAME" value="whenRequestClosestRider_getRider" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
->>>>>>> b1d4c354d323d231df9c9a5caa82a28143211a6c
     <configuration name="deliveries-engine" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -253,28 +207,36 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <configuration name="DeliveriesEngineApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="deliveries-engine" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="deliveries_engine.DeliveriesEngineApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Maven.deliveries-engine" />
-      <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
       <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
       <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
       <item itemvalue="JUnit.RiderServiceTest" />
       <item itemvalue="JUnit.StoreServiceTest" />
+      <item itemvalue="Maven.deliveries-engine" />
+      <item itemvalue="Spring Boot.DeliveriesEngineApplication" />
+      <item itemvalue="JUnit.StoreServiceTest.whenRequestClosestRider_getRider" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RiderServiceTest" />
         <item itemvalue="JUnit.StoreServiceTest" />
+        <item itemvalue="JUnit.StoreServiceTest.whenRequestClosestRider_getRider" />
+        <item itemvalue="JUnit.RiderServiceTest" />
         <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
         <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
-        <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="41a41c79-a386-4eb3-8650-4dfcba796f86" name="Default Changelist" comment="" />
+      <changelist id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="" />
       <created>1622163143077</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -291,10 +253,9 @@
       <workItem from="1622995033260" duration="3827000" />
       <workItem from="1623058433344" duration="546000" />
       <workItem from="1623172360370" duration="35000" />
-      <workItem from="1623767424913" duration="415000" />
-      <workItem from="1623798777486" duration="137000" />
-      <workItem from="1623798963520" duration="30000" />
-      <workItem from="1623835103657" duration="1932000" />
+      <workItem from="1623965789279" duration="1821000" />
+      <workItem from="1623870114685" duration="21000" />
+      <workItem from="1624139410403" duration="176000" />
     </task>
     <servers />
   </component>
@@ -314,6 +275,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser" timestamp="1624148069056">
+      <screen x="0" y="23" width="1920" height="1123" />
+    </state>
+    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1123@0.23.1920.1123" timestamp="1624148069056" />
+    <state x="508" y="209" key="FileChooserDialogImpl" timestamp="1623870133728">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="508" y="209" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1623870133728" />
     <state width="1878" height="297" key="GridCell.Tab.0.bottom" timestamp="1623691163190">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>

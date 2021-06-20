@@ -15,7 +15,7 @@ function getCookie(cname) {
 }
 
 function changeState(state){
-    fetch('http://localhost:8080/rider/status/' + state, { headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey") }, method: 'post' }).then(data => {
+    fetch('http://localhost:8080/rider/status/' + state, { headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'post' }).then(data => {
         if (data.status == 200) {
             data = data.json();
 

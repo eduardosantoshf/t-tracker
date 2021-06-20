@@ -1,8 +1,10 @@
 package deliveries_engine.service;
 
 import deliveries_engine.exception.ErrorWarning;
+import deliveries_engine.model.Delivery;
 import deliveries_engine.model.Rider;
 import deliveries_engine.model.Store;
+import deliveries_engine.repository.DeliveryRepository;
 import deliveries_engine.repository.RiderRepository;
 import deliveries_engine.repository.StoreRepository;
 import deliveries_engine.websocket.WarningController;
@@ -27,6 +29,9 @@ public class StoreServiceImp implements StoreService{
     private RiderRepository riderRepository;
 
     @Autowired
+    private DeliveryRepository deliveryRepository;
+
+    @Autowired
     public WarningController warningController = new WarningController();
 
     public Store registerStore(Store store) throws Exception {
@@ -45,7 +50,7 @@ public class StoreServiceImp implements StoreService{
     }
 
     @Override
-    public Rider getClosestRider(double latitude, double longitude, String token, int storeId) throws Exception {
+    public Rider getClosestRider(Delivery delivery, double latitude, double longitude, String token, int storeId) throws Exception {
 
         checkStoreToken(storeId, token);
 
@@ -97,9 +102,23 @@ public class StoreServiceImp implements StoreService{
             }
         }
 
+        delivery.setRider(responseRider);
+        deliveryRepository.save(delivery);
+        responseRider.addDelivery(delivery);
+
+        riderRepository.save(responseRider);
+
         JSONObject json = new JSONObject();
         json.put("latitude", latitude);
         json.put("longitude", longitude);
+
+        Optional<Store> opt = storeRepository.findById(storeId);
+
+        Store store = opt.get();
+
+
+        json.put("store_latitude", store.getLatitude());
+        json.put("store_longitude", store.getLongitude());
 
         warningController.send(json.toString());
 
@@ -175,6 +194,16 @@ public class StoreServiceImp implements StoreService{
         List<String> comments = rider.getComments();
 
         return comments;
+    }
+
+    @Override
+    public Rider getRiderPosition(int riderId, String token, int storeId) throws Exception {
+
+        checkStoreToken(storeId, token);
+
+        Rider rider = riderRepository.findById(riderId);
+
+        return rider;
     }
 
     public void checkStoreToken(int storeId, String token) throws Exception {

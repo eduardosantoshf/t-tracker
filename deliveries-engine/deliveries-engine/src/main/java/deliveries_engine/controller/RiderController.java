@@ -1,7 +1,9 @@
 package deliveries_engine.controller;
 
 import deliveries_engine.exception.ErrorWarning;
+import deliveries_engine.model.Delivery;
 import deliveries_engine.repository.RiderRepository;
+import io.jsonwebtoken.JwtException;
 import org.checkerframework.checker.nullness.Opt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,10 @@ import deliveries_engine.service.RiderService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
+
+import deliveries_engine.service.JwtTokenService;
 
 @RestController
 @RequestMapping("/rider")
@@ -47,6 +52,24 @@ public class RiderController {
         if(opt.isPresent())
             rider = opt.get();
         return riderService.updateStatus(status, rider);
+    }
+
+    @GetMapping(value = "/verify", produces = "application/json")
+    public String checkToken(@RequestHeader(name = "Authorization") String token, HttpServletRequest request) throws Exception {
+        try{
+            JwtTokenService.verifyToken(token);
+        } catch (JwtException e) {
+            //e.printStackTrace();
+            throw new Exception("FAILED TO VERIFY TOKEN");
+        }
+        return "SUCCESS";
+    }
+
+    @GetMapping(value = "/deliveries/{id}", produces = "application/json")
+    public List<Delivery> getDeliveries(@PathVariable(name = "id") int id, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        Rider rider = riderRepository.findById(id);
+        return riderService.getDeliveries(rider);
     }
 
 

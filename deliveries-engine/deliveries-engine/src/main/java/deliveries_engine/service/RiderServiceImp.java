@@ -1,8 +1,10 @@
 package deliveries_engine.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import deliveries_engine.exception.ErrorWarning;
+import deliveries_engine.model.Delivery;
 import deliveries_engine.model.Rider;
 import deliveries_engine.model.User;
 import deliveries_engine.repository.RiderRepository;
@@ -96,6 +98,12 @@ public class RiderServiceImp implements RiderService {
 
         return rider;
 
+    }
+
+    @Override
+    public List<Delivery> getDeliveries(Rider rider) {
+        Rider r = riderRepository.findById(rider.getId());
+        return r.getDeliveries();
     }
 
 }

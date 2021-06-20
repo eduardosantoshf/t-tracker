@@ -1,8 +1,10 @@
 package deliveries_engine.service;
 
 import deliveries_engine.DeliveriesEngineApplication;
+import deliveries_engine.model.Delivery;
 import deliveries_engine.model.Rider;
 import deliveries_engine.model.Store;
+import deliveries_engine.repository.DeliveryRepository;
 import deliveries_engine.repository.RiderRepository;
 import deliveries_engine.repository.StoreRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -46,6 +48,9 @@ public class StoreServiceTest {
     @MockBean
     private StoreRepository storeRepository;
 
+    @MockBean
+    private DeliveryRepository deliveryRepository;
+
     private Optional<Store> opt;
 
     @BeforeEach
@@ -84,7 +89,12 @@ public class StoreServiceTest {
         given(riderRepository.findAll()).willReturn(riders);
         given(storeRepository.findById(store.getId())).willReturn(Optional.of(store));
 
-        Rider response_rider = storeService.getClosestRider(40.741858, -8.470833, token, store.getId());
+
+        Delivery delivery = new Delivery("name", 3.4, 40.741858, -8.470833);
+
+        given(deliveryRepository.save(delivery)).willReturn(delivery);
+
+        Rider response_rider = storeService.getClosestRider(delivery,40.741858, -8.470833, token, store.getId());
 
         assertEquals(rider1, response_rider);
 
