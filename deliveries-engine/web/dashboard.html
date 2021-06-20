@@ -103,7 +103,7 @@
     <script src="assets/js/dashboard.js"></script>
 </head>
 
-<body onload="checkToken(); changeState(1);">
+<body onload="checkToken(); changeState(1); getAllDeliveries();">
     <!--[if IE]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
@@ -205,47 +205,9 @@
                             <th scope="col">Comissão</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Split Test</td>
-                            <td>
-                                <div class="statusPending">Waiting</div>
-                            </td>
-                            <td>4,3$</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>Throat Test</td>
-                            <td>
-                                <div class="statusDelivering">Delivering</div>
-                            </td>
-                            <td>1,99$</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">3</td>
-                            <td>Nose Test</td>
-                            <td>
-                                <div class="statusComplete">Delivered</div>
-                            </td>
-                            <td>7,9$</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">4</td>
-                            <td>Throat Test</td>
-                            <td>
-                                <div class="statusComplete">Delivered</div>
-                            </td>
-                            <td>3,9$</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">5</td>
-                            <td>Throat Test</td>
-                            <td>
-                                <div class="statusComplete">Delivered</div>
-                            </td>
-                            <td>6,7$</td>
-                        </tr>
+                    <tbody id="deliveriesList">
+
+                        
                     </tbody>
                 </table>
             </div>
