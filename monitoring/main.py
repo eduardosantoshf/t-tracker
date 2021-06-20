@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from requests import get
+import json
 
 app = Flask(__name__)
 
@@ -59,6 +60,7 @@ def get_workflow_info():
         return error_dic
 
     response_json = response.json()
+    #print(json.dumps(response_json, indent=4))
     
     workflow["runs"] = response_json["total_count"]
 
@@ -89,8 +91,10 @@ def get_workflow_info():
             return error_dic
 
         response_json2 = response2.json()
+        #print(json.dumps(response_json2, indent=4))
 
-        r["duration"] = response_json2["run_duration_ms"]
+        if "run_duration_ms" in response_json2:
+            r["duration"] = response_json2["run_duration_ms"]
 
         workflow["data"].append(r)
 
