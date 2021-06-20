@@ -26,7 +26,7 @@ function checkToken(){
         window.location.href='/login.html';
     }
     else {
-        fetch("http://localhost:8081/client/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client") }, method: 'get'}).then(data => data.text()).then(data => {
+        fetch("http://192.168.160.222:8081/client/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client") }, method: 'get'}).then(data => data.text()).then(data => {
             if(data!="SUCCESS"){
                 document.cookie = "sessionKey-client= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
                 window.location.href='login.html';
@@ -43,7 +43,7 @@ function signupclient(){
 
     let client={"name":name, "email":email, "username":username, "password":password};
     console.log(client);
-    fetch('http://localhost:8081/client/signup', { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'http://localhost:8081' }, method: 'post', body: JSON.stringify(client)}).then(data => {
+    fetch('http://192.168.160.222:8081/client/signup', { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'http://192.168.160.222:8081' }, method: 'post', body: JSON.stringify(client)}).then(data => {
         if(data.status==200)
             try{
                 data.json();
@@ -58,7 +58,7 @@ function signupclient(){
 }
 
 function autoLogin(username, password){
-    fetch('http://localhost:8081/client/login?username='+username+"&password="+password).then(data => {
+    fetch('http://192.168.160.222:8081/client/login?username='+username+"&password="+password).then(data => {
         if(data.status==200){
             data=data.json();
 

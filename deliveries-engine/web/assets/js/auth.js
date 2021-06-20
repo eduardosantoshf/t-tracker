@@ -26,7 +26,7 @@ function checkToken(){
         window.location.href='/login.html';
     }
     else {
-        fetch("http://localhost:8080/rider/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'get'}).then(data => data.text()).then(data => {
+        fetch("http://192.168.160.222:8080/rider/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'get'}).then(data => data.text()).then(data => {
             if(data!="SUCCESS"){
                 document.cookie = "sessionKey-rider= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
                 window.location.href='login.html';
@@ -47,7 +47,7 @@ function signuprider(){
 
     var rider={"name":riderName, "email":riderEmail, "username":riderUsername, "password":riderPassword, "phoneNumber":riderPhone, "address":riderAddress, "zipCode":riderCEP, "city":riderCity};
 
-    fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
+    fetch('http://192.168.160.222:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
         if(data.status==200)
             try{
                 data.json();
@@ -65,7 +65,7 @@ function loginrider(){
     var riderUsername = $("#riderUsername").val();
     var riderPassword = $("#riderPassword").val();
     
-    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
+    fetch('http://192.168.160.222:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
         if(data.status==200){
             data=data.json();
 
@@ -81,7 +81,7 @@ function loginrider(){
 }
 
 function autoLogin(riderUsername, riderPassword){
-    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
+    fetch('http://192.168.160.222:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
         if(data.status==200){
             data=data.json();
 
@@ -100,7 +100,7 @@ function signupstore(){
     var name = $("#storeNameTxt").val();
     var ownerName = $("#storeOwnerTxt").val();
 
-    fetch('http://localhost:8080/store', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => {
+    fetch('http://192.168.160.222:8080/store', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify({"name":name, "ownerName":ownerName})}).then(data => {
         if(data.status==200){
             data=data.json();
             
