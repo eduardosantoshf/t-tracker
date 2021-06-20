@@ -2,7 +2,6 @@ package t_tracker.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.model.*;
-import t_tracker.repository.ClientRepository;
 import t_tracker.service.ClientService;
 import t_tracker.service.OrderService;
 import t_tracker.service.ProductService;
