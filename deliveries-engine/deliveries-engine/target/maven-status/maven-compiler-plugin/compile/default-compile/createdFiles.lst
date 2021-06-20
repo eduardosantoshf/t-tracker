@@ -2,12 +2,12 @@ deliveries_engine/model/User.class
 deliveries_engine/PasswordEncoderConfig.class
 deliveries_engine/controller/RiderController.class
 deliveries_engine/controller/StoreController.class
+deliveries_engine/model/Stats.class
 deliveries_engine/websocket/WarningController.class
 deliveries_engine/websocket/WebSocketConfig.class
 deliveries_engine/CorsConfiguration.class
 deliveries_engine/model/Admin.class
 deliveries_engine/controller/Controller.class
-deliveries_engine/service/Service.class
 deliveries_engine/security/SecurityConfig.class
 deliveries_engine/service/RiderServiceImp.class
 deliveries_engine/security/JwtAuthenticationFilter.class
@@ -21,6 +21,7 @@ deliveries_engine/service/ServiceImp.class
 deliveries_engine/model/Store.class
 deliveries_engine/repository/StoreRepository.class
 deliveries_engine/model/Rider.class
+deliveries_engine/service/AdminService.class
 deliveries_engine/repository/UserRepository.class
 deliveries_engine/service/RiderService.class
 deliveries_engine/service/UserDetailsServiceImpl.class
@@ -30,3 +31,4 @@ deliveries_engine/DeliveriesEngineApplication.class
 deliveries_engine/model/Delivery.class
 deliveries_engine/repository/RiderRepository.class
 deliveries_engine/service/JwtTokenService.class
+deliveries_engine/LoadDatabase.class
