@@ -14,7 +14,6 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private int id;
 
     @Column(name = "name", nullable = false)
