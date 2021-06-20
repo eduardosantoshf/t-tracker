@@ -4,10 +4,28 @@ on:
   # triggers the workflow on push for the deployment branch
   push:
     branches: [ deployment ]
+    paths-ignore:
+      # don't run this workflow when the are pushes, and there are only changes for this directories:
+      - 'reporting/**'
+      - 'monitoring/**'
+      # don't run this workflow when the are pushes and there are only changes for the following files:
+      - '**.md'
+      - '**.pdf'
+      - '**.docx'
+      - '**.gitignore'
 
   # triggers the workflow on pull requests for the deployment branch
   pull_request:
     branches: [ deployment ]
+    paths-ignore:
+      # don't run this workflow when the are pull requests, and there are only changes for this directories:
+      - 'reporting/**'
+      - 'monitoring/**'
+      # don't run this workflow when the are pull requests, and there are only changes for the following files:
+      - '**.md'
+      - '**.pdf'
+      - '**.docx'
+      - '**.gitignore'
 
 jobs:
   t-tracker-runner:
