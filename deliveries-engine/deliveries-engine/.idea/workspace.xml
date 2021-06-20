@@ -47,7 +47,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/websocket/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/websocket/WebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar.original" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,9 +221,9 @@
       <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
       <item itemvalue="JUnit.RiderServiceTest" />
       <item itemvalue="JUnit.StoreServiceTest" />
+      <item itemvalue="JUnit.StoreServiceTest.whenRequestClosestRider_getRider" />
       <item itemvalue="Maven.deliveries-engine" />
       <item itemvalue="Spring Boot.DeliveriesEngineApplication" />
-      <item itemvalue="JUnit.StoreServiceTest.whenRequestClosestRider_getRider" />
     </list>
     <recent_temporary>
       <list>
@@ -283,21 +285,21 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="508" y="209" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1623870133728" />
-    <state width="1878" height="297" key="GridCell.Tab.0.bottom" timestamp="1623691163190">
+    <state width="1878" height="312" key="GridCell.Tab.0.bottom" timestamp="1624186453234">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="297" key="GridCell.Tab.0.bottom/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163190" />
-    <state width="1878" height="297" key="GridCell.Tab.0.center" timestamp="1623691163189">
+    <state width="1878" height="312" key="GridCell.Tab.0.bottom/0.23.1920.1123@0.23.1920.1123" timestamp="1624186453234" />
+    <state width="1878" height="312" key="GridCell.Tab.0.center" timestamp="1624186453233">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="297" key="GridCell.Tab.0.center/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
-    <state width="1878" height="297" key="GridCell.Tab.0.left" timestamp="1623691163189">
+    <state width="1878" height="312" key="GridCell.Tab.0.center/0.23.1920.1123@0.23.1920.1123" timestamp="1624186453233" />
+    <state width="1878" height="312" key="GridCell.Tab.0.left" timestamp="1624186453230">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="297" key="GridCell.Tab.0.left/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
-    <state width="1878" height="297" key="GridCell.Tab.0.right" timestamp="1623691163189">
+    <state width="1878" height="312" key="GridCell.Tab.0.left/0.23.1920.1123@0.23.1920.1123" timestamp="1624186453230" />
+    <state width="1878" height="312" key="GridCell.Tab.0.right" timestamp="1624186453233">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state width="1878" height="297" key="GridCell.Tab.0.right/0.23.1920.1123@0.23.1920.1123" timestamp="1623691163189" />
+    <state width="1878" height="312" key="GridCell.Tab.0.right/0.23.1920.1123@0.23.1920.1123" timestamp="1624186453233" />
   </component>
 </project>
