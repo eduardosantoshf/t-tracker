@@ -30,7 +30,6 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping(value = "/signup", consumes = "application/json")
-    public ResponseEntity<Client> registerClient(@RequestBody Client client, HttpServletRequest request)
     public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request)
             throws Exception {
         Client registeredClient;
@@ -40,8 +39,6 @@ public class ClientController {
 
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), HttpStatus.CONFLICT);
         }
 
         Client returnClientData = new Client();

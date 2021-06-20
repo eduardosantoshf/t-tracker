@@ -21,8 +21,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private PasswordEncoder passwordEncoder;
     private UserDetailsService userDetailsService;
     private ClientRepository ClientRepository;
-
-    public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, ClientRepository ClientRepository) {
     private ClientRepository userRepository;
 
     public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, ClientRepository userRepository) {

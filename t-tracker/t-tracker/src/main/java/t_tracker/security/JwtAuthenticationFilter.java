@@ -28,14 +28,9 @@ import io.jsonwebtoken.impl.DefaultClaims;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 
-    private final ClientRepository ClientRepository;
-
+    //private final ClientRepository clientRepository;
     private AuthenticationManager authenticationManager;
-
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager,ClientRepository ClientRepository) {
     private final ClientRepository userRepository;
-
-    private AuthenticationManager authenticationManager;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager,ClientRepository userRepository) {
         this.authenticationManager = authenticationManager;
