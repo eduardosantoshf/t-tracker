@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
@@ -12,6 +14,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private int id;
 
     @Column(name = "name", nullable = false)
@@ -23,6 +26,7 @@ public class Product {
     @Column(name = "type", nullable = false)
     private String type;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<Stock> orders;
 

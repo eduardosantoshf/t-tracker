@@ -143,4 +143,21 @@ public class Order {
         return Objects.hash(id, clientUsername, pickupLocation, deliverLocation, orderTotal, driverId, labId, listOfProducts, isDelivered);
     }
 
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", clientUsername='" + getClientUsername() + "'" +
+            ", pickupLocation='" + getPickupLocation() + "'" +
+            ", deliverLocation='" + getDeliverLocation() + "'" +
+            ", orderTotal='" + getOrderTotal() + "'" +
+            ", driverId='" + getDriverId() + "'" +
+            ", labId='" + getLabId() + "'" +
+            ", listOfProducts='" + getListOfProducts() + "'" +
+            ", isDelivered='" + isIsDelivered() + "'" +
+            "}";
+    }
+
+
 }

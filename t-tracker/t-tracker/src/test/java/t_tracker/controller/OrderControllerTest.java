@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,10 +22,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.jsonwebtoken.impl.DefaultClaims;
 import t_tracker.JsonUtil;
 import t_tracker.TTrackerApplication;
 import t_tracker.model.*;
-import t_tracker.service.OrderServiceImpl;
+import t_tracker.service.JwtTokenService;
+import t_tracker.service.OrderService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TTrackerApplication.class)
 @AutoConfigureMockMvc
@@ -34,12 +37,15 @@ public class OrderControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private OrderServiceImpl orderService;
+    private OrderService orderService;
 
     private Order testOrder;
+    private String token;
 
     @BeforeEach
     void setUp() {
+        token = JwtTokenService.generateToken("testtoken", new DefaultClaims());
+        
         testOrder = new Order(
             "TestClientUsername",
             new Coordinates(1.23456, 2.34567),
@@ -54,20 +60,22 @@ public class OrderControllerTest {
     void whenPlaceAValidOrder_thenReturnValidOrder() throws Exception {
         when( orderService.placeAnOrder(testOrder) ).thenReturn(testOrder);
 
-        mvc.perform( post("/order").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
+        mvc.perform( post("/order").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
             .andExpect( status().isOk() )
             .andExpect( jsonPath("$.clientUsername", is(testOrder.getClientUsername())) )
-            .andExpect( jsonPath("$.pickupLocation", is(testOrder.getPickupLocation())) )
-            .andExpect( jsonPath("$.deliverLocation", is(testOrder.getDeliverLocation())) )
+            .andExpect( jsonPath("$.pickupLocation.latitude", is(testOrder.getPickupLocation().getLatitude())) )
+            .andExpect( jsonPath("$.pickupLocation.longitude", is(testOrder.getPickupLocation().getLongitude())) )
+            .andExpect( jsonPath("$.deliverLocation.latitude", is(testOrder.getDeliverLocation().getLatitude())) )
+            .andExpect( jsonPath("$.deliverLocation.longitude", is(testOrder.getDeliverLocation().getLongitude())) )
             .andExpect( jsonPath("$.orderTotal", is(testOrder.getOrderTotal())) );
     }
 
     @Test
-    void whenPlaceOrderWithInvalidStock_ThenReturnNullAnd409() throws Exception {
-        when( orderService.placeAnOrder(any(Order.class)) ).thenThrow( ResponseStatusException.class );
+    void whenPlaceOrderWithInvalidClient_thenReturn404() throws Exception {
+        when( orderService.placeAnOrder(any(Order.class)) ).thenThrow( new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found."));
 
-        mvc.perform( post("/order").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
-            .andExpect( status().isConflict() );
+        mvc.perform( post("/order").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
+            .andExpect( status().isNotFound() );
     
     }
 

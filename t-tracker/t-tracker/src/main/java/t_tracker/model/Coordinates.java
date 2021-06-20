@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
@@ -11,6 +13,7 @@ public class Coordinates {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Integer id;
 
     @Column(name = "latitude", nullable = false)
@@ -19,15 +22,19 @@ public class Coordinates {
     @Column(name = "longitude", nullable = false)
     private Double longitude;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "location")
     private Lab lab;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "homeLocation")
     private User user;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "pickupLocation")
     private Order pickupOrder;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "deliverLocation")
     private Order deliverOrder;
 

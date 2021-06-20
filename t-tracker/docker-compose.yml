@@ -18,39 +18,39 @@ services:
     expose:
     # opens port 3307 on the container
       - '3307'
-    networks:
-      - main
+    # networks:
+    #   - main
   
-  backend:
-    image: store-backend
-    build:
-      context: t-tracker
-      dockerfile: Dockerfile
-    ports:
-      - "8082:8082"
-    restart: on-failure
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3307/t-tracker
-      SPRING_DATASOURCE_USERNAME: useraroo
-      SPRING_DATASOURCE_PASSWORD: lepwd
-      SPRING_RABBITMQ_HOST: lepwd
-    depends_on: 
-      - db
-    networks:
-      - main
+#   backend:
+#     image: store-backend
+#     build:
+#       context: t-tracker
+#       dockerfile: Dockerfile
+#     ports:
+#       - "8082:8082"
+#     restart: on-failure
+#     environment:
+#       SPRING_DATASOURCE_URL: jdbc:mysql://db:3307/t-tracker
+#       SPRING_DATASOURCE_USERNAME: useraroo
+#       SPRING_DATASOURCE_PASSWORD: lepwd
+#       SPRING_RABBITMQ_HOST: lepwd
+#     depends_on: 
+#       - db
+#     networks:
+#       - main
 
-  client:
-    build: web
-    ports:
-      - "8001:8083"
-    volumes:
-      - ./src:/etc/share/nginx/html
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on: 
-        - backend
-    networks:
-      - main
+#   client:
+#     build: web
+#     ports:
+#       - "8001:8083"
+#     volumes:
+#       - ./src:/etc/share/nginx/html
+#       - ./nginx.conf:/etc/nginx/nginx.conf
+#     depends_on: 
+#         - backend
+#     networks:
+#       - main
 
-networks:
-  main:
-    name: main_network
+# networks:
+#   main:
+#     name: main_network

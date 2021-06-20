@@ -1,7 +1,6 @@
 package t_tracker.controller;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -10,7 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.core.Is.is;
 
 import org.springframework.http.MediaType;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,7 @@ import t_tracker.JsonUtil;
 import t_tracker.TTrackerApplication;
 import t_tracker.model.Client;
 import t_tracker.model.Coordinates;
-import t_tracker.service.ClientServiceImpl;
+import t_tracker.service.ClientService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TTrackerApplication.class)
 @AutoConfigureMockMvc
@@ -34,9 +32,9 @@ class ClientControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private ClientServiceImpl clientService;
+    private ClientService clientService;
 
-    Client willy;
+    private Client willy;
 
     @BeforeEach
     void setUp() {
@@ -45,10 +43,10 @@ class ClientControllerTest {
         willy.setHomeLocation(new Coordinates(46.991750174814946, 15.907980069174572));
     }
 
-    @AfterEach
-    void cleanUp() {
-        reset(clientService);
-    }
+    // @AfterEach
+    // void cleanUp() {
+    //     reset(clientService);
+    // }
 
     @Test
     void whenSignupNewClient_thenReturnClientAnd200() throws Exception {

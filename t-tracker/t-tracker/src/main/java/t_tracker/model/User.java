@@ -2,6 +2,8 @@ package t_tracker.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
@@ -11,6 +13,7 @@ public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Integer id;
 
     @Column(name = "name", nullable = false)
@@ -22,6 +25,7 @@ public abstract class User {
     @Column(name = "email", nullable = false, unique=true)
     private String email;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
