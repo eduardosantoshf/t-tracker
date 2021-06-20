@@ -38,7 +38,7 @@ public class OrderController {
     public ResponseEntity<?> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request) throws Exception {
         Principal principal = request.getUserPrincipal();
         Client client;
-        System.out.println("Cheeckkk1");
+
         try {
             System.out.println(principal.getName());
             client = clientService.getClientByUsername(principal.getName());
@@ -46,10 +46,10 @@ public class OrderController {
         } catch(ResponseStatusException e) {
             return new ResponseEntity<String>("Unauthorized client.", HttpStatus.FORBIDDEN);
         }
-        System.out.println("Cheeckk2");
+
         Product orderProduct;
         Order orderPlaced = new Order(client);
-        System.out.println("Cheeckk2.5");
+
         try {
             for (OrderDTO order : productList) {
                 System.out.println(order);
@@ -59,13 +59,13 @@ public class OrderController {
         } catch( ResponseStatusException e ) {
             return new ResponseEntity<>(e.getReason(), e.getStatus());
         }
-        System.out.println("Cheeckk3");
+
         try {
             orderPlaced = orderService.placeAnOrder(orderPlaced);
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(e.getReason(), e.getStatus());
         }
-        System.out.println("Cheeckk4");
+
         return new ResponseEntity<>(orderPlaced, HttpStatus.OK);
     }
 

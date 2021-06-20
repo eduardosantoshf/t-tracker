@@ -41,4 +41,11 @@ public class ProductController {
 
         return new ResponseEntity<>(productInfo, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> getAllProducts(HttpServletRequest request)
+            throws Exception {
+
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
+    }
 }
