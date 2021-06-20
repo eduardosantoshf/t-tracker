@@ -49,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers(HttpMethod.GET, "/store/driver/comment/{storeId}/{riderId}").permitAll()
             .antMatchers(HttpMethod.POST, "/store/order/{storeId}").permitAll()
             .antMatchers(HttpMethod.POST, "/location/{latitude}/{longitude}").permitAll()
+                .antMatchers(HttpMethod.GET, "/store/rider/{riderId}/{storeId}").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.addFilter(new JwtAuthenticationFilter(authenticationManager(),userRepository))

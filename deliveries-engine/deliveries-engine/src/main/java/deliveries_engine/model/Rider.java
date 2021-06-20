@@ -41,6 +41,7 @@ public class Rider extends User {
         this.status = 0;
         this.ratings = new ArrayList<>();
         this.comments = new ArrayList<>();
+        this.deliveries = new ArrayList<>();
     }
 
     @Autowired
@@ -49,6 +50,7 @@ public class Rider extends User {
         this.status = 0;
         this.ratings = new ArrayList<>();
         this.comments = new ArrayList<>();
+        this.deliveries = new ArrayList<>();
     }
 
     @Autowired
@@ -59,10 +61,11 @@ public class Rider extends User {
         this.longitude = longitude;
         this.ratings = new ArrayList<>();
         this.comments = new ArrayList<>();
+        this.deliveries = new ArrayList<>();
     }
 
     public String toString(){
-        return "Rider: " + this.getUsername() + " " + this.getEmail();
+        return "Rider: " + this.getUsername() + " " + this.getEmail() + "\nDeliveries: " + this.getDeliveries();
     }
 
     public int getStatus() {
@@ -120,4 +123,5 @@ public class Rider extends User {
     public void setComments(List<String> comments) {
         this.comments = comments;
     }
+
 }

@@ -47,8 +47,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/model/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/model/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/StoreServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deliveries_engine/service/StoreServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +94,18 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager" selected="JUnit.RiderServiceTest">
+  <component name="RunManager" selected="JUnit.StoreServiceTest">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RiderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="deliveries-engine" />
       <extension name="coverage">
@@ -158,7 +168,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StoreServiceTest.whenGetRatings_returnRatings" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StoreServiceTest.whenRequestClosestRider_getRider" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="deliveries-engine" />
       <extension name="coverage">
         <pattern>
@@ -168,7 +178,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="deliveries_engine.service" />
       <option name="MAIN_CLASS_NAME" value="deliveries_engine.service.StoreServiceTest" />
-      <option name="METHOD_NAME" value="whenGetRatings_returnRatings" />
+      <option name="METHOD_NAME" value="whenRequestClosestRider_getRider" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -205,21 +215,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
       <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
       <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
       <item itemvalue="JUnit.RiderServiceTest" />
       <item itemvalue="JUnit.StoreServiceTest" />
       <item itemvalue="Maven.deliveries-engine" />
       <item itemvalue="Spring Boot.DeliveriesEngineApplication" />
+      <item itemvalue="JUnit.StoreServiceTest.whenRequestClosestRider_getRider" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RiderServiceTest" />
         <item itemvalue="JUnit.StoreServiceTest" />
+        <item itemvalue="JUnit.StoreServiceTest.whenRequestClosestRider_getRider" />
+        <item itemvalue="JUnit.RiderServiceTest" />
         <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
         <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
-        <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
       </list>
     </recent_temporary>
   </component>
@@ -265,10 +275,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser" timestamp="1624139565451">
+    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser" timestamp="1624148069056">
       <screen x="0" y="23" width="1920" height="1123" />
     </state>
-    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1123@0.23.1920.1123" timestamp="1624139565451" />
+    <state x="773" y="275" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1123@0.23.1920.1123" timestamp="1624148069056" />
     <state x="508" y="209" key="FileChooserDialogImpl" timestamp="1623870133728">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
