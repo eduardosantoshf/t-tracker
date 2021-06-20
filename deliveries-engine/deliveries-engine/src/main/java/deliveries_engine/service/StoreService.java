@@ -14,6 +14,7 @@ public interface StoreService {
     List<String> updateComments(String comment, String token, int storeId, int riderId) throws Exception;
     List<Integer> getRatings(String token, int storeId, int riderId) throws Exception;
     List<String> getComments(String token, int storeId, int riderId) throws Exception;
+    Rider getRiderPosition(int riderId, String token, int storeId) throws Exception;
 
 
 }

@@ -196,6 +196,16 @@ public class StoreServiceImp implements StoreService{
         return comments;
     }
 
+    @Override
+    public Rider getRiderPosition(int riderId, String token, int storeId) throws Exception {
+
+        checkStoreToken(storeId, token);
+
+        Rider rider = riderRepository.findById(riderId);
+
+        return rider;
+    }
+
     public void checkStoreToken(int storeId, String token) throws Exception {
 
         Optional<Store> store = storeRepository.findById(storeId);
