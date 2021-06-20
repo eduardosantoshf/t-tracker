@@ -16,6 +16,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.reset;
 
@@ -61,6 +64,18 @@ public class RiderServiceTest {
     void whenUpdateStatus_thenStatusIsChanged() throws Exception {
         Rider rider = riderService.updateStatus(1, newRider);
         assertEquals(1, rider.getStatus());
+    }
+
+    @Test
+    void whenRequestDeliveries_getDeliveries(){
+        List<Delivery> deliveryList = new ArrayList<>();
+        Delivery d1 = new Delivery("deliver1", 3.5, 40.631858, -8.650833);
+        deliveryList.add(d1);
+        newRider.setDeliveries(deliveryList);
+
+        List<Delivery> response = riderService.getDeliveries(newRider);
+
+        assertEquals(deliveryList, response);
     }
 
 }
