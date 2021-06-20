@@ -22,9 +22,9 @@ public class Stock {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @JsonBackReference(value="order-stock")
     @ManyToOne
-    @JoinColumn(name="order_id", referencedColumnName = "id")
+    @JoinColumn(name="products_id")
+    @JsonBackReference("products")
     private Order order;
 
     @JsonBackReference

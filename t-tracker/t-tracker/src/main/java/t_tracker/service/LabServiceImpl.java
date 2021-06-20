@@ -31,27 +31,6 @@ public class LabServiceImpl implements LabService {
     @Autowired
     ProductRepository productRepository;
 
-    // @Override
-    // public Lab registerLab(Lab lab) {
-    //     coordRepository.save(lab.getLocation());
-    //     return labRepository.save(lab);
-    // }
-
-    // @Override
-    // public Lab getLabById(int id) {
-    //     Optional<Lab> labFound = labRepository.findById(id);
-
-    //     if (labFound.isPresent())
-    //         return labFound.get();
-
-    //     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
-    // }
-
-    // @Override
-    // public List<Lab> getAllLabs() {
-    //     return labRepository.findAll();
-    // }
-
     @Override
     public List<Stock> getLabStock() {
         List<Lab> labFound = labRepository.findAll();

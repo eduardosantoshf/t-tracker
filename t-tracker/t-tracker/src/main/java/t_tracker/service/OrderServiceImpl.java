@@ -64,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
         if (labFound.size() == 0)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Laboratory not found.");
 
-        for (Stock stockOrder : order.getListOfProducts())
+        for (Stock stockOrder : order.getProducts())
             if (!isInStock(labFound.get(0), stockOrder))
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Product out of stock.");
 
@@ -88,50 +88,59 @@ public class OrderServiceImpl implements OrderService {
 
         HttpEntity<String> requestContent = new HttpEntity<String>(orderRequest.toString(), httpHeaders);
 
+        ResponseEntity<JSONObject> response;
+
         try {
 
-            ResponseEntity<JSONObject> response = restTemplate.postForEntity(orderPlacementUrl + authDetails.getId(),
+            response = restTemplate.postForEntity(orderPlacementUrl + authDetails.getId(),
                     requestContent, JSONObject.class);
-
-                    // Order orderToStore = order;
-            order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
-            coordRepository.save(order.getPickupLocation());
-            coordRepository.save(order.getDeliverLocation());
-
-            // Store order products and quantities
-            List<Stock> orderStock = order.getListOfProducts();
-            Product actualProduct;
-
-            for (Stock s : orderStock) {
-                Optional<Product> productFound = productRepository.findByNameAndPriceAndType(
-                        s.getProduct().getName(), s.getProduct().getPrice(),
-                        s.getProduct().getType());
-
-                if (productFound.isPresent())
-                    actualProduct = productFound.get();
-                else
-                    actualProduct = productRepository.save(s.getProduct());
-                
-                s.setProduct(actualProduct);
-            }
-
-            Order orderStored = orderRepository.save(order);
-
-            for (Stock s : orderStock) {
-                labFound.get(0).removeStock(s);
-                s.setOrder(order);
-                stockRepository.save(s);
-            }
-
-            labRepository.save(labFound.get(0));
-
-            client.addOrder(orderStored);
-            clientRepository.save(client);
-
-            return orderStored;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
+
+        // Order orderToStore = order;
+        order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
+
+        // Store order products and quantities
+        List<Stock> orderStock = order.getProducts();
+        Product actualProduct;
+
+        for (Stock s : orderStock) {
+            Optional<Product> productFound = productRepository.findByNameAndPriceAndType(
+                    s.getProduct().getName(), s.getProduct().getPrice(),
+                    s.getProduct().getType());
+
+            if (productFound.isPresent())
+                actualProduct = productFound.get();
+            else
+                actualProduct = productRepository.save(s.getProduct());
+
+            s.setProduct(actualProduct);
+            labFound.get(0).removeStock(s);
+
+            stockRepository.save(s);
+        }
+
+        Order orderStored = orderRepository.save(order);
+        orderStock = orderStored.getProducts();
+
+        for (Stock s : orderStock) {
+            s.setOrder(order);
+            stockRepository.save(s);
+        }
+
+        coordRepository.save(order.getPickupLocation());
+        coordRepository.save(order.getDeliverLocation());
+
+        orderRepository.save(orderStored);
+
+        labRepository.save(labFound.get(0));
+
+        client.addOrder(orderStored);
+        clientRepository.save(client);
+
+        return orderStored;
+        
     }
 
     public Lab getLabDetails() {

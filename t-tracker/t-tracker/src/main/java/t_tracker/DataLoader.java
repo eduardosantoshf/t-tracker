@@ -20,7 +20,7 @@ public class DataLoader implements ApplicationRunner {
 
     private LabRepository labRepository;
     private CoordinatesRepository coordinatesRepository;
-    private String labInfo = "{\"name\":\"CT-TrackerDeliveries" + java.time.LocalDate.now() + "\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
+    private String labInfo = "{\"name\":\"CT-TrackerDeliveries" + java.time.LocalDateTime.now() + "\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
 
     @Autowired
     public DataLoader(LabRepository labRepository, CoordinatesRepository coordinatesRepository) {

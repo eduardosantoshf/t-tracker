@@ -176,7 +176,7 @@ class OrderServiceUnitTests {
         assertThat(placedOrder.getDeliverLocation(), is(testOrder1.getDeliverLocation()));
         assertThat(placedOrder.getPickupLocation(), is(testOrder1.getPickupLocation()));
         assertThat(placedOrder.getIsDelivered(), is(false));
-        assertThat(placedOrder.getListOfProducts(), is(testOrder1.getListOfProducts()));
+        assertThat(placedOrder.getProducts(), is(testOrder1.getProducts()));
         assertThat(placedOrder.getOrderTotal(), is(testOrder1.getOrderTotal()));
     }
 
