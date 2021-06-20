@@ -44,7 +44,7 @@ public class LabServiceImpl implements LabService {
         if (labFound.isPresent())
             return labFound.get();
 
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
     }
 
     @Override
@@ -93,7 +93,7 @@ public class LabServiceImpl implements LabService {
                 actualProduct = productFound.get();
             else
                 actualProduct = productRepository.save(stockToAdd.getProduct());
-            
+
             stockToAdd.setProduct(actualProduct);
 
             stockToAdd.setLab(actualLab);

@@ -1,6 +1,7 @@
 package t_tracker.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.model.Client;
+import t_tracker.model.Order;
 import t_tracker.repository.ClientRepository;
 
 @Service
@@ -39,6 +41,17 @@ public class ClientServiceImpl implements ClientService {
         Client clientToRegister = newClient;
 
         return clientRepository.save(clientToRegister);
+    }
+
+    @Override
+    public List<Order> getOrders(String clientUsername) {
+        Optional<Client> clientFound = clientRepository.findByUsername(clientUsername);
+        System.out.println(clientFound);
+        if (!clientFound.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found.");
+        }
+
+        return clientFound.get().getOrderlist();
     }
 
     @Override

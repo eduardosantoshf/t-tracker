@@ -26,6 +26,9 @@ public class Product {
     @Column(name = "type", nullable = false)
     private String type;
 
+    @Column(name = "description")
+    private String description;
+
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<Stock> orders;
@@ -33,10 +36,11 @@ public class Product {
     public Product() {}
 
     @Autowired
-    public Product(String name, Double price, String type) {
+    public Product(String name, Double price, String type, String description) {
         this.name = name;
         this.price = price;
         this.type = type;
+        this.description = description;
     }
 
     public int getId() {
@@ -65,6 +69,10 @@ public class Product {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     @Override

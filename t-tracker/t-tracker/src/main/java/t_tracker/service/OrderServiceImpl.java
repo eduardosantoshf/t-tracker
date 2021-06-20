@@ -2,6 +2,7 @@ package t_tracker.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import t_tracker.model.Client;
+import t_tracker.model.Lab;
 import t_tracker.model.Order;
+import t_tracker.model.Product;
 import t_tracker.model.Stock;
 import t_tracker.model.StoreDetails;
 import t_tracker.repository.ClientRepository;
 import t_tracker.repository.CoordinatesRepository;
 import t_tracker.repository.LabRepository;
 import t_tracker.repository.OrderRepository;
+import t_tracker.repository.ProductRepository;
+import t_tracker.repository.StockRepository;
 import t_tracker.repository.StoreDetailsRepository;
 
 @Service
@@ -39,6 +45,12 @@ public class OrderServiceImpl implements OrderService {
     private CoordinatesRepository coordRepository;
 
     @Autowired
+    private ProductRepository productRepository;
+    
+    @Autowired
+    private StockRepository stockRepository;
+
+    @Autowired
     private StoreDetailsRepository storeDetailsRepository;
 
     @Autowired
@@ -51,15 +63,19 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order placeAnOrder(Order order) {
 
-        if (!clientRepository.findByUsername(order.getClientUsername()).isPresent())
+        Optional<Client> clientFound = clientRepository.findById(order.getClientId());
+        Optional<Lab> labFound = labRepository.findById(order.getLabId());
+
+        if (!clientFound.isPresent())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found.");
-        if (!labRepository.findById(order.getLabId()).isPresent())
+        if (!labFound.isPresent())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Laboratory not found.");
 
         for (Stock stockOrder : order.getListOfProducts())
-            if (!isInStock(stockOrder))
+            if (!isInStock(labFound.get(), stockOrder))
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Product out of stock.");
 
+        Client client = clientFound.get();
         StoreDetails authDetails = getStoreDetails();
 
         httpHeaders = new HttpHeaders();
@@ -80,7 +96,36 @@ public class OrderServiceImpl implements OrderService {
             coordRepository.save(order.getPickupLocation());
             coordRepository.save(order.getDeliverLocation());
 
-            return orderRepository.save(order);
+            // Store order products and quantities
+            List<Stock> orderStock = order.getListOfProducts();
+            Product actualProduct;
+            for (Stock s : orderStock) {
+                Optional<Product> productFound = productRepository.findByNameAndPriceAndType(
+                        s.getProduct().getName(), s.getProduct().getPrice(),
+                        s.getProduct().getType());
+
+                if (productFound.isPresent())
+                    actualProduct = productFound.get();
+                else
+                    actualProduct = productRepository.save(s.getProduct());
+                
+                s.setProduct(actualProduct);
+            }
+
+            Order orderStored = orderRepository.save(order);
+
+            // Update lab stock
+            for (Stock s : orderStock) {
+                labFound.get().removeStock(s);
+                s.setOrder(order);
+                stockRepository.save(s);
+            }
+            labRepository.save(labFound.get());
+
+            client.addOrder(orderStored);
+            clientRepository.save(client);
+
+            return orderStored;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
@@ -96,7 +141,7 @@ public class OrderServiceImpl implements OrderService {
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
             HashMap<String, String> storeDetails = new HashMap<>();
-            storeDetails.put("name", "CovidTestsDeliveries");
+            storeDetails.put("name", "CovidTestsDeliveries2");
             storeDetails.put("ownerName", "TqsG101");
             JSONObject storeRequest = new JSONObject(storeDetails);
 
@@ -128,8 +173,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean isInStock(Stock products) {
-        List<Stock> labStocks = products.getLab().getStocks();
+    public boolean isInStock(Lab lab, Stock products) {
+        List<Stock> labStocks = lab.getStocks();
 
         for (Stock stock : labStocks)
             if (stock.getProduct().equals(products.getProduct()))

@@ -65,8 +65,8 @@ class OrderServiceUnitTests {
         Coordinates pickupLocation = new Coordinates(1.1111, 1.1111);
         Coordinates deliverLocation = new Coordinates(1.1112, 1.1112);
 
-        Product product1 = new Product("Covid Test 1", 49.99, "Infrared Test");
-        Product product2 = new Product("Covid Test 2", 99.99, "Molecular Test");
+        Product product1 = new Product("Covid Test 1", 49.99, "Infrared Test", "Infrared test description.");
+        Product product2 = new Product("Covid Test 2", 99.99, "Molecular Test", "Molecular test description.");
 
         Stock labStock1 = new Stock(product1, 3);
         Stock labStock2 = new Stock(product2, 4);
@@ -85,15 +85,15 @@ class OrderServiceUnitTests {
 
         Double orderTotal = orderStock1.getTotalPrice() + orderStock2.getTotalPrice();
 
-        testOrder1 = new Order(orderClient.getUsername(), pickupLocation, deliverLocation, orderTotal,
+        testOrder1 = new Order(orderClient.getId(), pickupLocation, deliverLocation, orderTotal,
                 pickupLab.getId(), listOfOrderProducts1);
-        testOrder2 = new Order(orderClient.getUsername(), pickupLocation, deliverLocation, orderTotal,
+        testOrder2 = new Order(orderClient.getId(), pickupLocation, deliverLocation, orderTotal,
                 pickupLab.getId(), listOfOrderProducts2);
         
         // Start of repository mocks //
 
         Mockito.when(labRepository.findById(testOrder1.getLabId())).thenReturn(Optional.of(pickupLab));
-        Mockito.when(clientRepository.findByUsername(testOrder1.getClientUsername()))
+        Mockito.when(clientRepository.findById(testOrder1.getClientId()))
                 .thenReturn(Optional.of(orderClient));
         Mockito.when(labRepository.findById(testOrder1.getLabId())).thenReturn(Optional.of(pickupLab));
         Mockito.when(storeDetailsRepository.findAll()).thenReturn(new ArrayList<>());
@@ -144,22 +144,22 @@ class OrderServiceUnitTests {
 
     @Test
     void whenProductIsInStock_thenReturnTrue() {
-        Product newProduct = new Product("Covid Test 1", 49.99, "Infrared Test");
+        Product newProduct = new Product("Covid Test 1", 49.99, "Infrared Test", "Infrared test description.");
         Stock newStock = new Stock(newProduct, 1);
         newStock.setLab(pickupLab);
 
-        boolean isInStock = orderService.isInStock(newStock);
+        boolean isInStock = orderService.isInStock(pickupLab, newStock);
 
         assertThat(isInStock, is(true));
     }
 
     @Test
     void whenProductIsNotInStock_thenReturnFalse() {
-        Product newProduct = new Product("Covid Test 1", 49.99, "Infrared Test");
+        Product newProduct = new Product("Covid Test 1", 49.99, "Infrared Test", "Infrared test description.");
         Stock newStock = new Stock(newProduct, 10);
         newStock.setLab(pickupLab);
 
-        boolean isInStock = orderService.isInStock(newStock);
+        boolean isInStock = orderService.isInStock(pickupLab, newStock);
 
         assertThat(isInStock, is(false));
     }
@@ -168,7 +168,7 @@ class OrderServiceUnitTests {
     void whenPlacingValidOrder_thenReturnValidOrder() {
         Order placedOrder = orderService.placeAnOrder(testOrder1);
 
-        assertThat(placedOrder.getClientUsername(), is(testOrder1.getClientUsername()));
+        assertThat(placedOrder.getClientId(), is(testOrder1.getClientId()));
         assertThat(placedOrder.getDeliverLocation(), is(testOrder1.getDeliverLocation()));
         assertThat(placedOrder.getPickupLocation(), is(testOrder1.getPickupLocation()));
         assertThat(placedOrder.getIsDelivered(), is(false));
