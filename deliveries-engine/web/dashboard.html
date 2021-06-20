@@ -34,6 +34,8 @@
     <!--====== Style CSS ======-->
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" /> <!-- must be cdn because of markers that remains online -->
+
     <style>
         .row-padding {
             padding: 10px;
@@ -99,16 +101,30 @@
             z-index: 2;
         }
     </style>
-    <script src="assets/js/auth.js"></script>
-    <script src="assets/js/dashboard.js"></script>
+    
 </head>
 
-<body onload="checkToken(); changeState(1); getAllDeliveries();">
+<body onload="checkToken(); changeState(1); getAllDeliveries(); getLocation(); closeModal();">
     <!--[if IE]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 
-
+  <div class="modal" id="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Nova Entrega!!!!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Desça a página até ao mapa para ver mais detalhes.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
     <!--====== PRELOADER PART START ======-->
 
     <div class="preloader">
@@ -173,9 +189,9 @@
     </header>
 
     <!--====== HEADER PART ENDS ======-->
-
     <div style="width:100%; height: 90px;"></div>
 
+    
     <section id="dashboard" class="slider-area pt-100" style="display: flex; justify-content: center; width:100%;">
         <div style="width:100%; padding: 10px; display: flex; ">
             <div class="dashboardNav">
@@ -210,6 +226,7 @@
                         
                     </tbody>
                 </table>
+                <div style="height:300px; width:100%;" id="client_store_map"></div>
             </div>
         </div>
     </section>
@@ -350,6 +367,15 @@
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
 
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> <!-- must be online so it can request online assets -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+    <script src="assets/js/stomp.js"></script>
+
+    <script src="assets/js/auth.js"></script>
+
+    <script src="assets/js/dashboard.js"></script>
 </body>
 
 </html>
