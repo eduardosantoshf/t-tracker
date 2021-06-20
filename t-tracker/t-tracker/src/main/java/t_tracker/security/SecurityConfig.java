@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import t_tracker.model.User;
 import t_tracker.repository.ClientRepository;
+import t_tracker.repository.UserRepository;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -23,6 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private ClientRepository ClientRepository;
 
     public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, ClientRepository ClientRepository) {
+    private ClientRepository userRepository;
+
+    public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, ClientRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
         this.ClientRepository = ClientRepository;
@@ -39,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/client/login").permitAll()
             .antMatchers(HttpMethod.POST, "/client/signup").permitAll()
+            .antMatchers(HttpMethod.GET, "/client/verify").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.addFilter(new JwtAuthenticationFilter(authenticationManager(),ClientRepository))

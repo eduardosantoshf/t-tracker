@@ -16,9 +16,8 @@ public class Order {
     @GeneratedValue
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name="client_id")
-    private Client client;
+    @Column(name="client_username")
+    private String clientUsername;
 
     @OneToOne
     @JoinColumn(name = "coordinates_id", insertable=false, updatable=false)
@@ -33,6 +32,9 @@ public class Order {
 
     @Column(name = "driver_id")
     private int driverId;
+
+    @Column(name="lab_id")
+    private int labId;
     
     @OneToMany(mappedBy = "order")
     private List<Stock> listOfProducts;
@@ -43,26 +45,26 @@ public class Order {
     public Order() {}
 
     @Autowired
-    public Order(Client client, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, List<Stock> listOfProducts) {
-        this.client = client;
+    public Order(String clientUsername, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, int labId, List<Stock> listOfProducts) {
+        this.clientUsername = clientUsername;
         this.pickupLocation = pickupLocation;
         this.deliverLocation = deliverLocation;
         this.orderTotal = orderTotal;
+        this.labId = labId;
         this.listOfProducts = listOfProducts;
         this.isDelivered = false;
     }
-
 
     public UUID getId() {
         return this.id;
     }
 
-    public Client getClient() {
-        return this.client;
+    public String getClientUsername() {
+        return this.clientUsername;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientUsername(String clientUsername) {
+        this.clientUsername = clientUsername;
     }
 
     public Coordinates getPickupLocation() {
@@ -97,6 +99,14 @@ public class Order {
         this.driverId = driverId;
     }
 
+    public int getLabId() {
+        return this.labId;
+    }
+
+    public void setLabId(int labId) {
+        this.labId = labId;
+    }
+
     public List<Stock> getListOfProducts() {
         return this.listOfProducts;
     }
@@ -125,13 +135,12 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(client, order.client) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(listOfProducts, order.listOfProducts) && isDelivered == order.isDelivered;
+        return Objects.equals(id, order.id) && Objects.equals(clientUsername, order.clientUsername) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(labId, order.labId) && Objects.equals(listOfProducts, order.listOfProducts) && isDelivered == order.isDelivered;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, client, pickupLocation, deliverLocation, orderTotal, driverId, listOfProducts, isDelivered);
+        return Objects.hash(id, clientUsername, pickupLocation, deliverLocation, orderTotal, driverId, labId, listOfProducts, isDelivered);
     }
-
 
 }

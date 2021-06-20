@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import t_tracker.service.JwtTokenService;
 import t_tracker.model.User;
 import t_tracker.repository.ClientRepository;
+import t_tracker.repository.UserRepository;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,6 +34,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private AuthenticationManager authenticationManager;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager,ClientRepository ClientRepository) {
+    private final ClientRepository userRepository;
+
+    private AuthenticationManager authenticationManager;
+
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager,ClientRepository userRepository) {
         this.authenticationManager = authenticationManager;
         //this.setAuthenticationManager(authenticationManager);
         this.ClientRepository = ClientRepository;
@@ -46,7 +52,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         HashMap<String, Object> responseBody = new HashMap<>();
 
         String username = ((UserDetails) authResult.getPrincipal()).getUsername();
-        Integer id = this.ClientRepository.findByUsername(username).get().getId();
+        //Integer id = this.ClientRepository.findByUsername(username).get().getId();
+        Integer id = this.userRepository.findByUsername(username).get().getId();
+        System.out.println(this.userRepository.findByUsername(username));
 
         List<String> authorities = authResult.getAuthorities().stream()
                 .map(role -> role.getAuthority())

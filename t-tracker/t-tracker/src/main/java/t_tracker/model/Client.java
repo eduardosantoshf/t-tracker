@@ -11,7 +11,7 @@ import java.util.Objects;
 @Table(name = "Client")
 public class Client extends User {
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "clientUsername", cascade = CascadeType.ALL)
     private List<Order> orderlist;
 
     public Client() {}

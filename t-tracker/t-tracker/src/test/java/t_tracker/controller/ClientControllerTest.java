@@ -53,7 +53,6 @@ class ClientControllerTest {
     @Test
     void whenSignupNewClient_thenReturnClientAnd200() throws Exception {
         
-        System.out.println("Test: " + willy);
         when( clientService.registerClient(willy) ).thenReturn(willy);
 
         mvc.perform( post("/client/signup").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(willy)) )

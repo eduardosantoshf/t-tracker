@@ -66,6 +66,10 @@ public class Stock {
         return this.lab;
     }
 
+    public void setLab(Lab lab) {
+        this.lab = lab;
+    }
+
     public Double getTotalPrice() {
         return this.getProduct().getPrice() * this.getQuantity();
     }
