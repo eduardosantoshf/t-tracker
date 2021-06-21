@@ -1,6 +1,8 @@
 package t_tracker;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+/*import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.http.HttpEntity;
@@ -46,6 +48,8 @@ public class DataLoader implements ApplicationRunner {
             if (response.getBody() == null) {
                 return;
             }
+            System.out.println("OLA E ADEUS");
+            System.out.println(response.getBody());
 
             Lab newLab = new Lab(response.getBody().getId(), response.getBody().getToken(), "CT-TrackerDeliveries",
                     labCoord);
@@ -57,4 +61,77 @@ public class DataLoader implements ApplicationRunner {
         }
 
     }
+}*/
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import t_tracker.model.Coordinates;
+import t_tracker.model.Lab;
+import t_tracker.repository.CoordinatesRepository;
+import t_tracker.repository.LabRepository;
+
+@Configuration
+class DataLoader {
+
+  private static final Logger log = LoggerFactory.getLogger(DataLoader.class);
+  private String labInfo = "{\"name\":\"CT-TrackerDeliveries" + java.time.LocalDateTime.now() + "\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
+  
+  @Bean
+  CommandLineRunner initDatabase(
+    LabRepository labRepository,
+    CoordinatesRepository coordinatesRepository
+  ) {
+    return args -> {
+      RestTemplate restTemplate = new RestTemplate();
+
+      HttpHeaders httpHeaders = new HttpHeaders();
+      httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+      Coordinates labCoord = new Coordinates(1.0, 2.0);
+
+      HttpEntity<String> requestContent = new HttpEntity<>(
+        labInfo,
+        httpHeaders
+      );
+      try {
+        ResponseEntity<Lab> response = restTemplate.postForEntity(
+          "backend-engine:8080/store",
+          requestContent,
+          Lab.class
+        );
+
+        if (response.getBody() == null) {
+          return;
+        }
+        System.out.println("OLA E ADEUS");
+        System.out.println(response.getBody());
+
+        Lab newLab = new Lab(
+          response.getBody().getId(),
+          response.getBody().getToken(),
+          "CT-TrackerDeliveries",
+          labCoord
+        );
+
+        coordinatesRepository.save(labCoord);
+        labRepository.save(newLab);
+      } catch (Exception e) {
+        System.out.println(e);
+      }
+    };
+  }
 }
