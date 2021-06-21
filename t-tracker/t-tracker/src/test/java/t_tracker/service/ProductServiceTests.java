@@ -41,6 +41,7 @@ class ProductServiceTests {
         validTestProduct2 = new Product("Blood Test 2", 9.99, "blood", "Quick and easy covid test but more expensive.");
 
         Mockito.when(productRepository.save(validTestProduct1)).thenReturn(validTestProduct1);
+        Mockito.when(productRepository.save(validTestProduct2)).thenThrow( ResponseStatusException.class );
         Mockito.when(productRepository.findAll())
                 .thenReturn(new ArrayList<>(Arrays.asList(validTestProduct1, validTestProduct2)));
         Mockito.when(productRepository.findById(validTestProduct1.getId())).thenReturn(Optional.of(validTestProduct1));
@@ -53,6 +54,15 @@ class ProductServiceTests {
         Product productStored = productService.registerProduct(validTestProduct1);
 
         assertThat(productStored, is(validTestProduct1));
+
+    }
+
+    @Test
+    void whenRegisterInvalidProduct_thenThrow409() {
+        ResponseStatusException thrownException = assertThrows(ResponseStatusException.class, () -> productService.registerProduct(validTestProduct2));
+
+        assertThat( thrownException.getStatus(), is(HttpStatus.CONFLICT) );
+        assertThat( thrownException.getReason(), is("Failed to register product.") );
 
     }
 

@@ -63,7 +63,7 @@ class LabServiceUnitTests {
         Mockito.when(productRepository.findByNameAndPriceAndType(testProduct1.getName(), testProduct1.getPrice(),
                 testProduct1.getType())).thenReturn(Optional.of(testProduct1));
         Mockito.when(productRepository.findByNameAndPriceAndType(testProduct2.getName(), testProduct2.getPrice(),
-                testProduct2.getType())).thenReturn(Optional.of(testProduct2));
+                testProduct2.getType())).thenReturn(Optional.ofNullable(null));
 
         Mockito.when(productRepository.save(testStock1.getProduct())).thenReturn(testStock1.getProduct());
         Mockito.when(productRepository.save(testStock2.getProduct())).thenReturn(testStock2.getProduct());
@@ -136,7 +136,7 @@ class LabServiceUnitTests {
     }
 
     @Test
-    void whenAddNewStocWithNoLab_thenThrow404LabNotFound() {
+    void whenAddNewStockWithNoLab_thenThrow404LabNotFound() {
         Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<>());
         Stock stockToAdd = new Stock(new Product("Brand New Test", 49.99, "deluxe", "Deluxe test."), 3);
 
@@ -151,6 +151,43 @@ class LabServiceUnitTests {
 
         verifyFindAllIsCalledOnce();
 
+    }
+
+    @Test
+    void whenRemoveValidStockFromLab_thenReturnResultingStock() {
+        Stock stockToRemove = new Stock(testProduct1, 1);
+
+        List<Stock> resultingStock = labService.removeStockFromLab(stockToRemove);
+
+        List<Stock> expectedStock = testLab.getStocks();
+        for (Stock s : expectedStock)
+            if (s.getProduct().equals(stockToRemove.getProduct())) {
+                s.setQuantity(s.getQuantity() + stockToRemove.getQuantity());
+                break;
+            }
+
+        assertThat(resultingStock.size(), is(2));
+        assertThat(resultingStock, is(expectedStock));
+        assertThat(resultingStock, is(testLab.getStocks()));
+
+        verifyFindAllIsCalledOnce();
+    }
+
+    @Test
+    void whenRemoveStockWithNoLab_thenReturn404() {
+        Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<>());
+        Stock stockToRemove = new Stock(new Product("Brand New Test", 29.99, "deluxe", "Deluxe test."), 1);
+
+        List<Stock> expectedStock = new ArrayList<>(testLab.getStocks());
+
+        ResponseStatusException throwException = assertThrows(ResponseStatusException.class,
+                () -> labService.removeStockFromLab(stockToRemove));
+
+        assertThat(throwException.getStatus(), is(HttpStatus.NOT_FOUND));
+        assertThat(throwException.getReason(), is("Lab not found."));
+        assertThat(testLab.getStocks(), is(expectedStock));
+
+        verifyFindAllIsCalledOnce();
     }
 
     private void verifyFindAllIsCalledOnce() {

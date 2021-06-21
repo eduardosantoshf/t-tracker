@@ -91,7 +91,7 @@ public class LabServiceImpl implements LabService {
     public List<Stock> removeStockFromLab(Stock stockToRemove) {
         List<Lab> labFound = labRepository.findAll();
 
-        if (labFound.size() == 0)
+        if (labFound.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, LAB_NOT_FOUND);
 
         Lab actualLab = labFound.get(0);
