@@ -56,7 +56,8 @@ public class DataLoader implements ApplicationRunner {
             coordinatesRepository.save(labCoord);
             labRepository.save(newLab);
         } catch (Exception e) {
-            return;
+            //return;
+            System.out.println(e);
         }
 
         productRepository.save(new Product("Split Test", 49.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 1.", "assets/images/product/split.png"));
