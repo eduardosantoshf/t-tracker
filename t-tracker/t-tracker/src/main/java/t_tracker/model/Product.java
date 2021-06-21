@@ -28,6 +28,9 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "foto")
+    private String foto;
+
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<Stock> orders;
@@ -40,6 +43,14 @@ public class Product {
         this.price = price;
         this.type = type;
         this.description = description;
+    }
+
+    public Product(String name, Double price, String type, String description, String foto) {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.description = description;
+        this.foto=foto;
     }
 
     public int getId() {

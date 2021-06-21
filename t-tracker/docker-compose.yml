@@ -12,8 +12,8 @@ services:
       MYSQL_TCP_PORT: 3307 # change default MYSQL port from 3306 to 3307
     ports:
       - '3307:3307' # -[port_outside_container]:[port_inside_container]
-    volumes:
-      - db-data1:/var/lib/mysql
+    #volumes:
+      #- db-data1:/var/lib/mysql
       #- ./mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
     expose:
     # opens port 3307 on the container
@@ -27,7 +27,7 @@ services:
       context: t-tracker
       dockerfile: Dockerfile
     ports:
-      - "8082:8082"
+      - "8081:8082"
     restart: on-failure
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3307/t-tracker
@@ -54,3 +54,5 @@ services:
 networks:
   main:
     name: main_network
+
+
