@@ -32,6 +32,7 @@ public class ClientController {
     @PostMapping(value = "/signup", consumes = "application/json")
     public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request)
             throws ResponseStatusException {
+                
         Client registeredClient;
 
         try {

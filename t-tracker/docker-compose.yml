@@ -18,10 +18,8 @@ services:
     expose:
     # opens port 3307 on the container
       - '3307'
-    networks:
-      - main
   
-  backend:
+  backend-tracker:
     image: store-backend
     build:
       context: t-tracker
@@ -37,7 +35,7 @@ services:
     depends_on: 
       - db
     networks:
-      - main
+      - default
 
   client:
     build: web
@@ -47,12 +45,11 @@ services:
       - ./src:/etc/share/nginx/html
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on: 
-        - backend
-    networks:
-      - main
+        - backend-tracker
 
 networks:
-  main:
-    name: main_network2
+  default:
+      external:
+          name: rede
 
 

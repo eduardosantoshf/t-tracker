@@ -19,12 +19,13 @@ public class Client extends User {
         this.orderlist = new ArrayList<>();
     }
 
+    @Autowired
     public Client(String name, String username, String email, String password) {
         super(name, username, email, password);
         this.orderlist = new ArrayList<>();
     }
 
-    @Autowired
+    
     public Client(String name, String username, String email, String password, int phoneNumber, Coordinates homeLocation) {
         super(name, username, email, password, phoneNumber, homeLocation);
         this.orderlist = new ArrayList<>();

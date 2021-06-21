@@ -43,12 +43,14 @@ public class DataLoader implements ApplicationRunner {
         HttpEntity<String> requestContent = new HttpEntity<>(labInfo, httpHeaders);
         try {
 
-            ResponseEntity<Lab> response = restTemplate.postForEntity("http://localhost:8080/store", requestContent,
+            ResponseEntity<Lab> response = restTemplate.postForEntity("http://backend-engine:8080/store", requestContent,
                     Lab.class);
 
             /*if (response.getBody() == null) {
                 return;
             }*/
+
+            System.out.println("entrou");
 
             Lab newLab = new Lab(response.getBody().getId(), response.getBody().getToken(), "CT-TrackerDeliveries",
                     labCoord);
@@ -56,6 +58,7 @@ public class DataLoader implements ApplicationRunner {
             coordinatesRepository.save(labCoord);
             labRepository.save(newLab);
         } catch (Exception e) {
+            System.out.println(e);
             return;
         }
 
