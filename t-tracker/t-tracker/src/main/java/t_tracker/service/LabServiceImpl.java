@@ -37,6 +37,8 @@ public class LabServiceImpl implements LabService {
     public List<Stock> getLabStock() {
         List<Lab> labFound = labRepository.findAll();
 
+        System.out.println(labFound);
+
         if (labFound.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, LAB_NOT_FOUND);
 
@@ -46,6 +48,8 @@ public class LabServiceImpl implements LabService {
     @Override
     public List<Stock> addStockToLab(Stock stockToAdd) {
         List<Lab> labFound = labRepository.findAll();
+
+        System.out.println(labFound);
 
         if (labFound.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, LAB_NOT_FOUND);

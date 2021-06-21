@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
 
-        if (response == null)
+        if (response.getBody() == null)
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Error getting response from drivers api.");
 
         order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
@@ -154,6 +154,7 @@ public class OrderServiceImpl implements OrderService {
         List<Lab> allDetails = labRepository.findAll();
 
         Lab authDetails;
+        System.out.println("Check1");
         if (allDetails.size() == 0) {
             httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -162,11 +163,12 @@ public class OrderServiceImpl implements OrderService {
 
             ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest,
                     Lab.class);
-
+            System.out.println(response);
             authDetails = labRepository.save(response.getBody());
 
         } else {
             authDetails = allDetails.get(0);
+            System.out.println(authDetails);
 
         }
 

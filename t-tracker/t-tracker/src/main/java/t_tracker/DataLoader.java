@@ -29,8 +29,6 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
-        if (labRepository.findAll().isEmpty())
-            return;
 
         RestTemplate restTemplate = new RestTemplate();
 
