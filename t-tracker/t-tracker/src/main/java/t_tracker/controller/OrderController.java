@@ -41,7 +41,7 @@ public class OrderController {
             client = clientService.getClientByUsername(principal.getName());
 
         } catch(ResponseStatusException e) {
-            return new ResponseEntity<String>("Unauthorized client.", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Unauthorized client.", HttpStatus.FORBIDDEN);
         }
 
         Product orderProduct;

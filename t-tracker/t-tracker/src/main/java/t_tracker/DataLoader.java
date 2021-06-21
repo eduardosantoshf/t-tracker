@@ -5,7 +5,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -46,15 +45,18 @@ public class DataLoader implements ApplicationRunner {
             ResponseEntity<Lab> response = restTemplate.postForEntity("http://localhost:8080/store", requestContent,
                     Lab.class);
 
-            if (response.getStatusCode() != HttpStatus.OK)
+            if (response.getBody() == null) {
                 return;
+            }
 
             Lab newLab = new Lab(response.getBody().getId(), response.getBody().getToken(), "CT-TrackerDeliveries",
                     labCoord);
 
             coordinatesRepository.save(labCoord);
             labRepository.save(newLab);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            return;
+        }
 
     }
 }

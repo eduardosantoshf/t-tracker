@@ -2,8 +2,6 @@ package t_tracker.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity

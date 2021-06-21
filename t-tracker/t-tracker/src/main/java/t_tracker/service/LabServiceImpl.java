@@ -31,12 +31,14 @@ public class LabServiceImpl implements LabService {
     @Autowired
     ProductRepository productRepository;
 
+    final static String LAB_NOT_FOUND = "Lab not found.";
+
     @Override
     public List<Stock> getLabStock() {
         List<Lab> labFound = labRepository.findAll();
 
-        if (labFound.size() == 0)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
+        if (labFound.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, LAB_NOT_FOUND);
 
         return labFound.get(0).getStocks();
     }
@@ -45,8 +47,8 @@ public class LabServiceImpl implements LabService {
     public List<Stock> addStockToLab(Stock stockToAdd) {
         List<Lab> labFound = labRepository.findAll();
 
-        if (labFound.size() == 0)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
+        if (labFound.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, LAB_NOT_FOUND);
 
         Lab actualLab = labFound.get(0);
 
@@ -90,7 +92,7 @@ public class LabServiceImpl implements LabService {
         List<Lab> labFound = labRepository.findAll();
 
         if (labFound.size() == 0)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, LAB_NOT_FOUND);
 
         Lab actualLab = labFound.get(0);
 

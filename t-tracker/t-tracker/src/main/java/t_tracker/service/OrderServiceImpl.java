@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
                 "" + order.getOrderTotal() * 0.1, order.getDeliverLocation().getLatitude().toString(),
                 order.getDeliverLocation().getLongitude().toString());
 
-        HttpEntity<String> requestContent = new HttpEntity<String>(orderRequest.toString(), httpHeaders);
+        HttpEntity<String> requestContent = new HttpEntity<>(orderRequest.toString(), httpHeaders);
 
         ResponseEntity<JSONObject> response;
 
@@ -103,8 +103,8 @@ public class OrderServiceImpl implements OrderService {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
 
-        if (response.getStatusCode() != HttpStatus.OK)
-            return null;
+        if (response.getBody() == null)
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Error getting response from drivers api.");
 
         order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
 
@@ -158,7 +158,7 @@ public class OrderServiceImpl implements OrderService {
             httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-            HttpEntity<String> labDetailsRequest = new HttpEntity<String>(labInfo, httpHeaders);
+            HttpEntity<String> labDetailsRequest = new HttpEntity<>(labInfo, httpHeaders);
 
             ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest,
                     Lab.class);

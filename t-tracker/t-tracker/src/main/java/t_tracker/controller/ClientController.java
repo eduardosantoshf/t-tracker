@@ -33,7 +33,6 @@ public class ClientController {
     public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request)
             throws ResponseStatusException {
         Client registeredClient;
-        System.out.println(client);
 
         try {
             registeredClient = clientService.registerClient(client);
@@ -73,7 +72,6 @@ public class ClientController {
         try {
             JwtTokenService.verifyToken(token);
         } catch (JwtException e) {
-            // e.printStackTrace();
             throw new Exception("FAILED TO VERIFY TOKEN");
         }
         return "SUCCESS";
