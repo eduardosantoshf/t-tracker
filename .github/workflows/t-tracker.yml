@@ -27,7 +27,6 @@ on:
       - '**.pdf'
       - '**.docx'
       - '**.gitignore'
-    branches: [ main, develop ]
 
   # allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
