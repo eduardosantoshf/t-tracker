@@ -85,6 +85,10 @@ public class Product {
         return this.description;
     }
 
+    public String getFoto() {
+        return this.foto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -110,6 +114,7 @@ public class Product {
             ", price='" + getPrice() + "'" +
             ", type='" + getType() + "'" +
             ", description='" + getDescription() + "'" +
+            ", foto='" + getFoto() + "'" +
             "}";
     }    
 
