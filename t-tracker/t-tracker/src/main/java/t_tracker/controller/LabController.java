@@ -25,7 +25,7 @@ public class LabController {
     private LabService labService;
 
     @GetMapping(value = "/stock")
-    public ResponseEntity<?> getLabsStock(HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> getLabsStock(HttpServletRequest request) throws ResponseStatusException {
         List<Stock> labStock;
 
         try {
@@ -38,7 +38,7 @@ public class LabController {
     }
 
     @PostMapping(value = "/stock/add", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> addLabStock(@RequestBody Stock stock, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> addLabStock(@RequestBody Stock stock, HttpServletRequest request) throws ResponseStatusException {
         List<Stock> labStockAfterAdd;
 
         try {
@@ -51,7 +51,7 @@ public class LabController {
     }
 
     @PostMapping(value = "/stock/remove", consumes = "application/json")
-    public ResponseEntity<?> removeLabStock(@RequestBody Stock stock, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> removeLabStock(@RequestBody Stock stock, HttpServletRequest request) throws ResponseStatusException {
         List<Stock> labStockAfterRemoval;
 
         try {

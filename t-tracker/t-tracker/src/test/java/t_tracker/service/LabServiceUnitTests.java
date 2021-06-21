@@ -27,7 +27,7 @@ import t_tracker.model.Coordinates;
 import t_tracker.repository.*;
 
 @ExtendWith(MockitoExtension.class)
-public class LabServiceUnitTests {
+class LabServiceUnitTests {
 
     @Mock(lenient = true)
     private LabRepository labRepository;

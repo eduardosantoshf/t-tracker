@@ -68,7 +68,12 @@ public class OrderServiceImpl implements OrderService {
             if (!isInStock(labFound.get(0), stockOrder))
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Product out of stock.");
 
-        Client client = clientRepository.findById(order.getClientId()).get();
+        Optional<Client> potentialClient = clientRepository.findById(order.getClientId());
+
+        if (!potentialClient.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found.");
+
+        Client client = potentialClient.get();
 
         order.setPickupLocation(labFound.get(0).getLocation());
         order.setLabId(labFound.get(0).getId());
@@ -98,7 +103,9 @@ public class OrderServiceImpl implements OrderService {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
 
-        // Order orderToStore = order;
+        if (response.getStatusCode() != HttpStatus.OK)
+            return null;
+
         order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
 
         // Store order products and quantities
@@ -146,7 +153,7 @@ public class OrderServiceImpl implements OrderService {
     public Lab getLabDetails() {
         List<Lab> allDetails = labRepository.findAll();
 
-        Lab authDetails = new Lab();
+        Lab authDetails;
         if (allDetails.size() == 0) {
             httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -183,11 +190,11 @@ public class OrderServiceImpl implements OrderService {
         List<Stock> labStocks = lab.getStocks();
 
         for (Stock stock : labStocks)
-            if (stock.getProduct().equals(products.getProduct()))
+            if (stock.getProduct().equals(products.getProduct())) {
                 if (stock.getQuantity() >= products.getQuantity())
                     return true;
-                else
-                    return false;
+                return false;
+            }
 
         return false;
     }

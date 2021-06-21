@@ -15,7 +15,7 @@ import t_tracker.model.Product;
 import t_tracker.model.Stock;
 
 @DataJpaTest
-public class StockRepositoryTests {
+class StockRepositoryTests {
     
     @Autowired
     private TestEntityManager entityManager;

@@ -28,7 +28,7 @@ import t_tracker.service.JwtTokenService;
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureTestDatabase(replace = Replace.ANY)
-public class ProductControllerIntegrationTests {
+class ProductControllerIntegrationTests {
     
     @Autowired
     private MockMvc mvc;

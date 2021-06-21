@@ -33,7 +33,7 @@ public class OrderController {
     ClientService clientService;
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<?> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request) throws ResponseStatusException {
         Principal principal = request.getUserPrincipal();
         Client client;
 

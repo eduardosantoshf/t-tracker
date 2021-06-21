@@ -34,7 +34,7 @@ import t_tracker.service.LabService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TTrackerApplication.class)
 @AutoConfigureMockMvc
-public class LabControllerTest {
+class LabControllerTest {
 
     @Autowired
     private MockMvc mvc;

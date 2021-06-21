@@ -24,7 +24,7 @@ import t_tracker.model.Product;
 import t_tracker.repository.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductServiceTests {
+class ProductServiceTests {
 
     @Mock(lenient = true)
     private ProductRepository productRepository;

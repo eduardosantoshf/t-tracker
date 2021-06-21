@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import t_tracker.model.Product;
 
 @DataJpaTest
-public class ProductRepositoryTests {
+class ProductRepositoryTests {
 
     @Autowired
     private TestEntityManager entityManager;

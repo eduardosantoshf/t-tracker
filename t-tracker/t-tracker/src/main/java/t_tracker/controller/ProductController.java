@@ -24,7 +24,7 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<?> registerNewProduct(@RequestBody Product product, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> registerNewProduct(@RequestBody Product product, HttpServletRequest request) throws ResponseStatusException {
         Product productInfo;
 
         try {
@@ -38,7 +38,7 @@ public class ProductController {
     
     @GetMapping(value = "/{prodId}")
     public ResponseEntity<?> getProductInfo(@PathVariable(value = "prodId") int prodId, HttpServletRequest request)
-            throws Exception {
+            throws ResponseStatusException {
         Product productInfo;
 
         try {
@@ -52,7 +52,7 @@ public class ProductController {
 
     @GetMapping(value = "/all")
     public ResponseEntity<?> getAllProducts(HttpServletRequest request)
-            throws Exception {
+            throws ResponseStatusException {
 
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
