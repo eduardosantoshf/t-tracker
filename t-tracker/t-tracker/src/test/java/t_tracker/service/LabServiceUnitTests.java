@@ -96,14 +96,14 @@ class LabServiceUnitTests {
 
     @Test
     void whenAddExistingStock_thenSumQuantityToStock() {
-        Stock stockToAdd = new Stock(testProduct1, 1);
+        Stock stockToAdd = new Stock(testProduct2, 1);
 
-        List<Stock> resultingStock = labService.addStockToLab(stockToAdd);
+        List<Stock> resultingStock = labService.addStockToLab(testStock2);
 
         List<Stock> expectedStock = testLab.getStocks();
         for (Stock s : expectedStock)
-            if (s.getProduct().equals(stockToAdd.getProduct())) {
-                s.setQuantity(s.getQuantity() + stockToAdd.getQuantity());
+            if (s.getProduct().equals(testStock2.getProduct())) {
+                s.setQuantity(s.getQuantity() + testStock2.getQuantity());
                 break;
             }
 

@@ -62,32 +62,16 @@ public class Lab {
         return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getToken() {
         return this.token;
-    }
-
-    public void setId(String token) {
-        this.token = token;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Coordinates getLocation() {
         return this.location;
-    }
-
-    public void setLocation(Coordinates location) {
-        this.location = location;
     }
 
     public List<Stock> getStocks() {
