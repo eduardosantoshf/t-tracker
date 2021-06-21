@@ -53,6 +53,6 @@ services:
 
 networks:
   main:
-    name: main_network
+    name: main_network2
 
 
