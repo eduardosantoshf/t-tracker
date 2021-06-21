@@ -3,11 +3,14 @@ package t_tracker.controller;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.hamcrest.core.Is.is;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -64,15 +67,15 @@ class OrderControllerTest {
             new Coordinates(1.23457, 2.34566),
             49.99,
             1,
-            new ArrayList<>(Arrays.asList(new Stock(product, 1)))
+            new ArrayList<>(Arrays.asList(new Stock(product, 3)))
         );
     }
 
     @Test
     void whenPlaceAValidOrder_thenReturnValidOrder() throws Exception {
-        when( orderService.placeAnOrder(resultOrder) ).thenReturn(resultOrder);
-        when( productService.getProduct(product.getId()) ).thenReturn(product);
         when( clientService.getClientByUsername(client.getUsername()) ).thenReturn(client);
+        when( productService.getProduct(1) ).thenReturn(product);
+        when( orderService.placeAnOrder(resultOrder) ).thenReturn(resultOrder);
 
         mvc.perform( post("/order").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
             .andExpect( status().isOk() );
@@ -80,12 +83,32 @@ class OrderControllerTest {
 
     @Test
     void whenPlaceOrderWithInvalidClient_thenReturn404() throws Exception {
-        when( clientService.getClientByUsername(client.getUsername()) ).thenThrow( new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found."));
-        when( productService.getProduct(product.getId()) ).thenReturn(product);
-        when( orderService.placeAnOrder(any(Order.class)) ).thenThrow( new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found."));
+        when( clientService.getClientByUsername(client.getUsername()) ).thenThrow( new ResponseStatusException(HttpStatus.FORBIDDEN, "Unauthorized client."));
 
         mvc.perform( post("/order").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
             .andExpect( status().isForbidden() );
+    
+    }
+
+    @Test
+    void whenPlaceOrderWithInvalidProduct_thenReturn404() throws Exception {
+        when( clientService.getClientByUsername(client.getUsername()) ).thenReturn(client);
+        when( productService.getProduct(1) ).thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found."));
+
+        mvc.perform( post("/order").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
+            .andExpect( status().isNotFound() );
+    
+    }
+
+    @Test
+    void whenPlaceInvalidOrder_thenReturn404() throws Exception {
+        when( clientService.getClientByUsername(client.getUsername()) ).thenReturn(client);
+        when( productService.getProduct(1) ).thenReturn(product);
+        when( orderService.placeAnOrder(any(Order.class)) ).thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Laboratory not found."));
+
+        mvc.perform( post("/order").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testOrder)) )
+            .andExpect( status().isNotFound() )
+            .andExpect( jsonPath("$", is("Laboratory not found.")) );
     
     }
 
