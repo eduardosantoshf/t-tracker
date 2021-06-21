@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
@@ -11,6 +13,7 @@ public class Coordinates {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Integer id;
 
     @Column(name = "latitude", nullable = false)
@@ -19,15 +22,19 @@ public class Coordinates {
     @Column(name = "longitude", nullable = false)
     private Double longitude;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "location")
     private Lab lab;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "homeLocation")
     private User user;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "pickupLocation")
     private Order pickupOrder;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "deliverLocation")
     private Order deliverOrder;
 
@@ -39,7 +46,7 @@ public class Coordinates {
         this.longitude = longitude;
     }
 
-    private Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -67,12 +74,12 @@ public class Coordinates {
             return false;
         }
         Coordinates coordinates = (Coordinates) o;
-        return id == coordinates.id && Objects.equals(latitude, coordinates.latitude) && Objects.equals(longitude, coordinates.longitude) && Objects.equals(lab, coordinates.lab) && Objects.equals(user, coordinates.user) && Objects.equals(pickupOrder, coordinates.pickupOrder) && Objects.equals(deliverOrder, coordinates.deliverOrder);
+        return id == coordinates.id && Objects.equals(latitude, coordinates.latitude) && Objects.equals(longitude, coordinates.longitude);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, latitude, longitude, lab, user, pickupOrder, deliverOrder);
+        return Objects.hash(id, latitude, longitude);
     }
 
     @Override

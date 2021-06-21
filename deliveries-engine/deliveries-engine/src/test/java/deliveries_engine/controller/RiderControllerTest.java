@@ -1,6 +1,8 @@
 package deliveries_engine.controller;
 
+import deliveries_engine.model.Delivery;
 import deliveries_engine.service.JwtTokenService;
+import io.cucumber.java.hu.De;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.junit.After;
 import org.junit.Before;
@@ -22,6 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -32,6 +35,9 @@ import deliveries_engine.JsonUtil;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;
 
@@ -99,27 +105,37 @@ class RiderControllerTest {
     }
 
     @Test
-    void whenSignUpInvalidRider_thenReturnConflictStatusCode() {
-        // given( riderService.registerRider(newRider) ).willReturn(null);
+    void whenUpdateValidRiderStatus_thenIsOk() throws Exception {
+        Rider rider = new Rider("name", "email", "username", "pw", 912345678, "address", "city", "zip", 40.631858, -8.650833);
 
-        // mvc.perform( post("/rider/signup").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(newRider)) )
-        //     .andExpect( status().isConflict() );
+        String token = JwtTokenService.generateToken("olezito", new DefaultClaims());
+        assertNotNull(token);
+
+        given(riderService.updateStatus(any(Integer.class), any(Rider.class))).willReturn(rider);
+
+        mvc.perform(post("/rider/status/1").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(rider)) )
+                .andExpect(status().isOk());
     }
 
     @Test
-    void whenUpdateValidRiderStatus_thenIsOk() {
-        // given( riderService.updateRiderStatus(newRider) ).willReturn(newRider);
+    void whenRequestRiderDeliveries_thenGetDeliveries() throws Exception {
+        Rider rider = new Rider("name", "email", "username", "pw", 912345678, "address", "city", "zip", 40.631858, -8.650833);
+        Delivery d1 = new Delivery("deliver1", 3.5, 40.631858, -8.650833);
+        rider.addDelivery(d1);
 
-        // mvc.perform( post("/rider/status/0").contentType(MediaType.APPLICATION_JSON) )
-        //     .andExpect( status().isOk() );
+        List<Delivery> deliveryList = new ArrayList<>();
+        deliveryList.add(d1);
+
+        String token = JwtTokenService.generateToken("olezito", new DefaultClaims());
+        assertNotNull(token);
+
+        given(riderService.getDeliveries(any(Rider.class))).willReturn(deliveryList);
+
+        mvc.perform(get("/rider/deliveries/" + rider.getId()).header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
     }
 
-    @Test
-    void whenUpdateInvalidRiderStatus_thenIsConflict() {
-        // given( riderService.updateRiderStatus(newRider) ).willReturn(newRider);
 
-        // mvc.perform( post("/rider/status/99").contentType(MediaType.APPLICATION_JSON) )
-        //     .andExpect( status().isConflict() );
-    }
 
 }

@@ -1,8 +1,11 @@
 package t_tracker.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,13 +25,21 @@ public class Product {
     @Column(name = "type", nullable = false)
     private String type;
 
+    @Column(name = "description")
+    private String description;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private List<Stock> orders;
+
     public Product() {}
 
     @Autowired
-    public Product(String name, Double price, String type) {
+    public Product(String name, Double price, String type, String description) {
         this.name = name;
         this.price = price;
         this.type = type;
+        this.description = description;
     }
 
     public int getId() {
@@ -59,6 +70,10 @@ public class Product {
         this.type = type;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -67,12 +82,22 @@ public class Product {
             return false;
         }
         Product product = (Product) o;
-        return id == product.id && Objects.equals(name, product.name) && Objects.equals(price, product.price) && Objects.equals(type, product.type);
+        return Objects.equals(name, product.name) && Objects.equals(price, product.price) && Objects.equals(type, product.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, type);
+        return Objects.hash(name, price, type);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", price='" + getPrice() + "'" +
+            ", type='" + getType() + "'" +
+            "}";
     }
 
 }

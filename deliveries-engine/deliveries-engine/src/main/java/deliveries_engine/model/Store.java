@@ -1,5 +1,6 @@
 package deliveries_engine.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -38,6 +39,7 @@ public class Store {
     public Store(String name, String ownerName) {
         this.name = name;
         this.ownerName = ownerName;
+        this.deliveries = new ArrayList<>();
     }
 
     @Autowired
@@ -46,6 +48,7 @@ public class Store {
         this.ownerName = ownerName;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.deliveries = new ArrayList<>();
     }
 
     public int getId() {

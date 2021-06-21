@@ -4,7 +4,7 @@ name: t-tracker CI/CD Pipeline
 on:
   # triggers the workflow on push for the develop and deployment branches
   push:
-    branches: [ develop, deployment ]
+    branches: [ develop, deployment, feature/lab-stock-management ]
     paths-ignore:
       # don't run this workflow when the are pushes, and there are only changes for this directories:
       - 'reporting/**'
@@ -27,6 +27,7 @@ on:
       - '**.pdf'
       - '**.docx'
       - '**.gitignore'
+    branches: [ main, develop ]
 
   # allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
