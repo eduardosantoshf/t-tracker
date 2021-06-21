@@ -46,7 +46,7 @@ public class LabController {
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(e.getReason(), e.getStatus());
         }
-        System.out.println(labStockAfterAdd);
+
         return new ResponseEntity<>(labStockAfterAdd, HttpStatus.OK);
     }
 

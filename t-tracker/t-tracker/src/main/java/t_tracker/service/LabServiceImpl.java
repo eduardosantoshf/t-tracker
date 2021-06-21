@@ -35,8 +35,6 @@ public class LabServiceImpl implements LabService {
     public List<Stock> getLabStock() {
         List<Lab> labFound = labRepository.findAll();
 
-        System.out.println(labFound);
-
         if (labFound.size() == 0)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
 

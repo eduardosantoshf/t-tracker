@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,6 +22,19 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+
+    @PostMapping(consumes = "application/json")
+    public ResponseEntity<?> registerNewProduct(@RequestBody Product product, HttpServletRequest request) throws Exception {
+        Product productInfo;
+
+        try {
+            productInfo = productService.registerProduct(product);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatus());
+        }
+
+        return new ResponseEntity<>(productInfo, HttpStatus.OK);
+    }
     
     @GetMapping(value = "/{prodId}")
     public ResponseEntity<?> getProductInfo(@PathVariable(value = "prodId") int prodId, HttpServletRequest request)

@@ -33,6 +33,7 @@ public class ClientController {
     public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request)
             throws Exception {
         Client registeredClient;
+        System.out.println(client);
 
         try {
             registeredClient = clientService.registerClient(client);

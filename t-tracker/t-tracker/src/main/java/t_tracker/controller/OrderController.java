@@ -38,9 +38,8 @@ public class OrderController {
         Client client;
 
         try {
-            System.out.println(principal.getName());
             client = clientService.getClientByUsername(principal.getName());
-            System.out.println(client);
+
         } catch(ResponseStatusException e) {
             return new ResponseEntity<String>("Unauthorized client.", HttpStatus.FORBIDDEN);
         }
@@ -50,7 +49,6 @@ public class OrderController {
 
         try {
             for (OrderDTO order : productList) {
-                System.out.println(order);
                 orderProduct = productService.getProduct(order.getProductId());
                 orderPlaced.addProduct(new Stock(orderProduct, order.getQuantity()));
             }

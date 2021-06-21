@@ -127,7 +127,6 @@ public class LabServiceUnitTests {
 
         List<Stock> resultingStock = labService.addStockToLab(stockToAdd);
 
-        System.out.println(resultingStock);
         assertThat(resultingStock.size(), is(3));
         assertThat(resultingStock, is(expectedStock));
         assertThat(resultingStock, is(testLab.getStocks()));
