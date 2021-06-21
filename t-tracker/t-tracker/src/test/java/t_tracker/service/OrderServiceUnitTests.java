@@ -10,6 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -64,10 +65,11 @@ class OrderServiceUnitTests {
     void setUp() {
         Coordinates deliverLocation = new Coordinates(1.1112, 1.1112);
         // Start of order building section //
-        Client orderClient = new Client("Client Name", "ClientUsername", "email@org.com", "password1234", 123321231, deliverLocation);
+        Client orderClient = new Client("Client Name", "ClientUsername", "email@org.com", "password1234", 123321231,
+                deliverLocation);
 
         Coordinates pickupLocation = new Coordinates(1.1111, 1.1111);
-        
+
         Product product1 = new Product("Covid Test 1", 49.99, "Infrared Test", "Infrared test description.");
         Product product2 = new Product("Covid Test 2", 99.99, "Molecular Test", "Molecular test description.");
 
@@ -88,39 +90,41 @@ class OrderServiceUnitTests {
 
         Double orderTotal = orderStock1.getTotalPrice() + orderStock2.getTotalPrice();
 
-        testOrder1 = new Order(1, pickupLocation, deliverLocation, orderTotal,
-                pickupLab.getId(), listOfOrderProducts1);
-        testOrder2 = new Order(1, pickupLocation, deliverLocation, orderTotal,
-                pickupLab.getId(), listOfOrderProducts2);
-        
+        testOrder1 = new Order(1, pickupLocation, deliverLocation, orderTotal, pickupLab.getId(), listOfOrderProducts1);
+        testOrder2 = new Order(1, pickupLocation, deliverLocation, orderTotal, pickupLab.getId(), listOfOrderProducts2);
+
         // Start of repository mocks //
         Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<>(Arrays.asList(pickupLab)));
-        
-        Mockito.when(clientRepository.findById(testOrder1.getClientId()))
-                .thenReturn(Optional.of(orderClient));
-        
-        Mockito.when(orderRepository.save(testOrder1)).thenReturn(testOrder1);
 
-        Mockito.when(productRepository.findByNameAndPriceAndType(
-            orderStock1.getProduct().getName(), orderStock1.getProduct().getPrice(),
-            orderStock1.getProduct().getType())).thenReturn(Optional.of(orderStock1.getProduct()));
-        Mockito.when(productRepository.findByNameAndPriceAndType(
-            orderStock2.getProduct().getName(), orderStock2.getProduct().getPrice(),
-            orderStock2.getProduct().getType())).thenReturn(Optional.of(orderStock2.getProduct()));
-        
+        Mockito.when(clientRepository.findById(testOrder1.getClientId())).thenReturn(Optional.of(orderClient));
+
+        Mockito.when(orderRepository.save(testOrder1)).thenReturn(testOrder1);
+        Mockito.when(orderRepository.save(testOrder2)).thenReturn(testOrder2);
+        Mockito.when(productRepository.save(product2)).thenReturn(product2);
+
+        Mockito.when(productRepository.findByNameAndPriceAndType(orderStock1.getProduct().getName(),
+                orderStock1.getProduct().getPrice(), orderStock1.getProduct().getType()))
+                .thenReturn(Optional.of(orderStock1.getProduct()));
+        Mockito.when(productRepository.findByNameAndPriceAndType(orderStock2.getProduct().getName(),
+                orderStock2.getProduct().getPrice(), orderStock2.getProduct().getType()))
+                .thenReturn(Optional.of(orderStock2.getProduct()));
+        Mockito.when(productRepository.findByNameAndPriceAndType(orderStock3.getProduct().getName(),
+                orderStock3.getProduct().getPrice(), orderStock3.getProduct().getType()))
+                .thenReturn(Optional.ofNullable(null));
+
         // Start of store signup mocks, by mocking rest template //
-        
+
         String labInfo = "{\"name\":\"CovidTestsDeliveries\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
-        
+
         HttpHeaders storeDetailsRequestHeaders = new HttpHeaders();
         storeDetailsRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
-        
+
         HttpEntity<String> storeDetailsRequest = new HttpEntity<String>(labInfo, storeDetailsRequestHeaders);
 
         Mockito.when(restTemplate.postForEntity("http://localhost:8080/store", storeDetailsRequest, Lab.class))
                 .thenReturn(new ResponseEntity<Lab>(pickupLab, HttpStatus.OK));
 
-        Mockito.when(labRepository.save( any(Lab.class) )).thenReturn(pickupLab);
+        Mockito.when(labRepository.save(any(Lab.class))).thenReturn(pickupLab);
 
         // Start of driver request mocks, by mocking rest template //
 
@@ -139,9 +143,11 @@ class OrderServiceUnitTests {
         deliveryDetailsRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
         deliveryDetailsRequestHeaders.add("Authorization", pickupLab.getToken());
 
-        HttpEntity<String> deliveryDetailsRequest = new HttpEntity<String>(orderDetailsRequest.toString(), deliveryDetailsRequestHeaders);
+        HttpEntity<String> deliveryDetailsRequest = new HttpEntity<String>(orderDetailsRequest.toString(),
+                deliveryDetailsRequestHeaders);
 
-        Mockito.when(restTemplate.postForEntity("http://localhost:8080/store/order/" + pickupLab.getId(), deliveryDetailsRequest, JSONObject.class))
+        Mockito.when(restTemplate.postForEntity("http://localhost:8080/store/order/" + pickupLab.getId(),
+                deliveryDetailsRequest, JSONObject.class))
                 .thenReturn(new ResponseEntity<JSONObject>(driverDetailsResponse, HttpStatus.OK));
 
     }
@@ -157,9 +163,27 @@ class OrderServiceUnitTests {
         assertThat(isInStock, is(true));
     }
 
+    // @Test
+    // void whenOrderProductIsInStockButIsntFound_thenValidateProduct() {
+    //     Order order = orderService.placeAnOrder();
+
+    //     assertThat(isInStock, is(true));
+    // }
+
     @Test
     void whenProductIsNotInStock_thenReturnFalse() {
         Product newProduct = new Product("Covid Test 1", 49.99, "Infrared Test", "Infrared test description.");
+        Stock newStock = new Stock(newProduct, 10);
+        newStock.setLab(pickupLab);
+
+        boolean isInStock = orderService.isInStock(pickupLab, newStock);
+
+        assertThat(isInStock, is(false));
+    }
+
+    @Test
+    void whenProductDoesntExist_thenReturnFalse() {
+        Product newProduct = new Product("Covid Test 15", 69.99, "Infrareeeed Test", "Infrared test description.");
         Stock newStock = new Stock(newProduct, 10);
         newStock.setLab(pickupLab);
 
@@ -182,10 +206,75 @@ class OrderServiceUnitTests {
 
     @Test
     void whenPlacingInvalidOrder_thenReturnNull() {
-        ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class, () -> orderService.placeAnOrder(testOrder2)) ;
+        ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
+                () -> orderService.placeAnOrder(testOrder2));
 
-        assertThat( exceptionThrown.getStatus(), is(HttpStatus.CONFLICT) );
-        assertThat( exceptionThrown.getReason(), is("Product out of stock.") );
+        assertThat(exceptionThrown.getStatus(), is(HttpStatus.CONFLICT));
+        assertThat(exceptionThrown.getReason(), is("Product out of stock."));
+    }
+
+    @Test
+    void whenPlacingOrderWithInvalidLab_thenReturn404() {
+        Mockito.when( labRepository.findAll() ).thenReturn(new ArrayList<>());
+
+        ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
+                () -> orderService.placeAnOrder(testOrder1));
+
+        assertThat(exceptionThrown.getStatus(), is(HttpStatus.NOT_FOUND));
+        assertThat(exceptionThrown.getReason(), is("Laboratory not found."));
+    }
+
+    @Test
+    void whenPlacingOrderWithInvalidClient_thenReturn404() {
+        Mockito.when( clientRepository.findById(testOrder1.getClientId()) ).thenReturn(Optional.ofNullable(null));
+
+        ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
+                () -> orderService.placeAnOrder(testOrder1));
+
+        assertThat(exceptionThrown.getStatus(), is(HttpStatus.NOT_FOUND));
+        assertThat(exceptionThrown.getReason(), is("Client not found."));
+    }
+
+    @Test
+    void whenPlacingOrderWithExternalApiError_thenReturn409() {
+        Mockito.when( restTemplate.postForEntity(anyString(), any(), any()) ).thenThrow( ResponseStatusException.class );
+
+        ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
+                () -> orderService.placeAnOrder(testOrder1));
+
+        assertThat(exceptionThrown.getStatus(), is(HttpStatus.BAD_GATEWAY));
+    }
+
+    @Test
+    void whenPlacingOrderWithExternalApiReturnNull_thenReturn409() {
+        Mockito.when( restTemplate.postForEntity(anyString(), any(), any()) ).thenReturn(null);
+
+        ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
+                () -> orderService.placeAnOrder(testOrder1));
+
+        assertThat(exceptionThrown.getStatus(), is(HttpStatus.BAD_GATEWAY));
+        assertThat(exceptionThrown.getReason(), is("Error getting response from drivers api."));
+    }
+
+    @Test
+    void whenGetLabDetails_thenReturnLabDetails() {
+        Lab labDetails = orderService.getLabDetails();
+        
+        assertThat( labDetails.getName(), is("CovidTestsDeliveries") );
+        assertThat( labDetails.getLocation().getLatitude(), is(1.0) );
+        assertThat( labDetails.getLocation().getLongitude(), is(2.0) );
+
+    }
+
+    @Test
+    void whenGetNoLabDetails_thenFetchAndReturnLabDetails() {
+        Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<>());
+        Lab labDetails = orderService.getLabDetails();
+        
+        assertThat( labDetails.getName(), is("CovidTestsDeliveries") );
+        assertThat( labDetails.getLocation().getLatitude(), is(1.0) );
+        assertThat( labDetails.getLocation().getLongitude(), is(2.0) );
+
     }
 
 }

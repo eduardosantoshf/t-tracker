@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
 
-        if (response.getBody() == null)
+        if (response == null)
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Error getting response from drivers api.");
 
         order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
