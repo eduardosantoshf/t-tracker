@@ -26,7 +26,7 @@ public class Lab {
     private Coordinates location;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "lab")
+    @OneToMany(mappedBy = "lab", cascade = {CascadeType.ALL})
     private List<Stock> stocks;
 
     @OneToMany(mappedBy = "labId")

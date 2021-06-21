@@ -31,7 +31,7 @@ public class ClientController {
 
     @PostMapping(value = "/signup", consumes = "application/json")
     public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request)
-            throws Exception {
+            throws ResponseStatusException {
         Client registeredClient;
 
         try {
@@ -54,7 +54,7 @@ public class ClientController {
 
     @GetMapping(value = "/orders/{clientUsername}", produces = "application/json")
     public ResponseEntity<?> getClientOrders(@PathVariable(value = "clientUsername") String clientUsername, HttpServletRequest request)
-            throws Exception {
+            throws ResponseStatusException {
         List<Order> orders;
 
         try {
@@ -72,7 +72,6 @@ public class ClientController {
         try {
             JwtTokenService.verifyToken(token);
         } catch (JwtException e) {
-            // e.printStackTrace();
             throw new Exception("FAILED TO VERIFY TOKEN");
         }
         return "SUCCESS";

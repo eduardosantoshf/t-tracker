@@ -90,6 +90,7 @@ public class Product {
         return Objects.hash(name, price, type);
     }
 
+
     @Override
     public String toString() {
         return "{" +
@@ -97,7 +98,8 @@ public class Product {
             ", name='" + getName() + "'" +
             ", price='" + getPrice() + "'" +
             ", type='" + getType() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
-    }
+    }    
 
 }

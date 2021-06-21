@@ -15,6 +15,8 @@ public class JwtTokenService {
     private final static int tokenExpirationTime = 30 * 60 * 1000;
     private final static String tokenKey = "ut1FfO9sSPjG1OKxVh";
 
+    private JwtTokenService() {}
+
     public static String generateToken(String username, Claims claims) {
         return Jwts.builder()
                 .setHeaderParam("typ", "JWT")

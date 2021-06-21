@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,15 @@ public class Coordinates {
     @OneToOne(mappedBy = "homeLocation")
     private User user;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "pickupLocation")
-    private Order pickupOrder;
+    @OneToOne
+    @JoinColumn(name = "pickup_id")
+    @JsonBackReference("pickup")
+    private Order pickup;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "deliverLocation")
-    private Order deliverOrder;
+    @OneToOne
+    @JoinColumn(name = "deliver_id")
+    @JsonBackReference("deliver")
+    private Order deliver;
 
     public Coordinates() {}
 

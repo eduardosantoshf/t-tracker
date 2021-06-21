@@ -3,14 +3,11 @@ package t_tracker.controller;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.hamcrest.core.Is.is;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,7 +31,7 @@ import t_tracker.service.ProductService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TTrackerApplication.class)
 @AutoConfigureMockMvc
-public class OrderControllerTest {
+class OrderControllerTest {
     
     @Autowired
     private MockMvc mvc;

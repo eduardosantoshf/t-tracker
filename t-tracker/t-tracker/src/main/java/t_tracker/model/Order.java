@@ -2,6 +2,7 @@ package t_tracker.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class Order {
     @GeneratedValue
     private UUID id;
     
+    @JsonIgnore
     @JoinColumn(name = "client_id", insertable = false, updatable = false)
     @ManyToOne(targetEntity = Client.class, fetch = FetchType.EAGER)
     private Client client;
@@ -27,11 +29,13 @@ public class Order {
     private int clientId;
 
     @OneToOne
-    @JoinColumn(name = "coordinates_id", insertable=false, updatable=false)
+    @JoinColumn(name = "pickup_id")
+    @JsonManagedReference("pickup")
     private Coordinates pickupLocation;
 
     @OneToOne
-    @JoinColumn(name = "coordinates_id", insertable=false, updatable=false)
+    @JoinColumn(name = "deliver_id")
+    @JsonManagedReference("deliver")
     private Coordinates deliverLocation;
 
     @Column(name = "order_total", nullable = false)
@@ -43,9 +47,10 @@ public class Order {
     @Column(name="lab_id")
     private int labId;
     
-    @JsonManagedReference(value="order-stock")
-    @OneToMany(mappedBy = "order")
-    private List<Stock> listOfProducts;
+    @OneToMany
+    @JoinColumn(name = "products_id")
+    @JsonManagedReference("products")
+    private List<Stock> products;
 
     @Column(name = "is_delivered", nullable = false)
     private boolean isDelivered;
@@ -53,19 +58,19 @@ public class Order {
     public Order() {}
 
     @Autowired
-    public Order(int clientId, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, int labId, List<Stock> listOfProducts) {
+    public Order(int clientId, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, int labId, List<Stock> products) {
         this.clientId = clientId;
         this.pickupLocation = pickupLocation;
         this.deliverLocation = deliverLocation;
         this.orderTotal = orderTotal;
         this.labId = labId;
-        this.listOfProducts = listOfProducts;
+        this.products = products;
         this.isDelivered = false;
     }
 
     public Order(Client client) {
         this.clientId = client.getId();
-        listOfProducts = new ArrayList<>();
+        products = new ArrayList<>();
         this.isDelivered = false;
     }
 
@@ -125,16 +130,16 @@ public class Order {
         this.labId = labId;
     }
 
-    public List<Stock> getListOfProducts() {
-        return this.listOfProducts;
+    public List<Stock> getProducts() {
+        return this.products;
     }
 
-    public void setListOfProducts(List<Stock> listOfProducts) {
-        this.listOfProducts = listOfProducts;
+    public void setProducts(List<Stock> products) {
+        this.products = products;
     }
 
     public void addProduct(Stock stock) {
-        this.listOfProducts.add(stock);
+        this.products.add(stock);
     }
 
     public boolean isIsDelivered() {
@@ -152,7 +157,7 @@ public class Order {
     public Double getTotalPrice() {
         Double totalPrice = 0.0;
         
-        for (Stock s : listOfProducts) {
+        for (Stock s : products) {
             totalPrice += s.getTotalPrice();
         }
         
@@ -167,12 +172,12 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(clientId, order.clientId) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(labId, order.labId) && Objects.equals(listOfProducts, order.listOfProducts) && isDelivered == order.isDelivered;
+        return Objects.equals(id, order.id) && Objects.equals(clientId, order.clientId) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(labId, order.labId) && Objects.equals(products, order.products) && isDelivered == order.isDelivered;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, clientId, pickupLocation, deliverLocation, orderTotal, driverId, labId, listOfProducts, isDelivered);
+        return Objects.hash(id, clientId, pickupLocation, deliverLocation, orderTotal, driverId, labId, products, isDelivered);
     }
 
 }

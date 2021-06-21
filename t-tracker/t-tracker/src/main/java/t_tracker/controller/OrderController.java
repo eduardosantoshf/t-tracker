@@ -2,7 +2,6 @@ package t_tracker.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.model.*;
-import t_tracker.repository.ClientRepository;
 import t_tracker.service.ClientService;
 import t_tracker.service.OrderService;
 import t_tracker.service.ProductService;
@@ -35,16 +33,15 @@ public class OrderController {
     ClientService clientService;
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<?> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request) throws ResponseStatusException {
         Principal principal = request.getUserPrincipal();
         Client client;
 
         try {
-            System.out.println(principal.getName());
             client = clientService.getClientByUsername(principal.getName());
-            System.out.println(client);
+
         } catch(ResponseStatusException e) {
-            return new ResponseEntity<String>("Unauthorized client.", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Unauthorized client.", HttpStatus.FORBIDDEN);
         }
 
         Product orderProduct;
@@ -52,7 +49,6 @@ public class OrderController {
 
         try {
             for (OrderDTO order : productList) {
-                System.out.println(order);
                 orderProduct = productService.getProduct(order.getProductId());
                 orderPlaced.addProduct(new Stock(orderProduct, order.getQuantity()));
             }

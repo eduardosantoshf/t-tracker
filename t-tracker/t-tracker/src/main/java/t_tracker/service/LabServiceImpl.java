@@ -31,35 +31,14 @@ public class LabServiceImpl implements LabService {
     @Autowired
     ProductRepository productRepository;
 
-    // @Override
-    // public Lab registerLab(Lab lab) {
-    //     coordRepository.save(lab.getLocation());
-    //     return labRepository.save(lab);
-    // }
-
-    // @Override
-    // public Lab getLabById(int id) {
-    //     Optional<Lab> labFound = labRepository.findById(id);
-
-    //     if (labFound.isPresent())
-    //         return labFound.get();
-
-    //     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
-    // }
-
-    // @Override
-    // public List<Lab> getAllLabs() {
-    //     return labRepository.findAll();
-    // }
+    final static String LAB_NOT_FOUND = "Lab not found.";
 
     @Override
     public List<Stock> getLabStock() {
         List<Lab> labFound = labRepository.findAll();
 
-        System.out.println(labFound);
-
-        if (labFound.size() == 0)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
+        if (labFound.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, LAB_NOT_FOUND);
 
         return labFound.get(0).getStocks();
     }
@@ -68,8 +47,8 @@ public class LabServiceImpl implements LabService {
     public List<Stock> addStockToLab(Stock stockToAdd) {
         List<Lab> labFound = labRepository.findAll();
 
-        if (labFound.size() == 0)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
+        if (labFound.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, LAB_NOT_FOUND);
 
         Lab actualLab = labFound.get(0);
 
@@ -113,7 +92,7 @@ public class LabServiceImpl implements LabService {
         List<Lab> labFound = labRepository.findAll();
 
         if (labFound.size() == 0)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lab not found.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, LAB_NOT_FOUND);
 
         Lab actualLab = labFound.get(0);
 

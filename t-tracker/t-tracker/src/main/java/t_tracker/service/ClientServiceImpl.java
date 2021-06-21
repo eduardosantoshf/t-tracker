@@ -56,7 +56,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public List<Order> getOrders(String clientUsername) {
         Optional<Client> clientFound = clientRepository.findByUsername(clientUsername);
-        System.out.println(clientFound);
+
         if (!clientFound.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found.");
         }

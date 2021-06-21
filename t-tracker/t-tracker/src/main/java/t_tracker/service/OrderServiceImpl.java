@@ -64,11 +64,16 @@ public class OrderServiceImpl implements OrderService {
         if (labFound.size() == 0)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Laboratory not found.");
 
-        for (Stock stockOrder : order.getListOfProducts())
+        for (Stock stockOrder : order.getProducts())
             if (!isInStock(labFound.get(0), stockOrder))
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Product out of stock.");
 
-        Client client = clientRepository.findById(order.getClientId()).get();
+        Optional<Client> potentialClient = clientRepository.findById(order.getClientId());
+
+        if (!potentialClient.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found.");
+
+        Client client = potentialClient.get();
 
         order.setPickupLocation(labFound.get(0).getLocation());
         order.setLabId(labFound.get(0).getId());
@@ -86,63 +91,74 @@ public class OrderServiceImpl implements OrderService {
                 "" + order.getOrderTotal() * 0.1, order.getDeliverLocation().getLatitude().toString(),
                 order.getDeliverLocation().getLongitude().toString());
 
-        HttpEntity<String> requestContent = new HttpEntity<String>(orderRequest.toString(), httpHeaders);
+        HttpEntity<String> requestContent = new HttpEntity<>(orderRequest.toString(), httpHeaders);
+
+        ResponseEntity<JSONObject> response;
 
         try {
 
-            ResponseEntity<JSONObject> response = restTemplate.postForEntity(orderPlacementUrl + authDetails.getId(),
+            response = restTemplate.postForEntity(orderPlacementUrl + authDetails.getId(),
                     requestContent, JSONObject.class);
-
-                    // Order orderToStore = order;
-            order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
-            coordRepository.save(order.getPickupLocation());
-            coordRepository.save(order.getDeliverLocation());
-
-            // Store order products and quantities
-            List<Stock> orderStock = order.getListOfProducts();
-            Product actualProduct;
-
-            for (Stock s : orderStock) {
-                Optional<Product> productFound = productRepository.findByNameAndPriceAndType(
-                        s.getProduct().getName(), s.getProduct().getPrice(),
-                        s.getProduct().getType());
-
-                if (productFound.isPresent())
-                    actualProduct = productFound.get();
-                else
-                    actualProduct = productRepository.save(s.getProduct());
-                
-                s.setProduct(actualProduct);
-            }
-
-            Order orderStored = orderRepository.save(order);
-
-            for (Stock s : orderStock) {
-                labFound.get(0).removeStock(s);
-                s.setOrder(order);
-                stockRepository.save(s);
-            }
-
-            labRepository.save(labFound.get(0));
-
-            client.addOrder(orderStored);
-            clientRepository.save(client);
-
-            return orderStored;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
+
+        if (response.getBody() == null)
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Error getting response from drivers api.");
+
+        order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
+
+        // Store order products and quantities
+        List<Stock> orderStock = order.getProducts();
+        Product actualProduct;
+
+        for (Stock s : orderStock) {
+            Optional<Product> productFound = productRepository.findByNameAndPriceAndType(
+                    s.getProduct().getName(), s.getProduct().getPrice(),
+                    s.getProduct().getType());
+
+            if (productFound.isPresent())
+                actualProduct = productFound.get();
+            else
+                actualProduct = productRepository.save(s.getProduct());
+
+            s.setProduct(actualProduct);
+            labFound.get(0).removeStock(s);
+
+            stockRepository.save(s);
+        }
+
+        Order orderStored = orderRepository.save(order);
+        orderStock = orderStored.getProducts();
+
+        for (Stock s : orderStock) {
+            s.setOrder(order);
+            stockRepository.save(s);
+        }
+
+        coordRepository.save(order.getPickupLocation());
+        coordRepository.save(order.getDeliverLocation());
+
+        orderRepository.save(orderStored);
+
+        labRepository.save(labFound.get(0));
+
+        client.addOrder(orderStored);
+        clientRepository.save(client);
+
+        return orderStored;
+        
     }
 
     public Lab getLabDetails() {
         List<Lab> allDetails = labRepository.findAll();
 
-        Lab authDetails = new Lab();
+        Lab authDetails;
         if (allDetails.size() == 0) {
             httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-            HttpEntity<String> labDetailsRequest = new HttpEntity<String>(labInfo, httpHeaders);
+            HttpEntity<String> labDetailsRequest = new HttpEntity<>(labInfo, httpHeaders);
 
             ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest,
                     Lab.class);
@@ -174,11 +190,11 @@ public class OrderServiceImpl implements OrderService {
         List<Stock> labStocks = lab.getStocks();
 
         for (Stock stock : labStocks)
-            if (stock.getProduct().equals(products.getProduct()))
+            if (stock.getProduct().equals(products.getProduct())) {
                 if (stock.getQuantity() >= products.getQuantity())
                     return true;
-                else
-                    return false;
+                return false;
+            }
 
         return false;
     }

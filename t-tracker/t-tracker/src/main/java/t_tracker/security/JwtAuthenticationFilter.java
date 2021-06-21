@@ -34,7 +34,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager,ClientRepository userRepository) {
         this.authenticationManager = authenticationManager;
-        //this.setAuthenticationManager(authenticationManager);
         this.userRepository = userRepository;
         setFilterProcessesUrl("/client/login");
     }
@@ -48,7 +47,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = ((UserDetails) authResult.getPrincipal()).getUsername();
         //Integer id = this.ClientRepository.findByUsername(username).get().getId();
         Integer id = this.userRepository.findByUsername(username).get().getId();
-        System.out.println(this.userRepository.findByUsername(username));
 
         List<String> authorities = authResult.getAuthorities().stream()
                 .map(role -> role.getAuthority())
