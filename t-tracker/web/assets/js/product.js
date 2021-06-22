@@ -18,7 +18,7 @@ function loadProduct(){
             if(obj.id==productId){
                 nome=obj.name;
                 tipo=obj.type;
-                price=obj.price;
+                preco=obj.price;
                 image=obj.foto; 
                 desc=obj.description;
             }
@@ -27,44 +27,54 @@ function loadProduct(){
         $("#url_mapping_product").text(nome);
         $("#productImg").attr("src",image);
         $("#productName").text(nome);
-        $("#productPrice").text(preco);
+        $("#productPrice").text("$"+preco+" ");
         $("#productDesc").text(desc);
+
+        document.getElementById("comprarAgoraBtn").addEventListener("click", () => buy(preco));
+        document.getElementById("clientLoginBtn").addEventListener("click", () => loginclient(preco));
     });
 }
 
-function checkToken(name){
-    function getCookie(name) {
-        var dc = document.cookie;
-        var prefix = name + "=";
-        var begin = dc.indexOf("; " + prefix);
-        if (begin == -1) {
-            begin = dc.indexOf(prefix);
-            if (begin != 0) return null;
-        }else{
-            begin += 2;
-            var end = document.cookie.indexOf(";", begin);
-            if (end == -1) {
-            end = dc.length;
-            }
+function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }else{
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
         }
-
-        // because unescape has been deprecated, replaced with decodeURI
-        //return unescape(dc.substring(begin + prefix.length, end));
-        return decodeURI(dc.substring(begin + prefix.length, end));
     }
-    
+
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
+}
+
+function checkToken(name){
     var myCookie = getCookie(name);
 
     if (myCookie == null) {
         return false;
+    }else{
+        fetch("http://localhost:8081/client/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client") }, method: 'get'}).then(data => data.text()).then(data => {
+            if(data!="SUCCESS"){
+                document.cookie = "sessionKey-client= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+                return false;
+            }
+        })
     }
     
     return true;
 }
 
-function buy(){
+function buy(price){
     if(checkToken("sessionKey-client")){
-        // TODO place an order
+        
     }else{
         $("#modalLogin").css({"display":"block"});
     }
@@ -72,4 +82,24 @@ function buy(){
 
 function closeModal(){
     $("#modalLogin").css({"display":"none"});
+}
+
+function loginclient(price){
+    let username=$("#usernameTxt").val();
+    let password=$("#passwordTxt").val();
+    
+    fetch('http://localhost:8081/client/login?username='+username+"&password="+password).then(data => {
+        if(data.status==200){
+            data=data.json();
+
+            Promise.all([data]).then(data => {
+                document.cookie = "sessionKey-client="+data[0].token;
+                
+                buy(price);
+            })
+        }else{
+            alert("Wrong credentials");
+            $("#passwordTxt").val("");
+        }
+    });
 }
