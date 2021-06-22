@@ -17,7 +17,7 @@ def get_workflows():
 
     ############################################
 
-    '''
+    
     response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows?page={page_number}")
 
     if response.status_code != 200:
@@ -26,9 +26,10 @@ def get_workflows():
     response_json = response.json()
     '''
     
-    f = open('workflows_test.json')
+    f = open('examples/workflows_test.json')
     response_json = json.load(f)
     #print(json.dumps(response_json, indent=4))
+    '''
 
     ############################################
 
@@ -64,7 +65,7 @@ def get_workflow_info():
 
     ############################################
 
-    '''
+    
     response = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/workflows/{workflow_name}/runs?per_page=5&page={page_number}")
 
     if response.status_code != 200: 
@@ -75,9 +76,10 @@ def get_workflow_info():
     '''
 
     
-    f = open('workflow_runs_test.json')
+    f = open('examples/workflow_runs_test.json')
     response_json = json.load(f)
     #print(json.dumps(response_json, indent=4))
+    '''
 
     ############################################
     
@@ -105,7 +107,7 @@ def get_workflow_info():
 
         ############################################
 
-        '''
+        
         response2 = get(url=f"https://api.github.com/repos/eduardosantoshf/t-tracker/actions/runs/{run_id}/timing")
 
         if response2.status_code != 200: 
@@ -115,8 +117,9 @@ def get_workflow_info():
         response_json2 = response2.json()
         '''
 
-        f2 = open('workflow_runs_954738441_timing_test.json')
+        f2 = open('examples/workflow_runs_954738441_timing_test.json')
         response_json2 = json.load(f2)
+        '''
 
         ############################################
 
