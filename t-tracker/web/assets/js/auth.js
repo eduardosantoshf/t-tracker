@@ -41,7 +41,7 @@ function signupclient(){
     let name=$("#nameTxt").val();
     let email=$("#emailTxt").val();
 
-    let client={"name":name, "email":email, "username":username, "password":password};
+    let client={"name":name, "email":email, "username":username, "password":password, "homeLocation": {"latitude": 0.0, "longitude": 0.0}};
     console.log(client);
     fetch('http://localhost:8081/client/signup', { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'http://localhost:8081' }, method: 'post', body: JSON.stringify(client)}).then(data => {
         if(data.status==200)

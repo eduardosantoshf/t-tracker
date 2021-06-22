@@ -2,7 +2,6 @@ package t_tracker.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +14,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
-import t_tracker.model.Client;
+import t_tracker.model.Coordinates;
 import t_tracker.model.Lab;
 import t_tracker.model.Order;
-import t_tracker.model.Product;
+import t_tracker.model.OrderItem;
 import t_tracker.model.Stock;
-import t_tracker.repository.ClientRepository;
-import t_tracker.repository.CoordinatesRepository;
 import t_tracker.repository.LabRepository;
+import t_tracker.repository.OrderItemRepository;
 import t_tracker.repository.OrderRepository;
-import t_tracker.repository.ProductRepository;
 import t_tracker.repository.StockRepository;
 
 @Service
@@ -37,138 +34,105 @@ public class OrderServiceImpl implements OrderService {
     private LabRepository labRepository;
 
     @Autowired
-    private ClientRepository clientRepository;
-
-    @Autowired
-    private CoordinatesRepository coordRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
-    
-    @Autowired
     private StockRepository stockRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private StockServiceImpl stockService;
 
     @Autowired
     private RestTemplate restTemplate;
 
     private HttpHeaders httpHeaders;
-    private String storeSignupUrl = "http://localhost:8080/store";
-    private String orderPlacementUrl = "http://localhost:8080/store/order/";
+    private String storeSignupUrl = "http://backend-engine:8080/store";
+    private String orderPlacementUrl = "http://backend-engine:8080/store/order/";
     private String labInfo = "{\"name\":\"CovidTestsDeliveries\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
 
     @Override
     public Order placeAnOrder(Order order) {
 
-        List<Lab> labFound = labRepository.findAll();
+        Order orderToStore = new Order(order.getClient());
 
-        if (labFound.size() == 0)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Laboratory not found.");
+        // Retrieve lab details for delivery placement
+        Lab lab;
+        try {
+            lab = getLabDetails();
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(e.getStatus(), e.getMessage());
+        }
 
-        for (Stock stockOrder : order.getProducts())
-            if (!isInStock(labFound.get(0), stockOrder))
-                throw new ResponseStatusException(HttpStatus.CONFLICT, "Product out of stock.");
-
-        Optional<Client> potentialClient = clientRepository.findById(order.getClientId());
-
-        if (!potentialClient.isPresent())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found.");
-
-        Client client = potentialClient.get();
-
-        order.setPickupLocation(labFound.get(0).getLocation());
-        order.setLabId(labFound.get(0).getId());
-        order.setOrderTotal(order.getTotalPrice());
-        order.setDeliverLocation(client.getHomeLocation());
-        order.setPickupLocation(labFound.get(0).getLocation());
-
-        Lab authDetails = getLabDetails();
-
+        // Request driver
         httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.add("Authorization", authDetails.getToken());
+        httpHeaders.add("Authorization", lab.getToken());
 
-        JSONObject orderRequest = buildOrderRequest("" + order.getLabId() + java.time.LocalDate.now(),
-                "" + order.getOrderTotal() * 0.1, order.getDeliverLocation().getLatitude().toString(),
-                order.getDeliverLocation().getLongitude().toString());
+        Coordinates deliverLocation = orderToStore.getClient().getHomeLocation();
+
+        JSONObject orderRequest = buildOrderRequest("" + lab.getName() + java.time.LocalDate.now(),
+                "" + order.getTotalPrice() * 0.1, deliverLocation.getLatitude().toString(),
+                deliverLocation.getLongitude().toString());
 
         HttpEntity<String> requestContent = new HttpEntity<>(orderRequest.toString(), httpHeaders);
 
         ResponseEntity<JSONObject> response;
 
         try {
-
-            response = restTemplate.postForEntity(orderPlacementUrl + authDetails.getId(),
-                    requestContent, JSONObject.class);
+            response = restTemplate.postForEntity(orderPlacementUrl + lab.getId(), requestContent, JSONObject.class);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
 
-        if (response.getBody() == null)
+        try {
+            orderToStore.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
+        } catch (NullPointerException e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Error getting response from drivers api.");
-
-        order.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
-
-        // Store order products and quantities
-        List<Stock> orderStock = order.getProducts();
-        Product actualProduct;
-
-        for (Stock s : orderStock) {
-            Optional<Product> productFound = productRepository.findByNameAndPriceAndType(
-                    s.getProduct().getName(), s.getProduct().getPrice(),
-                    s.getProduct().getType());
-
-            if (productFound.isPresent())
-                actualProduct = productFound.get();
-            else
-                actualProduct = productRepository.save(s.getProduct());
-
-            s.setProduct(actualProduct);
-            labFound.get(0).removeStock(s);
-
-            stockRepository.save(s);
         }
 
-        Order orderStored = orderRepository.save(order);
-        orderStock = orderStored.getProducts();
-
-        for (Stock s : orderStock) {
-            s.setOrder(order);
-            stockRepository.save(s);
+        // Update stock if order products are valid
+        for (OrderItem s : order.getProducts()) {
+            try {
+                stockService.removeStock(s.getProduct(), s.getQuantity());
+            } catch (ResponseStatusException e) {
+                throw new ResponseStatusException(e.getStatus(), e.getMessage());
+            }
         }
 
-        coordRepository.save(order.getPickupLocation());
-        coordRepository.save(order.getDeliverLocation());
+        orderToStore.setPickupLocation(lab.getLocation());
+        orderToStore.setOrderTotal(order.getTotalPrice());
+        orderToStore.setDeliverLocation(order.getClient().getHomeLocation());
 
-        orderRepository.save(orderStored);
+        Order orderPlaced = orderRepository.save(orderToStore);
 
-        labRepository.save(labFound.get(0));
+        for (OrderItem item : order.getProducts()) {
+            OrderItem newItem = new OrderItem(item.getProduct(), item.getQuantity(), orderPlaced);
+            orderItemRepository.save(newItem);
+        }
 
-        client.addOrder(orderStored);
-        clientRepository.save(client);
-
-        return orderStored;
-        
+        return orderPlaced;
     }
 
     public Lab getLabDetails() {
         List<Lab> allDetails = labRepository.findAll();
 
         Lab authDetails;
-        System.out.println("Check1");
         if (allDetails.size() == 0) {
             httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<String> labDetailsRequest = new HttpEntity<>(labInfo, httpHeaders);
 
-            ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest,
-                    Lab.class);
-            System.out.println(response);
-            authDetails = labRepository.save(response.getBody());
+            ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest, Lab.class);
+            try {
+                authDetails = labRepository.save(response.getBody());
+            } catch (NullPointerException e) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT,
+                        "Error retrieving authentication details from deliveries API.");
+            }
 
         } else {
             authDetails = allDetails.get(0);
-            System.out.println(authDetails);
 
         }
 
@@ -188,10 +152,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean isInStock(Lab lab, Stock products) {
-        List<Stock> labStocks = lab.getStocks();
+    public boolean isInStock(Stock products) {
+        List<Stock> availableStock = stockRepository.findAll();
 
-        for (Stock stock : labStocks)
+        for (Stock stock : availableStock)
             if (stock.getProduct().equals(products.getProduct())) {
                 if (stock.getQuantity() >= products.getQuantity())
                     return true;

@@ -10,19 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name="orders")
 public class Order {
     
     @Id
-    @GeneratedValue
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     
     @JsonIgnore
     @JoinColumn(name = "client_id", insertable = false, updatable = false)
-    @ManyToOne(targetEntity = Client.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Client.class)
     private Client client;
 
     @Column(name="client_id")
@@ -43,14 +42,9 @@ public class Order {
 
     @Column(name = "driver_id")
     private int driverId;
-
-    @Column(name="lab_id")
-    private int labId;
     
-    @OneToMany
-    @JoinColumn(name = "products_id")
-    @JsonManagedReference("products")
-    private List<Stock> products;
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
+    private List<OrderItem> products;
 
     @Column(name = "is_delivered", nullable = false)
     private boolean isDelivered;
@@ -58,23 +52,23 @@ public class Order {
     public Order() {}
 
     @Autowired
-    public Order(int clientId, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, int labId, List<Stock> products) {
+    public Order(int clientId, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, List<OrderItem> products) {
         this.clientId = clientId;
         this.pickupLocation = pickupLocation;
         this.deliverLocation = deliverLocation;
         this.orderTotal = orderTotal;
-        this.labId = labId;
         this.products = products;
         this.isDelivered = false;
     }
 
     public Order(Client client) {
+        this.client = client;
         this.clientId = client.getId();
         products = new ArrayList<>();
         this.isDelivered = false;
     }
 
-    public UUID getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -122,23 +116,15 @@ public class Order {
         this.driverId = driverId;
     }
 
-    public int getLabId() {
-        return this.labId;
-    }
-
-    public void setLabId(int labId) {
-        this.labId = labId;
-    }
-
-    public List<Stock> getProducts() {
+    public List<OrderItem> getProducts() {
         return this.products;
     }
 
-    public void setProducts(List<Stock> products) {
+    public void setProducts(List<OrderItem> products) {
         this.products = products;
     }
 
-    public void addProduct(Stock stock) {
+    public void addProduct(OrderItem stock) {
         this.products.add(stock);
     }
 
@@ -157,7 +143,7 @@ public class Order {
     public Double getTotalPrice() {
         Double totalPrice = 0.0;
         
-        for (Stock s : products) {
+        for (OrderItem s : products) {
             totalPrice += s.getTotalPrice();
         }
         
@@ -172,12 +158,28 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(clientId, order.clientId) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(labId, order.labId) && Objects.equals(products, order.products) && isDelivered == order.isDelivered;
+        return Objects.equals(id, order.id) && Objects.equals(clientId, order.clientId) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(products, order.products) && isDelivered == order.isDelivered;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, clientId, pickupLocation, deliverLocation, orderTotal, driverId, labId, products, isDelivered);
+        return Objects.hash(id, clientId, pickupLocation, deliverLocation, orderTotal, driverId, products, isDelivered);
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", clientId='" + getClientId() + "'" +
+            ", pickupLocation='" + getPickupLocation() + "'" +
+            ", deliverLocation='" + getDeliverLocation() + "'" +
+            ", orderTotal='" + getOrderTotal() + "'" +
+            ", driverId='" + getDriverId() + "'" +
+            ", products='" + getProducts() + "'" +
+            ", isDelivered='" + isIsDelivered() + "'" +
+            "}";
+    }
+
 
 }

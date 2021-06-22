@@ -14,7 +14,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -27,6 +27,9 @@ public class Product {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "foto")
+    private String foto;
 
     @JsonIgnore
     @OneToMany(mappedBy = "product")
@@ -42,7 +45,15 @@ public class Product {
         this.description = description;
     }
 
-    public int getId() {
+    public Product(String name, Double price, String type, String description, String foto) {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.description = description;
+        this.foto=foto;
+    }
+
+    public Integer getId() {
         return this.id;
     }
 
@@ -74,6 +85,10 @@ public class Product {
         return this.description;
     }
 
+    public String getFoto() {
+        return this.foto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -99,6 +114,7 @@ public class Product {
             ", price='" + getPrice() + "'" +
             ", type='" + getType() + "'" +
             ", description='" + getDescription() + "'" +
+            ", foto='" + getFoto() + "'" +
             "}";
     }    
 

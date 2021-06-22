@@ -1,15 +1,15 @@
-package t_tracker.service;
+// package t_tracker.service;
 
-import java.util.List;
+// import java.util.List;
 
-import t_tracker.model.Stock;
+// import t_tracker.model.Stock;
 
-public interface LabService {
+// public interface LabService {
 
-    List<Stock> getLabStock();
+//     List<Stock> getLabStock();
 
-    List<Stock> addStockToLab(Stock stock);
+//     List<Stock> addStockToLab(Stock stock);
 
-    List<Stock> removeStockFromLab(Stock stock);
+//     List<Stock> removeStockFromLab(Stock stock);
 
-}
+// }

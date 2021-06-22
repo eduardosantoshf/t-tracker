@@ -4,8 +4,6 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
@@ -13,7 +11,7 @@ public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name="product_id")
@@ -21,16 +19,6 @@ public class Stock {
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
-
-    @ManyToOne
-    @JoinColumn(name="products_id")
-    @JsonBackReference("products")
-    private Order order;
-
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name="lab_id", referencedColumnName = "id")
-    private Lab lab;
 
     public Stock() {}
 
@@ -40,7 +28,7 @@ public class Stock {
         this.quantity = quantity;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -69,22 +57,6 @@ public class Stock {
         this.quantity = result <= 0 ? 0 : result;
     }
 
-    public Order getOrder() {
-        return this.order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Lab getLab() {
-        return this.lab;
-    }
-
-    public void setLab(Lab lab) {
-        this.lab = lab;
-    }
-
     public Double getTotalPrice() {
         return this.getProduct().getPrice() * this.getQuantity();
     }
@@ -97,12 +69,12 @@ public class Stock {
             return false;
         }
         Stock stock = (Stock) o;
-        return Objects.equals(product, stock.product) && quantity == stock.quantity && Objects.equals(lab, stock.lab);
+        return Objects.equals(product, stock.product) && quantity == stock.quantity;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(product, quantity, lab);
+        return Objects.hash(product, quantity);
     }
 
     @Override
@@ -111,7 +83,6 @@ public class Stock {
             " id='" + getId() + "'" +
             ", product='" + getProduct() + "'" +
             ", quantity='" + getQuantity() + "'" +
-            ", order='" + getOrder() + "'" +
             "}";
     }
 

@@ -6,6 +6,6 @@ public interface OrderService {
     
     Order placeAnOrder(Order order);
 
-    boolean isInStock(Lab lab, Stock products);
+    boolean isInStock(Stock products);
 
 }

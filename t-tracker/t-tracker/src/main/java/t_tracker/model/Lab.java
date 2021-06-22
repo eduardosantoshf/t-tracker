@@ -2,11 +2,8 @@ package t_tracker.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -25,13 +22,6 @@ public class Lab {
     @JoinColumn(name = "coordinates_id")
     private Coordinates location;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "lab", cascade = {CascadeType.ALL})
-    private List<Stock> stocks;
-
-    @OneToMany(mappedBy = "labId")
-    private List<Order> orders;
-
     public Lab() {}
 
     @Autowired
@@ -40,22 +30,6 @@ public class Lab {
         this.token = token;
         this.name = name;
         this.location = location;
-    }
-
-    public void addStock(Stock stockToAdd) {
-        stocks.add(stockToAdd);
-    }
-
-    public void removeStock(Stock stockToRemove) {
-        for (Stock stock : stocks)
-            if ( stockToRemove.getProduct().equals(stock.getProduct()) ) {
-                stock.removeQuantity( stockToRemove.getQuantity() );
-                
-                if ( stock.getQuantity() == 0 )
-                    stocks.remove(stock);
-                
-                return;
-            }
     }
 
     public int getId() {
@@ -72,14 +46,6 @@ public class Lab {
 
     public Coordinates getLocation() {
         return this.location;
-    }
-
-    public List<Stock> getStocks() {
-        return this.stocks;
-    }
-
-    public void setStocks(List<Stock> stocks) {
-        this.stocks = stocks;
     }
 
     @Override
