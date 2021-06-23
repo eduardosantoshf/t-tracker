@@ -121,12 +121,12 @@ public class OrderServiceImpl implements OrderService {
 
             ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest, Lab.class);
 
-            try {
-                authDetails = labRepository.save(response.getBody());
-            } catch (NullPointerException e) {
+            Lab body = response.getBody();
+            if (body != null)
+                authDetails = labRepository.save(body);
+            else
                 throw new ResponseStatusException(HttpStatus.CONFLICT,
                         "Error retrieving authentication details from deliveries API.");
-            }
 
         } else {
             authDetails = allDetails.get(0);
@@ -152,24 +152,24 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getOrder(int id) {
         Optional<Order> orderFound = orderRepository.findById(id);
-        
+
         if (!orderFound.isPresent())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found.");
-        
+
         return orderFound.get();
     }
 
     @Override
     public Order updateStatus(Order order, int status) {
-        if (status==0)
+        if (status == 0)
             order.setStatus("Pending");
-        else if (status==1)
+        else if (status == 1)
             order.setStatus("Delivering");
-        else if (status==2)
+        else if (status == 2)
             order.setStatus("Delivered");
 
         return orderRepository.save(order);
-        
+
     }
 
     @Override
@@ -185,7 +185,8 @@ public class OrderServiceImpl implements OrderService {
 
         HttpEntity<String> requestContent = new HttpEntity<>("{\"rating\":" + rating + "}", httpHeaders);
 
-        restTemplate.postForEntity(ratingPlacementUrl + allDetails.get(0).getId() + "/" + order.getDriverId(), requestContent, JSONObject.class);
+        restTemplate.postForEntity(ratingPlacementUrl + allDetails.get(0).getId() + "/" + order.getDriverId(),
+                requestContent, JSONObject.class);
 
         order.setRating(rating);
         return orderRepository.save(order);

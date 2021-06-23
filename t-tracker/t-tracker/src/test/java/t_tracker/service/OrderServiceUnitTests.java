@@ -213,7 +213,7 @@ class OrderServiceUnitTests {
     void whenFetchLabDetailsReturnsNull_thenReturn409() {
         Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<>());
 
-        ResponseEntity<Lab> response = new ResponseEntity<>(new Lab(), HttpStatus.OK);
+        ResponseEntity<Lab> response = new ResponseEntity<>(null, HttpStatus.OK);
 
         Mockito.doReturn(response).when(restTemplate).postForEntity(anyString(), any(), any());
 
