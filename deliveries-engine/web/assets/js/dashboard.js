@@ -76,7 +76,7 @@ function changeStateStyle(state) {
 function getAllDeliveries() {
     let riderID = localStorage.getItem("riderID") //
 
-    fetch('http://localhost:8080/rider/deliveries/' + riderID, { headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'get' }).then(data => {
+    fetch('http://192.168.160.222:8080/rider/deliveries/' + riderID, { headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'get' }).then(data => {
         if (data.status == 200) {
             data = data.json();
 
@@ -131,11 +131,11 @@ function loadMap(coords) {
 }
 
 var stompClient = null;
-var socket = new SockJS('http://localhost:8080/chat');
+var socket = new SockJS('http://192.168.160.222:8080/chat');
 stompClient = Stomp.over(socket);
 var headers = {
     // additional header
-    "Access-Control-Allow-Origin": "http://localhost:8080",
+    "Access-Control-Allow-Origin": "http://192.168.160.222:8080",
 };
 stompClient.connect(headers, function (frame) {
     stompClient.subscribe('/order/messages', function (messageOutput) {
