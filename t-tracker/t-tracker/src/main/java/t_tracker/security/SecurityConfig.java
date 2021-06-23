@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import t_tracker.repository.ClientRepository;
-import t_tracker.repository.UserRepository;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -20,7 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private PasswordEncoder passwordEncoder;
     private UserDetailsService userDetailsService;
-    private ClientRepository ClientRepository;
     private ClientRepository userRepository;
 
     public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, ClientRepository userRepository) {
