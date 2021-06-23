@@ -1,5 +1,5 @@
 function getAllOrders(){
-    fetch('http://localhost:8081/client/orders', {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client")  }, method: 'get'}).then(data => {
+    fetch('http://192.168.160.222:8081/client/orders', {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client")  }, method: 'get'}).then(data => {
         if(data.status==200){
             data=data.json();
 

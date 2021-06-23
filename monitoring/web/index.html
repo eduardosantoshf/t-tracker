@@ -189,7 +189,7 @@
     <script>
       function getWorkflows(pageNumber)
       {
-        var url = "http://localhost:5000/workflows?page_number=" + pageNumber;
+        var url = "http://192.168.160.222:5000/workflows?page_number=" + pageNumber;
         $.ajax({
           type: "GET",
           contentType: "application/json; charset=utf-8",
@@ -235,7 +235,7 @@
 
       function getWorkflowRuns(pageNumber2)
       {
-        var url = "http://localhost:5000/workflow-runs"
+        var url = "http://192.168.160.222:5000/workflow-runs"
         var j = {"workflow": "deliveries-engine-runner.yml", "page_number": pageNumber2}
         $.ajax({
           type: "POST",

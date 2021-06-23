@@ -26,7 +26,7 @@ function checkToken(){
         window.location.href='/login.html';
     }
     else {
-        fetch("http://localhost:8080/rider/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'get'}).then(data => data.text()).then(data => {
+        fetch("http://192.168.160.222:8080/rider/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'get'}).then(data => data.text()).then(data => {
             if(data!="SUCCESS"){
                 document.cookie = "sessionKey-rider= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
                 window.location.href='login.html';
@@ -37,7 +37,7 @@ function checkToken(){
 
 function getStats(){
 
-    fetch('http://localhost:8080/admin/stats', { headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'get'}).then(data => {
+    fetch('http://192.168.160.222:8080/admin/stats', { headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'get'}).then(data => {
 
         if(data.status==200)
             try{
