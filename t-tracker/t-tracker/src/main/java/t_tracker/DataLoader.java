@@ -1,5 +1,7 @@
 package t_tracker;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -13,9 +15,11 @@ import org.springframework.web.client.RestTemplate;
 import t_tracker.model.Coordinates;
 import t_tracker.model.Lab;
 import t_tracker.model.Product;
+import t_tracker.model.Stock;
 import t_tracker.repository.CoordinatesRepository;
 import t_tracker.repository.LabRepository;
 import t_tracker.repository.ProductRepository;
+import t_tracker.repository.StockRepository;
 
 @Component
 public class DataLoader implements ApplicationRunner {
@@ -26,10 +30,11 @@ public class DataLoader implements ApplicationRunner {
     private String labInfo = "{\"name\":\"CT-TrackerDeliveries" + java.time.LocalDateTime.now() + "\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
 
     @Autowired
-    public DataLoader(LabRepository labRepository, CoordinatesRepository coordinatesRepository, ProductRepository productRepository) {
+    public DataLoader(LabRepository labRepository, CoordinatesRepository coordinatesRepository, ProductRepository productRepository, StockRepository stockRepository) {
         this.labRepository = labRepository;
         this.coordinatesRepository = coordinatesRepository;
         this.productRepository = productRepository;
+        this.stockRepository = stockRepository;
     }
 
     public void run(ApplicationArguments args) {
