@@ -18,11 +18,9 @@ import t_tracker.model.Coordinates;
 import t_tracker.model.Lab;
 import t_tracker.model.Order;
 import t_tracker.model.OrderItem;
-import t_tracker.model.Stock;
 import t_tracker.repository.LabRepository;
 import t_tracker.repository.OrderItemRepository;
 import t_tracker.repository.OrderRepository;
-import t_tracker.repository.StockRepository;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -32,9 +30,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private LabRepository labRepository;
-
-    @Autowired
-    private StockRepository stockRepository;
 
     @Autowired
     private OrderItemRepository orderItemRepository;
@@ -48,6 +43,7 @@ public class OrderServiceImpl implements OrderService {
     private HttpHeaders httpHeaders;
     private String storeSignupUrl = "http://backend-engine:8080/store";
     private String orderPlacementUrl = "http://backend-engine:8080/store/order/";
+    private String ratingPlacementUrl = "http://backend-engine:8080/store/driver/rating/";
     private String labInfo = "{\"name\":\"CovidTestsDeliveries\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
 
     @Override
@@ -78,12 +74,13 @@ public class OrderServiceImpl implements OrderService {
 
         ResponseEntity<JSONObject> response;
 
+
         try {
             response = restTemplate.postForEntity(orderPlacementUrl + lab.getId(), requestContent, JSONObject.class);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
-
+        System.out.println("Check1");
         try {
             orderToStore.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
         } catch (NullPointerException e) {
@@ -92,17 +89,17 @@ public class OrderServiceImpl implements OrderService {
 
         // Update stock if order products are valid
         for (OrderItem s : order.getProducts()) {
+            System.out.println(order.getProducts());
             try {
                 stockService.removeStock(s.getProduct(), s.getQuantity());
             } catch (ResponseStatusException e) {
                 throw new ResponseStatusException(e.getStatus(), e.getMessage());
             }
         }
-
         orderToStore.setPickupLocation(lab.getLocation());
         orderToStore.setOrderTotal(order.getTotalPrice());
         orderToStore.setDeliverLocation(order.getClient().getHomeLocation());
-
+        orderToStore.setStatus("Delivering");
         Order orderPlaced = orderRepository.save(orderToStore);
 
         for (OrderItem item : order.getProducts()) {
@@ -152,17 +149,35 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean isInStock(Stock products) {
-        List<Stock> availableStock = stockRepository.findAll();
+    public void updateStatus(Order order, int status) {
+        if (status==0)
+            order.setStatus("Pending");
+        else if (status==1)
+            order.setStatus("Delivering");
+        else if (status==2)
+            order.setStatus("Delivered");
+        
+        orderRepository.save(order);
+        
+    }
 
-        for (Stock stock : availableStock)
-            if (stock.getProduct().equals(products.getProduct())) {
-                if (stock.getQuantity() >= products.getQuantity())
-                    return true;
-                return false;
-            }
+    @Override
+    public void rateOrder(Order order, int rating) {
+        List<Lab> allDetails = labRepository.findAll();
 
-        return false;
+        if (rating < 0 || rating > 10)
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Rating value out of bounds");
+        
+        httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.add("Authorization", allDetails.get(0).getToken());
+
+        HttpEntity<String> requestContent = new HttpEntity<>("{\"rating\":" + rating + "}", httpHeaders);
+
+        restTemplate.postForEntity(ratingPlacementUrl + allDetails.get(0).getId() + "/" + order.getDriverId(), requestContent, JSONObject.class);
+
+        order.setRating(rating);
+        orderRepository.save(order);
     }
 
 }

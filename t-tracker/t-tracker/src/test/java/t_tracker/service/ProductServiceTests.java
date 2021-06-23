@@ -34,6 +34,7 @@ class ProductServiceTests {
 
     private Product validTestProduct1, validTestProduct2;
     private int invalidId = 9999;
+    private int validId = 1;
 
     @BeforeEach
     void setUp() {
@@ -44,7 +45,7 @@ class ProductServiceTests {
         Mockito.when(productRepository.save(validTestProduct2)).thenThrow( ResponseStatusException.class );
         Mockito.when(productRepository.findAll())
                 .thenReturn(new ArrayList<>(Arrays.asList(validTestProduct1, validTestProduct2)));
-        Mockito.when(productRepository.findById(validTestProduct1.getId())).thenReturn(Optional.of(validTestProduct1));
+        Mockito.when(productRepository.findById(validId)).thenReturn(Optional.of(validTestProduct1));
         Mockito.when(productRepository.findById(invalidId)).thenReturn(Optional.ofNullable(null));
 
     }
@@ -80,11 +81,11 @@ class ProductServiceTests {
 
     @Test
     void whenGetProductByValidId_thenReturnValidProduct() {
-        Product productFound = productService.getProduct(validTestProduct1.getId());
+        Product productFound = productService.getProduct(validId);
 
         assertThat(productFound, is(validTestProduct1));
 
-        verifyFindByIdIsCalledOnce(validTestProduct1.getId());
+        verifyFindByIdIsCalledOnce(validId);
 
     }
 

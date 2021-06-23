@@ -75,9 +75,10 @@ class ProductControllerTest {
 
     @Test
     void whenGetProductWithValidId_thenReturnProductAnd200() throws Exception {
-        when(productService.getProduct(testProduct1.getId())).thenReturn(testProduct1);
+        int validId = 1;
+        when(productService.getProduct(validId)).thenReturn(testProduct1);
 
-        mvc.perform(get("/product/" + testProduct1.getId()).header("Authorization", "Bearer " + token))
+        mvc.perform(get("/product/" + validId).header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.name", is(testProduct1.getName())))
                 .andExpect(jsonPath("$.price", is(testProduct1.getPrice())))
                 .andExpect(jsonPath("$.type", is(testProduct1.getType())))

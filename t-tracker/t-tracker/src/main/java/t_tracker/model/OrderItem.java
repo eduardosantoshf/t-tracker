@@ -1,5 +1,6 @@
 package t_tracker.model;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.*;
@@ -45,6 +46,10 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
+    public Integer getId() {
+        return this.id;
+    }
+
     public Double getTotalPrice() {
         return product.getPrice() * quantity;
     }
@@ -56,5 +61,32 @@ public class OrderItem {
     public int getQuantity() {
         return this.quantity;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof OrderItem)) {
+            return false;
+        }
+        OrderItem orderItem = (OrderItem) o;
+        return Objects.equals(product, orderItem.product) && quantity == orderItem.quantity && Objects.equals(order, orderItem.order) && Objects.equals(orderId, orderItem.orderId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(product, quantity, order, orderId);
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", product='" + getProduct() + "'" +
+            ", quantity='" + getQuantity() + "'" +
+            "}";
+    }
+
 
 }

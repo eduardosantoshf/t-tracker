@@ -19,8 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 import io.jsonwebtoken.JwtException;
 import t_tracker.model.Client;
 import t_tracker.model.Order;
-import t_tracker.repository.OrderRepository;
-import t_tracker.repository.StockRepository;
 import t_tracker.service.ClientService;
 import t_tracker.service.JwtTokenService;
 
@@ -30,12 +28,6 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
-
-    @Autowired
-    private StockRepository stockRepository;
-    
-    @Autowired
-    private OrderRepository orderRepository;
 
     @PostMapping(value = "/signup", consumes = "application/json")
     public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request)
@@ -66,8 +58,6 @@ public class ClientController {
             throws ResponseStatusException {
         Principal principal = request.getUserPrincipal();
         List<Order> orders;
-        System.out.println(orderRepository.findAll());
-        System.out.println(stockRepository.findAll());
 
         try {
             orders = clientService.getOrders(principal.getName());

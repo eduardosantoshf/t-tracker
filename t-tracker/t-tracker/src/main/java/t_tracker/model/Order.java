@@ -47,29 +47,37 @@ public class Order {
     private List<OrderItem> products;
 
     @Column(name = "is_delivered", nullable = false)
-    private boolean isDelivered;
+    private String status;
+
+    @Column(name = "rating", nullable = false)
+    private int rating;
     
     public Order() {}
 
     @Autowired
-    public Order(int clientId, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, List<OrderItem> products) {
-        this.clientId = clientId;
+    public Order(Client client, Coordinates pickupLocation, Coordinates deliverLocation, Double orderTotal, List<OrderItem> products) {
+        this.client = client;
+        this.clientId = client.getId();
         this.pickupLocation = pickupLocation;
         this.deliverLocation = deliverLocation;
         this.orderTotal = orderTotal;
         this.products = products;
-        this.isDelivered = false;
+        this.status = "Pending";
     }
 
     public Order(Client client) {
         this.client = client;
         this.clientId = client.getId();
         products = new ArrayList<>();
-        this.isDelivered = false;
+        this.status = "Pending";
     }
 
     public Integer getId() {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getClientId() {
@@ -128,16 +136,16 @@ public class Order {
         this.products.add(stock);
     }
 
-    public boolean isIsDelivered() {
-        return this.isDelivered;
+    public String getStatus() {
+        return this.status;
     }
 
-    public boolean getIsDelivered() {
-        return this.isDelivered;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setIsDelivered(boolean isDelivered) {
-        this.isDelivered = isDelivered;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public Double getTotalPrice() {
@@ -158,12 +166,12 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(clientId, order.clientId) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(products, order.products) && isDelivered == order.isDelivered;
+        return Objects.equals(id, order.id) && Objects.equals(clientId, order.clientId) && Objects.equals(pickupLocation, order.pickupLocation) && Objects.equals(deliverLocation, order.deliverLocation) && Objects.equals(orderTotal, order.orderTotal) && driverId == order.driverId && Objects.equals(products, order.products) && status == order.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, clientId, pickupLocation, deliverLocation, orderTotal, driverId, products, isDelivered);
+        return Objects.hash(id, clientId, pickupLocation, deliverLocation, orderTotal, driverId, products, status);
     }
 
 
@@ -177,7 +185,7 @@ public class Order {
             ", orderTotal='" + getOrderTotal() + "'" +
             ", driverId='" + getDriverId() + "'" +
             ", products='" + getProducts() + "'" +
-            ", isDelivered='" + isIsDelivered() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 

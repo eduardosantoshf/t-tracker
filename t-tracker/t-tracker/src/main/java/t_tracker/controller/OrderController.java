@@ -2,6 +2,7 @@ package t_tracker.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,14 +41,15 @@ public class OrderController {
     OrderRepository orderRepository;
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<?> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request) throws ResponseStatusException {
+    public ResponseEntity<?> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request)
+            throws ResponseStatusException {
         Principal principal = request.getUserPrincipal();
         Client client;
 
         try {
             client = clientService.getClientByUsername(principal.getName());
 
-        } catch(ResponseStatusException e) {
+        } catch (ResponseStatusException e) {
             return new ResponseEntity<>("Unauthorized client.", HttpStatus.FORBIDDEN);
         }
 
@@ -58,7 +61,7 @@ public class OrderController {
                 orderProduct = productService.getProduct(order.getProductId());
                 orderPlaced.addProduct(new OrderItem(orderProduct, order.getQuantity()));
             }
-        } catch( ResponseStatusException e ) {
+        } catch (ResponseStatusException e) {
             return new ResponseEntity<>(e.getReason(), e.getStatus());
         }
 
@@ -76,6 +79,32 @@ public class OrderController {
             throws ResponseStatusException {
         System.out.print(orderRepository.findAll());
         return new ResponseEntity<>(orderRepository.findById(orderId), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/update/{orderId}/{status}")
+    public ResponseEntity<?> updateOrderStatus(@PathVariable(value = "orderId") int orderId,
+            @PathVariable(value = "status") int status, HttpServletRequest request) throws ResponseStatusException {
+        Optional<Order> order = orderRepository.findById(orderId);
+
+        if (!order.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found.");
+
+        orderService.updateStatus(order.get(), status);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/rate/{orderId}/{rating}")
+    public ResponseEntity<?> rateOrder(@PathVariable(value = "orderId") int orderId,
+            @PathVariable(value = "rating") int rating, HttpServletRequest request) throws ResponseStatusException {
+        Optional<Order> order = orderRepository.findById(orderId);
+
+        if (!order.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found.");
+
+        orderService.rateOrder(order.get(), rating);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

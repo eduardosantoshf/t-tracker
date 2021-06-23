@@ -13,7 +13,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     
     public Optional<Order> findById(int id);
     public List<Order> findByClientId(int id);
-    public List<Order> findByIsDelivered(boolean isDelivered);
+    public List<Order> findByStatus(String status);
     public List<Order> findAll();
 
 }

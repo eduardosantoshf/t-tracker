@@ -6,6 +6,8 @@ public interface OrderService {
     
     Order placeAnOrder(Order order);
 
-    boolean isInStock(Stock products);
+    void updateStatus(Order order, int status);
+
+    void rateOrder(Order order, int rating);
 
 }
