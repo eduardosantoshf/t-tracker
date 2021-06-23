@@ -32,9 +32,9 @@ public abstract class User {
     @JoinColumn(name = "coordinates_id")
     private Coordinates homeLocation;
 
-    public User() {}
+    protected User() {}
 
-    public User(String name, String username, String email, String password) {
+    protected User(String name, String username, String email, String password) {
         this.name = name;
         this.username = username;
         this.email = email;
@@ -42,7 +42,7 @@ public abstract class User {
     }
 
     @Autowired
-    public User(String name, String username, String email, String password, int phoneNumber, Coordinates homeLocation) {
+    protected User(String name, String username, String email, String password, int phoneNumber, Coordinates homeLocation) {
         this.name = name;
         this.username = username;
         this.email = email;
@@ -53,6 +53,10 @@ public abstract class User {
 
     public Integer getId() {
         return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -1,9 +1,0 @@
-t_tracker/model/Owner.class
-t_tracker/TTrackerApplication.class
-t_tracker/model/VaccineBuy.class
-t_tracker/model/User.class
-t_tracker/model/Product.class
-t_tracker/model/VaccineCollection.class
-t_tracker/model/Lab.class
-t_tracker/model/Client.class
-t_tracker/model/Store.class

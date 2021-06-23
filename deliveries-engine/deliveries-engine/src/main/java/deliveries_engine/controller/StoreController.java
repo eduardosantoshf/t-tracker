@@ -65,6 +65,11 @@ public class StoreController {
 
     @PostMapping(value = "/order/{storeId}", consumes = "application/json", produces = "application/json")
     public Rider order(@RequestBody Delivery delivery, @RequestHeader(name = "Authorization") String token, @PathVariable(name = "storeId") int storeId) throws Exception {
-        return storeService.getClosestRider(delivery.getDeliveryLatitude(), delivery.getDeliveryLongitude(), token, storeId);
+        return storeService.getClosestRider(delivery, delivery.getDeliveryLatitude(), delivery.getDeliveryLongitude(), token, storeId);
+    }
+
+    @GetMapping(value = "/rider/{riderId}/{storeId}", produces = "application/json")
+    public Rider getRiderPosition(@RequestHeader(name = "Authorization") String token, @PathVariable(name = "storeId") int storeId, @PathVariable(name = "riderId") int riderId) throws Exception {
+        return storeService.getRiderPosition(riderId, token, storeId);
     }
 }

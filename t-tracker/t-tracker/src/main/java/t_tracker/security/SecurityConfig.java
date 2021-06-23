@@ -9,8 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import t_tracker.model.User;
-import t_tracker.repository.UserRepository;
+import t_tracker.repository.ClientRepository;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -20,9 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private PasswordEncoder passwordEncoder;
     private UserDetailsService userDetailsService;
-    private UserRepository<User> userRepository;
+    private ClientRepository userRepository;
 
-    public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, UserRepository<User> userRepository) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, ClientRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
         this.userRepository = userRepository;
@@ -38,11 +37,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         httpSecurity.csrf().disable().cors().and()
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/client/login").permitAll()
+            .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
+            .antMatchers(HttpMethod.GET, "/v2/api-docs").permitAll()
+			.antMatchers(HttpMethod.GET, "/webjars/**").permitAll()
+			.antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
             .antMatchers(HttpMethod.POST, "/client/signup").permitAll()
+            .antMatchers(HttpMethod.GET, "/client/verify").permitAll()
+            .antMatchers(HttpMethod.GET, "/product/all").permitAll()
+            .antMatchers(HttpMethod.GET, "/product/{\\d+}").permitAll()
+            .antMatchers(HttpMethod.GET, "/stock").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.addFilter(new JwtAuthenticationFilter(authenticationManager(),userRepository))
             .addFilter(new JWTAuthorizationFilter(authenticationManager()));
 	}
-
 }

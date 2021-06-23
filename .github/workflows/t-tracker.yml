@@ -6,8 +6,10 @@ on:
   push:
     branches: [ develop, deployment ]
     paths-ignore:
-      - 'reporting/**' # don't run this workflow when the are pushes, and there are only changes for this directory
-      # don't run this workflow when the are pushes, and there are only changes for the following files:
+      # don't run this workflow when the are pushes, and there are only changes for this directories:
+      - 'reporting/**'
+      - 'monitoring/**'
+      # don't run this workflow when the are pushes and there are only changes for the following files:
       - '**.md'
       - '**.pdf'
       - '**.docx'
@@ -17,7 +19,9 @@ on:
   pull_request:
     branches: [ main, develop, deployment ]
     paths-ignore:
-      - 'reporting/**' # don't run this workflow when the are pull requests, and there are only changes for this directory
+      # don't run this workflow when the are pull requests, and there are only changes for this directories:
+      - 'reporting/**'
+      - 'monitoring/**'
       # don't run this workflow when the are pull requests, and there are only changes for the following files:
       - '**.md'
       - '**.pdf'
@@ -85,3 +89,4 @@ jobs:
         run: |
             cd t-tracker/t-tracker
             mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+  

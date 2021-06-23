@@ -102,23 +102,21 @@
         <div style="width:30%;">
             <form action="dashboard.html">
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="staticEmail2">Email</label>
-                    <input type="text" class="form-control" id="staticEmail2" placeholder="email@example.com">
+                    <label style="font-weight: bold;" for="usernameTxt">Username</label>
+                    <input type="text" class="form-control" id="usernameTxt" placeholder="marciano_de_marte">
                 </div>
                 <div class="row col-12" style="padding: 5px 0px;">
-                    <label style="font-weight: bold;" for="inputPassword2">Password</label>
-                    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                    <label style="font-weight: bold;" for="passwordTxt">Password</label>
+                    <input type="password" class="form-control" id="passwordTxt" placeholder="Password">
                 </div>
                 <div class="row" style="padding: 5px 0px;">
                     <div class="col-3">
-                        <button type="submit" class="btn btn-success mb-3 w-100">Login</button>
+                        <button type="button" class="btn btn-success mb-3 w-100" onclick="loginclient()">Login</button>
                     </div>
                     <div class="col-3">
                         <button type="button" class="btn btn-secondary mb-3 w-100" onclick="window.location.href='signup.html'">Signup</button>
                     </div>
-                    <div class="col-6">
-
-                    </div>
+                    <div class="col-6"></div>
                 </div>
               </form>
         </div>
@@ -247,6 +245,7 @@
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
 
+    <script src="assets/js/auth.js"></script>
 </body>
 
 </html>

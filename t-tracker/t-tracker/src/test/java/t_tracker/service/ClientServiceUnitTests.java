@@ -5,6 +5,8 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,18 +17,24 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.model.Client;
 import t_tracker.model.Coordinates;
+import t_tracker.model.Order;
 import t_tracker.repository.ClientRepository;
+import t_tracker.repository.CoordinatesRepository;
 
 @ExtendWith(MockitoExtension.class)
 class ClientServiceUnitTests {
 
     @Mock( lenient = true)
     private ClientRepository clientRepository;
+
+    @Mock( lenient = true)
+    private CoordinatesRepository coordRepository;
 
     @Mock( lenient = true)
     private PasswordEncoder passwordEncoder;
@@ -43,8 +51,8 @@ class ClientServiceUnitTests {
         neo = new Client("Thomas Anderson", "Neo", "thisisasimulation@sim.com", "keanuisbreathtaking");
         neo.setPhoneNumber(911222333);
         neo.setHomeLocation(new Coordinates(25.00198217925069, -70.99974266535844));
-        emailUsedUser = new Client("Common Name", "NotSoCommonUsername", usedEmail, "CommonPassword1234");
-        usernameUsedUser = new Client("Common Name", usedUsername, "notsocommonemail@org.com", "CommonPassword1234");
+        emailUsedUser = new Client("Common Name", "NotSoCommonUsername", usedEmail, "CommonPassword1234", 123123123, new Coordinates(12.0, 13.0));
+        usernameUsedUser = new Client("Common Name", usedUsername, "notsocommonemail@org.com", "CommonPassword1234", 123124123, new Coordinates(14.0, 13.0));
         
         Mockito.when(clientRepository.findByEmail(neo.getEmail())).thenReturn(Optional.ofNullable(null));
         Mockito.when(clientRepository.findByUsername(neo.getUsername())).thenReturn(Optional.ofNullable(null));
@@ -61,12 +69,22 @@ class ClientServiceUnitTests {
 
     @Test
     void whenRegisterNewClient_thenReturnCreatedClient() {
-        System.out.println(neo);
         Client registeredClient = clientService.registerClient(neo);
         assertThat( registeredClient, is(neo) );
 
         verifyFindByEmailIsCalledOnce(neo.getEmail());
         verifyFindByUsernameIsCalledOnce(neo.getUsername());
+    }
+
+    @Test
+    void whenRegisterClientWithNoHomeLocation_thenReturn409() {
+        Client noHLClient = new Client("Client Name", "Client Username", "email@email.com", "1234");
+        ResponseStatusException thrownException = assertThrows( ResponseStatusException.class, () -> clientService.registerClient(noHLClient) );
+        assertThat( thrownException.getStatus(), is(HttpStatus.CONFLICT) );
+        assertThat( thrownException.getReason(), is("Home location is required.") );
+
+        verifyFindByEmailIsCalledOnce(noHLClient.getEmail());
+        verifyFindByUsernameIsCalledOnce(noHLClient.getUsername());
     }
 
     @Test
@@ -87,6 +105,58 @@ class ClientServiceUnitTests {
         
         verifyFindByEmailIsCalledOnce(usernameUsedUser.getEmail());
         verifyFindByUsernameIsCalledOnce(usernameUsedUser.getUsername());
+    }
+
+    @Test
+    void whenGetValidClientOrder_thenReturnOrders() {
+        Mockito.when( clientRepository.findByUsername(usedUsername) ).thenReturn(Optional.of(usernameUsedUser));
+
+        List<Order> orderList = clientService.getOrders(usedUsername);
+
+        assertThat(orderList, is(usernameUsedUser.getOrderlist()));
+    }
+
+    @Test
+    void whenGetInvalidClientOrder_thenReturn404() {
+        String username = neo.getUsername();
+        ResponseStatusException thrownException = assertThrows(ResponseStatusException.class, () -> clientService.getOrders(username));
+
+        assertThat(thrownException.getStatus(), is(HttpStatus.NOT_FOUND));
+        assertThat(thrownException.getReason(), is("Client not found."));
+    }
+
+    @Test
+    void whenConvertClientToMap_thenReturnMappedClient() {
+        Map<String, Object> mappedClient = clientService.convertClientToMap(neo);
+
+        assertThat(mappedClient.get("name"), is(neo.getName()));
+        assertThat(mappedClient.get("username"), is(neo.getUsername()));
+        assertThat(mappedClient.get("email"), is(neo.getEmail()));
+        assertThat(mappedClient.get("phoneNumber"), is(neo.getPhoneNumber()));
+        assertThat(mappedClient.get("homeLocation"), is(neo.getHomeLocation()));
+        assertThat(mappedClient.get("orderList"), is(neo.getOrderlist()));
+    }
+
+    @Test
+    void whenGetClientByValidUsername_thenReturnClient() {
+        Mockito.when( clientRepository.findByUsername(usedUsername) ).thenReturn(Optional.of(usernameUsedUser));
+
+        Client clientFound = clientService.getClientByUsername(usedUsername);
+
+        assertThat(clientFound, is(neo));
+
+    }
+
+    @Test
+    void whenGetClientByInvalidUsername_thenReturn404() {
+        String username = neo.getUsername();
+
+        Mockito.when( clientRepository.findByUsername(neo.getUsername()) ).thenReturn(Optional.ofNullable(null));
+
+        ResponseStatusException thrownException = assertThrows(ResponseStatusException.class, () -> clientService.getClientByUsername(username));
+
+        assertThat(thrownException.getStatus(), is(HttpStatus.NOT_FOUND));
+        assertThat(thrownException.getReason(), is("Client not found."));
     }
 
     private void verifyFindByEmailIsCalledOnce(String email) {

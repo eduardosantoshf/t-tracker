@@ -1,8 +1,10 @@
 package deliveries_engine.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import deliveries_engine.exception.ErrorWarning;
+import deliveries_engine.model.Delivery;
 import deliveries_engine.model.Rider;
 import deliveries_engine.model.User;
 import deliveries_engine.repository.RiderRepository;
@@ -88,14 +90,20 @@ public class RiderServiceImp implements RiderService {
     @Override
     public Rider updateStatus(int status, Rider rider) throws Exception {
 
-        if(status < 0 || status > 1)
-            throw new Exception("Status needs to be 0 (inactive) or 1 (active)");
+        if(status < 0 || status > 2)
+            throw new Exception("Status needs to be 0, 1 or 2");
 
         rider.setStatus(status);
         riderRepository.save(rider);
 
         return rider;
 
+    }
+
+    @Override
+    public List<Delivery> getDeliveries(Rider rider) {
+        Rider r = riderRepository.findById(rider.getId());
+        return r.getDeliveries();
     }
 
 }

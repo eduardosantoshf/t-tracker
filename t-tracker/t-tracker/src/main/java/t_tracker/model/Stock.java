@@ -1,5 +1,7 @@
 package t_tracker.model;
 
+import java.util.Objects;
+
 import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,7 @@ public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name="product_id")
@@ -17,14 +19,6 @@ public class Stock {
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
-
-    @ManyToOne
-    @JoinColumn(name="order_id")
-    private Order order;
-
-    @ManyToOne
-    @JoinColumn(name="lab_id")
-    private Lab lab;
 
     public Stock() {}
 
@@ -34,7 +28,7 @@ public class Stock {
         this.quantity = quantity;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -59,16 +53,37 @@ public class Stock {
     }
 
     public void removeQuantity(int quantity) {
-        this.quantity -= quantity;
-    }
-
-    public Lab getLab() {
-        return this.lab;
+        int result = this.quantity - quantity;
+        this.quantity = result <= 0 ? 0 : result;
     }
 
     public Double getTotalPrice() {
         return this.getProduct().getPrice() * this.getQuantity();
     }
-    
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Stock)) {
+            return false;
+        }
+        Stock stock = (Stock) o;
+        return Objects.equals(product, stock.product) && quantity == stock.quantity;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(product, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", product='" + getProduct() + "'" +
+            ", quantity='" + getQuantity() + "'" +
+            "}";
+    }
+
 }

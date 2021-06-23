@@ -20,13 +20,18 @@ function checkToken(){
         return decodeURI(dc.substring(begin + prefix.length, end));
     }
     
-    var myCookie = getCookie("sessionKey");
+    var myCookie = getCookie("sessionKey-rider");
 
     if (myCookie == null) {
         window.location.href='/login.html';
     }
     else {
-        // do cookie-exists stuff
+        fetch("http://localhost:8080/rider/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'get'}).then(data => data.text()).then(data => {
+            if(data!="SUCCESS"){
+                document.cookie = "sessionKey-rider= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+                window.location.href='login.html';
+            }
+        })
     }
 }
 
@@ -41,7 +46,6 @@ function signuprider(){
     var riderCity=$("#riderCity").val();
 
     var rider={"name":riderName, "email":riderEmail, "username":riderUsername, "password":riderPassword, "phoneNumber":riderPhone, "address":riderAddress, "zipCode":riderCEP, "city":riderCity};
-    //fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => data.json()).then(data => (data.id!=null) ? autoLogin(riderUsername, riderPassword) : $("#authmessage").show());
 
     fetch('http://localhost:8080/rider/signup', { headers: { 'Content-Type': 'application/json' }, method: 'post', body: JSON.stringify(rider)}).then(data => {
         if(data.status==200)
@@ -61,19 +65,7 @@ function loginrider(){
     var riderUsername = $("#riderUsername").val();
     var riderPassword = $("#riderPassword").val();
     
-    fetch('http://localhost:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
-        if(data.status==200){
-            data=data.json();
-
-            Promise.all([data]).then(data => {
-                document.cookie = "sessionKey="+data[0].token;
-                window.location.href="/dashboard.html";
-            })
-        }else{
-            $("#authmessage").show();
-            $("#riderPassword").val("");
-        }
-    });
+    autoLogin(riderUsername, riderPassword);
 }
 
 function autoLogin(riderUsername, riderPassword){
@@ -82,7 +74,8 @@ function autoLogin(riderUsername, riderPassword){
             data=data.json();
 
             Promise.all([data]).then(data => {
-                document.cookie = "sessionKey="+data[0].token;
+                document.cookie = "sessionKey-rider="+data[0].token;
+                localStorage.setItem("riderID", data[0].id);
                 window.location.href="/dashboard.html"
             })
         }else{
