@@ -140,8 +140,13 @@ var headers = {
 stompClient.connect(headers, function (frame) {
     stompClient.subscribe('/order/messages', function (messageOutput) {
         let obj = JSON.parse(messageOutput.body);
+        console.log(obj);
         let storeCoords = [obj["store_latitude"], obj["store_longitude"]]
+        console.log(obj["store_latitude"]);
+        console.log(obj["store_longitude"]);
         let clientCoords = [obj["latitude"], obj["longitude"]]
+        console.log(obj["latitude"]);
+        console.log(obj["longitude"]);
 
         function putMarker(coordinates, type) { // type= client | store
             L.marker(coordinates).addTo(map)
