@@ -10,7 +10,7 @@ function showPosition(position) {
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
 
-    fetch('http://192.168.160.222:8080/rider/location/' + lat + "/" + long, { headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'post' }).then(data => {
+    fetch('http://localhost:8080/rider/location/' + lat + "/" + long, { headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-rider") }, method: 'post' }).then(data => {
         if (data.status == 200) {
             data = data.json();
 
