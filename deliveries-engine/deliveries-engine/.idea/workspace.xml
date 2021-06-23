@@ -46,10 +46,148 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../TQS Product Specification Report - template.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_27_0_1_jre.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_2_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_mojo_animal_sniffer_annotations_1_17.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/RiderServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deliveries_engine/service/StoreServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deliveries-engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/deliveries-engine.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/CorsConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/CorsConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/DeliveriesEngineApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/DeliveriesEngineApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/PasswordEncoderConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/PasswordEncoderConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/RiderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/RiderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/StoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/controller/StoreController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/exception/ErrorWarning.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/exception/ErrorWarning.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Delivery.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Delivery.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Rider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Rider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/Store.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/AdminRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/AdminRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/DeliveryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/DeliveryRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/RiderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/RiderRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/StoreRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/StoreRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JWTAuthorizationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JWTAuthorizationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/security/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/security/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/JwtTokenService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/JwtTokenService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/RiderServiceImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/Service.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/ServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/ServiceImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/StoreServiceImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/service/UserDetailsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/service/UserDetailsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deliveries_engine/swagger2/Swagger2Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/deliveries_engine/swagger2/Swagger2Config.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/deliveries-engine-1.0-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/jacoco.exec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.controller/Controller.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.controller/Controller.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.controller/RiderController.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.controller/RiderController.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.controller/StoreController.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.controller/StoreController.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.controller/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.controller/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.exception/ErrorWarning.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.exception/ErrorWarning.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.exception/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.exception/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/Admin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/Admin.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/Delivery.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/Delivery.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/Rider.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/Rider.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/Store.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/Store.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/User.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/User.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.model/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.security/JWTAuthorizationFilter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.security/JWTAuthorizationFilter.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.security/JwtAuthenticationFilter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.security/JwtAuthenticationFilter.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.security/SecurityConfig.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.security/SecurityConfig.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.security/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.security/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/JwtTokenService.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/JwtTokenService.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/RiderServiceImp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/RiderServiceImp.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/ServiceImp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/ServiceImp.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/StoreServiceImp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/StoreServiceImp.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/UserDetailsServiceImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/UserDetailsServiceImpl.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.service/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.swagger2/Swagger2Config.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.swagger2/Swagger2Config.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.swagger2/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine.swagger2/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine/CorsConfiguration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine/CorsConfiguration.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine/DeliveriesEngineApplication.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine/DeliveriesEngineApplication.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine/PasswordEncoderConfig.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine/PasswordEncoderConfig.java.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/deliveries_engine/index.source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/branchfc.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/branchnc.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/branchpc.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/bundle.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/class.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/down.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/greenbar.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/group.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/method.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/package.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/prettify.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/prettify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/redbar.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/report.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/report.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/session.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/sort.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/sort.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/source.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-resources/up.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-sessions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2021-06-07T10-38-05_188.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-deliveries_engine.repository.AdminRepositoryTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-deliveries_engine.repository.DeliveryRepositoryTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-deliveries_engine.repository.RiderRepositoryTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-deliveries_engine.repository.StoreRepositoryTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-deliveries_engine.repository.UserRepositoryTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/deliveries_engine.repository.AdminRepositoryTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/deliveries_engine.repository.DeliveryRepositoryTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/deliveries_engine.repository.RiderRepositoryTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/deliveries_engine.repository.StoreRepositoryTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/deliveries_engine.repository.UserRepositoryTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/AdminRepositoryTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/DeliveryRepositoryTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/RiderRepositoryTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/StoreRepositoryTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/deliveries_engine/repository/UserRepositoryTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reporting/TQS QA Manual.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reporting/TQS_Product_Specification_Report.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../reporting/TQS_Product_Specification_Report.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +204,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectId" id="1t8ufjHZFfPxjdDQfXxrrPlcITB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -90,13 +235,15 @@
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager" selected="JUnit.RiderServiceTest">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -203,12 +350,12 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Maven.deliveries-engine" />
       <item itemvalue="JUnit.StoreServiceTest.whenGetRatings_returnRatings" />
       <item itemvalue="JUnit.StoreServiceTest.whenGetComments_returnComments" />
       <item itemvalue="JUnit.RiderServiceTest.whenSignUpRider_thenRiderIsRegistered" />
       <item itemvalue="JUnit.RiderServiceTest" />
       <item itemvalue="JUnit.StoreServiceTest" />
+      <item itemvalue="Maven.deliveries-engine" />
     </list>
     <recent_temporary>
       <list>
@@ -223,7 +370,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="41a41c79-a386-4eb3-8650-4dfcba796f86" name="Default Changelist" comment="" />
+      <changelist id="d7bd686d-91eb-4053-b531-33a74aa3efec" name="Default Changelist" comment="" />
       <created>1622163143077</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -240,6 +387,7 @@
       <workItem from="1622995033260" duration="3827000" />
       <workItem from="1623058433344" duration="546000" />
       <workItem from="1623172360370" duration="35000" />
+      <workItem from="1624484538119" duration="2372000" />
     </task>
     <servers />
   </component>
