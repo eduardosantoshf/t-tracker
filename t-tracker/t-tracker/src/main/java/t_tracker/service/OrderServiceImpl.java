@@ -88,7 +88,6 @@ public class OrderServiceImpl implements OrderService {
 
         // Update stock if order products are valid
         for (OrderItem s : order.getProducts()) {
-            System.out.println("Alll good");
             try {
                 stockService.removeStock(s.getProduct(), s.getQuantity());
             } catch (ResponseStatusException e) {
@@ -121,7 +120,7 @@ public class OrderServiceImpl implements OrderService {
             HttpEntity<String> labDetailsRequest = new HttpEntity<>(labInfo, httpHeaders);
 
             ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest, Lab.class);
-            System.out.println(response.getBody());
+
             try {
                 authDetails = labRepository.save(response.getBody());
             } catch (NullPointerException e) {

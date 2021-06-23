@@ -156,8 +156,11 @@ class StockServiceUnitTests {
     void whenRemoveStockWithNotEnoughQuantity_thenReturn409() {
         Stock stockToRemove = new Stock(testProduct1, 50);
 
+        Product prod = stockToRemove.getProduct();
+        int quant = stockToRemove.getQuantity();
+
         ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
-                () -> stockService.removeStock(stockToRemove.getProduct(), stockToRemove.getQuantity()));
+                () -> stockService.removeStock(prod, quant));
 
         assertThat(exceptionThrown.getStatus(), is(HttpStatus.CONFLICT));
         assertThat(exceptionThrown.getReason(), is("Not enough stock to process request."));
@@ -169,33 +172,17 @@ class StockServiceUnitTests {
     void whenRemoveStockWithUnknownProduct_thenReturn404() {
         Stock stockToRemove = new Stock(new Product("Whatever", 1.1, "whatever", "whatever"), 50);
 
+        Product prod = stockToRemove.getProduct();
+        int quant = stockToRemove.getQuantity();
+
         ResponseStatusException exceptionThrown = assertThrows(ResponseStatusException.class,
-                () -> stockService.removeStock(stockToRemove.getProduct(), stockToRemove.getQuantity()));
+                () -> stockService.removeStock(prod, quant));
 
         assertThat(exceptionThrown.getStatus(), is(HttpStatus.NOT_FOUND));
         assertThat(exceptionThrown.getReason(), is("Product not Found."));
 
         verifyFindAllIsCalledOnce();
     }
-
-    // @Test
-    // void whenRemoveStockWithNoLab_thenReturn404() {
-    // Mockito.when(labRepository.findAll()).thenReturn(new ArrayList<>());
-    // Stock stockToRemove = new Stock(new Product("Brand New Test", 29.99,
-    // "deluxe", "Deluxe test."), 1);
-
-    // List<Stock> expectedStock = new ArrayList<>(testLab.getStocks());
-
-    // ResponseStatusException throwException =
-    // assertThrows(ResponseStatusException.class,
-    // () -> labService.removeStockFromLab(stockToRemove));
-
-    // assertThat(throwException.getStatus(), is(HttpStatus.NOT_FOUND));
-    // assertThat(throwException.getReason(), is("Lab not found."));
-    // assertThat(testLab.getStocks(), is(expectedStock));
-
-    // verifyFindAllIsCalledOnce();
-    // }
 
     private void verifyFindAllIsCalledOnce() {
         Mockito.verify(stockRepository, VerificationModeFactory.times(1)).findAll();

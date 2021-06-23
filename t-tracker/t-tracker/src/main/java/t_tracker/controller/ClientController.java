@@ -32,7 +32,7 @@ public class ClientController {
     @PostMapping(value = "/signup", consumes = "application/json")
     public ResponseEntity<Client> registerClient(@RequestBody Client client, HttpServletRequest request)
             throws ResponseStatusException {
-                
+
         Client registeredClient;
 
         try {
@@ -54,8 +54,7 @@ public class ClientController {
     }
 
     @GetMapping(value = "/orders", produces = "application/json")
-    public ResponseEntity<List<Order>> getClientOrders(HttpServletRequest request)
-            throws ResponseStatusException {
+    public ResponseEntity<List<Order>> getClientOrders(HttpServletRequest request) throws ResponseStatusException {
         Principal principal = request.getUserPrincipal();
 
         return new ResponseEntity<>(clientService.getOrders(principal.getName()), HttpStatus.OK);
@@ -64,13 +63,13 @@ public class ClientController {
     @GetMapping(value = "/verify", produces = "application/json")
     public String checkToken(@RequestHeader(name = "Authorization") String token, HttpServletRequest request)
             throws Exception {
-        System.out.println(1);
+
         try {
             JwtTokenService.verifyToken(token);
         } catch (JwtException e) {
             throw new Exception("FAILED TO VERIFY TOKEN");
         }
-        System.out.println(2);
+
         return "SUCCESS";
     }
 

@@ -52,10 +52,6 @@ public class StockServiceImpl implements StockService {
                     productToAdd.getName(), productToAdd.getPrice(),
                     productToAdd.getType());
 
-            System.out.println(allStocks);
-            System.out.println("product found:");
-            System.out.println(productFound);
-            System.out.println(productFound.isPresent());
             if (productFound.isPresent())
                 actualProduct = productFound.get();
             else

@@ -1,7 +1,5 @@
 package t_tracker;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -54,16 +52,17 @@ public class DataLoader implements ApplicationRunner {
             coordinatesRepository.save(labCoord);
             labRepository.save(newLab);
         } catch (Exception e) {
-            System.out.println(e);
-            return;
+            throw e;
         }
 
-        productRepository.save(new Product("Split Test", 49.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 1.", "assets/images/product/split.png"));
-        productRepository.save(new Product("Throat Test", 129.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 2.", "assets/images/product/throat.png"));
-        productRepository.save(new Product("Nose Test",89.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 3.", "assets/images/product/nose.png"));
-        productRepository.save(new Product("Nose Test", 59.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 4.", "assets/images/product/nose.png"));
-        productRepository.save(new Product("Throat Test", 59.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 5.", "assets/images/product/throat.png"));
-        productRepository.save(new Product("Take Blood", 79.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 6.", "assets/images/product/tirarsange.png"));
-        productRepository.save(new Product("Take Blood",89.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 7.", "assets/images/product/fingerblood.png"));
+        final String PROD_TYPE = "Molecular";
+
+        productRepository.save(new Product("Split Test", 49.0, PROD_TYPE, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 1.", "assets/images/product/split.png"));
+        productRepository.save(new Product("Throat Test", 129.0, PROD_TYPE, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 2.", "assets/images/product/throat.png"));
+        productRepository.save(new Product("Nose Test",89.0, PROD_TYPE, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 3.", "assets/images/product/nose.png"));
+        productRepository.save(new Product("Nose Test", 59.0, PROD_TYPE, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 4.", "assets/images/product/nose.png"));
+        productRepository.save(new Product("Throat Test", 59.0, PROD_TYPE, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 5.", "assets/images/product/throat.png"));
+        productRepository.save(new Product("Take Blood", 79.0, PROD_TYPE, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 6.", "assets/images/product/tirarsange.png"));
+        productRepository.save(new Product("Take Blood",89.0, PROD_TYPE, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 7.", "assets/images/product/fingerblood.png"));
     }
 }
