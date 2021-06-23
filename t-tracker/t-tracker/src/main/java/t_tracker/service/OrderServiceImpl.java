@@ -2,6 +2,7 @@ package t_tracker.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +45,10 @@ public class OrderServiceImpl implements OrderService {
     private String storeSignupUrl = "http://backend-engine:8080/store";
     private String orderPlacementUrl = "http://backend-engine:8080/store/order/";
     private String ratingPlacementUrl = "http://backend-engine:8080/store/driver/rating/";
-    private String labInfo = "{\"name\":\"CovidTestsDeliveries\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
+    private String labInfo = "{\"name\":\"CovidTestsDeliveries" + java.time.LocalDateTime.now() + "\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
 
     @Override
     public Order placeAnOrder(Order order) {
-
         Order orderToStore = new Order(order.getClient());
 
         // Retrieve lab details for delivery placement
@@ -74,22 +74,24 @@ public class OrderServiceImpl implements OrderService {
 
         ResponseEntity<JSONObject> response;
 
-
         try {
             response = restTemplate.postForEntity(orderPlacementUrl + lab.getId(), requestContent, JSONObject.class);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
-        System.out.println("Check1");
+
         try {
-            orderToStore.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
+            JSONObject body = response.getBody();
+            if (body != null)
+                orderToStore.setDriverId(Integer.parseInt(body.get("id").toString()));
+            else
+                throw new NullPointerException();
         } catch (NullPointerException e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Error getting response from drivers api.");
         }
 
         // Update stock if order products are valid
         for (OrderItem s : order.getProducts()) {
-            System.out.println(order.getProducts());
             try {
                 stockService.removeStock(s.getProduct(), s.getQuantity());
             } catch (ResponseStatusException e) {
@@ -110,6 +112,7 @@ public class OrderServiceImpl implements OrderService {
         return orderPlaced;
     }
 
+    @Override
     public Lab getLabDetails() {
         List<Lab> allDetails = labRepository.findAll();
 
@@ -121,12 +124,13 @@ public class OrderServiceImpl implements OrderService {
             HttpEntity<String> labDetailsRequest = new HttpEntity<>(labInfo, httpHeaders);
 
             ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest, Lab.class);
-            try {
-                authDetails = labRepository.save(response.getBody());
-            } catch (NullPointerException e) {
+
+            Lab body = response.getBody();
+            if (body != null)
+                authDetails = labRepository.save(body);
+            else
                 throw new ResponseStatusException(HttpStatus.CONFLICT,
                         "Error retrieving authentication details from deliveries API.");
-            }
 
         } else {
             authDetails = allDetails.get(0);
@@ -136,6 +140,7 @@ public class OrderServiceImpl implements OrderService {
         return authDetails;
     }
 
+    @Override
     public JSONObject buildOrderRequest(String name, String comission, String deliveryLatitude,
             String deliveryLongitude) {
         HashMap<String, String> orderDetails = new HashMap<>();
@@ -149,35 +154,46 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateStatus(Order order, int status) {
-        if (status==0)
-            order.setStatus("Pending");
-        else if (status==1)
-            order.setStatus("Delivering");
-        else if (status==2)
-            order.setStatus("Delivered");
-        
-        orderRepository.save(order);
-        
+    public Order getOrder(int id) {
+        Optional<Order> orderFound = orderRepository.findById(id);
+
+        if (!orderFound.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found.");
+
+        return orderFound.get();
     }
 
     @Override
-    public void rateOrder(Order order, int rating) {
+    public Order updateStatus(Order order, int status) {
+        if (status == 0)
+            order.setStatus("Pending");
+        else if (status == 1)
+            order.setStatus("Delivering");
+        else if (status == 2)
+            order.setStatus("Delivered");
+
+        return orderRepository.save(order);
+
+    }
+
+    @Override
+    public Order rateOrder(Order order, int rating) {
         List<Lab> allDetails = labRepository.findAll();
 
         if (rating < 0 || rating > 10)
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Rating value out of bounds");
-        
+
         httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.add("Authorization", allDetails.get(0).getToken());
 
         HttpEntity<String> requestContent = new HttpEntity<>("{\"rating\":" + rating + "}", httpHeaders);
 
-        restTemplate.postForEntity(ratingPlacementUrl + allDetails.get(0).getId() + "/" + order.getDriverId(), requestContent, JSONObject.class);
+        restTemplate.postForEntity(ratingPlacementUrl + allDetails.get(0).getId() + "/" + order.getDriverId(),
+                requestContent, JSONObject.class);
 
         order.setRating(rating);
-        orderRepository.save(order);
+        return orderRepository.save(order);
     }
 
 }

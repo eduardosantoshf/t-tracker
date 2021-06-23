@@ -36,8 +36,16 @@ public class Lab {
         return this.id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getToken() {
         return this.token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getName() {

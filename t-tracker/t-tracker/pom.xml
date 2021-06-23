@@ -127,6 +127,11 @@
 						</goals>
 					</execution>
 				</executions>
+                <configuration>
+                    <excludes>
+                        <exclude>t_tracker/model/*</exclude>
+                    </excludes>
+                </configuration>
 			</plugin>
 
 		</plugins>

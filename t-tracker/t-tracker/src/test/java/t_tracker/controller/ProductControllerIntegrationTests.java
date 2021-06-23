@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -66,7 +67,8 @@ class ProductControllerIntegrationTests {
         int invalidId = 9999;
 
         mvc.perform( get("/product/" + invalidId).header("Authorization", "Bearer " + token) )
-            .andExpect( status().isNotFound() );
+            .andExpect( status().isNotFound() )
+            .andExpect( status().reason(containsString("Product not found.")) );
     }
 
     @Test

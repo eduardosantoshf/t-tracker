@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import io.jsonwebtoken.JwtException;
 import t_tracker.model.Client;
+import t_tracker.model.ClientDTO;
 import t_tracker.model.Order;
 import t_tracker.service.ClientService;
 import t_tracker.service.JwtTokenService;
@@ -30,9 +31,12 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping(value = "/signup", consumes = "application/json")
-    public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request)
+    public ResponseEntity<Client> registerClient(@RequestBody ClientDTO clientDto, HttpServletRequest request)
             throws ResponseStatusException {
-                
+
+        Client client = new Client(clientDto.getName(), clientDto.getUsername(), clientDto.getEmail(),
+                clientDto.getPassword(), clientDto.getPhoneNumber(), clientDto.getHomeLocation());
+
         Client registeredClient;
 
         try {
@@ -41,7 +45,7 @@ public class ClientController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
-
+ 
         Client returnClientData = new Client();
         returnClientData.setName(registeredClient.getName());
         returnClientData.setUsername(registeredClient.getUsername());
@@ -54,28 +58,22 @@ public class ClientController {
     }
 
     @GetMapping(value = "/orders", produces = "application/json")
-    public ResponseEntity<?> getClientOrders(HttpServletRequest request)
-            throws ResponseStatusException {
+    public ResponseEntity<List<Order>> getClientOrders(HttpServletRequest request) throws ResponseStatusException {
         Principal principal = request.getUserPrincipal();
-        List<Order> orders;
 
-        try {
-            orders = clientService.getOrders(principal.getName());
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatus());
-        }
-
-        return new ResponseEntity<>(orders, HttpStatus.OK);
+        return new ResponseEntity<>(clientService.getOrders(principal.getName()), HttpStatus.OK);
     }
 
     @GetMapping(value = "/verify", produces = "application/json")
     public String checkToken(@RequestHeader(name = "Authorization") String token, HttpServletRequest request)
             throws Exception {
+
         try {
             JwtTokenService.verifyToken(token);
         } catch (JwtException e) {
             throw new Exception("FAILED TO VERIFY TOKEN");
         }
+
         return "SUCCESS";
     }
 
