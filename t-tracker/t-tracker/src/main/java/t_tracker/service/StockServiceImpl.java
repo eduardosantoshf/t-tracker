@@ -52,6 +52,10 @@ public class StockServiceImpl implements StockService {
                     productToAdd.getName(), productToAdd.getPrice(),
                     productToAdd.getType());
 
+            System.out.println(allStocks);
+            System.out.println("product found:");
+            System.out.println(productFound);
+            System.out.println(productFound.isPresent());
             if (productFound.isPresent())
                 actualProduct = productFound.get();
             else
@@ -60,9 +64,10 @@ public class StockServiceImpl implements StockService {
             Stock stockToAdd = new Stock(actualProduct, quantityToAdd);
             
             stockRepository.save(stockToAdd);
+            allStocks.add(stockToAdd);
         }
 
-        return stockRepository.findAll();
+        return allStocks;
     }
 
     @Override
@@ -75,7 +80,7 @@ public class StockServiceImpl implements StockService {
                     throw new ResponseStatusException(HttpStatus.CONFLICT, "Not enough stock to process request.");
                 stock.removeQuantity(quantityToRemove);
                 stockRepository.save(stock);
-                return stockRepository.findAll();
+                return allStocks;
             }
 
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not Found.");

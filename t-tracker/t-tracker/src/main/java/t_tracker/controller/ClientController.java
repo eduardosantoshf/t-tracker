@@ -56,7 +56,9 @@ public class ClientController {
     @GetMapping(value = "/orders", produces = "application/json")
     public ResponseEntity<?> getClientOrders(HttpServletRequest request)
             throws ResponseStatusException {
+                System.out.println("Check1");
         Principal principal = request.getUserPrincipal();
+        System.out.println(principal);
         List<Order> orders;
 
         try {
@@ -71,11 +73,13 @@ public class ClientController {
     @GetMapping(value = "/verify", produces = "application/json")
     public String checkToken(@RequestHeader(name = "Authorization") String token, HttpServletRequest request)
             throws Exception {
+        System.out.println(1);
         try {
             JwtTokenService.verifyToken(token);
         } catch (JwtException e) {
             throw new Exception("FAILED TO VERIFY TOKEN");
         }
+        System.out.println(2);
         return "SUCCESS";
     }
 

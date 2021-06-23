@@ -2,6 +2,7 @@ package t_tracker.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order placeAnOrder(Order order) {
-
         Order orderToStore = new Order(order.getClient());
 
         // Retrieve lab details for delivery placement
@@ -74,13 +74,12 @@ public class OrderServiceImpl implements OrderService {
 
         ResponseEntity<JSONObject> response;
 
-
         try {
             response = restTemplate.postForEntity(orderPlacementUrl + lab.getId(), requestContent, JSONObject.class);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
-        System.out.println("Check1");
+
         try {
             orderToStore.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
         } catch (NullPointerException e) {
@@ -89,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
 
         // Update stock if order products are valid
         for (OrderItem s : order.getProducts()) {
-            System.out.println(order.getProducts());
+            System.out.println("Alll good");
             try {
                 stockService.removeStock(s.getProduct(), s.getQuantity());
             } catch (ResponseStatusException e) {
@@ -110,6 +109,7 @@ public class OrderServiceImpl implements OrderService {
         return orderPlaced;
     }
 
+    @Override
     public Lab getLabDetails() {
         List<Lab> allDetails = labRepository.findAll();
 
@@ -121,6 +121,7 @@ public class OrderServiceImpl implements OrderService {
             HttpEntity<String> labDetailsRequest = new HttpEntity<>(labInfo, httpHeaders);
 
             ResponseEntity<Lab> response = restTemplate.postForEntity(storeSignupUrl, labDetailsRequest, Lab.class);
+            System.out.println(response.getBody());
             try {
                 authDetails = labRepository.save(response.getBody());
             } catch (NullPointerException e) {
@@ -136,6 +137,7 @@ public class OrderServiceImpl implements OrderService {
         return authDetails;
     }
 
+    @Override
     public JSONObject buildOrderRequest(String name, String comission, String deliveryLatitude,
             String deliveryLongitude) {
         HashMap<String, String> orderDetails = new HashMap<>();
@@ -149,25 +151,35 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateStatus(Order order, int status) {
+    public Order getOrder(int id) {
+        Optional<Order> orderFound = orderRepository.findById(id);
+        
+        if (!orderFound.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found.");
+        
+        return orderFound.get();
+    }
+
+    @Override
+    public Order updateStatus(Order order, int status) {
         if (status==0)
             order.setStatus("Pending");
         else if (status==1)
             order.setStatus("Delivering");
         else if (status==2)
             order.setStatus("Delivered");
-        
-        orderRepository.save(order);
+
+        return orderRepository.save(order);
         
     }
 
     @Override
-    public void rateOrder(Order order, int rating) {
+    public Order rateOrder(Order order, int rating) {
         List<Lab> allDetails = labRepository.findAll();
 
         if (rating < 0 || rating > 10)
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Rating value out of bounds");
-        
+
         httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.add("Authorization", allDetails.get(0).getToken());
@@ -177,7 +189,7 @@ public class OrderServiceImpl implements OrderService {
         restTemplate.postForEntity(ratingPlacementUrl + allDetails.get(0).getId() + "/" + order.getDriverId(), requestContent, JSONObject.class);
 
         order.setRating(rating);
-        orderRepository.save(order);
+        return orderRepository.save(order);
     }
 
 }

@@ -144,6 +144,10 @@ public class Order {
         this.status = status;
     }
 
+    public int getRating() {
+        return this.rating;
+    }
+
     public void setRating(int rating) {
         this.rating = rating;
     }
@@ -186,6 +190,7 @@ public class Order {
             ", driverId='" + getDriverId() + "'" +
             ", products='" + getProducts() + "'" +
             ", status='" + getStatus() + "'" +
+            ", rating='" + getRating() + "'" +
             "}";
     }
 

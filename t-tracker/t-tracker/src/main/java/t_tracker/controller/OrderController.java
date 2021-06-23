@@ -2,7 +2,6 @@ package t_tracker.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -77,19 +76,29 @@ public class OrderController {
     @GetMapping(produces = "application/json")
     public ResponseEntity<?> getClientOrders(@RequestParam int orderId, HttpServletRequest request)
             throws ResponseStatusException {
-        System.out.print(orderRepository.findAll());
-        return new ResponseEntity<>(orderRepository.findById(orderId), HttpStatus.OK);
+        Order order;
+
+        try {
+            order = orderService.getOrder(orderId);
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(e.getStatus(), e.getReason());
+        }
+
+        return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
     @PostMapping(value = "/update/{orderId}/{status}")
     public ResponseEntity<?> updateOrderStatus(@PathVariable(value = "orderId") int orderId,
             @PathVariable(value = "status") int status, HttpServletRequest request) throws ResponseStatusException {
-        Optional<Order> order = orderRepository.findById(orderId);
+        Order order;
 
-        if (!order.isPresent())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found.");
+        try {
+            order = orderService.getOrder(orderId);
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(e.getStatus(), e.getReason());
+        }
 
-        orderService.updateStatus(order.get(), status);
+        orderService.updateStatus(order, status);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -97,12 +106,15 @@ public class OrderController {
     @PostMapping(value = "/rate/{orderId}/{rating}")
     public ResponseEntity<?> rateOrder(@PathVariable(value = "orderId") int orderId,
             @PathVariable(value = "rating") int rating, HttpServletRequest request) throws ResponseStatusException {
-        Optional<Order> order = orderRepository.findById(orderId);
+        Order order;
 
-        if (!order.isPresent())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found.");
+        try {
+            order = orderService.getOrder(orderId);
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(e.getStatus(), e.getReason());
+        }
 
-        orderService.rateOrder(order.get(), rating);
+        orderService.rateOrder(order, rating);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

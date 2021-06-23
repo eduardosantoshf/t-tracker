@@ -101,13 +101,14 @@ class OrderRepositoryTests {
         assertThat(orderFound.size(), is(0));
     }
 
-    // @Test
-    // void whenFindOrderByIsDelivered_thenReturnOrder() {
-    //     List<Order> orderFound = orderRepository.findByIsDelivered(false);
+    @Test
+    void whenFindOrderByStatus_thenReturnOrder() {
+        List<Order> orderFound = orderRepository.findByStatus("Delivered");
 
-    //     assertThat(orderFound.size(), is(1));
-    //     assertThat(orderFound.contains(testOrder1), is(true));
-    // }
+        assertThat(orderFound.size(), is(1));
+        assertThat(orderFound.contains(testOrder1), is(false));
+        assertThat(orderFound.contains(testOrder2), is(true));
+    }
 
     @Test
     void whenFindAllOrders_thenReturnOrders() {
