@@ -26,12 +26,23 @@ function checkToken(){
         window.location.href='/login.html';
     }
     else {
-        fetch("http://localhost:8081/client/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client") }, method: 'get'}).then(data => data.text()).then(data => {
-            if(data!="SUCCESS"){
+        fetch("http://localhost:8081/client/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client") }, method: 'get'})
+        .then(data => {
+            if(data.status==200){
+                data=data.text();
+
+                Promise.all([data]).then(data => {
+                    let resp = data[0];
+                    if(resp!="SUCCESS"){
+                        document.cookie = "sessionKey-client= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+                        window.location.href='login.html';
+                    }
+                })
+            }else{
                 document.cookie = "sessionKey-client= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
                 window.location.href='login.html';
             }
-        })
+        });
     }
 }
 
