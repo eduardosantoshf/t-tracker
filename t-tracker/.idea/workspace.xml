@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bc30b8b-1adb-4bae-8c23-3d0bee6cde95" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../deliveries-engine/deliveries-engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../deliveries-engine/deliveries-engine/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/t-tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/t-tracker.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/t-tracker/src/main/java/t_tracker/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/t-tracker/src/main/java/t_tracker/DataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/t-tracker/target/classes/t_tracker/controller/ClientController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/assets/js/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/js/product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/t-tracker/src/test/java/t_tracker/service/OrderServiceUnitTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/t-tracker/src/test/java/t_tracker/service/OrderServiceUnitTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +31,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -52,6 +52,8 @@
       <updated>1624286862716</updated>
       <workItem from="1624286865088" duration="337000" />
       <workItem from="1624403038210" duration="474000" />
+      <workItem from="1624442259025" duration="165000" />
+      <workItem from="1624442427176" duration="101000" />
     </task>
     <servers />
   </component>
@@ -73,9 +75,10 @@
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state x="508" y="221" key="FileChooserDialogImpl/0.25.1440.875@0.25.1440.875" timestamp="1624403350095" />
-    <state x="208" y="41" key="SettingsEditor" timestamp="1624403355147">
-      <screen x="0" y="25" width="1440" height="875" />
+    <state x="277" y="44" key="SettingsEditor" timestamp="1624442401238">
+      <screen x="0" y="23" width="1920" height="1123" />
     </state>
+    <state x="277" y="44" key="SettingsEditor/0.23.1920.1123@0.23.1920.1123" timestamp="1624442401238" />
     <state x="208" y="41" key="SettingsEditor/0.25.1440.875@0.25.1440.875" timestamp="1624403355147" />
     <state x="408" y="150" key="spring file set editor" timestamp="1624403353838">
       <screen x="0" y="25" width="1440" height="875" />

@@ -175,6 +175,8 @@ class OrderServiceUnitTests {
 
     @Test
     void whenPlacingValidOrder_thenReturnValidOrder() {
+        Mockito.when(orderService.placeAnOrder(testOrder1)).thenReturn(testOrder1);
+
         Order placedOrder = orderService.placeAnOrder(testOrder1);
 
         assertThat(placedOrder.getClientId(), is(testOrder1.getClientId()));
