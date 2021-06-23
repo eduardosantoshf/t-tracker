@@ -3,6 +3,7 @@ package t_tracker.security;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.FilterChain;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import t_tracker.service.JwtTokenService;
+import t_tracker.model.Client;
 import t_tracker.repository.ClientRepository;
 import t_tracker.repository.UserRepository;
 import org.springframework.http.MediaType;
@@ -44,7 +46,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         HashMap<String, Object> responseBody = new HashMap<>();
 
         String username = ((UserDetails) authResult.getPrincipal()).getUsername();
-        Integer id = this.userRepository.findByUsername(username).get().getId();
+        Optional<Client> userFound = this.userRepository.findByUsername(username);
+
+        if (!userFound.isPresent())
+            return;
+
+        Integer id = userFound.get().getId();
 
         List<String> authorities = authResult.getAuthorities().stream()
                 .map(role -> role.getAuthority())

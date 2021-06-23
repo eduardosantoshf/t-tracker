@@ -81,7 +81,11 @@ public class OrderServiceImpl implements OrderService {
         }
 
         try {
-            orderToStore.setDriverId(Integer.parseInt(response.getBody().get("id").toString()));
+            JSONObject body = response.getBody();
+            if (body != null)
+                orderToStore.setDriverId(Integer.parseInt(body.get("id").toString()));
+            else
+                throw new NullPointerException();
         } catch (NullPointerException e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Error getting response from drivers api.");
         }

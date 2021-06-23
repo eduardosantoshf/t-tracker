@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import io.jsonwebtoken.JwtException;
 import t_tracker.model.Client;
+import t_tracker.model.ClientDTO;
 import t_tracker.model.Order;
 import t_tracker.service.ClientService;
 import t_tracker.service.JwtTokenService;
@@ -30,8 +31,11 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping(value = "/signup", consumes = "application/json")
-    public ResponseEntity<Client> registerClient(@RequestBody Client client, HttpServletRequest request)
+    public ResponseEntity<Client> registerClient(@RequestBody ClientDTO clientDto, HttpServletRequest request)
             throws ResponseStatusException {
+
+        Client client = new Client(clientDto.getName(), clientDto.getUsername(), clientDto.getEmail(),
+                clientDto.getPassword(), clientDto.getPhoneNumber(), clientDto.getHomeLocation());
 
         Client registeredClient;
 
