@@ -1,5 +1,6 @@
 package t_tracker.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -53,13 +53,14 @@ public class ClientController {
         return new ResponseEntity<>(returnClientData, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/orders/{clientUsername}", produces = "application/json")
-    public ResponseEntity<?> getClientOrders(@PathVariable(value = "clientUsername") String clientUsername, HttpServletRequest request)
+    @GetMapping(value = "/orders", produces = "application/json")
+    public ResponseEntity<?> getClientOrders(HttpServletRequest request)
             throws ResponseStatusException {
+        Principal principal = request.getUserPrincipal();
         List<Order> orders;
 
         try {
-            orders = clientService.getOrders(clientUsername);
+            orders = clientService.getOrders(principal.getName());
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(e.getReason(), e.getStatus());
         }

@@ -12,8 +12,9 @@ services:
       MYSQL_TCP_PORT: 3307 # change default MYSQL port from 3306 to 3307
     ports:
       - '3307:3307' # -[port_outside_container]:[port_inside_container]
-    volumes:
-      - db-data:/var/lib/mysql # persist DB data, even after "docker-compose down"
+    #volumes:
+      #- db-data1:/var/lib/mysql
+      #- ./mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
     expose:
     # opens port 3307 on the container
       - '3307'
@@ -46,12 +47,7 @@ services:
     depends_on: 
         - backend-tracker
 
-volumes:
-  db-data:
-
 networks:
   default:
       external:
           name: rede
-
-

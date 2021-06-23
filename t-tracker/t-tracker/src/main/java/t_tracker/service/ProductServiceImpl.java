@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             registeredProduct = productRepository.save(product);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Failed to register product. ");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Failed to register product.");
         }
 
         return registeredProduct;

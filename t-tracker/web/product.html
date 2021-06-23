@@ -213,16 +213,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="row col-12" style="margin-bottom: 5px;">
-                        <label style="font-weight: bold;" for="staticEmail2">Email</label>
-                        <input type="text" class="form-control" id="staticEmail2" placeholder="email@example.com">
+                        <label style="font-weight: bold;" for="usernameTxt">Email</label>
+                        <input type="text" class="form-control" id="usernameTxt" placeholder="marciano_de_marte">
                     </div>
                     <div class="row col-12" style="margin-bottom: 5px;">
-                        <label style="font-weight: bold;" for="inputPassword2">Password</label>
-                        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                        <label style="font-weight: bold;" for="passwordTxt">Password</label>
+                        <input type="password" class="form-control" id="passwordTxt" placeholder="Password">
                     </div>
                     <div class="row">
                         <div class="col-3" style="margin-bottom: 5px;">
-                            <button type="submit" class="btn btn-success mb-3 w-100">Login</button>
+                            <button type="button" class="btn btn-success mb-3 w-100" id="clientLoginBtn">Login</button>
                         </div>
                         <div class="col-3">
                             <button type="button" class="btn btn-secondary mb-3 w-100"
@@ -256,9 +256,10 @@
 
                     <div>
                         <span id="productPrice"></span>
+                        <input type="number" min="1" id="productQuantity" class="form-control"/>
+                        
                         <a class="main-btn" data-animation="fadeInUp" data-delay="1.5s" tabindex="0"
-                            style="animation-delay: 1.5s;" id="comprarAgoraBtn">Comprar Agora <i
-                                class="lni-chevron-right"></i></a>
+                            style="animation-delay: 1.5s;" id="comprarAgoraBtn">Comprar Agora <i class="lni-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
