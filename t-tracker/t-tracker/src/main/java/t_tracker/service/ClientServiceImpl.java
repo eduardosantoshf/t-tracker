@@ -34,7 +34,7 @@ public class ClientServiceImpl implements ClientService {
         Optional<Client> clientFoundByEmail = clientRepository.findByEmail(newClient.getEmail());
 
         if (newClient.getHomeLocation() == null) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "THome location is required.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Home location is required.");
         }
         
         if (clientFoundByUsername.isPresent()) {

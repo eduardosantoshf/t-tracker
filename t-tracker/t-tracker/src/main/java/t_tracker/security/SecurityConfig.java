@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import t_tracker.repository.ClientRepository;
-import t_tracker.repository.UserRepository;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -20,7 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private PasswordEncoder passwordEncoder;
     private UserDetailsService userDetailsService;
-    private ClientRepository ClientRepository;
     private ClientRepository userRepository;
 
     public SecurityConfig(PasswordEncoder passwordEncoder, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, ClientRepository userRepository) {
@@ -42,6 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers(HttpMethod.POST, "/client/signup").permitAll()
             .antMatchers(HttpMethod.GET, "/client/verify").permitAll()
             .antMatchers(HttpMethod.GET, "/product/all").permitAll()
+            .antMatchers(HttpMethod.GET, "/product/{\\d+}").permitAll()
+            .antMatchers(HttpMethod.GET, "/stock").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.addFilter(new JwtAuthenticationFilter(authenticationManager(),userRepository))
