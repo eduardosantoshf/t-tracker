@@ -37,46 +37,6 @@
     <!-- Websockets -->
     <script src="assets/js/sockjs-0.3.4.js"></script>
     <script src="assets/js/stomp.js"></script>
- 
-    <script type="text/javascript">
-
-       var stompClient = null;
-       var socket = new SockJS('http://192.168.160.222:8080/chat');
-       stompClient = Stomp.over(socket);
-       var headers = {
-          // additional header
-          "Access-Control-Allow-Origin":"http://192.168.160.222:8080",
-       };
-       stompClient.connect(headers, function(frame) {
-
-          stompClient.subscribe('/order/messages', function(messageOutput) {   
-                //message= messageOutput.body.split(":");;
-                //if (message[1]== id_medic){
-                //   $.ajax({
-                //   url: "http://192.168.160.217:8080/api/patients/"+ message[0],
-                //   headers:{"Access-Control-Allow-Origin":"http://192.168.160.217:8080","Authorization":"Bearer "+ jwt},
-                //   }).done(function (results) {
-                //      document.getElementById('ModalPatient').innerHTML = " Patient "+ results['fullname']+" is in danger!";
-                //   });
-                //   $.ajax({
-                //   url: "http://192.168.160.217:8080/api/patients/"+  message[0]+'/latest',
-                //   headers:{"Access-Control-Allow-Origin":"http://192.168.160.217","Authorization":"Bearer "+ jwt},
-                //   }).done(function (results) {
-                //         document.getElementById('modal_latest_bp').innerHTML = '-> '+results[0].low_value;
-                //         document.getElementById('modal_latest_bt').innerHTML = '-> '+results[1].bodyTemp;
-                //         document.getElementById('modal_latest_hr').innerHTML = '-> '+results[2].heartRate;
-                //         document.getElementById('modal_latest_sl').innerHTML = '-> '+results[3].sugarLevel;
-                //         document.getElementById('modal_latest_ol').innerHTML = '-> '+results[4].oxygenLevel;
-                //         localStorage.setItem("mPatient",message[0]);
-                //         $('#myModal').modal("show");
-                //   });
-                //}
-
-                console.log(messageOutput);
-          });
-       });
-
-    </script>
     
     <style>
         .row-padding{

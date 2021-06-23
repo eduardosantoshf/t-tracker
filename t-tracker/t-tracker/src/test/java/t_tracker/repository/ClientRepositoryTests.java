@@ -100,13 +100,20 @@ class ClientRepositoryTests {
 
     @Test
     void whenFindAllClients_thenReturnAllClients() {
-        Client shrek = new Client("Shrek", "SwampMaster", "bigandgreen@org.com", "getoutofmyswamp");
-        Client donkey = new Client("Donkey", "ShreksFriend", "donkey@org.com", "iS2dragons");
-        Client puss = new Client("Puss", "PussInBoots", "wantedcat@org.com", "cutekitty");
+        Coordinates shrekCoord = new Coordinates(1.1, 1.2);
+        Coordinates donkeyCoord = new Coordinates(1.2, 1.3);
+        Coordinates pussCoord = new Coordinates(1.3, 1.4);
+        entityManager.persist(shrekCoord);
+        entityManager.persist(donkeyCoord);
+        entityManager.persist(pussCoord);
 
+        Client shrek = new Client("Shrek", "SwampMaster", "bigandgreen@org.com", "getoutofmyswamp", 999888777, shrekCoord);
+        Client donkey = new Client("Donkey", "ShreksFriend", "donkey@org.com", "iS2dragons", 999888777, donkeyCoord);
+        Client puss = new Client("Puss", "PussInBoots", "wantedcat@org.com", "cutekitty", 999888777, pussCoord);
         entityManager.persist(shrek);
         entityManager.persist(donkey);
         entityManager.persist(puss);
+        
         entityManager.flush();
 
         List<Client> allClients = clientRepository.findAll();

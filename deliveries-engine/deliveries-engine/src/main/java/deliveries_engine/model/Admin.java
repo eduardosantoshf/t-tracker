@@ -12,6 +12,10 @@ public class Admin extends User {
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     // private int id;
 
+    public Admin(){
+
+    }
+
     public Admin(String name, String email, String username, String password, int phoneNumber){
         super(name, email, username, password, phoneNumber);
     }

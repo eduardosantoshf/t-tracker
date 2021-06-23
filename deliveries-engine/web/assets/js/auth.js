@@ -65,19 +65,7 @@ function loginrider(){
     var riderUsername = $("#riderUsername").val();
     var riderPassword = $("#riderPassword").val();
     
-    fetch('http://192.168.160.222:8080/login?username='+riderUsername+"&password="+riderPassword).then(data => {
-        if(data.status==200){
-            data=data.json();
-
-            Promise.all([data]).then(data => {
-                document.cookie = "sessionKey-rider="+data[0].token;
-                window.location.href="/dashboard.html";
-            })
-        }else{
-            $("#authmessage").show();
-            $("#riderPassword").val("");
-        }
-    });
+    autoLogin(riderUsername, riderPassword);
 }
 
 function autoLogin(riderUsername, riderPassword){
@@ -87,6 +75,7 @@ function autoLogin(riderUsername, riderPassword){
 
             Promise.all([data]).then(data => {
                 document.cookie = "sessionKey-rider="+data[0].token;
+                localStorage.setItem("riderID", data[0].id);
                 window.location.href="/dashboard.html"
             })
         }else{
