@@ -65,6 +65,7 @@ public class DataLoader implements ApplicationRunner {
         }
 
 
+        
         /*
         
         Product p1 = new Product("Split Test", 49.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 1.", "assets/images/product/split.png");
@@ -74,6 +75,14 @@ public class DataLoader implements ApplicationRunner {
         Product p5 = new  Product("Throat Test", 59.0, "Antigen", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 5.", "assets/images/product/throat.png");
         Product p6 = new  Product("Take Blood", 79.0, "Antibody", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 6.", "assets/images/product/tirarsange.png");
         Product p7 = new  Product("Take Blood",89.0, "Antibody", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 7.", "assets/images/product/fingerblood.png");
+
+        productRepository.save(p1);
+        productRepository.save(p2);
+        productRepository.save(p3);
+        productRepository.save(p4);
+        productRepository.save(p5);
+        productRepository.save(p6);
+        productRepository.save(p7);
 
         */
         
