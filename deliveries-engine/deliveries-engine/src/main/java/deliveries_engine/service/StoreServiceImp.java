@@ -120,6 +120,8 @@ public class StoreServiceImp implements StoreService{
         json.put("store_latitude", store.getLatitude());
         json.put("store_longitude", store.getLongitude());
 
+        System.out.println(responseRider);
+
         warningController.send(json.toString());
 
         return responseRider;
