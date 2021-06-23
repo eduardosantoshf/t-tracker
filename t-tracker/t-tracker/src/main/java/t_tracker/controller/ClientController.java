@@ -45,7 +45,7 @@ public class ClientController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
-
+ 
         Client returnClientData = new Client();
         returnClientData.setName(registeredClient.getName());
         returnClientData.setUsername(registeredClient.getUsername());
