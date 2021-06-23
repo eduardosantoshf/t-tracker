@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bc30b8b-1adb-4bae-8c23-3d0bee6cde95" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../deliveries-engine/deliveries-engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../deliveries-engine/deliveries-engine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/t-tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/t-tracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/t-tracker/src/test/java/t_tracker/service/OrderServiceUnitTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/t-tracker/src/test/java/t_tracker/service/OrderServiceUnitTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/t-tracker/target/classes/t_tracker/controller/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/t-tracker/target/classes/t_tracker/controller/ClientController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +51,7 @@
       <workItem from="1624286865088" duration="337000" />
       <workItem from="1624403038210" duration="474000" />
       <workItem from="1624442259025" duration="165000" />
-      <workItem from="1624442427176" duration="101000" />
+      <workItem from="1624442427176" duration="267000" />
     </task>
     <servers />
   </component>

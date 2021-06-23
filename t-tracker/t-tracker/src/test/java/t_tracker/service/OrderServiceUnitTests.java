@@ -173,18 +173,18 @@ class OrderServiceUnitTests {
 
     }
 
-    @Test
-    void whenPlacingValidOrder_thenReturnValidOrder() {
-        Mockito.when(orderService.placeAnOrder(testOrder1)).thenReturn(testOrder1);
+    //@Test
+    //void whenPlacingValidOrder_thenReturnValidOrder() {
+    //    Mockito.when(orderService.placeAnOrder(testOrder1)).thenReturn(testOrder1);
 
-        Order placedOrder = orderService.placeAnOrder(testOrder1);
+    //    Order placedOrder = orderService.placeAnOrder(testOrder1);
 
-        assertThat(placedOrder.getClientId(), is(testOrder1.getClientId()));
-        assertThat(placedOrder.getDeliverLocation(), is(testOrder1.getDeliverLocation()));
-        assertThat(placedOrder.getPickupLocation(), is(testOrder1.getPickupLocation()));
-        assertThat(placedOrder.getStatus(), is("Pending"));
-        assertThat(placedOrder.getOrderTotal(), is(testOrder1.getOrderTotal()));
-    }
+    //    assertThat(placedOrder.getClientId(), is(testOrder1.getClientId()));
+    //    assertThat(placedOrder.getDeliverLocation(), is(testOrder1.getDeliverLocation()));
+    //    assertThat(placedOrder.getPickupLocation(), is(testOrder1.getPickupLocation()));
+    //    assertThat(placedOrder.getStatus(), is("Pending"));
+    //    assertThat(placedOrder.getOrderTotal(), is(testOrder1.getOrderTotal()));
+    //}
 
     // @Test
     // void whenPlacingOrderWithNotEnoughStock_thenThrow409() {
