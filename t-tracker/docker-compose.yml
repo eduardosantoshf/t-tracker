@@ -50,3 +50,6 @@ networks:
   default:
       external:
           name: rede
+
+volumes:
+  db-data:
