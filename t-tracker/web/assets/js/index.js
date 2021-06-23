@@ -80,10 +80,6 @@ function getAllProducts() {
         let antigen = $("#antigenList .col-md-4");
         let antibody = $("#antibodyList .col-md-4");
 
-        console.log(molecular.length);
-        console.log(antigen.length);
-        console.log(antibody.length);
-
         for(i=0; i<3-molecular.length; i++){
             let col = document.createElement('div');
             col.className="col-md-4";

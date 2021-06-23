@@ -46,13 +46,14 @@ public class DataLoader implements ApplicationRunner {
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
         Coordinates labCoord = new Coordinates(1.0, 2.0);
-        Lab newLab;
+        
         HttpEntity<String> requestContent = new HttpEntity<>(labInfo, httpHeaders);
         try {
 
             ResponseEntity<Lab> response = restTemplate.postForEntity("http://backend-engine:8080/store", requestContent,
                     Lab.class);
 
+            System.out.println(response.getBody());
             Lab newLab = new Lab(response.getBody().getId(), response.getBody().getToken(), "CT-TrackerDeliveries",
                     labCoord);
 

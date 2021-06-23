@@ -175,6 +175,7 @@
                         src="https://www.openstreetmap.org/export/embed.html?bbox=-8.753037666901948%2C40.571594025686785%2C-8.548760628327727%2C40.66449958661063&amp;layer=mapnik"
                         style="border: 1px solid black"></iframe>
                 </div>
+                <div style="width:100%; margin:10px; background-color: rgb(196, 61, 61); padding:10px; color: white; display:none" id="getOrdersError">Error getting all orders!</div>
                 <table class="table" style="background-color: white;">
                     <thead>
                         <tr>
@@ -185,33 +186,6 @@
                         </tr>
                     </thead>
                     <tbody id="listOrders">
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Split Test</td>
-                            <td>
-                                <div class="statusPending">Pending</div>
-                            </td>
-                            <td>4,3$</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" id="delivery_1" style="display: none;"></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>Throat Test</td>
-                            <td>
-                                <div class="statusDelivering" onclick="javascript:openDelivery(2)">Delivering</div>
-                            </td>
-                            <td>11,99$</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">3</td>
-                            <td>Nose Test</td>
-                            <td>
-                                <div class="statusComplete">Complete</div>
-                            </td>
-                            <td>6,9$</td>
-                        </tr>
                         <tr>
                             <td colspan="4" id="delivery_3" style="display: none;"></td>
                         </tr>

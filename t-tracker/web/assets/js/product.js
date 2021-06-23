@@ -75,18 +75,21 @@ function checkToken(name){
 function buy(product_id){
     if(checkToken("sessionKey-client")){
         let quantity = $("#productQuantity").val();
-        let corpo=[{"product":parseInt(product_id), "quantity":parseInt(quantity)}]
-        console.log(corpo);
-        fetch('http://localhost:8081/order', {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client")  }, method: 'post', body:corpo}).then(data => {
+        let corpo=[{"productId":parseInt(product_id), "quantity":parseInt(quantity)}]
+        
+        fetch('http://localhost:8081/order', {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client")  }, method: 'post', body:JSON.stringify(corpo)}).then(data => {
             if(data.status==200){
                 data=data.json();
 
                 Promise.all([data]).then(data => {
-                    console.log(data);
+                    let resp = data[0];
+                    console.log(resp);
+                    if(resp.hasOwnProperty("id")){
+                        window.location.href='dashboard.html';
+                    }
                 })
             }else{
                 alert("Order not placed");
-                $("#passwordTxt").val("");
             }
         });
     }else{

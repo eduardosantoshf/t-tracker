@@ -1,5 +1,5 @@
 function getAllOrders(){
-    fetch('http://localhost:8081/order/all', {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client")  }, method: 'post', body:corpo}).then(data => {
+    fetch('http://localhost:8081/client/orders', {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client")  }, method: 'get'}).then(data => {
         if(data.status==200){
             data=data.json();
 
@@ -8,35 +8,40 @@ function getAllOrders(){
                 console.log(obj);
                 
                 for(i=0; i<obj.length; i++){
+                    const o=obj[i];
+                    let orderName=o.products[0].product.name;
+                    if(o.products.length>1){
+                        orderName+=", and " + (o.products.length-1) + " more";
+                    }
                     
                     let tr=document.createElement("tr");
 
                     let td_id=document.createElement("td");
-                    td_id.innerText="1";
+                    td_id.innerText=o.id;
 
                     let td_name=document.createElement("td");
-                    td_name.innerText="Split Text";
+                    td_name.innerText=orderName;
 
                     let td_status=document.createElement("td");
 
                     let div_status=document.createElement("div");
-                    div_status.innerHTML="Pending";
-                    div_status.className="";
+                    div_status.innerText=o.status;
+                    div_status.className="status"+o.status;
                     td_status.appendChild(div_status);
 
                     let td_preco=document.createElement("td");
+                    td_preco.innerText=o.totalPrice+"$";
                     
                     tr.appendChild(td_id);
                     tr.appendChild(td_name);
-                    tr.appendChild(td_preco);
                     tr.appendChild(td_status);
+                    tr.appendChild(td_preco);
 
                     document.getElementById("listOrders").appendChild(tr);
                 }
             })
         }else{
-            alert("Order not placed");
-            $("#passwordTxt").val("");
+            $("#getOrdersError").css({"display":"block"});
         }
     });
 }
