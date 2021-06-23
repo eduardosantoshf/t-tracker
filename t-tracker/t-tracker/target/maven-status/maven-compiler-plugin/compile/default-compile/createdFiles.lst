@@ -2,6 +2,7 @@ t_tracker/TTrackerApplication.class
 t_tracker/service/JwtTokenService.class
 t_tracker/model/Coordinates.class
 t_tracker/repository/ProductRepository.class
+t_tracker/swagger2/Swagger2Config.class
 t_tracker/security/JWTAuthorizationFilter.class
 t_tracker/service/OrderService.class
 t_tracker/model/OrderItem.class

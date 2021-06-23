@@ -61,4 +61,4 @@ public class Swagger2Config {
         return Arrays.asList( new SecurityReference("Token Access", authorizationScopes));
     }
     
-}s
+}
