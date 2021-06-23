@@ -84,7 +84,24 @@ public class DataLoader implements ApplicationRunner {
         productRepository.save(p6);
         productRepository.save(p7);
 
+        Stock s1 = new Stock(p1, 2);
+        Stock s2 = new Stock(p2, 3);
+        Stock s3 = new Stock(p3, 4);
+        Stock s4 = new Stock(p4, 1);
+        Stock s5 = new Stock(p5, 5);
+        Stock s6 = new Stock(p6, 3);
+        Stock s7 = new Stock(p7, 2);
+
+        stockRepository.save(s1);
+        stockRepository.save(s2);
+        stockRepository.save(s3);
+        stockRepository.save(s4);
+        stockRepository.save(s5);
+        stockRepository.save(s6);
+        stockRepository.save(s7);
+
         */
+        
         
     }
 }
