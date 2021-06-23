@@ -2,7 +2,7 @@ function loadProduct(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const productId = urlParams.get('i'); // product id
-    console.log(productId);
+    
     var nome="";
     var tipo="";
     var preco="";
@@ -18,7 +18,7 @@ function loadProduct(){
             if(obj.id==productId){
                 nome=obj.name;
                 tipo=obj.type;
-                price=obj.price;
+                preco=obj.price;
                 image=obj.foto; 
                 desc=obj.description;
             }
@@ -27,44 +27,83 @@ function loadProduct(){
         $("#url_mapping_product").text(nome);
         $("#productImg").attr("src",image);
         $("#productName").text(nome);
-        $("#productPrice").text(preco);
+        $("#productPrice").text("$"+preco+" ");
         $("#productDesc").text(desc);
+
+        document.getElementById("comprarAgoraBtn").addEventListener("click", () => buy(productId));
+        document.getElementById("clientLoginBtn").addEventListener("click", () => loginclient(productId));
     });
 }
 
-function checkToken(name){
-    function getCookie(name) {
-        var dc = document.cookie;
-        var prefix = name + "=";
-        var begin = dc.indexOf("; " + prefix);
-        if (begin == -1) {
-            begin = dc.indexOf(prefix);
-            if (begin != 0) return null;
-        }else{
-            begin += 2;
-            var end = document.cookie.indexOf(";", begin);
-            if (end == -1) {
-            end = dc.length;
-            }
+function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }else{
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
         }
-
-        // because unescape has been deprecated, replaced with decodeURI
-        //return unescape(dc.substring(begin + prefix.length, end));
-        return decodeURI(dc.substring(begin + prefix.length, end));
     }
-    
+
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
+}
+
+function checkToken(name){
     var myCookie = getCookie(name);
 
     if (myCookie == null) {
         return false;
+    }else{
+        fetch("http://192.168.160.222:8081/client/verify", {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client") }, method: 'get'})
+        .then(data => {
+            if(data.status==200){
+                data=data.text();
+
+                Promise.all([data]).then(data => {
+                    let resp = data[0];
+                    if(resp!="SUCCESS"){
+                        document.cookie = "sessionKey-client= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+                        return false;
+                    }
+                })
+            }else{
+                document.cookie = "sessionKey-client= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+                alert("Order not placed");
+                return false;
+            }
+        });
     }
     
     return true;
 }
 
-function buy(){
+function buy(product_id){
     if(checkToken("sessionKey-client")){
-        // TODO place an order
+        let quantity = $("#productQuantity").val();
+        let corpo=[{"productId":parseInt(product_id), "quantity":parseInt(quantity)}]
+        
+        fetch('http://192.168.160.222:8081/order', {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client")  }, method: 'post', body:JSON.stringify(corpo)}).then(data => {
+            if(data.status==200){
+                data=data.json();
+
+                Promise.all([data]).then(data => {
+                    let resp = data[0];
+                    console.log(resp);
+                    if(resp.hasOwnProperty("id")){
+                        window.location.href='dashboard.html';
+                    }
+                })
+            }else{
+                alert("Order not placed");
+            }
+        });
     }else{
         $("#modalLogin").css({"display":"block"});
     }
@@ -72,4 +111,24 @@ function buy(){
 
 function closeModal(){
     $("#modalLogin").css({"display":"none"});
+}
+
+function loginclient(product_id){
+    let username=$("#usernameTxt").val();
+    let password=$("#passwordTxt").val();
+    
+    fetch('http://192.168.160.222:8081/client/login?username='+username+"&password="+password).then(data => {
+        if(data.status==200){
+            data=data.json();
+
+            Promise.all([data]).then(data => {
+                document.cookie = "sessionKey-client="+data[0].token;
+                
+                buy(product_id);
+            })
+        }else{
+            alert("Wrong credentials");
+            $("#passwordTxt").val("");
+        }
+    });
 }
