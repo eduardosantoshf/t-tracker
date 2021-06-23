@@ -1,5 +1,13 @@
 # CI/CD Monitoring
 
+As an extra feature, we implemented a SPA to present statistics regarding the **GitHub Actions Workflows**, this consumes the [GitHub Actions API](https://docs.github.com/en/rest/reference/actions).
+
+<p align="center">
+    <img style="height: 200px" src="images/monitoring_start.png">
+    <img style="height: 200px" src="images/monitoring_workflows.png">
+    <img style="height: 200px" src="images/monitoring_workflows_runs.png">
+</p>
+
 The ***main.py*** script will be used to monitorize the GitHub Actions [workflows](https://github.com/eduardosantoshf/t-tracker/tree/main/.github/workflows) for this repository.
 
 Send this script to the VM with the following command:
