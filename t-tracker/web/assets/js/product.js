@@ -9,7 +9,7 @@ function loadProduct(){
     var image="";
     var desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. Quisque ut laoreet ante. Duis eleifend elementum magna nec suscipit. Duis pretium, tortor id faucibus fermentum, dolor leo ullamcorper massa, non iaculis orci ex sit amet lacus. Fusce non convallis urna. Suspendisse fermentum orci ac maximus congue.";
     
-    fetch("http://localhost:8081/product/all", {headers: { 'Content-Type': 'application/json' }, method: 'get'}).then(data => data.json()).then(data => {
+    fetch("http://192.168.160.222:8081/product/all", {headers: { 'Content-Type': 'application/json' }, method: 'get'}).then(data => data.json()).then(data => {
         console.log(data);
 
         for(i=0; i<data.length; i++){
