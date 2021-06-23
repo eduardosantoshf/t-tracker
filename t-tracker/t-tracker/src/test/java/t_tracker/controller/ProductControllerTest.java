@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -70,7 +71,7 @@ class ProductControllerTest {
         mvc.perform(post("/product").header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(testProduct1)))
                 .andExpect( status().isConflict() )
-                .andExpect( jsonPath("$", is("Failed to register product.")) );
+                .andExpect( status().reason(containsString("Failed to register product.")) );
     }
 
     @Test
@@ -92,7 +93,8 @@ class ProductControllerTest {
                 .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found."));
 
         mvc.perform(get("/product/" + invalidId).header("Authorization", "Bearer " + token))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound())
+                .andExpect( status().reason(containsString("Product not found.")) );
     }
 
     @Test

@@ -1,5 +1,7 @@
 package t_tracker.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.model.Product;
+import t_tracker.model.ProductDTO;
 import t_tracker.service.ProductService;
 
 @RestController
@@ -24,34 +27,20 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<?> registerNewProduct(@RequestBody Product product, HttpServletRequest request) throws ResponseStatusException {
-        Product productInfo;
-
-        try {
-            productInfo = productService.registerProduct(product);
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatus());
-        }
-
-        return new ResponseEntity<>(productInfo, HttpStatus.OK);
+    public ResponseEntity<Product> registerNewProduct(@RequestBody ProductDTO productDto, HttpServletRequest request) throws ResponseStatusException {
+        Product product = new Product(productDto.getName(), productDto.getPrice(), productDto.getType(), productDto.getDescription(), productDto.getFoto());
+        return new ResponseEntity<>(productService.registerProduct(product), HttpStatus.OK);
     }
     
     @GetMapping(value = "/{prodId}")
-    public ResponseEntity<?> getProductInfo(@PathVariable(value = "prodId") int prodId, HttpServletRequest request)
+    public ResponseEntity<Product> getProductInfo(@PathVariable(value = "prodId") int prodId, HttpServletRequest request)
             throws ResponseStatusException {
-        Product productInfo;
 
-        try {
-            productInfo = productService.getProduct(prodId);
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatus());
-        }
-
-        return new ResponseEntity<>(productInfo, HttpStatus.OK);
+        return new ResponseEntity<>(productService.getProduct(prodId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/all")
-    public ResponseEntity<?> getAllProducts(HttpServletRequest request)
+    public ResponseEntity<List<Product>> getAllProducts(HttpServletRequest request)
             throws ResponseStatusException {
 
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);

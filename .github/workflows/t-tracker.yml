@@ -4,7 +4,7 @@ name: t-tracker CI/CD Pipeline
 on:
   # triggers the workflow on push for the develop and deployment branches
   push:
-    branches: [ develop, deployment, feature/order-placement ]
+    branches: [ develop, deployment ]
     paths-ignore:
       # don't run this workflow when the are pushes, and there are only changes for this directories:
       - 'reporting/**'

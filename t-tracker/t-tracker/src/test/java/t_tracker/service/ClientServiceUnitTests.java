@@ -118,7 +118,8 @@ class ClientServiceUnitTests {
 
     @Test
     void whenGetInvalidClientOrder_thenReturn404() {
-        ResponseStatusException thrownException = assertThrows(ResponseStatusException.class, () -> clientService.getOrders(neo.getUsername()));
+        String username = neo.getUsername();
+        ResponseStatusException thrownException = assertThrows(ResponseStatusException.class, () -> clientService.getOrders(username));
 
         assertThat(thrownException.getStatus(), is(HttpStatus.NOT_FOUND));
         assertThat(thrownException.getReason(), is("Client not found."));
@@ -148,9 +149,11 @@ class ClientServiceUnitTests {
 
     @Test
     void whenGetClientByInvalidUsername_thenReturn404() {
+        String username = neo.getUsername();
+
         Mockito.when( clientRepository.findByUsername(neo.getUsername()) ).thenReturn(Optional.ofNullable(null));
 
-        ResponseStatusException thrownException = assertThrows(ResponseStatusException.class, () -> clientService.getClientByUsername(neo.getUsername()));
+        ResponseStatusException thrownException = assertThrows(ResponseStatusException.class, () -> clientService.getClientByUsername(username));
 
         assertThat(thrownException.getStatus(), is(HttpStatus.NOT_FOUND));
         assertThat(thrownException.getReason(), is("Client not found."));

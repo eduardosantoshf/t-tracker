@@ -1,7 +1,6 @@
 package t_tracker.model;
 
 import java.util.Objects;
-import java.util.UUID;
 
 import javax.persistence.*;
 

@@ -60,9 +60,10 @@ public class StockServiceImpl implements StockService {
             Stock stockToAdd = new Stock(actualProduct, quantityToAdd);
             
             stockRepository.save(stockToAdd);
+            allStocks.add(stockToAdd);
         }
 
-        return stockRepository.findAll();
+        return allStocks;
     }
 
     @Override
@@ -75,7 +76,7 @@ public class StockServiceImpl implements StockService {
                     throw new ResponseStatusException(HttpStatus.CONFLICT, "Not enough stock to process request.");
                 stock.removeQuantity(quantityToRemove);
                 stockRepository.save(stock);
-                return stockRepository.findAll();
+                return allStocks;
             }
 
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not Found.");
