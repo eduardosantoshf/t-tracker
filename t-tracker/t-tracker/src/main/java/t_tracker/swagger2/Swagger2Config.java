@@ -60,5 +60,4 @@ public class Swagger2Config {
         authorizationScopes[0] = authorizationScope;
         return Arrays.asList( new SecurityReference("Token Access", authorizationScopes));
     }
-    
 }
