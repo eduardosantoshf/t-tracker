@@ -30,7 +30,7 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping(value = "/signup", consumes = "application/json")
-    public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request)
+    public ResponseEntity<Client> registerClient(@RequestBody Client client, HttpServletRequest request)
             throws ResponseStatusException {
                 
         Client registeredClient;
@@ -54,20 +54,11 @@ public class ClientController {
     }
 
     @GetMapping(value = "/orders", produces = "application/json")
-    public ResponseEntity<?> getClientOrders(HttpServletRequest request)
+    public ResponseEntity<List<Order>> getClientOrders(HttpServletRequest request)
             throws ResponseStatusException {
-                System.out.println("Check1");
         Principal principal = request.getUserPrincipal();
-        System.out.println(principal);
-        List<Order> orders;
 
-        try {
-            orders = clientService.getOrders(principal.getName());
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatus());
-        }
-
-        return new ResponseEntity<>(orders, HttpStatus.OK);
+        return new ResponseEntity<>(clientService.getOrders(principal.getName()), HttpStatus.OK);
     }
 
     @GetMapping(value = "/verify", produces = "application/json")

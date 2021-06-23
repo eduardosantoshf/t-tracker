@@ -35,35 +35,35 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
-        // RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
 
-        // HttpHeaders httpHeaders = new HttpHeaders();
-        // httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-        // Coordinates labCoord = new Coordinates(1.0, 2.0);
+        Coordinates labCoord = new Coordinates(1.0, 2.0);
 
-        // HttpEntity<String> requestContent = new HttpEntity<>(labInfo, httpHeaders);
-        // try {
+        HttpEntity<String> requestContent = new HttpEntity<>(labInfo, httpHeaders);
+        try {
 
-        //     ResponseEntity<Lab> response = restTemplate.postForEntity("http://backend-engine:8080/store", requestContent,
-        //             Lab.class);
+            ResponseEntity<Lab> response = restTemplate.postForEntity("http://backend-engine:8080/store", requestContent,
+                    Lab.class);
 
-        //     Lab newLab = new Lab(response.getBody().getId(), response.getBody().getToken(), "CT-TrackerDeliveries",
-        //             labCoord);
+            Lab newLab = new Lab(response.getBody().getId(), response.getBody().getToken(), "CT-TrackerDeliveries",
+                    labCoord);
 
-        //     coordinatesRepository.save(labCoord);
-        //     labRepository.save(newLab);
-        // } catch (Exception e) {
-        //     System.out.println(e);
-        //     return;
-        // }
+            coordinatesRepository.save(labCoord);
+            labRepository.save(newLab);
+        } catch (Exception e) {
+            System.out.println(e);
+            return;
+        }
 
-        // productRepository.save(new Product("Split Test", 49.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 1.", "assets/images/product/split.png"));
-        // productRepository.save(new Product("Throat Test", 129.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 2.", "assets/images/product/throat.png"));
-        // productRepository.save(new Product("Nose Test",89.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 3.", "assets/images/product/nose.png"));
-        // productRepository.save(new Product("Nose Test", 59.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 4.", "assets/images/product/nose.png"));
-        // productRepository.save(new Product("Throat Test", 59.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 5.", "assets/images/product/throat.png"));
-        // productRepository.save(new Product("Take Blood", 79.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 6.", "assets/images/product/tirarsange.png"));
-        // productRepository.save(new Product("Take Blood",89.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 7.", "assets/images/product/fingerblood.png"));
+        productRepository.save(new Product("Split Test", 49.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 1.", "assets/images/product/split.png"));
+        productRepository.save(new Product("Throat Test", 129.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 2.", "assets/images/product/throat.png"));
+        productRepository.save(new Product("Nose Test",89.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 3.", "assets/images/product/nose.png"));
+        productRepository.save(new Product("Nose Test", 59.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 4.", "assets/images/product/nose.png"));
+        productRepository.save(new Product("Throat Test", 59.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 5.", "assets/images/product/throat.png"));
+        productRepository.save(new Product("Take Blood", 79.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 6.", "assets/images/product/tirarsange.png"));
+        productRepository.save(new Product("Take Blood",89.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 7.", "assets/images/product/fingerblood.png"));
     }
 }

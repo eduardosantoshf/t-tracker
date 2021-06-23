@@ -1,5 +1,7 @@
 package t_tracker.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,34 +26,20 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<?> registerNewProduct(@RequestBody Product product, HttpServletRequest request) throws ResponseStatusException {
-        Product productInfo;
+    public ResponseEntity<Product> registerNewProduct(@RequestBody Product product, HttpServletRequest request) throws ResponseStatusException {
 
-        try {
-            productInfo = productService.registerProduct(product);
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatus());
-        }
-
-        return new ResponseEntity<>(productInfo, HttpStatus.OK);
+        return new ResponseEntity<>(productService.registerProduct(product), HttpStatus.OK);
     }
     
     @GetMapping(value = "/{prodId}")
-    public ResponseEntity<?> getProductInfo(@PathVariable(value = "prodId") int prodId, HttpServletRequest request)
+    public ResponseEntity<Product> getProductInfo(@PathVariable(value = "prodId") int prodId, HttpServletRequest request)
             throws ResponseStatusException {
-        Product productInfo;
 
-        try {
-            productInfo = productService.getProduct(prodId);
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatus());
-        }
-
-        return new ResponseEntity<>(productInfo, HttpStatus.OK);
+        return new ResponseEntity<>(productService.getProduct(prodId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/all")
-    public ResponseEntity<?> getAllProducts(HttpServletRequest request)
+    public ResponseEntity<List<Product>> getAllProducts(HttpServletRequest request)
             throws ResponseStatusException {
 
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);

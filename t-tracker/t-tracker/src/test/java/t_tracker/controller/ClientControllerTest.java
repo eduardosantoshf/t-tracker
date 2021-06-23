@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.Matchers.hasSize;
 
 import org.springframework.http.HttpStatus;
@@ -109,7 +110,7 @@ class ClientControllerTest {
         
         mvc.perform( get("/client/orders").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(willy)) )
             .andExpect( status().isNotFound() )
-            .andExpect( jsonPath("$", is("Client not found.")) );
+            .andExpect( status().reason(containsString("Client not found.")) );
     }
 
     @Test

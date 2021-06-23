@@ -40,7 +40,7 @@ public class OrderController {
     OrderRepository orderRepository;
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<?> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request)
+    public ResponseEntity<Order> placeAnOrder(@RequestBody List<OrderDTO> productList, HttpServletRequest request)
             throws ResponseStatusException {
         Principal principal = request.getUserPrincipal();
         Client client;
@@ -49,7 +49,7 @@ public class OrderController {
             client = clientService.getClientByUsername(principal.getName());
 
         } catch (ResponseStatusException e) {
-            return new ResponseEntity<>("Unauthorized client.", HttpStatus.FORBIDDEN);
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Unauthorized client.");
         }
 
         Product orderProduct;
@@ -61,34 +61,21 @@ public class OrderController {
                 orderPlaced.addProduct(new OrderItem(orderProduct, order.getQuantity()));
             }
         } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatus());
-        }
-
-        try {
-            orderPlaced = orderService.placeAnOrder(orderPlaced);
-        } catch (ResponseStatusException e) {
-            return new ResponseEntity<>(e.getReason(), e.getStatus());
-        }
-
-        return new ResponseEntity<>(orderPlaced, HttpStatus.OK);
-    }
-
-    @GetMapping(produces = "application/json")
-    public ResponseEntity<?> getClientOrders(@RequestParam int orderId, HttpServletRequest request)
-            throws ResponseStatusException {
-        Order order;
-
-        try {
-            order = orderService.getOrder(orderId);
-        } catch (ResponseStatusException e) {
             throw new ResponseStatusException(e.getStatus(), e.getReason());
         }
 
-        return new ResponseEntity<>(order, HttpStatus.OK);
+        return new ResponseEntity<>(orderService.placeAnOrder(orderPlaced), HttpStatus.OK);
+    }
+
+    @GetMapping(produces = "application/json")
+    public ResponseEntity<Order> getClientOrders(@RequestParam int orderId, HttpServletRequest request)
+            throws ResponseStatusException {
+
+        return new ResponseEntity<>(orderService.getOrder(orderId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/update/{orderId}/{status}")
-    public ResponseEntity<?> updateOrderStatus(@PathVariable(value = "orderId") int orderId,
+    public ResponseEntity<Order> updateOrderStatus(@PathVariable(value = "orderId") int orderId,
             @PathVariable(value = "status") int status, HttpServletRequest request) throws ResponseStatusException {
         Order order;
 
@@ -104,7 +91,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/rate/{orderId}/{rating}")
-    public ResponseEntity<?> rateOrder(@PathVariable(value = "orderId") int orderId,
+    public ResponseEntity<Order> rateOrder(@PathVariable(value = "orderId") int orderId,
             @PathVariable(value = "rating") int rating, HttpServletRequest request) throws ResponseStatusException {
         Order order;
 

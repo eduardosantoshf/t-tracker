@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.StringContains.containsString;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -106,7 +107,7 @@ class OrderControllerTest {
 
         mvc.perform(post("/order").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJson(testOrder))).andExpect(status().isBadGateway())
-                .andExpect( jsonPath("$", is("Error getting response from drivers api.")) );
+                .andExpect( status().reason(containsString("Error getting response from drivers api.")) );
     }
 
     @Test
