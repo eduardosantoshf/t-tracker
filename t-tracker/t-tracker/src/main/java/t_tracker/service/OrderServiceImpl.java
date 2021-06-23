@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
     private String storeSignupUrl = "http://backend-engine:8080/store";
     private String orderPlacementUrl = "http://backend-engine:8080/store/order/";
     private String ratingPlacementUrl = "http://backend-engine:8080/store/driver/rating/";
-    private String labInfo = "{\"name\":\"CovidTestsDeliveries\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
+    private String labInfo = "{\"name\":\"CovidTestsDeliveries" + java.time.LocalDateTime.now() + "\",\"ownerName\":\"TqsG101\",\"latitude\":\"1.0\",\"longitude\":\"2.0\"}";
 
     @Override
     public Order placeAnOrder(Order order) {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import t_tracker.model.Product;
+import t_tracker.model.ProductDTO;
 import t_tracker.service.ProductService;
 
 @RestController
@@ -26,7 +27,7 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Product> registerNewProduct(@RequestBody Product productDto, HttpServletRequest request) throws ResponseStatusException {
+    public ResponseEntity<Product> registerNewProduct(@RequestBody ProductDTO productDto, HttpServletRequest request) throws ResponseStatusException {
         Product product = new Product(productDto.getName(), productDto.getPrice(), productDto.getType(), productDto.getDescription(), productDto.getFoto());
         return new ResponseEntity<>(productService.registerProduct(product), HttpStatus.OK);
     }
