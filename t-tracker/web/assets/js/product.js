@@ -2,7 +2,7 @@ function loadProduct(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const productId = urlParams.get('i'); // product id
-    console.log(productId);
+    
     var nome="";
     var tipo="";
     var preco="";
@@ -30,8 +30,8 @@ function loadProduct(){
         $("#productPrice").text("$"+preco+" ");
         $("#productDesc").text(desc);
 
-        document.getElementById("comprarAgoraBtn").addEventListener("click", () => buy(preco));
-        document.getElementById("clientLoginBtn").addEventListener("click", () => loginclient(preco));
+        document.getElementById("comprarAgoraBtn").addEventListener("click", () => buy(productId));
+        document.getElementById("clientLoginBtn").addEventListener("click", () => loginclient(productId));
     });
 }
 
@@ -72,9 +72,23 @@ function checkToken(name){
     return true;
 }
 
-function buy(price){
+function buy(product_id){
     if(checkToken("sessionKey-client")){
-        
+        let quantity = $("#productQuantity").val();
+        let corpo=[{"product":parseInt(product_id), "quantity":parseInt(quantity)}]
+        console.log(corpo);
+        fetch('http://localhost:8081/order', {headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + getCookie("sessionKey-client")  }, method: 'post', body:corpo}).then(data => {
+            if(data.status==200){
+                data=data.json();
+
+                Promise.all([data]).then(data => {
+                    console.log(data);
+                })
+            }else{
+                alert("Order not placed");
+                $("#passwordTxt").val("");
+            }
+        });
     }else{
         $("#modalLogin").css({"display":"block"});
     }
@@ -84,7 +98,7 @@ function closeModal(){
     $("#modalLogin").css({"display":"none"});
 }
 
-function loginclient(price){
+function loginclient(product_id){
     let username=$("#usernameTxt").val();
     let password=$("#passwordTxt").val();
     
@@ -95,7 +109,7 @@ function loginclient(price){
             Promise.all([data]).then(data => {
                 document.cookie = "sessionKey-client="+data[0].token;
                 
-                buy(price);
+                buy(product_id);
             })
         }else{
             alert("Wrong credentials");

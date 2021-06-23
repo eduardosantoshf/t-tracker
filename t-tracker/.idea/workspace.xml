@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bc30b8b-1adb-4bae-8c23-3d0bee6cde95" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../deliveries-engine/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../deliveries-engine/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/t-tracker/src/main/java/t_tracker/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/t-tracker/src/main/java/t_tracker/DataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/t-tracker/target/classes/t_tracker/controller/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/t-tracker/target/classes/t_tracker/controller/ClientController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/t-tracker/target/t-tracker-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/t-tracker/target/t-tracker-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/t-tracker/target/t-tracker-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/t-tracker/target/t-tracker-1.0-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/t-tracker/target/classes/t_tracker/controller/ClientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/js/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/js/product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/product.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +38,9 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -50,6 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1624286862716</updated>
       <workItem from="1624286865088" duration="337000" />
+      <workItem from="1624403038210" duration="474000" />
     </task>
     <servers />
   </component>
@@ -57,13 +59,27 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="109" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1624286937116">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="184" y="131" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1624403274761">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state x="184" y="109" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1624286937116" />
-    <state x="457" y="244" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1624286935080">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="184" y="131" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1440.875@0.25.1440.875" timestamp="1624403274761" />
+    <state x="457" y="262" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1624403190754">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state x="457" y="244" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1440.900@0.0.1440.900" timestamp="1624286935080" />
+    <state x="457" y="262" key="#com.intellij.ide.util.TreeClassChooserDialog/0.25.1440.875@0.25.1440.875" timestamp="1624403190754" />
+    <state x="508" y="221" key="FileChooserDialogImpl" timestamp="1624403350095">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="508" y="221" key="FileChooserDialogImpl/0.25.1440.875@0.25.1440.875" timestamp="1624403350095" />
+    <state x="208" y="41" key="SettingsEditor" timestamp="1624403355147">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="208" y="41" key="SettingsEditor/0.25.1440.875@0.25.1440.875" timestamp="1624403355147" />
+    <state x="408" y="150" key="spring file set editor" timestamp="1624403353838">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="408" y="150" key="spring file set editor/0.25.1440.875@0.25.1440.875" timestamp="1624403353838" />
   </component>
 </project>
