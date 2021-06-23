@@ -66,7 +66,7 @@ public class DataLoader implements ApplicationRunner {
 
 
         
-        /*
+        
         
         Product p1 = new Product("Split Test", 49.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 1.", "assets/images/product/split.png");
         Product p2 = new  Product("Throat Test", 129.0, "Molecular", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis consectetur nibh et tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac turpis neque. produto 2.", "assets/images/product/throat.png");
@@ -100,7 +100,7 @@ public class DataLoader implements ApplicationRunner {
         stockRepository.save(s6);
         stockRepository.save(s7);
 
-        */
+        
         
         
     }
