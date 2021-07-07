@@ -25,6 +25,8 @@ This project was developed under the [Software Quality And Tests](https://www.ua
 * [Deliveries Engine webpage](http://192.168.160.222:8002)
 * [t-tracker webpage](http://192.168.160.222:8001)
 * [CI/CD Workflows Monitoring webpage](http://192.168.160.222:8005/) (extra feature - [/monitoring](https://github.com/eduardosantoshf/t-tracker/tree/develop/monitoring))
-* API Documentation - Soon
+* Swagger2 API Documentation:
+    * [Deliveries Engine](http://192.168.160.222:8080/swagger-ui.html)
+    * [t-tracker](http://192.168.160.222:8081/swagger-ui.html)
 * CI/CD - GitHub Actions (scripts in [_.github/workflows_](https://github.com/eduardosantoshf/t-tracker/tree/main/.github/workflows))
 * Quality Dashboards - [SonarCloud](https://sonarcloud.io/organizations/eduardosantoshf/projects)
