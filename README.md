@@ -1,4 +1,4 @@
-# TQSProject
+# TQS Group Project
 
 The objective of this project is to specify and implement a medium-sized project, comprising a multi-layered, enterprise web application and a Software Quality Assurance (SQA) strategy, applied throughout the software engineering process.
 
@@ -30,3 +30,6 @@ This project was developed under the [Software Quality And Tests](https://www.ua
     * [t-tracker](http://192.168.160.222:8081/swagger-ui.html)
 * CI/CD - GitHub Actions (scripts in [_.github/workflows_](https://github.com/eduardosantoshf/t-tracker/tree/main/.github/workflows))
 * Quality Dashboards - [SonarCloud](https://sonarcloud.io/organizations/eduardosantoshf/projects)
+
+## Grade 
+This project's (individual) grade was **17** out of 20.
